@@ -1,8 +1,10 @@
 <script>
+  import FormComponent from './BusinessLogic/FormComponent.svelte';
 </script>
 
 <main>
   <h1>DASHBOARD</h1>
+  <FormComponent />
 </main>
 
 <style>
