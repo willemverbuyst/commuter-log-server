@@ -1,17 +1,21 @@
 <script>
-  export let id;
+  export let route;
+  export let routes;
   export let label;
-  export let value;
-  export let type = 'text';
 </script>
 
 <div class="form-control">
-  <label for="title">{label}</label>
-  <input {type} {id} {value} on:input />
+  <label for={label}>{label}</label>
+  <!-- svelte-ignore a11y-no-onchange -->
+  <select value={route} on:change>
+    {#each routes as r}
+      <option value={r}>{r}</option>
+    {/each}
+  </select>
 </div>
 
 <style>
-  input {
+  select {
     width: 300px;
     font: inherit;
     color: inherit;
@@ -20,10 +24,10 @@
     background: transparent;
     padding: 10px 20px;
     transition: border-color 0.1s ease-out;
+    cursor: pointer;
   }
 
-  input:focus {
-    border-color: #f1f1f1;
+  select:focus {
     outline: none;
   }
 
