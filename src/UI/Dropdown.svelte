@@ -5,26 +5,24 @@
 </script>
 
 <div class="form-control">
-  <label for={label}
-    >{label}
-    <!-- svelte-ignore a11y-no-onchange -->
-    <select value={route} on:change>
-      {#each routes as r}
-        <option value={r}>{r}</option>
-      {/each}
-    </select>
-  </label>
+  <label for={label}>{label} </label>
+  <!-- svelte-ignore a11y-no-onchange -->
+  <select value={route} on:change>
+    {#each routes as r}
+      <option value={r}>{r}</option>
+    {/each}
+  </select>
 </div>
 
 <style>
   select {
-    width: 300px;
+    width: 340px;
     font: inherit;
     color: inherit;
     border: 1px solid #fff;
     border-radius: 7px;
     background: transparent;
-    padding: 10px 20px;
+    padding: 10px 0;
     transition: border-color 0.1s ease-out;
     cursor: pointer;
   }
@@ -40,8 +38,6 @@
   }
 
   .form-control {
-    padding: 0.5rem 0;
     width: 100%;
-    margin: 0.25rem 0;
   }
 </style>

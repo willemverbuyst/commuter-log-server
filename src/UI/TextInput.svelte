@@ -5,10 +5,8 @@
 </script>
 
 <div class="form-control">
-  <label for="title"
-    >{label}
-    <input {type} {value} on:input />
-  </label>
+  <label for="title">{label} </label>
+  <input {type} {value} on:input />
 </div>
 
 <style>
@@ -35,8 +33,6 @@
   }
 
   .form-control {
-    padding: 0.5rem 0;
     width: 100%;
-    margin: 0.25rem 0;
   }
 </style>

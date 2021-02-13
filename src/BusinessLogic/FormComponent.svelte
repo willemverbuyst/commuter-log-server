@@ -93,7 +93,6 @@
 
 <style>
   form {
-    width: 50vw;
-    margin: auto;
+    width: 100%;
   }
 </style>

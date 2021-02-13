@@ -37,8 +37,9 @@
   .modal {
     position: fixed;
     top: 10vh;
-    left: 10%;
-    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
     min-height: 80vh;
     background: #ffa500;
     border-radius: 5px;

@@ -9,7 +9,7 @@
   let format = '#{l} #{j} #{M} #{Y}';
 </script>
 
-<div on:click={updateSelectedDate(selectedDate)}>
+<div class="container" on:click={updateSelectedDate(selectedDate)}>
   <Datepicker
     {format}
     start={minDate}
@@ -24,3 +24,11 @@
     dayHighlightedTextColor="#fff"
   />
 </div>
+
+<style>
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>
