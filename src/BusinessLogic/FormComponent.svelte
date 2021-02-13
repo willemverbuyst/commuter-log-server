@@ -2,8 +2,9 @@
   import Checkbox from '../UI/Checkbox.svelte';
   import DatePicker from '../UI/DatePicker.svelte';
   import Dropdown from '../UI/Dropdown.svelte';
-  import TextInput from '../UI/TextInput.svelte';
+  import Modal from '../UI/Modal.svelte';
   import RadioButton from '../UI/RadioButton.svelte';
+  import TextInput from '../UI/TextInput.svelte';
 
   import { routes } from '../constants';
 
@@ -44,44 +45,51 @@
   $: console.log('Costs: ', costs);
 </script>
 
-<form>
-  <DatePicker {selectedDate} {updateSelectedDate} />
-  <Checkbox
-    value={workingFromHome}
-    label="Working from home?"
-    on:change={(event) => (workingFromHome = event.target.checked)}
-  />
-
-  <div>
-    <RadioButton
-      name="transport"
-      value="Car"
-      group={meansOfTransport}
-      on:change={updateMeansOfTransport}
+<Modal title="Add a day to log" on:cancel>
+  <form>
+    <DatePicker {selectedDate} {updateSelectedDate} />
+    <Checkbox
+      value={workingFromHome}
+      label="Working from home?"
+      on:change={(event) => (workingFromHome = event.target.checked)}
     />
-    <RadioButton
-      name="transport"
-      value="Public Transport"
-      group={meansOfTransport}
-      on:change={updateMeansOfTransport}
-    />
-  </div>
-
-  <Checkbox
-    value={returnTrip}
-    label=" Return trip?"
-    on:change={(event) => (returnTrip = event.target.checked)}
-  />
-  <Dropdown {route} {routes} label="One Way" on:change={updateRouteSelection} />
-  {#if returnTrip}
-    <TextInput
-      label="Route back"
-      value={routeBack}
-      on:input={updateRouteBack}
-    />
-  {/if}
-  <TextInput label="Costs" value={costs} on:input={updateCosts} />
-</form>
+    {#if !workingFromHome}
+      <div>
+        <RadioButton
+          name="transport"
+          value="Car"
+          group={meansOfTransport}
+          on:change={updateMeansOfTransport}
+        />
+        <RadioButton
+          name="transport"
+          value="Public Transport"
+          group={meansOfTransport}
+          on:change={updateMeansOfTransport}
+        />
+      </div>
+      <Checkbox
+        value={returnTrip}
+        label=" Return trip?"
+        on:change={(event) => (returnTrip = event.target.checked)}
+      />
+      <Dropdown
+        {route}
+        {routes}
+        label="One Way"
+        on:change={updateRouteSelection}
+      />
+      {#if returnTrip}
+        <TextInput
+          label="Route back"
+          value={routeBack}
+          on:input={updateRouteBack}
+        />
+      {/if}
+      <TextInput label="Costs" value={costs} on:input={updateCosts} />
+    {/if}
+  </form>
+</Modal>
 
 <style>
   form {
