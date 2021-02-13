@@ -1,8 +1,9 @@
 <script>
   import Checkbox from '../UI/Checkbox.svelte';
-  import InputComponent from '../UI/InputComponent.svelte';
+  import TextInput from '../UI/TextInput.svelte';
   import Datepicker from 'svelte-calendar';
   import Dropdown from '../UI/Dropdown.svelte';
+  import RadioButton from '../UI/RadioButton.svelte';
 
   import { routes } from '../constants';
 
@@ -30,9 +31,13 @@
     route = event.target.value;
   }
 
+  function updateMeansOfTransport(event) {
+    meansOfTransport = event.target.value;
+  }
+
   $: console.log(selectedDate);
   $: console.log('Return: ', returnTrip);
-  $: console.log(meansOfTransport);
+  $: console.log('Means of transport: ', meansOfTransport);
   $: console.log('Route: ', route);
   $: console.log('Route back: ', routeBack);
   $: console.log('Costs: ', costs);
@@ -60,25 +65,20 @@
   />
 
   <div>
-    <label>
-      <input
-        type="radio"
-        name="transport"
-        value="Car"
-        bind:group={meansOfTransport}
-      />
-      Car
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="transport"
-        value="Public Transport"
-        bind:group={meansOfTransport}
-      />
-      Public transport
-    </label>
+    <RadioButton
+      name="transport"
+      value="Car"
+      group={meansOfTransport}
+      on:change={updateMeansOfTransport}
+    />
+    <RadioButton
+      name="transport"
+      value="Public Transport"
+      group={meansOfTransport}
+      on:change={updateMeansOfTransport}
+    />
   </div>
+
   <Checkbox
     value={returnTrip}
     label=" Return trip?"
@@ -86,13 +86,13 @@
   />
   <Dropdown {route} {routes} label="One Way" on:change={updateRouteSelection} />
   {#if returnTrip}
-    <InputComponent
+    <TextInput
       label="Route back"
       value={routeBack}
       on:input={updateRouteBack}
     />
   {/if}
-  <InputComponent label="Costs" value={costs} on:input={updateCosts} />
+  <TextInput label="Costs" value={costs} on:input={updateCosts} />
 </form>
 
 <style>
