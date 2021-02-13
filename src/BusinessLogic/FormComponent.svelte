@@ -1,7 +1,9 @@
 <script>
+  import Checkbox from '../UI/Checkbox.svelte';
   import InputComponent from '../UI/InputComponent.svelte';
   import Datepicker from 'svelte-calendar';
   import Dropdown from '../UI/Dropdown.svelte';
+
   import { routes } from '../constants';
 
   let costs = '';
@@ -10,16 +12,31 @@
 
   let selectedDate = new Date();
   let format = '#{l} #{j} #{M} #{Y}';
+  let workingFromHome = false;
   let meansOfTransport = 'Car';
   let returnTrip = false;
   let route = routes[1];
   let routeBack = routes[3];
 
+  function updateRouteBack(event) {
+    routeBack = event.target.value;
+  }
+
+  function updateCosts(event) {
+    costs = event.target.value;
+  }
+
+  function updateRouteSelection(event) {
+    route = event.target.value;
+  }
+
   $: console.log(selectedDate);
-  $: console.log(returnTrip);
+  $: console.log('Return: ', returnTrip);
   $: console.log(meansOfTransport);
-  $: console.log(route);
-  $: console.log(costs);
+  $: console.log('Route: ', route);
+  $: console.log('Route back: ', routeBack);
+  $: console.log('Costs: ', costs);
+  $: console.log('Working from home: ', workingFromHome);
 </script>
 
 <form>
@@ -36,6 +53,12 @@
     dayHighlightedBackgroundColor="#e20074"
     dayHighlightedTextColor="#fff"
   />
+  <Checkbox
+    value={workingFromHome}
+    label="Working from home?"
+    on:change={(event) => (workingFromHome = event.target.checked)}
+  />
+
   <div>
     <label>
       <input
@@ -56,30 +79,20 @@
       Public transport
     </label>
   </div>
-  <label>
-    <input type="checkbox" bind:checked={returnTrip} />
-    Return trip?
-  </label>
-  <Dropdown
-    {route}
-    {routes}
-    label="One Way"
-    on:change={(event) => (route = event.target.value)}
+  <Checkbox
+    value={returnTrip}
+    label=" Return trip?"
+    on:change={(event) => (returnTrip = event.target.checked)}
   />
+  <Dropdown {route} {routes} label="One Way" on:change={updateRouteSelection} />
   {#if returnTrip}
-    <Dropdown
-      route={routeBack}
-      {routes}
-      label="Return Trip"
-      on:change={(event) => (routeBack = event.target.value)}
+    <InputComponent
+      label="Route back"
+      value={routeBack}
+      on:input={updateRouteBack}
     />
   {/if}
-  <InputComponent
-    id="title"
-    label="Costs"
-    value={costs}
-    on:input={(event) => (costs = event.target.value)}
-  />
+  <InputComponent label="Costs" value={costs} on:input={updateCosts} />
 </form>
 
 <style>

@@ -1,13 +1,14 @@
 <script>
-  export let id;
   export let label;
   export let value;
   export let type = 'text';
 </script>
 
 <div class="form-control">
-  <label for="title">{label}</label>
-  <input {type} {id} {value} on:input />
+  <label for="title"
+    >{label}
+    <input {type} {value} on:input />
+  </label>
 </div>
 
 <style>
