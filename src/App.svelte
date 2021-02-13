@@ -1,5 +1,6 @@
 <script>
   import Button from './ui/Button.svelte';
+  import Chart from './UI/Chart.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
 
   let showForm = false;
@@ -13,8 +14,9 @@
   <h1>DASHBOARD</h1>
   <Button on:click={() => (showForm = true)}>Add Working Day</Button>
   {#if showForm}
-    <FormComponent on:cancel={cancelForm} {showForm} />
+    <FormComponent on:cancel={cancelForm} />
   {/if}
+  <Chart />
 </main>
 
 <style>
