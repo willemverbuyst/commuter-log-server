@@ -1,23 +1,23 @@
 <script>
   import Checkbox from '../UI/Checkbox.svelte';
-  import TextInput from '../UI/TextInput.svelte';
-  import Datepicker from 'svelte-calendar';
+  import DatePicker from '../UI/DatePicker.svelte';
   import Dropdown from '../UI/Dropdown.svelte';
+  import TextInput from '../UI/TextInput.svelte';
   import RadioButton from '../UI/RadioButton.svelte';
 
   import { routes } from '../constants';
 
   let costs = '';
-  let minDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
-  let maxDate = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-
   let selectedDate = new Date();
-  let format = '#{l} #{j} #{M} #{Y}';
   let workingFromHome = false;
   let meansOfTransport = 'Car';
   let returnTrip = false;
   let route = routes[1];
   let routeBack = routes[3];
+
+  function updateSelectedDate(date) {
+    selectedDate = date;
+  }
 
   function updateRouteBack(event) {
     routeBack = event.target.value;
@@ -35,29 +35,17 @@
     meansOfTransport = event.target.value;
   }
 
-  $: console.log(selectedDate);
+  $: console.log('Date: ', selectedDate);
+  $: console.log('Working from home: ', workingFromHome);
   $: console.log('Return: ', returnTrip);
   $: console.log('Means of transport: ', meansOfTransport);
   $: console.log('Route: ', route);
   $: console.log('Route back: ', routeBack);
   $: console.log('Costs: ', costs);
-  $: console.log('Working from home: ', workingFromHome);
 </script>
 
 <form>
-  <Datepicker
-    {format}
-    start={minDate}
-    end={maxDate}
-    bind:selected={selectedDate}
-    buttonBackgroundColor="#e20074"
-    buttonTextColor="white"
-    highlightColor="#e20074"
-    dayBackgroundColor="#efefef"
-    dayTextColor="#333"
-    dayHighlightedBackgroundColor="#e20074"
-    dayHighlightedTextColor="#fff"
-  />
+  <DatePicker {selectedDate} {updateSelectedDate} />
   <Checkbox
     value={workingFromHome}
     label="Working from home?"
