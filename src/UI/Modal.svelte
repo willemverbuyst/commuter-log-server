@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import Button from '../UI/Button.svelte';
 
   export let title;
 
@@ -17,7 +18,7 @@
   <div class="content"><slot /></div>
   <footer>
     <slot name="footer">
-      <button on:click={closeModal}>Close</button>
+      <Button on:click={closeModal}>Close</Button>
     </slot>
   </footer>
 </div>
@@ -39,10 +40,9 @@
     left: 10%;
     width: 80%;
     min-height: 80vh;
-    background: orange;
+    background: #ffa500;
     border-radius: 5px;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   }
 
   h1 {
