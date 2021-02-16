@@ -2,8 +2,11 @@
   import Bar from 'svelte-chartjs/src/Bar.svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../helpers/format';
+  import { week1 } from '../dummyData';
+  import { getBackgroundColor, getMinutes } from '../helpers/chartData';
 
-  let travelTimes = [300, 30, 70, 70, 130, 130];
+  const travelTimes = getMinutes(week1);
+  const backgroundColor = getBackgroundColor(week1);
   const max = Math.max(...travelTimes) * 1.2;
 
   let data = {
@@ -11,13 +14,7 @@
     datasets: [
       {
         data: travelTimes,
-        backgroundColor: [
-          '#e20074',
-          '#e20074',
-          '#e20074',
-          '#e20074',
-          '#e20074',
-        ],
+        backgroundColor,
         borderWidth: 0,
         barPercentage: 1,
       },
