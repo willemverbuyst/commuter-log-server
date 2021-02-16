@@ -1,12 +1,11 @@
 <script>
   export let label;
   export let value;
-  export let type = 'text';
 </script>
 
 <div class="form-control">
-  <label for="title">{label} </label>
-  <input {type} {value} on:input />
+  <label for="costs">{label} </label>
+  <input id="costs" type="text" {value} on:input />
 </div>
 
 <style>

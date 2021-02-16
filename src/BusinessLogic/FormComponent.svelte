@@ -3,6 +3,7 @@
   import DatePicker from '../UI/DatePicker.svelte';
   import Dropdown from '../UI/Dropdown.svelte';
   import Modal from '../UI/Modal.svelte';
+  import NumberInput from '../UI/NumberInput.svelte';
   import RadioButton from '../UI/RadioButton.svelte';
   import TextInput from '../UI/TextInput.svelte';
 
@@ -15,6 +16,8 @@
   let returnTrip = false;
   let route = routes[1];
   let routeBack = routes[3];
+  let minutes = 20;
+  let hours = 1;
 
   function updateSelectedDate(date) {
     selectedDate = date;
@@ -79,6 +82,7 @@
         label="One Way"
         on:change={updateRouteSelection}
       />
+      <NumberInput {hours} {minutes} />
       {#if returnTrip}
         <TextInput
           label="Route back"
