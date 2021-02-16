@@ -3,14 +3,19 @@
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../helpers/format';
   import { week1 } from '../dummyData';
-  import { getBackgroundColor, getMinutes } from '../helpers/chartData';
+  import {
+    getBackgroundColor,
+    getMinutes,
+    getWeekdays,
+  } from '../helpers/chartData';
 
   const travelTimes = getMinutes(week1);
   const backgroundColor = getBackgroundColor(week1);
+  const labels = getWeekdays(week1);
   const max = Math.max(...travelTimes) * 1.2;
 
   let data = {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    labels,
     datasets: [
       {
         data: travelTimes,
