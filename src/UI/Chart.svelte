@@ -1,10 +1,10 @@
 <script>
   import Bar from 'svelte-chartjs/src/Bar.svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../helpers/format';
   import { week1 } from '../dummyData';
   import {
     getBackgroundColor,
+    formatDataLabels,
     getMinutes,
     getWeekdays,
   } from '../helpers/chartData';
@@ -12,7 +12,7 @@
   const travelTimes = getMinutes(week1);
   const backgroundColor = getBackgroundColor(week1);
   const labels = getWeekdays(week1);
-  const max = Math.max(...travelTimes) * 1.2;
+  const maxForDisplay = Math.max(...travelTimes) * 1.2;
 
   let data = {
     labels,
@@ -48,10 +48,13 @@
           ticks: {
             display: false,
             beginAtZero: true,
-            suggestedMax: max,
+            suggestedMax: maxForDisplay,
           },
         },
       ],
+    },
+    tooltips: {
+      enabled: false,
     },
     plugins: {
       datalabels: {
@@ -71,7 +74,7 @@
 
 <style>
   .chart-container {
-    width: 600px;
+    max-width: 600px;
     margin: 4rem auto;
   }
 </style>
