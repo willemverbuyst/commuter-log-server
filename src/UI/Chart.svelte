@@ -1,16 +1,10 @@
 <script>
   import Bar from 'svelte-chartjs/src/Bar.svelte';
   import 'chartjs-plugin-datalabels';
+  import { formatDataLabels } from '../helpers/format';
 
-  let travelTimes = [300, 70, 70, 70, 130, 130];
+  let travelTimes = [300, 30, 70, 70, 130, 130];
   const max = Math.max(...travelTimes) * 1.2;
-
-  function formatDataLabels(value) {
-    if (value % 60 === 0) {
-      return `0${Math.floor(value / 60)}:00`;
-    }
-    return `0${Math.floor(value / 60)}:${value % 60}`;
-  }
 
   let data = {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
