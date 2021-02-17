@@ -3,7 +3,7 @@
   import DatePicker from '../UI/DatePicker.svelte';
   import Dropdown from '../UI/Dropdown.svelte';
   import Modal from '../UI/Modal.svelte';
-  import NumberInput from '../UI/NumberInput.svelte';
+  import TimeInput from '../UI/TimeInput.svelte';
   import RadioButton from '../UI/RadioButton.svelte';
   import TextInput from '../UI/TextInput.svelte';
 
@@ -82,7 +82,7 @@
         label="One Way"
         on:change={updateRouteSelection}
       />
-      <NumberInput {hours} {minutes} />
+      <TimeInput {hours} {minutes} />
       {#if returnTrip}
         <TextInput
           label="Route back"

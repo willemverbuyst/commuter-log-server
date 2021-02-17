@@ -1,13 +1,27 @@
 <script>
   export let hours;
   export let minutes;
+
+  function validateMinuteInput(event) {
+    if (event.target.value > 60) minutes = 60;
+    if (event.target.value % 5 !== 0)
+      minutes = event.target.value - (event.target.value % 5);
+  }
 </script>
 
 <div class="form-control">
   <div class="labels">hrs&nbsp;:&nbsp;min</div>
 
   <div class="number-inputs">
-    <input class="hours" type="number" value={hours} on:input />
+    <input
+      class="hours"
+      type="number"
+      value={hours}
+      dir="rtl"
+      min="0"
+      max="100"
+      on:input
+    />
     &nbsp;:&nbsp;
     <input
       class="minutes"
@@ -15,23 +29,25 @@
       value={minutes}
       min="0"
       max="60"
+      step="5"
       on:input
+      on:keyup={validateMinuteInput}
     />
   </div>
 </div>
 
 <style>
   /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
+  /* input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
   /* Firefox */
-  input[type='number'] {
+  /* input[type='number'] {
     -moz-appearance: textfield;
-  }
+  }  */
 
   input {
     width: 40px;
@@ -39,6 +55,7 @@
     color: inherit;
     border: none;
     background: transparent;
+    margin: 0;
 
     /* padding: 10px 20px; */
     transition: border-color 0.1s ease-out;
