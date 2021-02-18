@@ -6,7 +6,7 @@
   import TimeInput from '../UI/TimeInput.svelte';
   import RadioButton from '../UI/RadioButton.svelte';
   import TextInput from '../UI/TextInput.svelte';
-
+  import { checkDurationInput } from '../helpers/validation';
   import { routes } from '../constants';
 
   let costs = '';
@@ -16,8 +16,9 @@
   let returnTrip = false;
   let route = routes[1];
   let routeBack = routes[3];
-  let minutes = 20;
-  let hours = 1;
+  let duration = '00:00';
+
+  $: durationValid = checkDurationInput(duration);
 
   function updateSelectedDate(date) {
     selectedDate = date;
@@ -39,13 +40,13 @@
     meansOfTransport = event.target.value;
   }
 
-  $: console.log('Date: ', selectedDate);
-  $: console.log('Working from home: ', workingFromHome);
-  $: console.log('Return: ', returnTrip);
-  $: console.log('Means of transport: ', meansOfTransport);
-  $: console.log('Route: ', route);
-  $: console.log('Route back: ', routeBack);
-  $: console.log('Costs: ', costs);
+  // $: console.log('Date: ', selectedDate);
+  // $: console.log('Working from home: ', workingFromHome);
+  // $: console.log('Return: ', returnTrip);
+  // $: console.log('Means of transport: ', meansOfTransport);
+  // $: console.log('Route: ', route);
+  // $: console.log('Route back: ', routeBack);
+  // $: console.log('Costs: ', costs);
 </script>
 
 <Modal title="Add a day to log" on:cancel>
@@ -82,7 +83,12 @@
         label="One Way"
         on:change={updateRouteSelection}
       />
-      <TimeInput {hours} {minutes} />
+      <TimeInput
+        {duration}
+        valid={durationValid}
+        validityMessage="Please write a duration in the format hh:mm"
+        on:input={(event) => (duration = event.target.value)}
+      />
       {#if returnTrip}
         <TextInput
           label="Route back"

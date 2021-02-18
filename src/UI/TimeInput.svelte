@@ -1,80 +1,44 @@
 <script>
-  export let hours;
-  export let minutes;
+  export let duration;
+  export let valid = true;
+  export let validityMessage = '';
 
-  function validateMinuteInput(event) {
-    if (event.target.value > 60) minutes = 60;
-    if (event.target.value % 5 !== 0)
-      minutes = event.target.value - (event.target.value % 5);
-  }
+  let touched = false;
 </script>
 
 <div class="form-control">
   <div class="labels">hrs&nbsp;:&nbsp;min</div>
-
-  <div class="number-inputs">
+  <div>
     <input
-      class="hours"
-      type="number"
-      value={hours}
-      dir="rtl"
-      min="0"
-      max="100"
+      type="text"
+      value={duration}
+      {validityMessage}
+      class:invalid={!valid && touched}
       on:input
+      on:blur={() => (touched = true)}
     />
-    &nbsp;:&nbsp;
-    <input
-      class="minutes"
-      type="number"
-      value={minutes}
-      min="0"
-      max="60"
-      step="5"
-      on:input
-      on:keyup={validateMinuteInput}
-    />
+    {#if validityMessage && !valid && touched}
+      <p class="error-message">{validityMessage}</p>
+    {/if}
   </div>
 </div>
 
 <style>
-  /* Chrome, Safari, Edge, Opera */
-  /* input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Firefox */
-  /* input[type='number'] {
-    -moz-appearance: textfield;
-  }  */
-
   input {
-    width: 40px;
+    width: 100px;
     font: inherit;
     color: inherit;
     border: none;
     background: transparent;
-    margin: 0;
-
-    /* padding: 10px 20px; */
-    transition: border-color 0.1s ease-out;
-  }
-
-  input.hours {
-    text-align: right;
-  }
-  input.minutes {
-    text-align: left;
+    margin: 2px;
+    text-align: center;
   }
 
   input:focus {
-    border-color: #f1f1f1;
     outline: none;
   }
 
-  .labels,
-  .number-inputs {
+  .labels {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -86,5 +50,14 @@
     border: 1px solid #fff;
     border-radius: 7px;
     padding: 10px 20px;
+  }
+
+  .invalid {
+    border: 3px solid red;
+  }
+
+  .error-message {
+    color: red;
+    margin: 0.25rem 0;
   }
 </style>
