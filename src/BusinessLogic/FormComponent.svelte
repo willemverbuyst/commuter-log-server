@@ -7,6 +7,7 @@
   import RadioButton from '../UI/RadioButton.svelte';
   import CostsInput from '../UI/CostsInput.svelte';
   import { checkCostsInput, checkDurationInput } from '../helpers/validation';
+  import { reverseRoute } from '../helpers/formatting';
   import { routes } from '../constants';
 
   let costs = '0,00';
@@ -23,14 +24,6 @@
 
   function updateSelectedDate(date) {
     selectedDate = date;
-  }
-
-  function updateRouteSelection(event) {
-    route = event.target.value;
-  }
-
-  function updateMeansOfTransport(event) {
-    meansOfTransport = event.target.value;
   }
 
   // $: console.log('Date: ', selectedDate);
@@ -56,13 +49,13 @@
           name="transport"
           value="Car"
           group={meansOfTransport}
-          on:change={updateMeansOfTransport}
+          on:change={(event) => (meansOfTransport = event.target.value)}
         />
         <RadioButton
           name="transport"
           value="Public Transport"
           group={meansOfTransport}
-          on:change={updateMeansOfTransport}
+          on:change={(event) => (meansOfTransport = event.target.value)}
         />
       </div>
       <Checkbox
@@ -74,7 +67,7 @@
         {route}
         {routes}
         label="One Way"
-        on:change={updateRouteSelection}
+        on:change={(event) => (route = event.target.value)}
       />
       <TimeInput
         {duration}
@@ -83,7 +76,7 @@
         on:input={(event) => (duration = event.target.value)}
       />
       {#if returnTrip}
-        <p>"Route back"</p>
+        <p>{reverseRoute(route)}</p>
       {/if}
       <CostsInput
         {costs}
