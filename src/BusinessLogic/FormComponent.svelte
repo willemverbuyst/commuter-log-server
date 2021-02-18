@@ -18,9 +18,11 @@
   let route = routes[1];
   // let routeBack = routes[3];
   let duration = '00:00';
+  let durationReturn = '00:00';
 
-  $: durationValid = checkDurationInput(duration);
   $: costsValid = checkCostsInput(costs);
+  $: durationValid = checkDurationInput(duration);
+  $: durationReturnValid = checkDurationInput(durationReturn);
 
   function updateSelectedDate(date) {
     selectedDate = date;
@@ -77,6 +79,12 @@
       />
       {#if returnTrip}
         <p>{reverseRoute(route)}</p>
+        <TimeInput
+          duration={durationReturn}
+          valid={durationReturnValid}
+          validityMessage="Please write a duration in the format hh:mm"
+          on:input={(event) => (durationReturn = event.target.value)}
+        />
       {/if}
       <CostsInput
         {costs}
