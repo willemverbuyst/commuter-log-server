@@ -5,31 +5,24 @@
   import Modal from '../UI/Modal.svelte';
   import TimeInput from '../UI/TimeInput.svelte';
   import RadioButton from '../UI/RadioButton.svelte';
-  import TextInput from '../UI/TextInput.svelte';
-  import { checkDurationInput } from '../helpers/validation';
+  import CostsInput from '../UI/CostsInput.svelte';
+  import { checkCostsInput, checkDurationInput } from '../helpers/validation';
   import { routes } from '../constants';
 
-  let costs = '';
+  let costs = '0,00';
   let selectedDate = new Date();
   let workingFromHome = false;
   let meansOfTransport = 'Car';
   let returnTrip = false;
   let route = routes[1];
-  let routeBack = routes[3];
+  // let routeBack = routes[3];
   let duration = '00:00';
 
   $: durationValid = checkDurationInput(duration);
+  $: costsValid = checkCostsInput(costs);
 
   function updateSelectedDate(date) {
     selectedDate = date;
-  }
-
-  function updateRouteBack(event) {
-    routeBack = event.target.value;
-  }
-
-  function updateCosts(event) {
-    costs = event.target.value;
   }
 
   function updateRouteSelection(event) {
@@ -90,13 +83,14 @@
         on:input={(event) => (duration = event.target.value)}
       />
       {#if returnTrip}
-        <TextInput
-          label="Route back"
-          value={routeBack}
-          on:input={updateRouteBack}
-        />
+        <p>"Route back"</p>
       {/if}
-      <TextInput label="Costs" value={costs} on:input={updateCosts} />
+      <CostsInput
+        {costs}
+        valid={costsValid}
+        validityMessage="Please write costs in the format 0,00"
+        on:input={(event) => (costs = event.target.value)}
+      />
     {/if}
   </form>
 </Modal>
