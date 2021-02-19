@@ -1,5 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import { scale } from 'svelte/transition';
+  import { cubicIn } from 'svelte/easing';
   import Button from '../UI/Button.svelte';
 
   export let title;
@@ -13,7 +15,14 @@
 
 <div class="modal-backdrop" on:click={closeModal} />
 
-<div class="modal">
+<div
+  class="modal"
+  transition:scale={{
+    delay: 0,
+    duration: 400,
+    easing: cubicIn,
+  }}
+>
   <h1>{title}</h1>
   <div class="content"><slot /></div>
   <footer>
@@ -44,7 +53,6 @@
     background: #ffa500;
     border-radius: 5px;
     z-index: 100;
-    animation: dropDown 0.8s ease-out;
   }
 
   h1 {
@@ -60,19 +68,5 @@
 
   footer {
     padding: 1rem;
-  }
-
-  @keyframes dropDown {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -10rem);
-    }
-    80% {
-      transform: translate(-50%, 1rem);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
   }
 </style>
