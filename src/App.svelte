@@ -11,7 +11,6 @@
 </script>
 
 <main>
-  <h1>DASHBOARD</h1>
   <Button on:click={() => (showForm = true)}>Add Working Day</Button>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
@@ -21,8 +20,12 @@
 
 <style>
   main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
     padding: 1em;
-    margin: 0 auto;
+    margin: 5rem auto;
   }
 </style>

@@ -3,6 +3,7 @@ export function isEmpty(val) {
 }
 
 export function checkCostsInput(val) {
+  if (parseInt(val) < 0) return false;
   return /^\d{1,4},\d{2}$/.test(val);
 }
 

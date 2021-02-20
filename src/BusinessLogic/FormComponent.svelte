@@ -37,7 +37,7 @@
   // $: console.log('Costs: ', costs);
 </script>
 
-<Modal title="Add a day to log" on:cancel>
+<Modal on:cancel>
   <form>
     <DatePicker {selectedDate} {updateSelectedDate} />
     <Checkbox

@@ -26,14 +26,14 @@
 
 <style>
   input {
-    width: 40px;
+    width: 60px;
     font: inherit;
     color: inherit;
     border: none;
     background: transparent;
     margin: 2px 0;
     padding: 2px 0;
-    text-align: center;
+    text-align: right;
   }
 
   input:focus {
@@ -49,7 +49,7 @@
   .form-control {
     width: 300px;
     margin: 20px auto;
-    border: 1px solid #fff;
+    border: 1px solid #170a3a;
     border-radius: 7px;
     padding: 10px 20px;
   }

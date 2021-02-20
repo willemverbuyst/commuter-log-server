@@ -47,7 +47,7 @@
   .form-control {
     width: 300px;
     margin: 20px auto;
-    border: 1px solid #fff;
+    border: 1px solid #170a3a;
     border-radius: 7px;
     padding: 10px 20px;
   }

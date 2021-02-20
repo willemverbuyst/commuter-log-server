@@ -1,10 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { scale } from 'svelte/transition';
+  import { fade, fly, scale } from 'svelte/transition';
   import { cubicIn } from 'svelte/easing';
   import Button from '../UI/Button.svelte';
-
-  export let title;
 
   const dispatch = createEventDispatcher();
 
@@ -14,17 +12,15 @@
 </script>
 
 <div class="modal-backdrop" on:click={closeModal} />
-
 <div
   class="modal"
-  transition:scale={{
-    delay: 0,
-    duration: 400,
-    easing: cubicIn,
-  }}
+  in:scale={{ duration: 400, easing: cubicIn }}
+  out:fly={{ y: 300 }}
 >
-  <h1>{title}</h1>
-  <div class="content"><slot /></div>
+  <div class="content">
+    <h1>Add a day to log</h1>
+    <slot />
+  </div>
   <footer>
     <slot name="footer">
       <Button on:click={closeModal}>Close</Button>
@@ -38,35 +34,48 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 10;
+    height: 100%;
+  }
+
+  .modal:before {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    border-radius: 7px;
+    box-shadow: 5px 3px 5px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 5px 3px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 5px 3px 5px 0px rgba(0, 0, 0, 0.25);
+    z-index: -100;
   }
 
   .modal {
+    background-image: linear-gradient(
+      30deg,
+      #38438b,
+      #944b94,
+      #d75a88,
+      #ff7e71,
+      #ffb25f,
+      #ffeb68
+    );
+    opacity: 0.95;
     position: fixed;
     top: 10vh;
     left: 50%;
     transform: translateX(-50%);
     width: 600px;
     min-height: 80vh;
-    background: #ffa500;
-    border-radius: 5px;
-    z-index: 100;
-  }
-
-  h1 {
-    padding: 1rem;
-    margin: 0;
-    border-bottom: 1px solid #ccc;
-    font-family: 'Roboto Slab', sans-serif;
+    z-index: 3000;
+    border-radius: 7px;
   }
 
   .content {
-    padding: 1rem;
-  }
-
-  footer {
     padding: 1rem;
   }
 </style>

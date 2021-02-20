@@ -61,7 +61,7 @@
         anchor: 'end',
         align: 'top',
         display: true,
-        color: 'white',
+        color: '#170a3a',
         formatter: (value) => formatDataLabels(value),
       },
     },

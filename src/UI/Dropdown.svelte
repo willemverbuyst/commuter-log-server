@@ -19,7 +19,7 @@
     width: 340px;
     font: inherit;
     color: inherit;
-    border: 1px solid #fff;
+    border: 1px solid #170a3a;
     border-radius: 7px;
     background: transparent;
     padding: 10px 0;
