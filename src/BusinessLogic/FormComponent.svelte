@@ -10,19 +10,20 @@
   import { reverseRoute } from '../helpers/formatting';
   import { routes } from '../constants';
 
-  let costs = '0,00';
   let selectedDate = new Date();
   let workingFromHome = false;
   let meansOfTransport = 'Car';
-  let returnTrip = false;
-  let route = routes[1];
-  // let routeBack = routes[3];
-  let duration = '00:00';
-  let durationReturn = '00:00';
+  let routeTripOne = routes[1];
+  let routeTripTwo = '';
+  let roundTrip = false;
+  let durationTripOne = '00:00';
+  let durationTripTwo = '00:00';
+  let costs = '0,00';
 
   $: costsValid = checkCostsInput(costs);
-  $: durationValid = checkDurationInput(duration);
-  $: durationReturnValid = checkDurationInput(durationReturn);
+  $: durationTripOneValid = checkDurationInput(durationTripOne);
+  $: durationTripTwoValid = checkDurationInput(durationTripTwo);
+  $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
 
   function updateSelectedDate(date) {
     selectedDate = date;
@@ -30,7 +31,7 @@
 
   // $: console.log('Date: ', selectedDate);
   // $: console.log('Working from home: ', workingFromHome);
-  // $: console.log('Return: ', returnTrip);
+  // $: console.log('Return: ', roundTrip);
   // $: console.log('Means of transport: ', meansOfTransport);
   // $: console.log('Route: ', route);
   // $: console.log('Route back: ', routeBack);
@@ -61,31 +62,36 @@
         />
       </div>
       <Checkbox
-        value={returnTrip}
-        label=" Return trip?"
-        on:change={(event) => (returnTrip = event.target.checked)}
+        value={roundTrip}
+        label=" Round trip?"
+        on:change={(event) => (roundTrip = event.target.checked)}
       />
       <Dropdown
-        {route}
+        route={routeTripOne}
         {routes}
-        label="One Way"
-        on:change={(event) => (route = event.target.value)}
+        on:change={(event) => (routeTripOne = event.target.value)}
       />
       <TimeInput
-        {duration}
-        valid={durationValid}
+        duration={durationTripOne}
+        valid={durationTripOneValid}
         validityMessage="Please write a duration in the format hh:mm"
-        on:input={(event) => (duration = event.target.value)}
+        on:input={(event) => (durationTripOne = event.target.value)}
       />
-      {#if returnTrip}
-        <p>{reverseRoute(route)}</p>
-        <TimeInput
-          duration={durationReturn}
-          valid={durationReturnValid}
-          validityMessage="Please write a duration in the format hh:mm"
-          on:input={(event) => (durationReturn = event.target.value)}
+      {#if !roundTrip}
+        <Dropdown
+          route={routeTripTwo}
+          {routes}
+          on:change={(event) => (routeTripTwo = event.target.value)}
         />
+      {:else}
+        <p>{routeTripTwo}</p>
       {/if}
+      <TimeInput
+        duration={durationTripTwo}
+        valid={durationTripTwoValid}
+        validityMessage="Please write a duration in the format hh:mm"
+        on:input={(event) => (durationTripTwo = event.target.value)}
+      />
       <CostsInput
         {costs}
         valid={costsValid}

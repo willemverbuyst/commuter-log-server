@@ -1,11 +1,9 @@
 <script>
   export let route;
   export let routes;
-  export let label;
 </script>
 
 <div class="form-control">
-  <label for={label}>{label} </label>
   <!-- svelte-ignore a11y-no-onchange -->
   <select value={route} on:change>
     {#each routes as r}
@@ -31,11 +29,11 @@
     outline: none;
   }
 
-  label {
+  /* label {
     display: block;
     margin-bottom: 0.5rem;
     width: 100%;
-  }
+  } */
 
   .form-control {
     width: 100%;

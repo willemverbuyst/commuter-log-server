@@ -55,21 +55,11 @@
   }
 
   .modal {
-    background-image: linear-gradient(
-      30deg,
-      #38438b,
-      #944b94,
-      #d75a88,
-      #ff7e71,
-      #ffb25f,
-      #ffeb68
-    );
-    opacity: 0.95;
     position: fixed;
     top: 10vh;
     left: 50%;
     transform: translateX(-50%);
-    width: 600px;
+    width: 60vw;
     min-height: 80vh;
     z-index: 3000;
     border-radius: 7px;

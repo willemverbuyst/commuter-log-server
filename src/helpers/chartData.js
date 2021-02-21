@@ -22,13 +22,15 @@ export const formatDataLabels = (value) => {
     return `${Math.floor(value / 60)}:${value % 60}`;
   } else if (value < 600 && value % 60 === 0) {
     return `0${Math.floor(value / 60)}:00`;
+  } else if (value < 600 && value % 60 !== 0 && value % 60 < 10) {
+    return `0${Math.floor(value / 60)}:0${value % 60}`;
   } else {
     return `0${Math.floor(value / 60)}:${value % 60}`;
   }
 };
 
 export const getMinutes = (dates) => {
-  return dates.map((date) => date.minutes);
+  return dates.map((date) => date.durationTripOne + date.durationTripTwo);
 };
 
 export const getWeekdays = (dates) => {
