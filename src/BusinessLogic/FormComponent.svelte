@@ -29,13 +29,16 @@
     selectedDate = date;
   }
 
-  // $: console.log('Date: ', selectedDate);
-  // $: console.log('Working from home: ', workingFromHome);
-  // $: console.log('Return: ', roundTrip);
-  // $: console.log('Means of transport: ', meansOfTransport);
-  // $: console.log('Route: ', route);
-  // $: console.log('Route back: ', routeBack);
-  // $: console.log('Costs: ', costs);
+  // FOR DEV
+  $: console.log('Date: ', selectedDate);
+  $: console.log('Working from home: ', workingFromHome);
+  $: console.log('Means of transport: ', meansOfTransport);
+  $: console.log('Route Trip One: ', routeTripOne);
+  $: console.log('Route Trip Two: ', routeTripTwo);
+  $: console.log('Roundtrip: ', roundTrip);
+  $: console.log('Duration Trip One: ', durationTripOne);
+  $: console.log('Duration Trip Two: ', durationTripTwo);
+  $: console.log('Costs: ', costs);
 </script>
 
 <Modal on:cancel>

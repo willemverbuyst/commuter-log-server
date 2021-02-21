@@ -8,5 +8,7 @@ export function checkCostsInput(val) {
 }
 
 export function checkDurationInput(val) {
+  const minutes = val.split(':')[1];
+  if (minutes >= 60) return false;
   return /^\d{2}:\d{2}$/.test(val);
 }
