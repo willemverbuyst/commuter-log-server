@@ -1,6 +1,6 @@
 export const week1 = [
   {
-    date: new Date('2/8/2021'),
+    date: new Date('Mon Feb 8 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
     meansOfTransport: 'train',
     routeTripOne: 'Tilburg - Vlissingen',
@@ -11,7 +11,7 @@ export const week1 = [
     costs: 24.99,
   },
   {
-    date: new Date('2/9/2021'),
+    date: new Date('Tue Feb 9 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
@@ -22,7 +22,7 @@ export const week1 = [
     costs: 24.99,
   },
   {
-    date: new Date('2/10/2021'),
+    date: new Date('Wed Feb 10 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
@@ -33,7 +33,7 @@ export const week1 = [
     costs: 24.99,
   },
   {
-    date: new Date('2/11/2021'),
+    date: new Date('Thu Feb 11 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
@@ -44,7 +44,7 @@ export const week1 = [
     costs: 24.99,
   },
   {
-    date: new Date('2/12/2021'),
+    date: new Date('Fri Feb 12 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',

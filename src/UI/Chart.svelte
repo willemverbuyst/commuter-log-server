@@ -7,12 +7,14 @@
     formatDataLabels,
     getMinutes,
     getWeekdays,
+    getWeekNumber,
   } from '../helpers/chartData';
 
   const travelTimes = getMinutes(week1);
   const backgroundColor = getBackgroundColor(week1);
   const labels = getWeekdays(week1);
   const maxForDisplay = Math.max(...travelTimes) * 1.2;
+  const title = `WEEK ${getWeekNumber(week1[0].date)}`;
 
   let data = {
     labels,
@@ -27,6 +29,10 @@
   };
 
   let options = {
+    title: {
+      display: true,
+      text: title,
+    },
     maintainAspectRatio: true,
     legend: {
       display: false,
