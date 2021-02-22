@@ -1,20 +1,16 @@
 <script>
   import Bar from 'svelte-chartjs/src/Bar.svelte';
   import 'chartjs-plugin-datalabels';
-  import { week1 } from '../dummyData';
-  import {
-    getBackgroundColor,
-    formatDataLabels,
-    getMinutes,
-    getWeekdays,
-    getWeekNumber,
-  } from '../helpers/chartData';
+  import { workingDays } from '../dummyData';
+  import { formatDataLabels, getWeekData } from '../helpers/chartData';
 
-  const travelTimes = getMinutes(week1);
-  const backgroundColor = getBackgroundColor(week1);
-  const labels = getWeekdays(week1);
-  const maxForDisplay = Math.max(...travelTimes) * 1.2;
-  const title = `WEEK ${getWeekNumber(week1[0].date)}`;
+  const {
+    travelTimes,
+    backgroundColor,
+    labels,
+    maxForDisplay,
+    title,
+  } = getWeekData(workingDays, 6);
 
   let data = {
     labels,

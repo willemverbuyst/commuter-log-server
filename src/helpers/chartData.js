@@ -51,5 +51,22 @@ export const getWeekNumber = (day) => {
   // Calculate full weeks to nearest Thursday
   const weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
   // Return array of year and week number
-  return weekNo;
+  return [d.getFullYear(), weekNo];
+};
+
+export const getWeekData = (dates, weekNumber) => {
+  const week = dates.filter((d) => getWeekNumber(d.date)[1] === weekNumber);
+  const travelTimes = getMinutes(week);
+  const backgroundColor = getBackgroundColor(week);
+  const labels = getWeekdays(week);
+  const maxForDisplay = Math.max(...travelTimes) * 1.2;
+  const title = `WEEK ${getWeekNumber(week[0].date)[1]}`;
+
+  return {
+    travelTimes,
+    backgroundColor,
+    labels,
+    maxForDisplay,
+    title,
+  };
 };
