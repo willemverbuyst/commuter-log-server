@@ -1,8 +1,8 @@
 <script>
   import Button from './ui/Button.svelte';
-  import WeekChart from './UI/WeekChart.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
-  import AveragesChart from './UI/AveragesChart.svelte';
+  import AveragesChart from './UI/Charts/AveragesChart.svelte';
+  import WeekChart from './UI/Charts/WeekChart.svelte';
 
   let showForm = false;
 

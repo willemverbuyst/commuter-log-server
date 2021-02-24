@@ -1,5 +1,3 @@
-import { workingDays } from '../dummyData';
-
 const weekdays = [
   'Sunday',
   'Monday',

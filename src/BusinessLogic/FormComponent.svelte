@@ -1,11 +1,11 @@
 <script>
-  import Checkbox from '../UI/Checkbox.svelte';
-  import DatePicker from '../UI/DatePicker.svelte';
-  import Dropdown from '../UI/Dropdown.svelte';
+  import Checkbox from '../UI/Inputs/Checkbox.svelte';
+  import DatePicker from '../UI/Inputs/DatePicker.svelte';
+  import Dropdown from '../UI/Inputs/Dropdown.svelte';
   import Modal from '../UI/Modal.svelte';
-  import TimeInput from '../UI/TimeInput.svelte';
-  import RadioButton from '../UI/RadioButton.svelte';
-  import CostsInput from '../UI/CostsInput.svelte';
+  import TimeInput from '../UI/Inputs/TimeInput.svelte';
+  import RadioButton from '../UI/Inputs/RadioButton.svelte';
+  import CostsInput from '../UI/Inputs/CostsInput.svelte';
   import { checkCostsInput, checkDurationInput } from '../helpers/validation';
   import { reverseRoute } from '../helpers/formatting';
   import { routes } from '../constants';

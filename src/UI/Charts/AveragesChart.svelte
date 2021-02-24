@@ -1,22 +1,25 @@
 <script>
-  import Bar from 'svelte-chartjs/src/Bar.svelte';
+  import Bar from 'svelte-chartjs/src/Line.svelte';
   import 'chartjs-plugin-datalabels';
-  import { workingDays } from '../dummyData';
-  import { formatDataLabels, getWeekData } from '../helpers/chartData';
+  import { workingDays } from '../../dummyData';
+  import {
+    formatDataLabels,
+    getAveragePerWeekData,
+  } from '../../helpers/chartData';
 
   const {
-    travelTimes,
+    averages,
     backgroundColor,
     labels,
     maxForDisplay,
     title,
-  } = getWeekData(workingDays, 4);
+  } = getAveragePerWeekData(workingDays);
 
   let data = {
     labels,
     datasets: [
       {
-        data: travelTimes,
+        data: averages,
         backgroundColor,
         borderWidth: 0,
         barPercentage: 1,
