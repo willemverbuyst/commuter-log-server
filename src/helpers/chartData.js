@@ -1,3 +1,5 @@
+import { workingDays } from '../dummyData';
+
 const weekdays = [
   'Sunday',
   'Monday',
@@ -8,7 +10,7 @@ const weekdays = [
   'Saturday',
 ];
 
-export const getBackgroundColor = (dates) => {
+const getBackgroundColor = (dates) => {
   return dates.map((date) =>
     date.meansOfTransport === 'car' ? '#1F91AE' : '#392D4D'
   );
@@ -31,7 +33,7 @@ export const formatDataLabels = (value) => {
   }
 };
 
-export const getMinutes = (dates) => {
+const getMinutes = (dates) => {
   return dates.map((date) => {
     return date.durationTripOne === 99999
       ? 0.00001
@@ -39,12 +41,12 @@ export const getMinutes = (dates) => {
   });
 };
 
-export const getWeekdays = (dates) => {
+const getWeekdays = (dates) => {
   return dates.map((date) => weekdays[date.date.getDay()]);
 };
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
-export const getWeekNumber = (day) => {
+const getWeekNumber = (day) => {
   // Copy date so don't modify original
   const d = new Date(
     Date.UTC(day.getFullYear(), day.getMonth(), day.getDate())
@@ -70,6 +72,50 @@ export const getWeekData = (dates, weekNumber) => {
 
   return {
     travelTimes,
+    backgroundColor,
+    labels,
+    maxForDisplay,
+    title,
+  };
+};
+
+const getAveragesPerWeek = (weeks) => {
+  const averagesPerWeek = weeks.map((week) => getAveragePerWeek(week));
+
+  return averagesPerWeek;
+};
+
+const getAveragePerWeek = (week) => {
+  const weekWithoutDayOff = week.filter((day) => day.durationTripOne !== 99999);
+  const totalMinutesPerWeek = weekWithoutDayOff
+    .map((day) => day.durationTripOne + day.durationTripTwo)
+    .reduce((a, b) => a + b);
+  const averagePerWeek = totalMinutesPerWeek / weekWithoutDayOff.length;
+
+  return averagePerWeek;
+};
+
+const chunkArray = (arr, size) => {
+  const chunkedArr = [];
+  let index = 0;
+  while (index < arr.length) {
+    chunkedArr.push(arr.slice(index, size + index));
+    index += size;
+  }
+
+  return chunkedArr;
+};
+
+export const getAveragePerWeekData = (workingDays) => {
+  const weeks = chunkArray(workingDays, 5);
+  const averages = getAveragesPerWeek(weeks);
+  const backgroundColor = averages.map(() => '#1F91AE');
+  const labels = weeks.map((a) => `WEEK ${getWeekNumber(a[0].date)[1]}`);
+  const maxForDisplay = Math.max(...averages) * 1.2;
+  const title = `AVERAGE PER WEEK`;
+
+  return {
+    averages,
     backgroundColor,
     labels,
     maxForDisplay,

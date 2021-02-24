@@ -18,7 +18,7 @@ export const workingDays = [
     routeTripTwo: 'Vlissingen - Terneuzen',
     roundTrip: false,
     durationTripOne: 90,
-    durationTripTwo: 35,
+    durationTripTwo: 40,
     costs: 24.99,
   },
   {

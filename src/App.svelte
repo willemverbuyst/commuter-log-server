@@ -2,6 +2,7 @@
   import Button from './ui/Button.svelte';
   import WeekChart from './UI/WeekChart.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
+  import AveragesChart from './UI/AveragesChart.svelte';
 
   let showForm = false;
 
@@ -16,6 +17,7 @@
     <FormComponent on:cancel={cancelForm} />
   {/if}
   <WeekChart />
+  <AveragesChart />
 </main>
 
 <style>
