@@ -1,6 +1,6 @@
 <script>
   import Button from './ui/Button.svelte';
-  import Chart from './UI/Chart.svelte';
+  import WeekChart from './UI/WeekChart.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
 
   let showForm = false;
@@ -15,7 +15,7 @@
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
-  <Chart />
+  <WeekChart />
 </main>
 
 <style>

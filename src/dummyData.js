@@ -35,12 +35,12 @@ export const workingDays = [
   {
     date: new Date('Thu Jan 28 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
     roundTrip: false,
-    durationTripOne: 150,
-    durationTripTwo: 150,
+    durationTripOne: 99999,
+    durationTripTwo: 0,
     costs: 24.99,
   },
   {

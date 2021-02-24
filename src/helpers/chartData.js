@@ -16,7 +16,9 @@ export const getBackgroundColor = (dates) => {
 
 // change the number in minutes to hh:mm
 export const formatDataLabels = (value) => {
-  if (value >= 600 && value % 60 === 0) {
+  if (value === 0.00001) {
+    return 'day off';
+  } else if (value >= 600 && value % 60 === 0) {
     return `${Math.floor(value / 60)}:00`;
   } else if (value >= 600 && value % 60 !== 0) {
     return `${Math.floor(value / 60)}:${value % 60}`;
@@ -30,7 +32,11 @@ export const formatDataLabels = (value) => {
 };
 
 export const getMinutes = (dates) => {
-  return dates.map((date) => date.durationTripOne + date.durationTripTwo);
+  return dates.map((date) => {
+    return date.durationTripOne === 99999
+      ? 0.00001
+      : date.durationTripOne + date.durationTripTwo;
+  });
 };
 
 export const getWeekdays = (dates) => {
