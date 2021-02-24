@@ -1,25 +1,21 @@
 <script>
-  import Line from 'svelte-chartjs/src/Line.svelte';
+  import Pie from 'svelte-chartjs/src/Pie.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import {
-    formatDataLabels,
-    getAveragePerWeekData,
-  } from '../../helpers/chartLogic';
+  import { getTransportPartitionData } from '../../helpers/chartLogic';
 
   const {
-    averages,
+    partition,
     backgroundColor,
     labels,
-    maxForDisplay,
     title,
-  } = getAveragePerWeekData(workingDays);
+  } = getTransportPartitionData(workingDays);
 
   let data = {
     labels,
     datasets: [
       {
-        data: averages,
+        data: partition,
         backgroundColor,
         borderWidth: 0,
         barPercentage: 1,
@@ -53,7 +49,6 @@
           ticks: {
             display: false,
             beginAtZero: true,
-            suggestedMax: maxForDisplay,
           },
         },
       ],
@@ -61,20 +56,11 @@
     tooltips: {
       enabled: false,
     },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'top',
-        display: true,
-        color: '#170a3a',
-        formatter: (value) => formatDataLabels(value),
-      },
-    },
   };
 </script>
 
 <div class="chart-container">
-  <Line {data} {options} />
+  <Pie {data} {options} />
 </div>
 
 <style>

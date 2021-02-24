@@ -2,6 +2,7 @@
   import Button from './ui/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import AveragesChart from './UI/Charts/AveragesChart.svelte';
+  import TransportChart from './UI/Charts/TransportChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
 
   let showForm = false;
@@ -18,6 +19,7 @@
   {/if}
   <WeekChart />
   <AveragesChart />
+  <TransportChart />
 </main>
 
 <style>

@@ -155,13 +155,13 @@ export const workingDays = [
   },
   {
     date: new Date('Fri Feb 12 2021 19:50:52 GMT+0100'),
-    workingFromHome: false,
+    workingFromHome: true,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: false,
-    durationTripOne: 35,
-    durationTripTwo: 95,
+    durationTripOne: 0,
+    durationTripTwo: 0,
     costs: 24.99,
   },
   {
@@ -210,13 +210,13 @@ export const workingDays = [
   },
   {
     date: new Date('Fri Feb 19 2021 19:50:52 GMT+0100'),
-    workingFromHome: false,
+    workingFromHome: true,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: false,
-    durationTripOne: 35,
-    durationTripTwo: 95,
+    durationTripOne: 0,
+    durationTripTwo: 0,
     costs: 24.99,
   },
 ];

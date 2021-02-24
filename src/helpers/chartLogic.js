@@ -120,3 +120,32 @@ export const getAveragePerWeekData = (workingDays) => {
     title,
   };
 };
+
+const getTransportPartition = (workingDays) => {
+  const workingFromHome = workingDays.filter(
+    (day) => day.workingFromHome === true
+  ).length;
+  const travelledByCar = workingDays.filter(
+    (day) => day.meansOfTransport === 'car'
+  ).length;
+  const travelledByTrain = workingDays.filter(
+    (day) => day.meansOfTransport === 'train'
+  ).length;
+
+  return [workingFromHome, travelledByCar, travelledByTrain];
+};
+
+export const getTransportPartitionData = (workingDays) => {
+  // const partition = [10, 30, 60];
+  const partition = getTransportPartition(workingDays);
+  const backgroundColor = ['#dfdf44', '#aaa11a', '#eea49a'];
+  const labels = ['wfh', 'car', 'train'];
+  const title = `PIE`;
+
+  return {
+    partition,
+    backgroundColor,
+    labels,
+    title,
+  };
+};
