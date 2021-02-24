@@ -10,7 +10,7 @@
     labels,
     maxForDisplay,
     title,
-  } = getWeekData(workingDays, 6);
+  } = getWeekData(workingDays, 4);
 
   let data = {
     labels,
