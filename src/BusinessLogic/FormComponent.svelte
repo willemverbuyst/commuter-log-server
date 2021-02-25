@@ -2,7 +2,7 @@
   import Checkbox from '../UI/Inputs/Checkbox.svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
   import Dropdown from '../UI/Inputs/Dropdown.svelte';
-  import Modal from '../UI/Modal.svelte';
+  import Modal from '../UI/Components/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
   import CostsInput from '../UI/Inputs/CostsInput.svelte';

@@ -10,7 +10,7 @@
     font: inherit;
     border: 1px solid #fff;
     border-radius: 7px;
-    background: #170a3a;
+    background: var(--buttonMain);
     padding: 0.5rem 1rem;
     color: #fff;
     cursor: pointer;
@@ -23,8 +23,8 @@
 
   button:hover,
   button:active {
-    background: #170a3a;
-    border-color: #170a3a;
+    background: var(--buttonMain);
+    border-color: var(--buttonMain);
   }
 
   button:disabled,

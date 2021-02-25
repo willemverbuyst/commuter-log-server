@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import { fade, fly, scale } from 'svelte/transition';
+  import { fly, scale } from 'svelte/transition';
   import { cubicIn } from 'svelte/easing';
-  import Button from '../UI/Button.svelte';
+  import Button from './Button.svelte';
 
   const dispatch = createEventDispatcher();
 

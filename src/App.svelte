@@ -1,5 +1,5 @@
 <script>
-  import Button from './ui/Button.svelte';
+  import Button from './UI/Components/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import AveragesChart from './UI/Charts/AveragesChart.svelte';
   import TransportChart from './UI/Charts/TransportChart.svelte';
