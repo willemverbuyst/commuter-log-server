@@ -4,32 +4,35 @@
   import { workingDays } from '../../dummyData';
   import {
     formatDataLabels,
-    getAveragePerWeekData,
+    getAllWorkingDaysData,
   } from '../../helpers/chartLogic';
 
   const {
-    averages,
-    backgroundColorCar,
-    backgroundColorPublicTransport,
+    travelTimes,
+    backgroundColor,
+    maxForDisplay,
     labels,
-    // maxForDisplay,
     title,
-  } = getAveragePerWeekData(workingDays);
+    lineValue,
+  } = getAllWorkingDaysData(workingDays);
 
   let data = {
     labels,
     datasets: [
       {
-        data: averages.averagesPerWeekCar,
-        backgroundColor: backgroundColorCar,
+        data: travelTimes,
+        backgroundColor,
         borderWidth: 0,
         barPercentage: 1,
       },
       {
-        data: averages.averagesPersWeekPublicTransport,
-        backgroundColor: backgroundColorPublicTransport,
-        borderWidth: 0,
-        barPercentage: 1,
+        label: 'Line Dataset',
+        data: lineValue,
+        type: 'line',
+        fill: false,
+        borderColor: 'purple',
+        // this dataset is drawn on top
+        order: 2,
       },
     ],
   };
@@ -43,29 +46,29 @@
     legend: {
       display: false,
     },
+    elements: {
+      point: {
+        radius: 0,
+      },
+    },
     responsive: true,
     scales: {
       xAxes: [
         {
-          stacked: true,
           gridLines: {
             display: false,
-          },
-          ticks: {
-            beginAtZero: true,
           },
         },
       ],
       yAxes: [
         {
-          stacked: true,
           gridLines: {
             display: false,
           },
           ticks: {
             display: false,
             beginAtZero: true,
-            // suggestedMax: maxForDisplay,
+            suggestedMax: maxForDisplay,
           },
         },
       ],
@@ -75,9 +78,9 @@
     },
     plugins: {
       datalabels: {
-        // anchor: 'end',
-        // align: 'top',
-        display: true,
+        anchor: 'end',
+        align: 'top',
+        display: false,
         color: '#170a3a',
         formatter: (value) => formatDataLabels(value),
       },

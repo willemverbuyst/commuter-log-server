@@ -228,3 +228,29 @@ export const getCarAndPublicTransortData = (workingDays) => {
 
   return { totals, labels, backgroundColor, maxForDisplay, title };
 };
+
+export const getAllWorkingDaysData = (workingDays) => {
+  const withoutDayOff = workingDays.filter(
+    (day) => day.durationTripOne !== 99999
+  );
+  const travelTimes = withoutDayOff.map(
+    (day) => day.durationTripOne + day.durationTripTwo
+  );
+  const backgroundColor = travelTimes.map(() => travelByCarColor);
+
+  const labels = withoutDayOff.map((day) => day.date.toString().slice(0, 3));
+  const maxForDisplay = Math.max(...travelTimes) * 1.2;
+  const title = `TRAVEL TIMES`;
+  const lineValue = withoutDayOff.map(
+    () => travelTimes.reduce((a, b) => a + b) / travelTimes.length
+  );
+
+  return {
+    travelTimes,
+    backgroundColor,
+    maxForDisplay,
+    labels,
+    title,
+    lineValue,
+  };
+};

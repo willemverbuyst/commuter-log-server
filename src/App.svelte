@@ -5,6 +5,7 @@
   import TransportChart from './UI/Charts/TransportChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
   import CarVsOPublicTransportChart from './UI/Charts/CarVsPublicTransportChart.svelte';
+  import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
 
   let showForm = false;
 
@@ -18,6 +19,7 @@
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
+  <AllWorkingDays />
   <WeekChart />
   <AveragesChart />
   <TransportChart />
