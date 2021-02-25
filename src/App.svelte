@@ -4,6 +4,7 @@
   import AveragesChart from './UI/Charts/AveragesChart.svelte';
   import TransportChart from './UI/Charts/TransportChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
+  import CarVsOPublicTransportChart from './UI/Charts/CarVsPublicTransportChart.svelte';
 
   let showForm = false;
 
@@ -20,6 +21,7 @@
   <WeekChart />
   <AveragesChart />
   <TransportChart />
+  <CarVsOPublicTransportChart />
 </main>
 
 <style>

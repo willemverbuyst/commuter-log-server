@@ -1,3 +1,5 @@
+import { workingDays } from '../dummyData';
+
 const weekdays = [
   'Sunday',
   'Monday',
@@ -66,7 +68,7 @@ export const getWeekData = (dates, weekNumber) => {
   const backgroundColor = getBackgroundColor(week);
   const labels = getWeekdays(week);
   const maxForDisplay = Math.max(...travelTimes) * 1.2;
-  const title = `WEEK ${getWeekNumber(week[0].date)[1]}`;
+  const title = `TRAVEL TIMES WEEK ${getWeekNumber(week[0].date)[1]}`;
 
   return {
     travelTimes,
@@ -79,18 +81,32 @@ export const getWeekData = (dates, weekNumber) => {
 
 const getAveragesPerWeek = (weeks) => {
   const averagesPerWeek = weeks.map((week) => getAveragePerWeek(week));
+  const averagesPerWeekCar = averagesPerWeek.map(
+    (week) => week.averagePerWeekCar
+  );
+  const averagesPersWeekPublicTransport = averagesPerWeek.map(
+    (week) => week.averagePerWeekPublicTransport
+  );
 
-  return averagesPerWeek;
+  return { averagesPerWeekCar, averagesPersWeekPublicTransport };
 };
 
 const getAveragePerWeek = (week) => {
   const weekWithoutDayOff = week.filter((day) => day.durationTripOne !== 99999);
-  const totalMinutesPerWeek = weekWithoutDayOff
+  const totalMinutesPerWeekCar = weekWithoutDayOff
+    .filter((day) => day.meansOfTransport === 'car')
     .map((day) => day.durationTripOne + day.durationTripTwo)
     .reduce((a, b) => a + b);
-  const averagePerWeek = totalMinutesPerWeek / weekWithoutDayOff.length;
+  const totalMinutesPerWeekPublicTransport = weekWithoutDayOff
+    .filter((day) => day.meansOfTransport === 'public transport')
+    .map((day) => day.durationTripOne + day.durationTripTwo)
+    .reduce((a, b) => a + b);
 
-  return averagePerWeek;
+  const averagePerWeekCar = totalMinutesPerWeekCar / weekWithoutDayOff.length;
+  const averagePerWeekPublicTransport =
+    totalMinutesPerWeekPublicTransport / weekWithoutDayOff.length;
+
+  return { averagePerWeekCar, averagePerWeekPublicTransport };
 };
 
 const chunkArray = (arr, size) => {
@@ -106,17 +122,21 @@ const chunkArray = (arr, size) => {
 
 export const getAveragePerWeekData = (workingDays) => {
   const weeks = chunkArray(workingDays, 5);
+
   const averages = getAveragesPerWeek(weeks);
-  const backgroundColor = averages.map(() => '#1F91AE');
+  const backgroundColorCar = [1, 2, 3, 4].map(() => '#1F91AE');
+  const backgroundColorPublicTransport = [1, 2, 3, 4].map(() => '#392D4D');
+
   const labels = weeks.map((a) => `WEEK ${getWeekNumber(a[0].date)[1]}`);
-  const maxForDisplay = Math.max(...averages) * 1.2;
-  const title = `AVERAGE PER WEEK`;
+  // const maxForDisplay = Math.max(...averages) * 1.2;
+  const title = `AVERAGE TRAVEL TIMES PER WEEK`;
 
   return {
     averages,
-    backgroundColor,
+    backgroundColorCar,
+    backgroundColorPublicTransport,
     labels,
-    maxForDisplay,
+    // maxForDisplay: 20,
     title,
   };
 };
@@ -129,17 +149,16 @@ const getTransportPartition = (workingDays) => {
     (day) => day.meansOfTransport === 'car'
   ).length;
   const travelledByTrain = workingDays.filter(
-    (day) => day.meansOfTransport === 'train'
+    (day) => day.meansOfTransport === 'public transport'
   ).length;
 
   return [workingFromHome, travelledByCar, travelledByTrain];
 };
 
 export const getTransportPartitionData = (workingDays) => {
-  // const partition = [10, 30, 60];
   const partition = getTransportPartition(workingDays);
   const backgroundColor = ['#dfdf44', '#aaa11a', '#eea49a'];
-  const labels = ['wfh', 'car', 'train'];
+  const labels = ['wfh', 'car', 'public transport'];
   const title = `PIE`;
 
   return {
@@ -148,4 +167,52 @@ export const getTransportPartitionData = (workingDays) => {
     labels,
     title,
   };
+};
+
+const getCarTotals = (workingDays) => {
+  const daysTravelledByCar = workingDays.filter(
+    (day) => day.meansOfTransport === 'car' && day.durationTripOne !== 99999
+  );
+  const numberOfDaystravelledByCar = daysTravelledByCar.length;
+  const totalTimeTravelledByCar = daysTravelledByCar
+    .map((day) => day.durationTripOne + day.durationTripTwo)
+    .reduce((a, b) => a + b);
+
+  return {
+    numberOfDaystravelledByCar,
+    totalTimeTravelledByCar,
+  };
+};
+
+const getPublicTransportTotals = (workingDays) => {
+  const daysTravelledByPublicTransport = workingDays.filter(
+    (day) =>
+      day.meansOfTransport === 'public transport' &&
+      day.durationTripOne !== 99999
+  );
+  const numberOfDaysTravelledByublicTransport =
+    daysTravelledByPublicTransport.length;
+  const totalTimeTravelledByPublicTransport = daysTravelledByPublicTransport
+    .map((day) => day.durationTripOne + day.durationTripTwo)
+    .reduce((a, b) => a + b);
+
+  return {
+    numberOfDaysTravelledByublicTransport,
+    totalTimeTravelledByPublicTransport,
+  };
+};
+
+export const getCarAndPublicTransortData = (workingDays) => {
+  const carTotals = getCarTotals(workingDays);
+  const publicTransportTotals = getPublicTransportTotals(workingDays);
+  const totals = [
+    carTotals.totalTimeTravelledByCar,
+    publicTransportTotals.totalTimeTravelledByPublicTransport,
+  ];
+  const labels = ['Car', 'Public Transport'];
+  const maxForDisplay = Math.max(...totals) * 1.2;
+  const title = 'Car vs Public Transport';
+  const backgroundColor = ['#1F91AE', '#392D4D'];
+
+  return { totals, labels, backgroundColor, maxForDisplay, title };
 };

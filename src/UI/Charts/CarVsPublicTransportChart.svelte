@@ -4,32 +4,23 @@
   import { workingDays } from '../../dummyData';
   import {
     formatDataLabels,
-    getAveragePerWeekData,
+    getCarAndPublicTransortData,
   } from '../../helpers/chartLogic';
 
   const {
-    averages,
-    backgroundColorCar,
-    backgroundColorPublicTransport,
+    totals,
     labels,
-    // maxForDisplay,
+    backgroundColor,
+    maxForDisplay,
     title,
-  } = getAveragePerWeekData(workingDays);
-
-  console.log(averages);
+  } = getCarAndPublicTransortData(workingDays);
 
   let data = {
     labels,
     datasets: [
       {
-        data: averages.averagesPerWeekCar,
-        backgroundColor: backgroundColorCar,
-        borderWidth: 0,
-        barPercentage: 1,
-      },
-      {
-        data: averages.averagesPersWeekPublicTransport,
-        backgroundColor: backgroundColorPublicTransport,
+        data: totals,
+        backgroundColor,
         borderWidth: 0,
         barPercentage: 1,
       },
@@ -49,25 +40,20 @@
     scales: {
       xAxes: [
         {
-          stacked: true,
           gridLines: {
             display: false,
-          },
-          ticks: {
-            beginAtZero: true,
           },
         },
       ],
       yAxes: [
         {
-          stacked: true,
           gridLines: {
             display: false,
           },
           ticks: {
             display: false,
             beginAtZero: true,
-            // suggestedMax: maxForDisplay,
+            suggestedMax: maxForDisplay,
           },
         },
       ],
@@ -77,8 +63,8 @@
     },
     plugins: {
       datalabels: {
-        // anchor: 'end',
-        // align: 'top',
+        anchor: 'end',
+        align: 'top',
         display: true,
         color: '#170a3a',
         formatter: (value) => formatDataLabels(value),

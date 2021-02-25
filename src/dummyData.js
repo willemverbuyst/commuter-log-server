@@ -2,12 +2,12 @@ export const workingDays = [
   {
     date: new Date('Mon Jan 25 2021 19:50:52 GMT+0100'),
     workingFromHome: true,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: true,
-    durationTripOne: 0,
-    durationTripTwo: 0,
+    durationTripOne: 150,
+    durationTripTwo: 150,
     costs: 0.0,
   },
   {
@@ -46,7 +46,7 @@ export const workingDays = [
   {
     date: new Date('Fri Jan 29 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: false,
@@ -57,7 +57,7 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 1 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: true,
@@ -90,7 +90,7 @@ export const workingDays = [
   {
     date: new Date('Thu Feb 4 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
     roundTrip: false,
@@ -101,7 +101,7 @@ export const workingDays = [
   {
     date: new Date('Fri Feb 5 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: false,
@@ -112,7 +112,7 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 8 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: true,
@@ -167,7 +167,7 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 15 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: true,
@@ -225,7 +225,7 @@ export const week1 = [
   {
     date: new Date('Mon Feb 8 2021 19:50:52 GMT+0100'),
     workingFromHome: false,
-    meansOfTransport: 'train',
+    meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: true,
