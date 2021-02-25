@@ -1,4 +1,25 @@
-import { workingDays } from '../dummyData';
+// CHART COLORS
+document.documentElement.style.setProperty(
+  '--travelByCar',
+  'rgba(255, 159, 64, 0.8)'
+);
+document.documentElement.style.setProperty(
+  '--travelByPublicTransport',
+  'rgba(255, 99, 132, 0.8)'
+);
+document.documentElement.style.setProperty(
+  '--workingFromHome',
+  'rgba(255, 39, 204, 0.8)'
+);
+const travelByCarColor = document.documentElement.style.getPropertyValue(
+  '--travelByCar'
+);
+const travelByPublicTransportColor = document.documentElement.style.getPropertyValue(
+  '--travelByPublicTransport'
+);
+const workingFromHomeColor = document.documentElement.style.getPropertyValue(
+  '--workingFromHome'
+);
 
 const weekdays = [
   'Sunday',
@@ -12,7 +33,9 @@ const weekdays = [
 
 const getBackgroundColor = (dates) => {
   return dates.map((date) =>
-    date.meansOfTransport === 'car' ? '#1F91AE' : '#392D4D'
+    date.meansOfTransport === 'car'
+      ? travelByCarColor
+      : travelByPublicTransportColor
   );
 };
 
@@ -124,8 +147,10 @@ export const getAveragePerWeekData = (workingDays) => {
   const weeks = chunkArray(workingDays, 5);
 
   const averages = getAveragesPerWeek(weeks);
-  const backgroundColorCar = [1, 2, 3, 4].map(() => '#1F91AE');
-  const backgroundColorPublicTransport = [1, 2, 3, 4].map(() => '#392D4D');
+  const backgroundColorCar = [1, 2, 3, 4].map(() => travelByCarColor);
+  const backgroundColorPublicTransport = [1, 2, 3, 4].map(
+    () => travelByPublicTransportColor
+  );
 
   const labels = weeks.map((a) => `WEEK ${getWeekNumber(a[0].date)[1]}`);
   // const maxForDisplay = Math.max(...averages) * 1.2;
@@ -157,7 +182,11 @@ const getTransportPartition = (workingDays) => {
 
 export const getTransportPartitionData = (workingDays) => {
   const partition = getTransportPartition(workingDays);
-  const backgroundColor = ['#dfdf44', '#aaa11a', '#eea49a'];
+  const backgroundColor = [
+    workingFromHomeColor,
+    travelByCarColor,
+    travelByPublicTransportColor,
+  ];
   const labels = ['wfh', 'car', 'public transport'];
   const title = `PIE`;
 
@@ -212,7 +241,7 @@ export const getCarAndPublicTransortData = (workingDays) => {
   const labels = ['Car', 'Public Transport'];
   const maxForDisplay = Math.max(...totals) * 1.2;
   const title = 'Car vs Public Transport';
-  const backgroundColor = ['#1F91AE', '#392D4D'];
+  const backgroundColor = [travelByCarColor, travelByPublicTransportColor];
 
   return { totals, labels, backgroundColor, maxForDisplay, title };
 };

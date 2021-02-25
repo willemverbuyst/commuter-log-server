@@ -16,8 +16,6 @@
     title,
   } = getAveragePerWeekData(workingDays);
 
-  console.log(averages);
-
   let data = {
     labels,
     datasets: [
