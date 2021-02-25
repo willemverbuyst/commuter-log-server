@@ -1,11 +1,12 @@
 <script>
   import Button from './UI/Components/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
-  import AveragesChart from './UI/Charts/AveragesChart.svelte';
+  import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
   import TransportChart from './UI/Charts/TransportChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
   import CarVsOPublicTransportChart from './UI/Charts/CarVsPublicTransportChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
+  import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
 
   let showForm = false;
 
@@ -19,9 +20,10 @@
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
+  <TotalsPerWeekChart />
   <AllWorkingDays />
   <WeekChart />
-  <AveragesChart />
+  <AveragesPerWeekChart />
   <TransportChart />
   <CarVsOPublicTransportChart />
 </main>
