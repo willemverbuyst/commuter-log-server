@@ -1,4 +1,5 @@
-import { chunkArray, getWeekNumber } from './chartLogic';
+import { getWeekNumber } from './chartLogic';
+import { chunkArray } from './utils';
 import {
   travelByCarColor,
   travelByPublicTransportColor,

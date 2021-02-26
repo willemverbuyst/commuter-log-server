@@ -23,7 +23,7 @@
   <TotalsPerWeekChart />
   <!-- <AllWorkingDays /> -->
   <WeekChart />
-  <!-- <AveragesPerWeekChart /> -->
+  <AveragesPerWeekChart />
   <PartitionChart />
   <CarVsOPublicTransportChart />
 </main>

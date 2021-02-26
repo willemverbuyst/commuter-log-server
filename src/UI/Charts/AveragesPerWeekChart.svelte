@@ -2,17 +2,16 @@
   import Line from 'svelte-chartjs/src/Line.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import {
-    formatDataLabels,
-    getAveragePerWeekData,
-  } from '../../helpers/chartLogic/chartLogic';
+  import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
+  import { getAveragePerWeekData } from '../../helpers/chartLogic/averagesChart';
 
   const {
-    averages,
+    averagesPerWeekCar,
+    averagesPerWeekPublic,
     backgroundColorCar,
-    backgroundColorPublicTransport,
+    backgroundColorPublic,
     labels,
-    // maxForDisplay,
+    maxForDisplay,
     title,
   } = getAveragePerWeekData(workingDays);
 
@@ -20,14 +19,14 @@
     labels,
     datasets: [
       {
-        data: averages.averagesPerWeekCar,
+        data: averagesPerWeekCar,
         backgroundColor: backgroundColorCar,
         borderWidth: 0,
         barPercentage: 1,
       },
       {
-        data: averages.averagesPersWeekPublicTransport,
-        backgroundColor: backgroundColorPublicTransport,
+        data: averagesPerWeekPublic,
+        backgroundColor: backgroundColorPublic,
         borderWidth: 0,
         barPercentage: 1,
       },
@@ -65,7 +64,7 @@
           ticks: {
             display: false,
             beginAtZero: true,
-            // suggestedMax: maxForDisplay,
+            suggestedMax: maxForDisplay,
           },
         },
       ],
