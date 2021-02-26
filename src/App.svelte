@@ -21,11 +21,11 @@
     <FormComponent on:cancel={cancelForm} />
   {/if}
   <TotalsPerWeekChart />
-  <!-- <AllWorkingDays />
-  <WeekChart />
-  <AveragesPerWeekChart />
-  <TransportChart />
-  <CarVsOPublicTransportChart /> -->
+  <!-- <AllWorkingDays /> -->
+  <!-- <WeekChart /> -->
+  <!-- <AveragesPerWeekChart /> -->
+  <!-- <TransportChart /> -->
+  <CarVsOPublicTransportChart />
 </main>
 
 <style>

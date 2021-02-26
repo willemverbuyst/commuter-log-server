@@ -2,10 +2,8 @@
   import Bar from 'svelte-chartjs/src/Bar.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import {
-    formatDataLabels,
-    getCarAndPublicTransortData,
-  } from '../../helpers/chartLogic/chartLogic';
+  import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
+  import { getCarVsPublicTransportTotalsData } from '../../helpers/chartLogic/totalsChart';
 
   const {
     totals,
@@ -13,7 +11,7 @@
     backgroundColor,
     maxForDisplay,
     title,
-  } = getCarAndPublicTransortData(workingDays);
+  } = getCarVsPublicTransportTotalsData(workingDays);
 
   let data = {
     labels,

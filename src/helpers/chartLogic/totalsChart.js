@@ -44,40 +44,66 @@ const getTotalsPerWeek = (weeks) => {
 };
 
 const getTotalPerWeek = (week) => {
-  const weekWithoutDaysOff = week.filter(
-    (day) => day.durationTripOne !== 99999
-  );
+  const weekWithoutDaysOff = week.filter((day) => !day.holiday);
 
-  const totalPerWeekCar = getTotalPerWeekForCar(weekWithoutDaysOff);
-  const totalPerWeekPublicTransport = getTotalPerWeekForPublicTransport(
-    weekWithoutDaysOff
+  const totalPerWeekCar = getTotalPerWeekForTransport(
+    weekWithoutDaysOff,
+    'car'
+  );
+  const totalPerWeekPublicTransport = getTotalPerWeekForTransport(
+    weekWithoutDaysOff,
+    'public transport'
   );
 
   return { totalPerWeekCar, totalPerWeekPublicTransport };
 };
 
-export const getTotalPerWeekForCar = (week) => {
-  const travelledByCar = week.filter((day) => day.meansOfTransport === 'car');
-  const totalPerWeekForCar =
+export const getTotalPerWeekForTransport = (week, transport) => {
+  const travelledByCar = week.filter(
+    (day) => day.meansOfTransport === transport
+  );
+  const totalPerWeekForTransport =
     travelledByCar.length > 0
       ? travelledByCar
           .map((day) => day.durationTripOne + day.durationTripTwo)
           .reduce((a, b) => a + b)
       : 0;
 
-  return totalPerWeekForCar;
+  return totalPerWeekForTransport;
 };
 
-export const getTotalPerWeekForPublicTransport = (week) => {
-  const travelledByPublicTransport = week.filter(
-    (day) => day.meansOfTransport === 'public transport'
+export const getCarVsPublicTransportTotalsData = (workingDays) => {
+  const carTotals = getTotalsTransport(workingDays, 'car');
+  const publicTransportTotals = getTotalsTransport(
+    workingDays,
+    'public transport'
   );
-  const totalPerWeekForPublicTransport =
-    travelledByPublicTransport.length > 0
-      ? travelledByPublicTransport
+  const totals = [
+    carTotals.totalTimeTravelled,
+    publicTransportTotals.totalTimeTravelled,
+  ];
+  const labels = ['Car', 'Public Transport'];
+  const maxForDisplay = Math.max(...totals) * 1.2;
+  const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
+  const backgroundColor = [travelByCarColor, travelByPublicTransportColor];
+
+  return { totals, labels, backgroundColor, maxForDisplay, title };
+};
+
+const getTotalsTransport = (workingDays, transport) => {
+  const daysTravelled = workingDays.filter(
+    (day) => !day.workingFromHome && day.meansOfTransport === transport
+  );
+  const numberOfDaystravelled = daysTravelled.length;
+  const totalTimeTravelled =
+    daysTravelled.length > 0
+      ? daysTravelled
           .map((day) => day.durationTripOne + day.durationTripTwo)
           .reduce((a, b) => a + b)
       : 0;
 
-  return totalPerWeekForPublicTransport;
+  return {
+    numberOfDaystravelled,
+    totalTimeTravelled,
+  };
 };
