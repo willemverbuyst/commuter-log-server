@@ -6,9 +6,11 @@
   import { getCarVsPublicTransportTotalsData } from '../../helpers/chartLogic/totalsChart';
 
   const {
-    totals,
+    totalsCar,
+    totalsPublic,
+    backgroundColorCar,
+    backgroundColorPublic,
     labels,
-    backgroundColor,
     maxForDisplay,
     title,
   } = getCarVsPublicTransportTotalsData(workingDays);
@@ -17,8 +19,8 @@
     labels,
     datasets: [
       {
-        data: totals,
-        backgroundColor,
+        data: [totalsCar, totalsPublic],
+        backgroundColor: [backgroundColorCar, backgroundColorPublic],
         borderWidth: 0,
         barPercentage: 1,
       },

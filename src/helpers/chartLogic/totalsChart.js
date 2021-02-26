@@ -44,27 +44,37 @@ export const getTotalsPerWeek = (week, transport) => {
   return totalPerTransport;
 };
 
-export const getCarVsPublicTransportTotalsData = (workingDays) => {
-  const carTotals = getTotalsTransport(workingDays, 'car');
-  const publicTransportTotals = getTotalsTransport(
-    workingDays,
-    'public transport'
-  );
-  const totals = [
-    carTotals.totalTimeTravelled,
-    publicTransportTotals.totalTimeTravelled,
+export const getCarVsPublicTotalsData = (workingDays) => {
+  const totalsCar = getTotalsTransport(workingDays, 'car');
+  const totalsublic = getTotalsTransport(workingDays, 'public transport');
+  const [backgroundColorCar, backgroundColorPublic] = [
+    travelByCarColor,
+    travelByPublicTransportColor,
   ];
-  const labels = ['Car', 'Public Transport'];
-  const maxForDisplay = Math.max(...totals) * 1.2;
-  const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
-  const backgroundColor = [travelByCarColor, travelByPublicTransportColor];
 
-  return { totals, labels, backgroundColor, maxForDisplay, title };
+  const labels = ['Car', 'Public Transport'];
+  const maxForDisplay =
+    Math.max(
+      ...totalsCar.totalTimeTravelled,
+      ...totalsublic.totalTimeTravelled
+    ) * 1.2;
+  const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
+
+  return {
+    totalsCar,
+    totalsPublic,
+    backgroundColorCar,
+    backgroundColorPublic,
+    labels,
+    maxForDisplay,
+    title,
+  };
 };
 
 const getTotalsTransport = (workingDays, transport) => {
   const daysTravelled = workingDays.filter(
-    (day) => !day.workingFromHome && day.meansOfTransport === transport
+    (day) =>
+      !day.holiday && !day.workingFromHome && day.meansOfTransport === transport
   );
   const numberOfDaystravelled = daysTravelled.length;
   const totalTimeTravelled =
