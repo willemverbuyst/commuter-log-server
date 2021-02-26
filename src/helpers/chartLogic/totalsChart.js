@@ -7,70 +7,41 @@ import {
 
 export const getTotalsPerWeekData = (workingDays) => {
   const weeks = chunkArray(workingDays, 5);
-
-  const totals = getTotalsPerWeek(weeks);
-  const backgroundColorCar = totals.totalsPerWeekCar.map(
-    () => travelByCarColor
+  const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'car'));
+  const totalsPerWeekPublic = weeks.map((week) =>
+    getTotalsPerWeek(week, 'public transport')
   );
-  const backgroundColorPublicTransport = totals.totalsPersWeekPublicTransport.map(
-    () => travelByPublicTransportColor
-  );
+  const backgroundColorCar = weeks.map(() => travelByCarColor);
+  const backgroundColorPublic = weeks.map(() => travelByPublicTransportColor);
 
   const labels = weeks.map((a) => `WEEK ${getWeekNumber(a[0].date)[1]}`);
-  const totalCarAndPublicTransport = totals.totalsPerWeekCar.map(
-    (day, i) => day + totals.totalsPersWeekPublicTransport[i]
-  );
-  const maxForDisplay = Math.max(...totalCarAndPublicTransport) * 1.2;
+  const maxForDisplay =
+    Math.max(...totalsPerWeekCar, ...totalsPerWeekPublic) * 1.2;
   const title = `TOTAL TRAVEL TIME PER WEEK`;
 
   return {
-    totals,
+    totalsPerWeekCar,
+    totalsPerWeekPublic,
     backgroundColorCar,
-    backgroundColorPublicTransport,
+    backgroundColorPublic,
     labels,
     maxForDisplay,
     title,
-    totalCarAndPublicTransport,
   };
 };
 
-const getTotalsPerWeek = (weeks) => {
-  const totalsPerWeek = weeks.map((week) => getTotalPerWeek(week));
-  const totalsPerWeekCar = totalsPerWeek.map((week) => week.totalPerWeekCar);
-  const totalsPersWeekPublicTransport = totalsPerWeek.map(
-    (week) => week.totalPerWeekPublicTransport
+export const getTotalsPerWeek = (week, transport) => {
+  const weekTransport = week.filter(
+    (day) => !day.holiday && day.meansOfTransport === transport
   );
-
-  return { totalsPerWeekCar, totalsPersWeekPublicTransport };
-};
-
-const getTotalPerWeek = (week) => {
-  const weekWithoutDaysOff = week.filter((day) => !day.holiday);
-
-  const totalPerWeekCar = getTotalPerWeekForTransport(
-    weekWithoutDaysOff,
-    'car'
-  );
-  const totalPerWeekPublicTransport = getTotalPerWeekForTransport(
-    weekWithoutDaysOff,
-    'public transport'
-  );
-
-  return { totalPerWeekCar, totalPerWeekPublicTransport };
-};
-
-export const getTotalPerWeekForTransport = (week, transport) => {
-  const travelledByCar = week.filter(
-    (day) => day.meansOfTransport === transport
-  );
-  const totalPerWeekForTransport =
-    travelledByCar.length > 0
-      ? travelledByCar
+  const totalPerTransport =
+    weekTransport.length > 0
+      ? weekTransport
           .map((day) => day.durationTripOne + day.durationTripTwo)
           .reduce((a, b) => a + b)
       : 0;
 
-  return totalPerWeekForTransport;
+  return totalPerTransport;
 };
 
 export const getCarVsPublicTransportTotalsData = (workingDays) => {

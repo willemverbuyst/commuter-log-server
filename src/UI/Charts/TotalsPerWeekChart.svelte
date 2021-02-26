@@ -6,29 +6,27 @@
   import { getTotalsPerWeekData } from '../../helpers/chartLogic/totalsChart';
 
   const {
-    totals,
+    totalsPerWeekCar,
+    totalsPerWeekPublic,
     backgroundColorCar,
-    backgroundColorPublicTransport,
+    backgroundColorPublic,
     labels,
     maxForDisplay,
     title,
-    totalCarAndPublicTransport,
   } = getTotalsPerWeekData(workingDays);
-
-  console.log(totalCarAndPublicTransport);
 
   let data = {
     labels,
     datasets: [
       {
-        data: totals.totalsPerWeekCar,
+        data: totalsPerWeekCar,
         backgroundColor: backgroundColorCar,
         borderWidth: 0,
         barPercentage: 1,
       },
       {
-        data: totals.totalsPersWeekPublicTransport,
-        backgroundColor: backgroundColorPublicTransport,
+        data: totalsPerWeekPublic,
+        backgroundColor: backgroundColorPublic,
         borderWidth: 0,
         barPercentage: 1,
       },
