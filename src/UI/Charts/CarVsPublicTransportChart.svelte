@@ -5,7 +5,7 @@
   import {
     formatDataLabels,
     getCarAndPublicTransortData,
-  } from '../../helpers/chartLogic';
+  } from '../../helpers/chartLogic/chartLogic';
 
   const {
     totals,

@@ -2,19 +2,20 @@
   import Line from 'svelte-chartjs/src/Line.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import {
-    formatDataLabels,
-    getTotalsPerWeekData,
-  } from '../../helpers/chartLogic';
+  import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
+  import { getTotalsPerWeekData } from '../../helpers/chartLogic/totalsChart';
 
   const {
     totals,
     backgroundColorCar,
     backgroundColorPublicTransport,
     labels,
-    // maxForDisplay,
+    maxForDisplay,
     title,
+    totalCarAndPublicTransport,
   } = getTotalsPerWeekData(workingDays);
+
+  console.log(totalCarAndPublicTransport);
 
   let data = {
     labels,
@@ -65,7 +66,7 @@
           ticks: {
             display: false,
             beginAtZero: true,
-            // suggestedMax: maxForDisplay,
+            suggestedMax: maxForDisplay,
           },
         },
       ],
@@ -73,15 +74,15 @@
     tooltips: {
       enabled: false,
     },
-    // plugins: {
-    //   datalabels: {
-    //     // anchor: 'end',
-    //     // align: 'top',
-    //     display: true,
-    //     color: '#170a3a',
-    //     formatter: (value) => formatDataLabels(value),
-    //   },
-    // },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        display: true,
+        color: '#170a3a',
+        formatter: (value) => formatDataLabels(value),
+      },
+    },
   };
 </script>
 

@@ -5,7 +5,7 @@
   import {
     formatDataLabels,
     getAllWorkingDaysData,
-  } from '../../helpers/chartLogic';
+  } from '../../helpers/chartLogic/chartLogic';
 
   const {
     travelTimes,

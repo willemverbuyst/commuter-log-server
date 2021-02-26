@@ -2,7 +2,7 @@
   import Polar from 'svelte-chartjs/src/Polar.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import { getTransportPartitionData } from '../../helpers/chartLogic';
+  import { getTransportPartitionData } from '../../helpers/chartLogic/chartLogic';
 
   const {
     partition,

@@ -5,7 +5,7 @@
   import {
     formatDataLabels,
     getAveragePerWeekData,
-  } from '../../helpers/chartLogic';
+  } from '../../helpers/chartLogic/chartLogic';
 
   const {
     averages,

@@ -2,7 +2,7 @@ import {
   travelByCarColor,
   travelByPublicTransportColor,
   workingFromHomeColor,
-} from '../UI/Colors';
+} from '../../UI/Colors';
 
 const weekdays = [
   'Sunday',
@@ -52,7 +52,7 @@ const getWeekdays = (dates) => {
 };
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
-const getWeekNumber = (day) => {
+export const getWeekNumber = (day) => {
   // Copy date so don't modify original
   const d = new Date(
     Date.UTC(day.getFullYear(), day.getMonth(), day.getDate())
@@ -115,7 +115,7 @@ const getAveragePerWeek = (week) => {
   return { averagePerWeekCar, averagePerWeekPublicTransport };
 };
 
-const chunkArray = (arr, size) => {
+export const chunkArray = (arr, size) => {
   const chunkedArr = [];
   let index = 0;
   while (index < arr.length) {
@@ -252,54 +252,5 @@ export const getAllWorkingDaysData = (workingDays) => {
     labels,
     title,
     lineValue,
-  };
-};
-
-const getTotalsPerWeek = (weeks) => {
-  const totalsPerWeek = weeks.map((week) => getTotalPerWeek(week));
-  const totalsPerWeekCar = totalsPerWeek.map((week) => week.totalPerWeekCar);
-  const totalsPersWeekPublicTransport = totalsPerWeek.map(
-    (week) => week.totalPerWeekPublicTransport
-  );
-
-  return { totalsPerWeekCar, totalsPersWeekPublicTransport };
-};
-
-const getTotalPerWeek = (week) => {
-  const weekWithoutDayOff = week.filter((day) => day.durationTripOne !== 99999);
-  const totalPerWeekCar = weekWithoutDayOff
-    .filter((day) => day.meansOfTransport === 'car')
-    .map((day) => day.durationTripOne + day.durationTripTwo)
-    .reduce((a, b) => a + b);
-  const totalPerWeekPublicTransport = weekWithoutDayOff
-    .filter((day) => day.meansOfTransport === 'public transport')
-    .map((day) => day.durationTripOne + day.durationTripTwo)
-    .reduce((a, b) => a + b);
-
-  return { totalPerWeekCar, totalPerWeekPublicTransport };
-};
-
-export const getTotalsPerWeekData = (workingDays) => {
-  const weeks = chunkArray(workingDays, 5);
-
-  const totals = getTotalsPerWeek(weeks);
-  const backgroundColorCar = totals.totalsPerWeekCar.map(
-    () => travelByCarColor
-  );
-  const backgroundColorPublicTransport = totals.totalsPersWeekPublicTransport.map(
-    () => travelByPublicTransportColor
-  );
-
-  const labels = weeks.map((a) => `WEEK ${getWeekNumber(a[0].date)[1]}`);
-  // const maxForDisplay = Math.max(...averages) * 1.2;
-  const title = `TOTAL TRAVEL TIME PER WEEK`;
-
-  return {
-    totals,
-    backgroundColorCar,
-    backgroundColorPublicTransport,
-    labels,
-    // maxForDisplay: 20,
-    title,
   };
 };

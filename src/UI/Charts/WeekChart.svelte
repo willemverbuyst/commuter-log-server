@@ -2,7 +2,10 @@
   import Bar from 'svelte-chartjs/src/Bar.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import { formatDataLabels, getWeekData } from '../../helpers/chartLogic';
+  import {
+    formatDataLabels,
+    getWeekData,
+  } from '../../helpers/chartLogic/chartLogic';
 
   const {
     travelTimes,
