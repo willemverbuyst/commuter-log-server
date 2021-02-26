@@ -59,6 +59,8 @@ export const workingDays = [
     date: new Date('Thu Jan 28 2021 19:50:52 GMT+0100'),
     holiday: false,
     workingFromHome: true,
+    durationTripOne: 0,
+    durationTripTwo: 0,
   },
   {
     date: new Date('Fri Jan 29 2021 19:50:52 GMT+0100'),
@@ -80,8 +82,8 @@ export const workingDays = [
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: true,
-    durationTripOne: 150,
-    durationTripTwo: 150,
+    durationTripOne: 0,
+    durationTripTwo: 0,
     costs: 24.99,
   },
   {
@@ -135,7 +137,7 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 8 2021 19:50:52 GMT+0100'),
     holiday: false,
-    workingFromHome: true,
+    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',

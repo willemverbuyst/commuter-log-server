@@ -119,64 +119,14 @@ export const getPartitionData = (workingDays) => {
   };
 };
 
-// const getCarTotals = (workingDays) => {
-//   const daysTravelledByCar = workingDays.filter(
-//     (day) => day.meansOfTransport === 'car' && day.durationTripOne !== 99999
-//   );
-//   const numberOfDaystravelledByCar = daysTravelledByCar.length;
-//   const totalTimeTravelledByCar = daysTravelledByCar
-//     .map((day) => day.durationTripOne + day.durationTripTwo)
-//     .reduce((a, b) => a + b);
-
-//   return {
-//     numberOfDaystravelledByCar,
-//     totalTimeTravelledByCar,
-//   };
-// };
-
-// const getPublicTransportTotals = (workingDays) => {
-//   const daysTravelledByPublicTransport = workingDays.filter(
-//     (day) =>
-//       day.meansOfTransport === 'public transport' &&
-//       day.durationTripOne !== 99999
-//   );
-//   const numberOfDaysTravelledByublicTransport =
-//     daysTravelledByPublicTransport.length;
-//   const totalTimeTravelledByPublicTransport = daysTravelledByPublicTransport
-//     .map((day) => day.durationTripOne + day.durationTripTwo)
-//     .reduce((a, b) => a + b);
-
-//   return {
-//     numberOfDaysTravelledByublicTransport,
-//     totalTimeTravelledByPublicTransport,
-//   };
-// };
-
-// export const getCarAndPublicTransortData = (workingDays) => {
-//   const carTotals = getCarTotals(workingDays);
-//   const publicTransportTotals = getPublicTransportTotals(workingDays);
-//   const totals = [
-//     carTotals.totalTimeTravelledByCar,
-//     publicTransportTotals.totalTimeTravelledByPublicTransport,
-//   ];
-//   const labels = ['Car', 'Public Transport'];
-//   const maxForDisplay = Math.max(...totals) * 1.2;
-//   const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
-//   const backgroundColor = [travelByCarColor, travelByPublicTransportColor];
-
-//   return { totals, labels, backgroundColor, maxForDisplay, title };
-// };
-
 export const getAllWorkingDaysData = (workingDays) => {
-  const withoutDayOff = workingDays.filter(
-    (day) => day.durationTripOne !== 99999
-  );
+  const withoutDayOff = workingDays.filter((day) => !day.holiday);
   const travelTimes = withoutDayOff.map(
     (day) => day.durationTripOne + day.durationTripTwo
   );
   const backgroundColor = travelTimes.map(() => travelByCarColor);
 
-  const labels = withoutDayOff.map((day) => day.date.toString().slice(0, 3));
+  const labels = withoutDayOff.map((day) => '');
   const maxForDisplay = Math.max(...travelTimes) * 1.2;
   const title = `TRAVEL TIMES`;
   const lineValue = withoutDayOff.map(

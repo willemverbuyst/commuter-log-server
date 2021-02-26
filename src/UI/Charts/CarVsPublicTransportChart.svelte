@@ -3,7 +3,7 @@
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
-  import { getCarVsPublicTransportTotalsData } from '../../helpers/chartLogic/totalsChart';
+  import { getCarVsPublicTotalsData } from '../../helpers/chartLogic/totalsChart';
 
   const {
     totalsCar,
@@ -13,13 +13,13 @@
     labels,
     maxForDisplay,
     title,
-  } = getCarVsPublicTransportTotalsData(workingDays);
+  } = getCarVsPublicTotalsData(workingDays);
 
   let data = {
     labels,
     datasets: [
       {
-        data: [totalsCar, totalsPublic],
+        data: [totalsCar.totalTimeTravelled, totalsPublic.totalTimeTravelled],
         backgroundColor: [backgroundColorCar, backgroundColorPublic],
         borderWidth: 0,
         barPercentage: 1,

@@ -21,7 +21,7 @@
     <FormComponent on:cancel={cancelForm} />
   {/if}
   <TotalsPerWeekChart />
-  <!-- <AllWorkingDays /> -->
+  <AllWorkingDays />
   <WeekChart />
   <AveragesPerWeekChart />
   <PartitionChart />
