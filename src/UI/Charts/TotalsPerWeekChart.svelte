@@ -73,15 +73,15 @@
     tooltips: {
       enabled: false,
     },
-    plugins: {
-      datalabels: {
-        // anchor: 'end',
-        // align: 'top',
-        display: true,
-        color: '#170a3a',
-        formatter: (value) => formatDataLabels(value),
-      },
-    },
+    // plugins: {
+    //   datalabels: {
+    //     // anchor: 'end',
+    //     // align: 'top',
+    //     display: true,
+    //     color: '#170a3a',
+    //     formatter: (value) => formatDataLabels(value),
+    //   },
+    // },
   };
 </script>
 

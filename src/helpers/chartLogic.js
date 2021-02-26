@@ -171,7 +171,7 @@ export const getTransportPartitionData = (workingDays) => {
     travelByPublicTransportColor,
   ];
   const labels = ['wfh', 'car', 'public transport'];
-  const title = `PIE`;
+  const title = `DAYS CAR / PUBLIC TRANSPORT / WORKING FORM HOME`;
 
   return {
     partition,
@@ -223,7 +223,7 @@ export const getCarAndPublicTransortData = (workingDays) => {
   ];
   const labels = ['Car', 'Public Transport'];
   const maxForDisplay = Math.max(...totals) * 1.2;
-  const title = 'Car vs Public Transport';
+  const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
   const backgroundColor = [travelByCarColor, travelByPublicTransportColor];
 
   return { totals, labels, backgroundColor, maxForDisplay, title };

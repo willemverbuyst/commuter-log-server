@@ -1,5 +1,5 @@
 <script>
-  import Pie from 'svelte-chartjs/src/Pie.svelte';
+  import Polar from 'svelte-chartjs/src/Polar.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { getTransportPartitionData } from '../../helpers/chartLogic';
@@ -60,7 +60,7 @@
 </script>
 
 <div class="chart-container">
-  <Pie {data} {options} />
+  <Polar {data} {options} />
 </div>
 
 <style>
