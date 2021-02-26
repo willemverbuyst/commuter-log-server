@@ -151,7 +151,7 @@ export const getAveragePerWeekData = (workingDays) => {
   };
 };
 
-const getTransportPartition = (workingDays) => {
+const getPartition = (workingDays) => {
   const workingFromHome = workingDays.filter(
     (day) => day.workingFromHome === true
   ).length;
@@ -165,8 +165,8 @@ const getTransportPartition = (workingDays) => {
   return [workingFromHome, travelledByCar, travelledByTrain];
 };
 
-export const getTransportPartitionData = (workingDays) => {
-  const partition = getTransportPartition(workingDays);
+export const getPartitionData = (workingDays) => {
+  const partition = getPartition(workingDays);
   const backgroundColor = [
     workingFromHomeColor,
     travelByCarColor,

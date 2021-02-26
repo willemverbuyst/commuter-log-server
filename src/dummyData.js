@@ -75,7 +75,7 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 1 2021 19:50:52 GMT+0100'),
     holiday: false,
-    workingFromHome: false,
+    workingFromHome: true,
     meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -135,7 +135,7 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 8 2021 19:50:52 GMT+0100'),
     holiday: false,
-    workingFromHome: false,
+    workingFromHome: true,
     meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',

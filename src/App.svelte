@@ -2,7 +2,7 @@
   import Button from './UI/Components/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
-  import TransportChart from './UI/Charts/TransportChart.svelte';
+  import PartitionChart from './UI/Charts/PartitionChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
   import CarVsOPublicTransportChart from './UI/Charts/CarVsPublicTransportChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
@@ -24,7 +24,7 @@
   <!-- <AllWorkingDays /> -->
   <WeekChart />
   <!-- <AveragesPerWeekChart /> -->
-  <!-- <TransportChart /> -->
+  <PartitionChart />
   <CarVsOPublicTransportChart />
 </main>
 

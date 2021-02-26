@@ -2,14 +2,11 @@
   import Polar from 'svelte-chartjs/src/Polar.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import { getTransportPartitionData } from '../../helpers/chartLogic/chartLogic';
+  import { getPartitionData } from '../../helpers/chartLogic/chartLogic';
 
-  const {
-    partition,
-    backgroundColor,
-    labels,
-    title,
-  } = getTransportPartitionData(workingDays);
+  const { partition, backgroundColor, labels, title } = getPartitionData(
+    workingDays
+  );
 
   let data = {
     labels,
@@ -33,25 +30,8 @@
       display: false,
     },
     responsive: true,
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            display: false,
-          },
-        },
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: false,
-          },
-          ticks: {
-            display: false,
-            beginAtZero: true,
-          },
-        },
-      ],
+    scale: {
+      display: false,
     },
     tooltips: {
       enabled: false,
