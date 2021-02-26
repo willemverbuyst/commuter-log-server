@@ -22,7 +22,7 @@
   {/if}
   <TotalsPerWeekChart />
   <!-- <AllWorkingDays /> -->
-  <!-- <WeekChart /> -->
+  <WeekChart />
   <!-- <AveragesPerWeekChart /> -->
   <!-- <TransportChart /> -->
   <CarVsOPublicTransportChart />

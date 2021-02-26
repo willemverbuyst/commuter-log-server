@@ -41,7 +41,9 @@ export const formatDataLabels = (value) => {
 
 const getMinutes = (dates) => {
   return dates.map((date) => {
-    return date.durationTripOne === 99999
+    return date.holiday
+      ? 0
+      : date.workingFromHome
       ? 0.00001
       : date.durationTripOne + date.durationTripTwo;
   });

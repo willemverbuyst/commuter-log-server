@@ -67,7 +67,13 @@
         align: 'top',
         display: true,
         color: '#170a3a',
-        formatter: (value) => formatDataLabels(value),
+        formatter: (value) => {
+          return value === 0
+            ? ''
+            : value === 0.00001
+            ? 'WFH'
+            : formatDataLabels(value);
+        },
       },
     },
   };
