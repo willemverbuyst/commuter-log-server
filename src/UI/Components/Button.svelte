@@ -7,33 +7,28 @@
 
 <style>
   button {
-    font: inherit;
-    border: 1px solid #fff;
+    font-family: 'Helvetica Neue';
+    size: 12px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    border: 2px solid #333;
     border-radius: 7px;
-    background: var(--buttonMain);
+    background: #333;
     padding: 0.5rem 1rem;
-    color: #fff;
+    color: #aaa;
     cursor: pointer;
     text-decoration: none;
+    box-shadow: inset 4px 4px 4px #444, inset -4px -4px 4px #222;
+    transition: 0.3s ease-in;
   }
 
-  button:focus {
+  button:focus,
+  button:hover {
     outline: none;
+    box-shadow: inset 2px 2px 2px #444, inset -2px -2px 2px #222;
   }
 
-  button:hover,
   button:active {
-    background: var(--buttonMain);
-    border-color: var(--buttonMain);
-  }
-
-  button:disabled,
-  button:disabled:hover,
-  button:disabled:active {
-    background: #ccc;
-    border-color: #ccc;
-    color: #959595;
-    box-shadow: none;
-    cursor: not-allowed;
+    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
   }
 </style>
