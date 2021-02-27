@@ -4,7 +4,7 @@
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
   import PartitionChart from './UI/Charts/PartitionChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
-  import CarVsOPublicTransportChart from './UI/Charts/CarVsPublicTransportChart.svelte';
+  import CarVsPublicChart from './UI/Charts/CarVsPublicTransportChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
 
@@ -29,8 +29,8 @@
     <AveragesPerWeekChart />
   </div>
   <div class="chart-container">
-    <!-- <PartitionChart />
-    <CarVsOPublicTransportChart /> -->
+    <PartitionChart />
+    <CarVsPublicChart />
   </div>
 </main>
 

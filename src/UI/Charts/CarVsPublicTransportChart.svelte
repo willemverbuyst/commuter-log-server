@@ -1,5 +1,5 @@
 <script>
-  import Doughnut from 'svelte-chartjs/src/Doughnut.svelte';
+  import { onMount } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
@@ -15,75 +15,100 @@
     title,
   } = getCarVsPublicTotalsData(workingDays);
 
-  let data = {
-    labels,
-    datasets: [
-      {
-        data: [totalsCar.totalTimeTravelled, totalsPublic.totalTimeTravelled],
-        backgroundColor: [backgroundColorCar, backgroundColorPublic],
-        borderWidth: 0,
-        barPercentage: 1,
-      },
-    ],
-  };
+  function createChart() {
+    const ctx = document.getElementById('carVsPublicChart').getContext('2d');
 
-  let options = {
-    title: {
-      display: true,
-      text: title,
-      fontColor: '#aaa',
-    },
-    maintainAspectRatio: true,
-    legend: {
-      display: false,
-    },
-    responsive: true,
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            display: false,
+    const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 200);
+    gradientFillCar.addColorStop(0, '#006b97');
+    gradientFillCar.addColorStop(0.5, '#0085a6');
+    gradientFillCar.addColorStop(1, '#00a0af');
+
+    var gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 200);
+    gradientFillPublic.addColorStop(0, '#00bbb2');
+    gradientFillPublic.addColorStop(0.5, '#00d5b0');
+    gradientFillPublic.addColorStop(1, '#65eeac');
+
+    const carVsPublicChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [
+          {
+            data: [
+              totalsCar.totalTimeTravelled,
+              totalsPublic.totalTimeTravelled,
+            ],
+            backgroundColor: [gradientFillCar, gradientFillPublic],
+            borderWidth: 0,
+            barPercentage: 1,
           },
-        },
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: false,
-          },
-          ticks: {
-            display: false,
-            beginAtZero: true,
-            suggestedMax: maxForDisplay,
-          },
-        },
-      ],
-    },
-    tooltips: {
-      enabled: false,
-    },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'top',
-        display: true,
-        color: '#170a3a',
-        formatter: (value) => formatDataLabels(value),
+        ],
       },
-    },
-  };
+      options: {
+        title: {
+          display: true,
+          text: title,
+          fontColor: '#aaa',
+          // // padding: {
+          // //   top: 0,
+          // //   bottom: 30,
+          // // },
+        },
+        maintainAspectRatio: true,
+        legend: {
+          display: false,
+        },
+        responsive: true,
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+              ticks: {
+                display: false,
+                beginAtZero: true,
+                suggestedMax: maxForDisplay,
+              },
+            },
+          ],
+        },
+        tooltips: {
+          enabled: false,
+        },
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            display: false,
+            color: '#170a3a',
+            formatter: (value) => formatDataLabels(value),
+          },
+        },
+      },
+    });
+  }
+
+  onMount(createChart);
 </script>
 
 <div class="chart-container">
-  <Doughnut {data} {options} />
+  <canvas id="carVsPublicChart" width="500" />
 </div>
 
 <style>
-  /* .chart-container {
-    max-width: 600px;
-    margin: 4rem auto;
+  .chart-container {
+    margin-top: 4rem;
     padding: 2rem;
-    border: 2px solid #aaa;
+    border: 2px solid #333;
     border-radius: 7px;
-  } */
+    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
+  }
 </style>
