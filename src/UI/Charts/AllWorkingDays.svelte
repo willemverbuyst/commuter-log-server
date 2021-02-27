@@ -20,18 +20,24 @@
     labels,
     datasets: [
       {
-        data: travelTimes,
-        backgroundColor,
-        borderWidth: 0,
-        barPercentage: 1,
-      },
-      {
         label: 'Line Dataset',
         data: lineValue,
+        borderJoinStyle: 'miter',
         type: 'line',
         fill: false,
         borderColor: 'purple',
+        borderWidth: 2,
         // this dataset is drawn on top
+        order: 1,
+      },
+      {
+        data: travelTimes,
+        backgroundColor: 'rgba(255, 159, 64, 0.8)',
+        fill: true,
+        lineTension: 0.3,
+        borderColor: 'rgba(255, 159, 64, 1)',
+        borderWidth: 3,
+        barPercentage: 1,
         order: 2,
       },
     ],

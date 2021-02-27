@@ -107,7 +107,7 @@ export const workingDays = [
     routeTripTwo: 'Vlissingen - Terneuzen',
     roundTrip: false,
     durationTripOne: 85,
-    durationTripTwo: 85,
+    durationTripTwo: 25,
     costs: 24.99,
   },
   {
@@ -286,7 +286,7 @@ export const workingDays = [
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
     roundTrip: false,
-    durationTripOne: 135,
+    durationTripOne: 35,
     durationTripTwo: 35,
     costs: 24.99,
   },
@@ -311,7 +311,7 @@ export const workingDays = [
     routeTripTwo: 'Vlissingen - Tilburg',
     roundTrip: false,
     durationTripOne: 50,
-    durationTripTwo: 90,
+    durationTripTwo: 20,
     costs: 24.99,
   },
 ];

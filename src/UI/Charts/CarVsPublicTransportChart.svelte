@@ -1,5 +1,5 @@
 <script>
-  import Bar from 'svelte-chartjs/src/Bar.svelte';
+  import Doughnut from 'svelte-chartjs/src/Doughnut.svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
@@ -74,7 +74,7 @@
 </script>
 
 <div class="chart-container">
-  <Bar {data} {options} />
+  <Doughnut {data} {options} />
 </div>
 
 <style>
