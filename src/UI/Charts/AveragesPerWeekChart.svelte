@@ -81,7 +81,7 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            display: true,
+            display: false,
             color: '#170a3a',
             formatter: (value) => formatDataLabels(value),
           },

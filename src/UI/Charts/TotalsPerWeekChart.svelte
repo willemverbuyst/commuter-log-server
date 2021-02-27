@@ -8,8 +8,6 @@
   const {
     totalsPerWeekCar,
     totalsPerWeekPublic,
-    backgroundColorCar,
-    backgroundColorPublic,
     labels,
     maxForDisplay,
     title,
@@ -30,7 +28,6 @@
 
     const totalsPerWeekChart = new Chart(ctx, {
       type: 'line',
-
       data: {
         labels,
         datasets: [

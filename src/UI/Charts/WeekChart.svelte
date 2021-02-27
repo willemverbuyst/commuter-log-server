@@ -1,5 +1,5 @@
 <script>
-  import Bar from 'svelte-chartjs/src/Bar.svelte';
+  import { onMount } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import {
@@ -15,72 +15,81 @@
     title,
   } = getWeekData(workingDays, 4);
 
-  let data = {
-    labels,
-    datasets: [
-      {
-        data: travelTimes,
-        backgroundColor,
-        borderWidth: 0,
-        barPercentage: 1,
-      },
-    ],
-  };
+  function createChart() {
+    const ctx = document.getElementById('weekChart').getContext('2d');
 
-  let options = {
-    title: {
-      display: true,
-      text: title,
-    },
-    maintainAspectRatio: true,
-    legend: {
-      display: false,
-    },
-    responsive: true,
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            display: false,
+    const weekChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            data: travelTimes,
+            backgroundColor,
+            borderWidth: 0,
+            barPercentage: 1,
           },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: title,
         },
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: false,
-          },
-          ticks: {
-            display: false,
-            beginAtZero: true,
-            suggestedMax: maxForDisplay,
-          },
+        maintainAspectRatio: true,
+        legend: {
+          display: false,
         },
-      ],
-    },
-    tooltips: {
-      enabled: false,
-    },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'top',
-        display: true,
-        color: '#170a3a',
-        formatter: (value) => {
-          return value === 0
-            ? ''
-            : value === 0.00001
-            ? 'WFH'
-            : formatDataLabels(value);
+        responsive: true,
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+              ticks: {
+                display: false,
+                beginAtZero: true,
+                suggestedMax: maxForDisplay,
+              },
+            },
+          ],
+        },
+        tooltips: {
+          enabled: false,
+        },
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            display: true,
+            color: '#170a3a',
+            formatter: (value) => {
+              return value === 0
+                ? ''
+                : value === 0.00001
+                ? 'WFH'
+                : // : formatDataLabels(value);
+                  '';
+            },
+          },
         },
       },
-    },
-  };
+    });
+  }
+
+  onMount(createChart);
 </script>
 
 <div class="chart-container">
-  <Bar {data} {options} />
+  <canvas id="weekChart" />
 </div>
 
 <style>

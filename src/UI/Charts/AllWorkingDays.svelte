@@ -40,7 +40,7 @@
             borderJoinStyle: 'miter',
             type: 'line',
             fill: false,
-            borderColor: 'purple',
+            borderColor: 'rgba(21,211,211,.6)',
             borderWidth: 2,
             order: 1,
           },
