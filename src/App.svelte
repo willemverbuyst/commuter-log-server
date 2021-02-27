@@ -20,12 +20,18 @@
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
-  <TotalsPerWeekChart />
-  <AllWorkingDays />
-  <WeekChart />
-  <AveragesPerWeekChart />
-  <PartitionChart />
-  <CarVsOPublicTransportChart />
+  <div class="chart-container">
+    <TotalsPerWeekChart />
+    <AllWorkingDays />
+  </div>
+  <div class="chart-container">
+    <WeekChart />
+    <AveragesPerWeekChart />
+  </div>
+  <div class="chart-container">
+    <!-- <PartitionChart />
+    <CarVsOPublicTransportChart /> -->
+  </div>
 </main>
 
 <style>
@@ -35,7 +41,14 @@
     left: 0;
     width: 100%;
     text-align: center;
-    padding: 1em;
-    margin: 5rem auto;
+    margin: 1rem auto;
+  }
+  .chart-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }
 </style>

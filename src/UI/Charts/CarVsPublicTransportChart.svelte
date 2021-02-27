@@ -31,6 +31,7 @@
     title: {
       display: true,
       text: title,
+      fontColor: '#aaa',
     },
     maintainAspectRatio: true,
     legend: {
@@ -78,8 +79,11 @@
 </div>
 
 <style>
-  .chart-container {
+  /* .chart-container {
     max-width: 600px;
     margin: 4rem auto;
-  }
+    padding: 2rem;
+    border: 2px solid #aaa;
+    border-radius: 7px;
+  } */
 </style>

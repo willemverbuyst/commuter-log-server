@@ -39,6 +39,7 @@
         title: {
           display: true,
           text: title,
+          fontColor: '#aaa',
         },
         maintainAspectRatio: true,
         legend: {
@@ -93,12 +94,15 @@
 </script>
 
 <div class="chart-container">
-  <canvas id="averagesPerWeekChart" />
+  <canvas id="averagesPerWeekChart" width="500" />
 </div>
 
 <style>
   .chart-container {
-    max-width: 600px;
-    margin: 4rem auto;
+    margin-top: 4rem;
+    padding: 2rem;
+    border: 2px solid #333;
+    border-radius: 7px;
+    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
   }
 </style>
