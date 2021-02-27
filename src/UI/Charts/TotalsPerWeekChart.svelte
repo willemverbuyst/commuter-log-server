@@ -16,12 +16,12 @@
   function createChart() {
     const ctx = document.getElementById('totalsPerWeekChart').getContext('2d');
 
-    const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 200);
+    const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
     gradientFillCar.addColorStop(0, '#006b97');
     gradientFillCar.addColorStop(0.5, '#0085a6');
     gradientFillCar.addColorStop(1, '#00a0af');
 
-    var gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 200);
+    var gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
     gradientFillPublic.addColorStop(0, '#00bbb2');
     gradientFillPublic.addColorStop(0.5, '#00d5b0');
     gradientFillPublic.addColorStop(1, '#65eeac');
