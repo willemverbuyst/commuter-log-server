@@ -1,5 +1,5 @@
 <script>
-  import Polar from 'svelte-chartjs/src/Polar.svelte';
+  import { onMount } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { getPartitionData } from '../../helpers/chartLogic/chartLogic';
@@ -8,48 +8,84 @@
     workingDays
   );
 
-  let data = {
-    labels,
-    datasets: [
-      {
-        data: partition,
-        backgroundColor,
-        borderWidth: 0,
-        barPercentage: 1,
-      },
-    ],
-  };
+  function createChart() {
+    const ctx = document.getElementById('partitionChart').getContext('2d');
 
-  let options = {
-    title: {
-      display: true,
-      text: title,
-      fontColor: '#aaa',
-    },
-    maintainAspectRatio: true,
-    legend: {
-      display: false,
-    },
-    responsive: true,
-    scale: {
-      display: false,
-    },
-    tooltips: {
-      enabled: false,
-    },
-  };
+    const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 200);
+    gradientFillCar.addColorStop(0, '#006b97');
+    gradientFillCar.addColorStop(0.5, '#0085a6');
+    gradientFillCar.addColorStop(1, '#00a0af');
+
+    var gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 200);
+    gradientFillPublic.addColorStop(0, '#00bbb2');
+    gradientFillPublic.addColorStop(0.5, '#00d5b0');
+    gradientFillPublic.addColorStop(1, '#65eeac');
+
+    var gradientFillHome = ctx.createLinearGradient(0, 0, 0, 200);
+    gradientFillHome.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
+    gradientFillHome.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
+    gradientFillHome.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
+
+    const partitionChart = new Chart(ctx, {
+      type: 'polarArea',
+      data: {
+        labels,
+        datasets: [
+          {
+            data: partition,
+            backgroundColor: [
+              gradientFillHome,
+              gradientFillCar,
+              gradientFillPublic,
+            ],
+            borderWidth: 0,
+            barPercentage: 1,
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: title,
+          fontColor: '#aaa',
+        },
+        maintainAspectRatio: true,
+        legend: {
+          display: false,
+        },
+        responsive: true,
+        scale: {
+          display: false,
+        },
+        tooltips: {
+          enabled: false,
+        },
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'top',
+            display: false,
+            color: '#170a3a',
+            formatter: (value) => formatDataLabels(value),
+          },
+        },
+      },
+    });
+  }
+
+  onMount(createChart);
 </script>
 
 <div class="chart-container">
-  <Polar {data} {options} />
+  <canvas id="partitionChart" width="500" />
 </div>
 
 <style>
-  /* .chart-container {
-    max-width: 600px;
-    margin: 4rem auto;
+  .chart-container {
+    margin-top: 4rem;
     padding: 2rem;
-    border: 2px solid #aaa;
+    border: 2px solid #333;
     border-radius: 7px;
-  } */
+    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
+  }
 </style>

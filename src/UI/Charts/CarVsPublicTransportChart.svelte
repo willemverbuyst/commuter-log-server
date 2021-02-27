@@ -8,8 +8,6 @@
   const {
     totalsCar,
     totalsPublic,
-    backgroundColorCar,
-    backgroundColorPublic,
     labels,
     maxForDisplay,
     title,
@@ -49,10 +47,6 @@
           display: true,
           text: title,
           fontColor: '#aaa',
-          // // padding: {
-          // //   top: 0,
-          // //   bottom: 30,
-          // // },
         },
         maintainAspectRatio: true,
         legend: {

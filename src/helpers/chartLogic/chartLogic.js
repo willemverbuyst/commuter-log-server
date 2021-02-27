@@ -106,7 +106,7 @@ export const getPartitionData = (workingDays) => {
     travelByCarColor,
     travelByPublicTransportColor,
   ];
-  const labels = ['wfh', 'car', 'public transport'];
+  const labels = ['', '', ''];
   const title = `DAYS CAR / PUBLIC TRANSPORT / WORKING FORM HOME`;
 
   return {

@@ -52,7 +52,7 @@ export const getCarVsPublicTotalsData = (workingDays) => {
     travelByPublicTransportColor,
   ];
 
-  const labels = ['Car', 'Public Transport'];
+  const labels = ['', ''];
   const maxForDisplay =
     Math.max(totalsCar.totalTimeTravelled, totalsPublic.totalTimeTravelled) *
     1.2;
