@@ -6,10 +6,8 @@
   import { getAveragePerWeekData } from '../../helpers/chartLogic/averagesChart';
 
   const {
-    averagesPerWeekCar,
-    averagesPerWeekPublic,
-    backgroundColorCar,
-    backgroundColorPublic,
+    averages,
+    backgroundColor,
     labels,
     maxForDisplay,
     title,
@@ -19,16 +17,12 @@
     labels,
     datasets: [
       {
-        data: averagesPerWeekCar,
-        backgroundColor: backgroundColorCar,
-        borderWidth: 0,
+        data: averages,
+        fill: false,
+        borderColor: backgroundColor,
+        borderWidth: 3,
         barPercentage: 1,
-      },
-      {
-        data: averagesPerWeekPublic,
-        backgroundColor: backgroundColorPublic,
-        borderWidth: 0,
-        barPercentage: 1,
+        steppedLine: 'middle',
       },
     ],
   };
@@ -41,6 +35,11 @@
     maintainAspectRatio: true,
     legend: {
       display: false,
+    },
+    elements: {
+      point: {
+        radius: 0,
+      },
     },
     responsive: true,
     scales: {
@@ -74,8 +73,8 @@
     },
     plugins: {
       datalabels: {
-        // anchor: 'end',
-        // align: 'top',
+        anchor: 'end',
+        align: 'top',
         display: true,
         color: '#170a3a',
         formatter: (value) => formatDataLabels(value),
