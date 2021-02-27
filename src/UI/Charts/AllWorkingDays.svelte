@@ -16,19 +16,19 @@
   } = getAllWorkingDaysData(workingDays);
 
   function createChart() {
-    const ctx = document.getElementById('myChart').getContext('2d');
+    const ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
 
-    const gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientStroke.addColorStop(0, 'rgba(255, 159, 64, 0.8)');
+    const gradientStroke = ctx.createLinearGradient(0, 100, 0, 300);
+    gradientStroke.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
     gradientStroke.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
-    gradientStroke.addColorStop(1, 'rgba(255, 39, 204, 0.8)');
+    gradientStroke.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
 
-    var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientFill.addColorStop(0, 'rgba(255, 159, 64, 0.8)');
+    var gradientFill = ctx.createLinearGradient(0, 100, 0, 300);
+    gradientFill.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
     gradientFill.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
-    gradientFill.addColorStop(1, 'rgba(255, 39, 204, 0.8)');
+    gradientFill.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
 
-    const myChart = new Chart(ctx, {
+    const allWorkingDaysChart = new Chart(ctx, {
       type: 'line',
 
       data: {
@@ -117,7 +117,7 @@
 </script>
 
 <div class="chart-container">
-  <canvas id="myChart" />
+  <canvas id="allWorkingDaysChart" />
 </div>
 
 <style>
