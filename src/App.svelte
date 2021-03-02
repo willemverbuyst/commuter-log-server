@@ -7,6 +7,7 @@
   import CarVsPublicChart from './UI/Charts/CarVsPublicChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
+  import Table from './UI/Table/Table.svelte';
 
   let showForm = false;
 
@@ -23,6 +24,9 @@
   <div class="chart-container">
     <TotalsPerWeekChart />
     <AllWorkingDays />
+  </div>
+  <div class="chart-container">
+    <Table />
   </div>
   <div class="chart-container">
     <WeekChart />
