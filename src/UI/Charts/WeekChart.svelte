@@ -71,14 +71,13 @@
             anchor: 'end',
             align: 'top',
             display: true,
-            color: '#170a3a',
+            color: 'rgb(170,170,170)',
             formatter: (value) => {
               return value === 0
                 ? ''
                 : value === 0.00001
                 ? 'WFH'
-                : // : formatDataLabels(value);
-                  '';
+                : formatDataLabels(value);
             },
           },
         },

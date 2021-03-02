@@ -4,7 +4,7 @@
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
   import PartitionChart from './UI/Charts/PartitionChart.svelte';
   import WeekChart from './UI/Charts/WeekChart.svelte';
-  import CarVsPublicChart from './UI/Charts/CarVsPublicTransportChart.svelte';
+  import CarVsPublicChart from './UI/Charts/CarVsPublicChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
 

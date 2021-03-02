@@ -4,9 +4,7 @@
   import { workingDays } from '../../dummyData';
   import { getPartitionData } from '../../helpers/chartLogic/chartLogic';
 
-  const { partition, backgroundColor, labels, title } = getPartitionData(
-    workingDays
-  );
+  const { partition, labels, title } = getPartitionData(workingDays);
 
   function createChart() {
     const ctx = document.getElementById('partitionChart').getContext('2d');
@@ -64,9 +62,8 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            display: false,
-            color: '#170a3a',
-            formatter: (value) => formatDataLabels(value),
+            display: true,
+            color: 'rgb(170,170,170)',
           },
         },
       },

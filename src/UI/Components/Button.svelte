@@ -8,14 +8,15 @@
 <style>
   button {
     font-family: 'Helvetica Neue';
-    size: 12px;
+    font-size: 12px;
     line-height: 1.2;
     text-transform: uppercase;
+    color: #aaa;
+    font-weight: bold;
     border: 2px solid #333;
     border-radius: 7px;
     background: #333;
     padding: 0.5rem 1rem;
-    color: #aaa;
     cursor: pointer;
     text-decoration: none;
     box-shadow: inset 4px 4px 4px #444, inset -4px -4px 4px #222;

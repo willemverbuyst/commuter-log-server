@@ -47,11 +47,6 @@ export const getTotalsPerWeek = (week, transport) => {
 export const getCarVsPublicTotalsData = (workingDays) => {
   const totalsCar = getTotalsTransport(workingDays, 'car');
   const totalsPublic = getTotalsTransport(workingDays, 'public transport');
-  const [backgroundColorCar, backgroundColorPublic] = [
-    travelByCarColor,
-    travelByPublicTransportColor,
-  ];
-
   const labels = ['', ''];
   const maxForDisplay =
     Math.max(totalsCar.totalTimeTravelled, totalsPublic.totalTimeTravelled) *
@@ -61,8 +56,6 @@ export const getCarVsPublicTotalsData = (workingDays) => {
   return {
     totalsCar,
     totalsPublic,
-    backgroundColorCar,
-    backgroundColorPublic,
     labels,
     maxForDisplay,
     title,

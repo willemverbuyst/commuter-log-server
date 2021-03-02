@@ -1,9 +1,3 @@
-import {
-  travelByCarColor,
-  travelByPublicTransportColor,
-  workingFromHomeColor,
-} from '../../UI/Colors';
-
 const weekdays = [
   'Sunday',
   'Monday',
@@ -101,17 +95,11 @@ const getPartition = (workingDays) => {
 
 export const getPartitionData = (workingDays) => {
   const partition = getPartition(workingDays);
-  const backgroundColor = [
-    workingFromHomeColor,
-    travelByCarColor,
-    travelByPublicTransportColor,
-  ];
   const labels = ['', '', ''];
   const title = `DAYS CAR / PUBLIC TRANSPORT / WORKING FORM HOME`;
 
   return {
     partition,
-    backgroundColor,
     labels,
     title,
   };
@@ -122,9 +110,7 @@ export const getAllWorkingDaysData = (workingDays) => {
   const travelTimes = withoutDayOff.map(
     (day) => day.durationTripOne + day.durationTripTwo
   );
-  const backgroundColor = travelTimes.map(() => travelByCarColor);
-
-  const labels = withoutDayOff.map((day) => '');
+  const labels = withoutDayOff.map(() => '');
   const maxForDisplay = Math.max(...travelTimes) * 1.2;
   const title = `TRAVEL TIMES`;
   const lineValue = withoutDayOff.map(
@@ -133,7 +119,6 @@ export const getAllWorkingDaysData = (workingDays) => {
 
   return {
     travelTimes,
-    backgroundColor,
     maxForDisplay,
     labels,
     title,

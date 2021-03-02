@@ -79,10 +79,8 @@
         },
         plugins: {
           datalabels: {
-            anchor: 'end',
-            align: 'top',
-            display: false,
-            color: '#170a3a',
+            display: true,
+            color: '#333',
             formatter: (value) => formatDataLabels(value),
           },
         },
