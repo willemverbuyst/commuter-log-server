@@ -50,7 +50,7 @@
             fill: true,
             lineTension: 0.3,
             backgroundColor: gradientFill,
-            borderWidth: 2,
+            borderWidth: 0,
             order: 2,
           },
         ],

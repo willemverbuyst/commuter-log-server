@@ -13,23 +13,23 @@
     text-transform: uppercase;
     color: #aaa;
     font-weight: bold;
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 7px;
     background: #333;
     padding: 0.5rem 1rem;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: inset 4px 4px 4px #444, inset -4px -4px 4px #222;
+    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
     transition: 0.3s ease-in;
   }
 
   button:focus,
   button:hover {
     outline: none;
-    box-shadow: inset 2px 2px 2px #444, inset -2px -2px 2px #222;
+    /* box-shadow: inset 1px 1px 1px #222, inset -1px -1px 1px #444; */
   }
 
   button:active {
-    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
+    box-shadow: inset 1px 1px 1px #222, inset -1px -1px 1px #444;
   }
 </style>

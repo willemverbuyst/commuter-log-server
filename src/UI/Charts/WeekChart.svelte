@@ -15,6 +15,9 @@
     title,
   } = getWeekData(workingDays, 4);
 
+  let showGridY = true;
+  let showLabels = !showGridY;
+
   function createChart() {
     const ctx = document.getElementById('weekChart').getContext('2d');
 
@@ -53,12 +56,21 @@
           yAxes: [
             {
               gridLines: {
-                display: false,
+                display: showGridY,
+                color: 'rgba(170, 170, 170, 0.3)',
+                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                tickMarkLength: 0,
+                drawBorder: false,
               },
               ticks: {
-                display: false,
+                padding: 10,
+                display: showGridY,
                 beginAtZero: true,
                 suggestedMax: maxForDisplay,
+                stepSize: 60,
+                callback: function (value, _index, _values) {
+                  return formatDataLabels(value);
+                },
               },
             },
           ],
@@ -70,7 +82,7 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            display: true,
+            display: showLabels,
             color: 'rgb(170,170,170)',
             formatter: (value) => {
               return value === 0
