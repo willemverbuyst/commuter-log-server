@@ -1,5 +1,5 @@
 <script>
-  import Button from './UI/Components/Button.svelte';
+  import Button from './UI/Buttons/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
   import PartitionChart from './UI/Charts/PartitionChart.svelte';
@@ -17,7 +17,7 @@
 </script>
 
 <main>
-  <Button on:click={() => (showForm = true)}>Add Working Day</Button>
+  <Button on:click={() => (showForm = true)}>Add Day</Button>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}

@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { fly, scale } from 'svelte/transition';
   import { cubicIn } from 'svelte/easing';
-  import Button from './Button.svelte';
+  import Button from '../Buttons/Button.svelte';
 
   const dispatch = createEventDispatcher();
 
