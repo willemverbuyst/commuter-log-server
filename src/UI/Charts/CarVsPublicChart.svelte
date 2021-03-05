@@ -2,8 +2,8 @@
   import { onMount } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
-  import { getCarVsPublicTotalsData } from '../../helpers/chartLogic/totalsChart';
+  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { getCarVsPublicTotalsData } from '../../Helpers/chartLogic/totalsChart';
 
   const {
     totalsCar,

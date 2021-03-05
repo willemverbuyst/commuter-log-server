@@ -2,8 +2,10 @@
   import { onMount } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
-  import { formatDataLabels } from '../../helpers/chartLogic/chartLogic';
-  import { getTotalsPerWeekData } from '../../helpers/chartLogic/totalsChart';
+  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsChart';
+
+  export let showGrid;
 
   const {
     totalsPerWeekCar,
@@ -12,8 +14,6 @@
     maxForDisplay,
     title,
   } = getTotalsPerWeekData(workingDays);
-
-  let showGridY = true;
 
   const totalizer = {
     id: 'totalizer',
@@ -103,7 +103,7 @@
             {
               stacked: true,
               gridLines: {
-                display: showGridY,
+                display: showGrid,
                 color: 'rgba(170, 170, 170, 0.3)',
                 zeroLineColor: 'rgba(170, 170, 170, 0.3)',
                 tickMarkLength: 0,
@@ -111,7 +111,7 @@
               },
               ticks: {
                 padding: 10,
-                display: showGridY,
+                display: showGrid,
                 beginAtZero: true,
                 suggestedMax: maxForDisplay,
                 stepSize: 60,
@@ -134,7 +134,7 @@
               const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
               return formatDataLabels(total);
             },
-            display: !showGridY
+            display: !showGrid
               ? function (ctx) {
                   return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
                 }

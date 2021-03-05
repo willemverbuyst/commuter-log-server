@@ -5,7 +5,9 @@
   import {
     formatDataLabels,
     getAllWorkingDaysData,
-  } from '../../helpers/chartLogic/chartLogic';
+  } from '../../Helpers/chartLogic/chartLogic';
+
+  export let showGrid;
 
   const {
     travelTimes,
@@ -14,8 +16,6 @@
     title,
     lineValue,
   } = getAllWorkingDaysData(workingDays);
-
-  let showGridY = false;
 
   function createChart() {
     const ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
@@ -90,7 +90,7 @@
           yAxes: [
             {
               gridLines: {
-                display: showGridY,
+                display: showGrid,
                 color: 'rgba(170, 170, 170, 0.3)',
                 zeroLineColor: 'rgba(170, 170, 170, 0.3)',
                 tickMarkLength: 0,
@@ -98,7 +98,7 @@
               },
               ticks: {
                 padding: 10,
-                display: showGridY,
+                display: showGrid,
                 beginAtZero: true,
                 suggestedMax: maxForDisplay,
                 stepSize: 60,

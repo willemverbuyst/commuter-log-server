@@ -8,29 +8,37 @@
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
   import Table from './UI/Table/Table.svelte';
+  import showGrid from './Store/appState';
+  import showGridStore from './Store/appState';
 
   let showForm = false;
 
   function cancelForm() {
     showForm = false;
   }
+
+  function toggleGrid() {
+    showGrid.toggleGrid();
+  }
 </script>
 
 <main>
   <Button on:click={() => (showForm = true)}>Add Day</Button>
+  <Button on:click={toggleGrid}>Show Grid</Button>
+  <p>{$showGrid}</p>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
   <div class="chart-container">
-    <TotalsPerWeekChart />
-    <AllWorkingDays />
+    <TotalsPerWeekChart showGrid={$showGrid} />
+    <AllWorkingDays showGrid={$showGrid} />
   </div>
   <div class="chart-container">
     <Table />
   </div>
   <div class="chart-container">
     <WeekChart />
-    <AveragesPerWeekChart />
+    <AveragesPerWeekChart showGrid={$showGrid} />
   </div>
   <div class="chart-container">
     <PartitionChart />
