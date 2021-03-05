@@ -13,7 +13,7 @@
     title,
   } = getTotalsPerWeekData(workingDays);
 
-  let showGridY = false;
+  let showGridY = true;
 
   const totalizer = {
     id: 'totalizer',
@@ -129,7 +129,7 @@
           datalabels: {
             anchor: 'end',
             align: 'end',
-            color: '#aaa',
+            color: 'rgba(170, 170, 170, 0.3)',
             formatter: (_value, ctx) => {
               const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
               return formatDataLabels(total);

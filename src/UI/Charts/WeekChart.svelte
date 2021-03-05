@@ -82,7 +82,7 @@
             anchor: 'end',
             align: 'top',
             display: !showGridY,
-            color: 'rgb(170,170,170)',
+            color: 'rgba(170, 170, 170, 0.3)',
             formatter: (value) => {
               return value === 0
                 ? ''
