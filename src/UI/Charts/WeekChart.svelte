@@ -1,11 +1,13 @@
 <script>
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import {
     formatDataLabels,
     getWeekData,
   } from '../../Helpers/chartLogic/chartLogic';
+
+  export let showGrid;
 
   const {
     travelTimes,
@@ -15,12 +17,15 @@
     title,
   } = getWeekData(workingDays, 4);
 
-  let showGridY = true;
+  let weekChart;
+  let ctx;
 
   function createChart() {
-    const ctx = document.getElementById('weekChart').getContext('2d');
+    ctx = document.getElementById('weekChart').getContext('2d');
 
-    const weekChart = new Chart(ctx, {
+    if (weekChart) weekChart.destroy();
+
+    weekChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels,
@@ -55,7 +60,7 @@
           yAxes: [
             {
               gridLines: {
-                display: showGridY,
+                display: showGrid,
                 color: 'rgba(170, 170, 170, 0.3)',
                 zeroLineColor: 'rgba(170, 170, 170, 0.3)',
                 tickMarkLength: 0,
@@ -63,7 +68,7 @@
               },
               ticks: {
                 padding: 10,
-                display: showGridY,
+                display: showGrid,
                 beginAtZero: true,
                 suggestedMax: maxForDisplay,
                 stepSize: 60,
@@ -81,7 +86,7 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            display: !showGridY,
+            display: !showGrid,
             color: 'rgba(170, 170, 170, 0.3)',
             formatter: (value) => {
               return value === 0
@@ -96,7 +101,7 @@
     });
   }
 
-  onMount(createChart);
+  afterUpdate(createChart);
 </script>
 
 <div class="chart-container">

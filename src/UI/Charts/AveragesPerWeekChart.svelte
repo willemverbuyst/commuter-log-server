@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
@@ -11,17 +11,20 @@
     workingDays
   );
 
+  let averagesPerWeekChart;
+  let ctx;
+
   function createChart() {
-    const ctx = document
-      .getElementById('averagesPerWeekChart')
-      .getContext('2d');
+    ctx = document.getElementById('averagesPerWeekChart').getContext('2d');
 
     const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);
     gradientStroke.addColorStop(0, '#ff0080 ');
     gradientStroke.addColorStop(0.5, '#ff8c00');
     gradientStroke.addColorStop(1, '#40e0d0');
 
-    const myAllWorkingDaysChart = new Chart(ctx, {
+    if (averagesPerWeekChart) averagesPerWeekChart.destroy();
+
+    averagesPerWeekChart = new Chart(ctx, {
       type: 'line',
 
       data: {
@@ -101,7 +104,7 @@
       },
     });
   }
-  onMount(createChart);
+  afterUpdate(createChart);
 </script>
 
 <div class="chart-container">

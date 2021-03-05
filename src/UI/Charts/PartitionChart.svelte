@@ -1,30 +1,35 @@
 <script>
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { getPartitionData } from '../../helpers/chartLogic/chartLogic';
 
   const { partition, labels, title } = getPartitionData(workingDays);
 
+  let partitionChart;
+  let ctx;
+
   function createChart() {
-    const ctx = document.getElementById('partitionChart').getContext('2d');
+    ctx = document.getElementById('partitionChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(150, 0, 0, 150);
     gradientFillCar.addColorStop(0, '#006b97');
     gradientFillCar.addColorStop(0.5, '#0085a6');
     gradientFillCar.addColorStop(1, '#00a0af');
 
-    var gradientFillPublic = ctx.createLinearGradient(150, 0, 0, 150);
+    const gradientFillPublic = ctx.createLinearGradient(150, 0, 0, 150);
     gradientFillPublic.addColorStop(0, '#00bbb2');
     gradientFillPublic.addColorStop(0.5, '#00d5b0');
     gradientFillPublic.addColorStop(1, '#65eeac');
 
-    var gradientFillHome = ctx.createLinearGradient(150, 0, 0, 150);
+    const gradientFillHome = ctx.createLinearGradient(150, 0, 0, 150);
     gradientFillHome.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
     gradientFillHome.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
     gradientFillHome.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
 
-    const partitionChart = new Chart(ctx, {
+    if (partitionChart) partitionChart.destroy();
+
+    partitionChart = new Chart(ctx, {
       type: 'polarArea',
       data: {
         labels,
@@ -70,7 +75,7 @@
     });
   }
 
-  onMount(createChart);
+  afterUpdate(createChart);
 </script>
 
 <div class="chart-container">

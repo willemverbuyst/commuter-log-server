@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import {
@@ -17,20 +17,20 @@
     lineValue,
   } = getAllWorkingDaysData(workingDays);
 
+  let allWorkingDaysChart;
+  let ctx;
+
   function createChart() {
-    const ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
+    ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
 
-    const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);
-    gradientStroke.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
-    gradientStroke.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
-    gradientStroke.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
-
-    var gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
+    const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
     gradientFill.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
     gradientFill.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
     gradientFill.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
 
-    const allWorkingDaysChart = new Chart(ctx, {
+    if (allWorkingDaysChart) allWorkingDaysChart.destroy();
+
+    allWorkingDaysChart = new Chart(ctx, {
       type: 'line',
 
       data: {
@@ -48,7 +48,6 @@
           },
           {
             data: travelTimes,
-            borderColor: gradientStroke,
             fill: true,
             lineTension: 0.3,
             backgroundColor: gradientFill,
@@ -121,7 +120,7 @@
     });
   }
 
-  onMount(createChart);
+  afterUpdate(createChart);
 </script>
 
 <div class="chart-container">

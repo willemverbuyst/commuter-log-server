@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
@@ -14,6 +14,9 @@
     maxForDisplay,
     title,
   } = getTotalsPerWeekData(workingDays);
+
+  let totalsPerWeekChart;
+  let ctx;
 
   const totalizer = {
     id: 'totalizer',
@@ -39,19 +42,21 @@
   };
 
   function createChart() {
-    const ctx = document.getElementById('totalsPerWeekChart').getContext('2d');
+    ctx = document.getElementById('totalsPerWeekChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
     gradientFillCar.addColorStop(0, '#006b97');
     gradientFillCar.addColorStop(0.5, '#0085a6');
     gradientFillCar.addColorStop(1, '#00a0af');
 
-    var gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
+    const gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
     gradientFillPublic.addColorStop(0, '#00bbb2');
     gradientFillPublic.addColorStop(0.5, '#00d5b0');
     gradientFillPublic.addColorStop(1, '#65eeac');
 
-    const totalsPerWeekChart = new Chart(ctx, {
+    if (totalsPerWeekChart) totalsPerWeekChart.destroy();
+
+    totalsPerWeekChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels,
@@ -145,7 +150,7 @@
     });
   }
 
-  onMount(createChart);
+  afterUpdate(createChart);
 </script>
 
 <div class="chart-container">

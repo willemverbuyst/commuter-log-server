@@ -25,7 +25,6 @@
 <main>
   <Button on:click={() => (showForm = true)}>Add Day</Button>
   <Button on:click={toggleGrid}>Show Grid</Button>
-  <p>{$showGrid}</p>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
@@ -37,7 +36,7 @@
     <Table />
   </div>
   <div class="chart-container">
-    <WeekChart />
+    <WeekChart showGrid={$showGrid} />
     <AveragesPerWeekChart showGrid={$showGrid} />
   </div>
   <div class="chart-container">
