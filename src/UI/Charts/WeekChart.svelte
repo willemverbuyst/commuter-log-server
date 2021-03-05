@@ -16,7 +16,6 @@
   } = getWeekData(workingDays, 4);
 
   let showGridY = true;
-  let showLabels = !showGridY;
 
   function createChart() {
     const ctx = document.getElementById('weekChart').getContext('2d');
@@ -82,7 +81,7 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            display: showLabels,
+            display: !showGridY,
             color: 'rgb(170,170,170)',
             formatter: (value) => {
               return value === 0

@@ -13,6 +13,31 @@
     title,
   } = getTotalsPerWeekData(workingDays);
 
+  let showGridY = false;
+
+  const totalizer = {
+    id: 'totalizer',
+
+    beforeUpdate: (chart) => {
+      let totals = {};
+      let utmost = 0;
+
+      chart.data.datasets.forEach((dataset, datasetIndex) => {
+        if (chart.isDatasetVisible(datasetIndex)) {
+          utmost = datasetIndex;
+          dataset.data.forEach((value, index) => {
+            totals[index] = (totals[index] || 0) + value;
+          });
+        }
+      });
+
+      chart.$totalizer = {
+        totals: totals,
+        utmost: utmost,
+      };
+    },
+  };
+
   function createChart() {
     const ctx = document.getElementById('totalsPerWeekChart').getContext('2d');
 
@@ -45,6 +70,7 @@
           },
         ],
       },
+      plugins: [totalizer],
       options: {
         title: {
           display: true,
@@ -77,12 +103,21 @@
             {
               stacked: true,
               gridLines: {
-                display: false,
+                display: showGridY,
+                color: 'rgba(170, 170, 170, 0.3)',
+                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                tickMarkLength: 0,
+                drawBorder: false,
               },
               ticks: {
-                display: false,
+                padding: 10,
+                display: showGridY,
                 beginAtZero: true,
-                suggestedMax: maxForDisplay,
+                suggestedMax: showGridY ? 0 : maxForDisplay,
+                stepSize: 120,
+                callback: function (value, _index, _values) {
+                  return formatDataLabels(value);
+                },
               },
             },
           ],
@@ -93,10 +128,17 @@
         plugins: {
           datalabels: {
             anchor: 'end',
-            align: 'top',
-            display: false,
-            color: '#170a3a',
-            formatter: (value) => formatDataLabels(value),
+            align: 'end',
+            color: '#aaa',
+            formatter: (_value, ctx) => {
+              const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
+              return formatDataLabels(total);
+            },
+            display: !showGridY
+              ? function (ctx) {
+                  return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
+                }
+              : false,
           },
         },
       },

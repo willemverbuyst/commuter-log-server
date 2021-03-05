@@ -20,6 +20,8 @@ export const formatDataLabels = (value) => {
     return 'day off';
   } else if (value >= 600 && value % 60 === 0) {
     return `${Math.floor(value / 60)}:00`;
+  } else if (value >= 600 && value % 60 !== 0 && value % 60 < 10) {
+    return `${Math.floor(value / 60)}:0${Math.floor(value % 60)}`;
   } else if (value >= 600 && value % 60 !== 0) {
     return `${Math.floor(value / 60)}:${Math.floor(value % 60)}`;
   } else if (value < 600 && value % 60 === 0) {
