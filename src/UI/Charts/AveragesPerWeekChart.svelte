@@ -66,7 +66,6 @@
           ],
           yAxes: [
             {
-              stacked: true,
               gridLines: {
                 display: showGridY,
                 color: 'rgba(170, 170, 170, 0.3)',
@@ -78,7 +77,7 @@
                 padding: 10,
                 display: showGridY,
                 beginAtZero: true,
-                suggestedMax: showGridY ? 0 : maxForDisplay,
+                suggestedMax: maxForDisplay,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
                   return formatDataLabels(value);

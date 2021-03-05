@@ -113,8 +113,8 @@
                 padding: 10,
                 display: showGridY,
                 beginAtZero: true,
-                suggestedMax: showGridY ? 0 : maxForDisplay,
-                stepSize: 120,
+                suggestedMax: maxForDisplay,
+                stepSize: 60,
                 callback: function (value, _index, _values) {
                   return formatDataLabels(value);
                 },

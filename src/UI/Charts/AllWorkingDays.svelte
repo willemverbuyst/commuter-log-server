@@ -15,6 +15,8 @@
     lineValue,
   } = getAllWorkingDaysData(workingDays);
 
+  let showGridY = false;
+
   function createChart() {
     const ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
 
@@ -88,12 +90,21 @@
           yAxes: [
             {
               gridLines: {
-                display: false,
+                display: showGridY,
+                color: 'rgba(170, 170, 170, 0.3)',
+                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                tickMarkLength: 0,
+                drawBorder: false,
               },
               ticks: {
-                display: false,
+                padding: 10,
+                display: showGridY,
                 beginAtZero: true,
                 suggestedMax: maxForDisplay,
+                stepSize: 60,
+                callback: function (value, _index, _values) {
+                  return formatDataLabels(value);
+                },
               },
             },
           ],
@@ -103,11 +114,7 @@
         },
         plugins: {
           datalabels: {
-            anchor: 'end',
-            align: 'top',
             display: false,
-            color: '#170a3a',
-            formatter: (value) => formatDataLabels(value),
           },
         },
       },
