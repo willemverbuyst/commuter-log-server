@@ -18,9 +18,9 @@
     ctx = document.getElementById('averagesPerWeekChart').getContext('2d');
 
     const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);
-    gradientStroke.addColorStop(0, '#ff0080 ');
-    gradientStroke.addColorStop(0.5, '#ff8c00');
-    gradientStroke.addColorStop(1, '#40e0d0');
+    gradientStroke.addColorStop(0, 'rgba(255, 0, 128, 1)');
+    gradientStroke.addColorStop(0.5, 'rgba(255, 140, 0, 1)');
+    gradientStroke.addColorStop(1, 'rgba(64, 224, 208, 1)');
 
     if (averagesPerWeekChart) averagesPerWeekChart.destroy();
 

@@ -13,19 +13,19 @@
     ctx = document.getElementById('partitionChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(150, 0, 0, 150);
-    gradientFillCar.addColorStop(0, '#006b97');
-    gradientFillCar.addColorStop(0.5, '#0085a6');
-    gradientFillCar.addColorStop(1, '#00a0af');
+    gradientFillCar.addColorStop(0, 'rgba(0, 107, 151, 1)');
+    gradientFillCar.addColorStop(0.5, 'rgba(0, 133, 166, 1)');
+    gradientFillCar.addColorStop(1, 'rgba(0, 160, 175, 1)');
 
     const gradientFillPublic = ctx.createLinearGradient(150, 0, 0, 150);
-    gradientFillPublic.addColorStop(0, '#00bbb2');
-    gradientFillPublic.addColorStop(0.5, '#00d5b0');
-    gradientFillPublic.addColorStop(1, '#65eeac');
+    gradientFillPublic.addColorStop(0, 'rgba(0, 187, 178, 1)');
+    gradientFillPublic.addColorStop(0.5, 'rgba(0, 213, 176, 1)');
+    gradientFillPublic.addColorStop(1, 'rgba(101, 238, 172, 1)');
 
     const gradientFillHome = ctx.createLinearGradient(150, 0, 0, 150);
-    gradientFillHome.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
-    gradientFillHome.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
-    gradientFillHome.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
+    gradientFillHome.addColorStop(0, 'rgba(255, 39, 204, 1)');
+    gradientFillHome.addColorStop(0.5, 'rgba(255, 99, 132, 1)');
+    gradientFillHome.addColorStop(1, 'rgba(255, 159, 64, 1)');
 
     if (partitionChart) partitionChart.destroy();
 

@@ -24,9 +24,9 @@
     ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
 
     const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
-    gradientFill.addColorStop(0, 'rgba(255, 39, 204, 0.8)');
-    gradientFill.addColorStop(0.5, 'rgba(255, 99, 132, 0.8)');
-    gradientFill.addColorStop(1, 'rgba(255, 159, 64, 0.8)');
+    gradientFill.addColorStop(0, 'rgba(255, 39, 204, 1)');
+    gradientFill.addColorStop(0.5, 'rgba(255, 99, 132, 1)');
+    gradientFill.addColorStop(1, 'rgba(255, 159, 64, 1)');
 
     if (allWorkingDaysChart) allWorkingDaysChart.destroy();
 
@@ -42,7 +42,7 @@
             borderJoinStyle: 'miter',
             type: 'line',
             fill: false,
-            borderColor: 'rgba(21,211,211,.6)',
+            borderColor: 'rgba(21, 211, 211, 1)',
             borderWidth: 2,
             order: 1,
           },

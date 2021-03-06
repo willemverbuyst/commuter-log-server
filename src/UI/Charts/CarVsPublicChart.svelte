@@ -20,14 +20,14 @@
     ctx = document.getElementById('carVsPublicChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillCar.addColorStop(0, '#006b97');
-    gradientFillCar.addColorStop(0.5, '#0085a6');
-    gradientFillCar.addColorStop(1, '#00a0af');
+    gradientFillCar.addColorStop(0, 'rgba(0, 107, 151, 1)');
+    gradientFillCar.addColorStop(0.5, 'rgba(0, 133, 166, 1)');
+    gradientFillCar.addColorStop(1, 'rgba(0, 160, 175, 1)');
 
     const gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillPublic.addColorStop(0, '#00bbb2');
-    gradientFillPublic.addColorStop(0.5, '#00d5b0');
-    gradientFillPublic.addColorStop(1, '#65eeac');
+    gradientFillPublic.addColorStop(0, 'rgba(0, 187, 178, 1)');
+    gradientFillPublic.addColorStop(0.5, 'rgba(0, 213, 176, 1)');
+    gradientFillPublic.addColorStop(1, 'rgba(101, 238, 172, 1)');
 
     if (carVsPublicChart) carVsPublicChart.destroy();
 

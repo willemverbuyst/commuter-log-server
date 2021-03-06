@@ -10,7 +10,9 @@ const weekdays = [
 
 const getBackgroundColor = (dates) => {
   return dates.map((date) =>
-    date.meansOfTransport === 'car' ? '#006b97' : '#00bbb2'
+    date.meansOfTransport === 'car'
+      ? 'rgba(0, 107, 151, 1)'
+      : 'rgba(0, 187, 178, 1)'
   );
 };
 
