@@ -1,5 +1,18 @@
+<script>
+  import { getWeekNumber } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
+
+  export let logData;
+  export let selectedWeek;
+  let logDates;
+
+  $: logDates = logData.filter(
+    (d) => getWeekNumber(d.date)[1] === +selectedWeek
+  );
+</script>
+
 <div class="table-container">
-  <div class="table-title">Week 6</div>
+  <div class="table-title">Week {selectedWeek}</div>
   <table>
     <tr>
       <th>Date</th>
@@ -8,38 +21,19 @@
       <th>Trip Two</th>
       <th>Total Travel Time</th>
     </tr>
-    <tr>
-      <td>25-01-2021</td>
-      <td>Car</td>
-      <td>Tilburg - Vlissingen</td>
-      <td>Vlissingen - Tilburg</td>
-      <td>03:00</td>
-    </tr>
-    <tr>
-      <td>26-01-2021</td>
-      <td>Car</td>
-      <td>Tilburg - Vlissingen</td>
-      <td>Vlissingen - Tilburg</td>
-      <td>03:00</td>
-    </tr>
-    <tr>
-      <td>27-01-2021</td>
-      <td>Public Transport</td>
-      <td>Tilburg - Vlissingen</td>
-      <td>Vlissingen - Tilburg</td>
-      <td>05:00</td>
-    </tr>
-    <tr>
-      <td>28-01-2021</td>
-      <td>wfh</td>
-    </tr>
-    <tr>
-      <td>29-01-2021</td>
-      <td>car</td>
-      <td>Tilburg - Vlissingen</td>
-      <td>Vlissingen - Tilburg</td>
-      <td>03:00</td>
-    </tr>
+    {#each logDates as logDate}
+      <tr>
+        <td>{logDate.date.toString().slice(0, 15)}</td>
+        <td>{logDate.meansOfTransport}</td>
+        <td>{logDate.routeTripOne}</td>
+        <td>{logDate.routeTripTwo}</td>
+        <td
+          >{formatDuration(
+            logDate.durationTripOne + logDate.durationTripTwo
+          )}</td
+        >
+      </tr>
+    {/each}
   </table>
 </div>
 

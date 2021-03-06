@@ -8,19 +8,20 @@
 
   export let showGrid;
   export let logData;
-
-  const {
-    travelTimes,
-    backgroundColor,
-    labels,
-    maxForDisplay,
-    title,
-  } = getWeekData(logData, 4);
+  export let selectedWeek;
 
   let weekChart;
   let ctx;
 
   function createChart() {
+    const {
+      travelTimes,
+      backgroundColor,
+      labels,
+      maxForDisplay,
+      title,
+    } = getWeekData(logData, +selectedWeek);
+
     ctx = document.getElementById('weekChart').getContext('2d');
 
     if (weekChart) weekChart.destroy();

@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import Button from './UI/Buttons/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
@@ -14,6 +13,7 @@
   import { workingDays } from './dummyData';
 
   let showForm = false;
+  let selectedWeek = '5';
 
   function cancelForm() {
     showForm = false;
@@ -27,20 +27,26 @@
 </script>
 
 <main>
+  <!-- svelte-ignore a11y-no-onchange -->
+  <select bind:value={selectedWeek}>
+    <option value="4">WEEK 4</option>
+    <option value="5">WEEK 5</option>
+    <option value="6">WEEK 6</option>
+  </select>
   <Button on:click={() => (showForm = true)}>Add Day</Button>
   <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
   <div class="chart-container">
-    <TotalsPerWeekChart showGrid={$showGrid} logData={$logData} />
+    <WeekChart showGrid={$showGrid} logData={$logData} {selectedWeek} />
     <AllWorkingDays showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
-    <Table />
+    <Table logData={$logData} {selectedWeek} />
   </div>
   <div class="chart-container">
-    <WeekChart showGrid={$showGrid} logData={$logData} />
+    <TotalsPerWeekChart showGrid={$showGrid} logData={$logData} />
     <AveragesPerWeekChart showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
