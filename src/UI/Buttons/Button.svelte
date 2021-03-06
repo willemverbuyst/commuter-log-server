@@ -8,6 +8,7 @@
 <style>
   button {
     font-family: 'Helvetica Neue';
+    width: 12rem;
     font-size: 12px;
     line-height: 1.2;
     text-transform: uppercase;

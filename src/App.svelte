@@ -9,7 +9,6 @@
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
   import Table from './UI/Table/Table.svelte';
   import showGrid from './Store/appState';
-  import showGridStore from './Store/appState';
 
   let showForm = false;
 
@@ -24,7 +23,7 @@
 
 <main>
   <Button on:click={() => (showForm = true)}>Add Day</Button>
-  <Button on:click={toggleGrid}>Show Grid</Button>
+  <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
