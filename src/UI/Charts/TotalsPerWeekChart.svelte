@@ -1,11 +1,11 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsChart';
 
   export let showGrid;
+  export let logData;
 
   const {
     totalsPerWeekCar,
@@ -13,7 +13,7 @@
     labels,
     maxForDisplay,
     title,
-  } = getTotalsPerWeekData(workingDays);
+  } = getTotalsPerWeekData(logData);
 
   let totalsPerWeekChart;
   let ctx;

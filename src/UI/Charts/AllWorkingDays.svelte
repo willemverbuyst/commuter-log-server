@@ -1,13 +1,13 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { workingDays } from '../../dummyData';
   import {
     formatDataLabels,
     getAllWorkingDaysData,
   } from '../../Helpers/chartLogic/chartLogic';
 
   export let showGrid;
+  export let logData;
 
   const {
     travelTimes,
@@ -15,7 +15,7 @@
     labels,
     title,
     lineValue,
-  } = getAllWorkingDaysData(workingDays);
+  } = getAllWorkingDaysData(logData);
 
   let allWorkingDaysChart;
   let ctx;

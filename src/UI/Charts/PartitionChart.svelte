@@ -1,10 +1,11 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { workingDays } from '../../dummyData';
   import { getPartitionData } from '../../helpers/chartLogic/chartLogic';
 
-  const { partition, labels, title } = getPartitionData(workingDays);
+  export let logData;
+
+  const { partition, labels, title } = getPartitionData(logData);
 
   let partitionChart;
   let ctx;

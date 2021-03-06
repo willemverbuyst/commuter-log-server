@@ -1,14 +1,14 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { workingDays } from '../../dummyData';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getAveragePerWeekData } from '../../Helpers/chartLogic/averagesChart';
 
   export let showGrid;
+  export let logData;
 
   const { averages, labels, maxForDisplay, title } = getAveragePerWeekData(
-    workingDays
+    logData
   );
 
   let averagesPerWeekChart;

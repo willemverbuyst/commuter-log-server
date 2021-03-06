@@ -1,13 +1,13 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { workingDays } from '../../dummyData';
   import {
     formatDataLabels,
     getWeekData,
   } from '../../Helpers/chartLogic/chartLogic';
 
   export let showGrid;
+  export let logData;
 
   const {
     travelTimes,
@@ -15,7 +15,7 @@
     labels,
     maxForDisplay,
     title,
-  } = getWeekData(workingDays, 4);
+  } = getWeekData(logData, 4);
 
   let weekChart;
   let ctx;

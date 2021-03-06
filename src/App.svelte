@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Button from './UI/Buttons/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
@@ -9,6 +10,8 @@
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
   import Table from './UI/Table/Table.svelte';
   import showGrid from './Store/appState';
+  import logData from './Store/logState';
+  import { workingDays } from './dummyData';
 
   let showForm = false;
 
@@ -19,6 +22,8 @@
   function toggleGrid() {
     showGrid.toggleGrid();
   }
+
+  logData.setLogData(workingDays);
 </script>
 
 <main>
@@ -28,19 +33,19 @@
     <FormComponent on:cancel={cancelForm} />
   {/if}
   <div class="chart-container">
-    <TotalsPerWeekChart showGrid={$showGrid} />
-    <AllWorkingDays showGrid={$showGrid} />
+    <TotalsPerWeekChart showGrid={$showGrid} logData={$logData} />
+    <AllWorkingDays showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
     <Table />
   </div>
   <div class="chart-container">
-    <WeekChart showGrid={$showGrid} />
-    <AveragesPerWeekChart showGrid={$showGrid} />
+    <WeekChart showGrid={$showGrid} logData={$logData} />
+    <AveragesPerWeekChart showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
-    <PartitionChart />
-    <CarVsPublicChart />
+    <PartitionChart logData={$logData} />
+    <CarVsPublicChart logData={$logData} />
   </div>
 </main>
 
