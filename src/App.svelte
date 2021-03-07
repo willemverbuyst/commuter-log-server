@@ -8,6 +8,7 @@
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
   import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
   import Table from './UI/Table/Table.svelte';
+  import Card from './UI/Card/Card.svelte';
   import showGrid from './Store/appState';
   import logData from './Store/logState';
   import { workingDays } from './dummyData';
@@ -43,7 +44,7 @@
     <AllWorkingDays showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
-    <Table
+    <Card
       logData={$logData}
       {selectedWeek}
       on:click={() => (showForm = true)}
@@ -56,6 +57,13 @@
   <div class="chart-container">
     <PartitionChart logData={$logData} />
     <CarVsPublicChart logData={$logData} />
+  </div>
+  <div class="chart-container">
+    <Table
+      logData={$logData}
+      {selectedWeek}
+      on:click={() => (showForm = true)}
+    />
   </div>
 </main>
 

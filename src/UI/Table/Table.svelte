@@ -4,16 +4,15 @@
   import Button from '../Buttons/Button.svelte';
 
   export let logData;
-  export let selectedWeek;
+  // export let selectedWeek;
   let logDates;
 
-  $: logDates = logData.filter(
-    (d) => getWeekNumber(d.date)[1] === +selectedWeek
-  );
+  // $: logDates = logData.filter(
+  //   (d) => getWeekNumber(d.date)[1] === +selectedWeek
+  // );
 </script>
 
 <div class="table-container">
-  <div class="table-title">Week {selectedWeek}</div>
   <table>
     <tr>
       <th>Date</th>
@@ -23,7 +22,7 @@
       <th class="tc--align-right">Total Travel Time</th>
       <th />
     </tr>
-    {#each logDates as logDate}
+    {#each logData as logDate}
       <td>{logDate.date.toString().slice(0, 15)}</td>
       {#if logDate.holiday}
         <td colspan="4" class="tc--day-off">Day off</td>
@@ -84,12 +83,6 @@
     border: 2px solid #333;
     border-radius: 7px;
     box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
-  }
-
-  .table-title {
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-bottom: 1rem;
   }
 
   .tc--align-right {
