@@ -1,6 +1,7 @@
 <script>
   import { getWeekNumber } from '../../Helpers/chartLogic/chartLogic';
   import { formatDuration } from '../../Helpers/formatting';
+  import Button from '../Buttons/Button.svelte';
 
   export let logData;
   export let selectedWeek;
@@ -19,31 +20,57 @@
       <th>Work</th>
       <th>Trip One</th>
       <th>Trip Two</th>
-      <th>Total Travel Time</th>
+      <th class="tc--align-right">Total Travel Time</th>
+      <th />
     </tr>
     {#each logDates as logDate}
-      <tr>
-        <td>{logDate.date.toString().slice(0, 15)}</td>
+      <td>{logDate.date.toString().slice(0, 15)}</td>
+      {#if logDate.holiday}
+        <td colspan="4" class="tc--day-off">Day off</td>
+        <Button on:click>Edit</Button>
+        <!-- <td class="tc--edit" on:click>Edit</td> -->
+      {:else if logDate.workingFromHome}
+        <td colspan="4">Working from home</td>
+        <Button on:click>Edit</Button>
+        <!-- <td class="tc--edit" on:click>Edit</td> -->
+      {:else}
         <td>{logDate.meansOfTransport}</td>
         <td>{logDate.routeTripOne}</td>
         <td>{logDate.routeTripTwo}</td>
-        <td
+        <td class="tc--align-right"
           >{formatDuration(
             logDate.durationTripOne + logDate.durationTripTwo
           )}</td
         >
-      </tr>
-    {/each}
+        <Button on:click>Edit</Button>
+
+        <!-- <td class="tc--edit" on:click>Edit</td> -->
+      {/if}
+      <tr />{/each}
   </table>
 </div>
 
 <style>
   table {
     margin: auto;
+    border-spacing: collapse;
   }
 
   th {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
+    color: rgba(170, 170, 170, 0.3);
+  }
+
+  th,
+  td {
+    padding: 0.8rem 2rem;
+    text-align: left;
+  }
+
+  td {
+    border: 2px solid #333;
+    /* border-radius: 7px; */
+    box-shadow: inset 0.5px 0.5px 0.5px #444, inset -0.5px -0.5px 0.5px #222;
   }
 
   .table-container {
@@ -64,4 +91,18 @@
     font-weight: bold;
     margin-bottom: 1rem;
   }
+
+  .tc--align-right {
+    text-align: right;
+  }
+
+  /* .tc--edit {
+    padding: 0.4rem 1rem;
+    border-radius: 7px;
+    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
+  } */
+
+  /* .tc--align-center {
+    text-align: center;
+  } */
 </style>

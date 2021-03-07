@@ -87,15 +87,19 @@
           datalabels: {
             anchor: 'end',
             align: 'top',
-            display: !showGrid,
+            display: true,
             color: 'rgba(170, 170, 170, 0.3)',
-            formatter: (value) => {
-              return value === 0
-                ? ''
-                : value === 0.00001
-                ? 'WFH'
-                : formatDataLabels(value);
-            },
+            formatter: !showGrid
+              ? (value) => {
+                  return value === 0
+                    ? ''
+                    : value === 0.00001
+                    ? 'WFH'
+                    : formatDataLabels(value);
+                }
+              : (value) => {
+                  return value === 0 ? '' : value === 0.00001 ? 'WFH' : '';
+                },
           },
         },
       },

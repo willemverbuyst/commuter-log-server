@@ -43,7 +43,11 @@
     <AllWorkingDays showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
-    <Table logData={$logData} {selectedWeek} />
+    <Table
+      logData={$logData}
+      {selectedWeek}
+      on:click={() => (showForm = true)}
+    />
   </div>
   <div class="chart-container">
     <TotalsPerWeekChart showGrid={$showGrid} logData={$logData} />
