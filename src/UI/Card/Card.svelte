@@ -1,7 +1,7 @@
 <script>
   import { getWeekNumber } from '../../Helpers/chartLogic/chartLogic';
   import { formatDuration } from '../../Helpers/formatting';
-  import Button from '../Buttons/Button.svelte';
+  import CardButton from '../Buttons/CardButton.svelte';
 
   export let logData;
   export let selectedWeek;
@@ -17,30 +17,28 @@
   <div class="card-container">
     {#each logDates as logDate}
       <div class="card">
-        <div>
-          <p>{logDate.date.toString().slice(0, 15)}</p>
+        <div class="card-content">
+          <div>
+            <h3>{logDate.date.toString().slice(0, 15)}</h3>
+          </div>
+          {#if logDate.holiday}
+            <p>Day off</p>
+          {:else if logDate.workingFromHome}
+            <div><p>Working from home</p></div>
+          {:else}
+            <div>
+              <p>{logDate.meansOfTransport}</p>
+              <p>{logDate.routeTripOne}</p>
+              <p>{logDate.routeTripTwo}</p>
+              <p class="tc--align-right">
+                {formatDuration(
+                  logDate.durationTripOne + logDate.durationTripTwo
+                )}
+              </p>
+            </div>
+          {/if}
         </div>
-        {#if logDate.holiday}
-          <p>Day off</p>
-          <Button on:click>Edit</Button>
-        {:else if logDate.workingFromHome}
-          <div><p>Working from home</p></div>
-          <div><Button on:click>Edit</Button></div>
-        {:else}
-          <div>
-            <p>{logDate.meansOfTransport}</p>
-            <p>{logDate.routeTripOne}</p>
-            <p>{logDate.routeTripTwo}</p>
-            <p class="tc--align-right">
-              {formatDuration(
-                logDate.durationTripOne + logDate.durationTripTwo
-              )}
-            </p>
-          </div>
-          <div>
-            <Button on:click>Edit</Button>
-          </div>
-        {/if}
+        <CardButton on:click>Edit</CardButton>
       </div>
     {/each}
   </div>
@@ -73,11 +71,16 @@
   }
 
   .card {
-    border: 2px solid #333;
-    /* border-radius: 7px; */
-    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .card-content {
+    border: 1px solid #333;
+    height: 100%;
+    border-bottom: 0px;
+    /* border-radius: 7px; */
+    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
   }
 </style>

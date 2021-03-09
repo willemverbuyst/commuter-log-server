@@ -5,13 +5,12 @@
   import Modal from '../UI/Modal/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
-  import CostsInput from '../UI/Inputs/CostsInput.svelte';
-  import { checkCostsInput, checkDurationInput } from '../helpers/validation';
+  import { checkDurationInput } from '../helpers/validation';
   import { reverseRoute } from '../helpers/formatting';
   import { routes } from '../constants';
 
   let selectedDate = new Date();
-  let workingFromHome = false;
+  let day = 'Working at the Office';
   let meansOfTransport = 'Car';
   let routeTripOne = routes[1];
   let routeTripTwo = '';
@@ -20,7 +19,6 @@
   let durationTripTwo = '00:00';
   let costs = '0,00';
 
-  $: costsValid = checkCostsInput(costs);
   $: durationTripOneValid = checkDurationInput(durationTripOne);
   $: durationTripTwoValid = checkDurationInput(durationTripTwo);
   $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
@@ -31,7 +29,6 @@
 
   // FOR DEV
   $: console.log('Date: ', selectedDate);
-  $: console.log('Working from home: ', workingFromHome);
   $: console.log('Means of transport: ', meansOfTransport);
   $: console.log('Route Trip One: ', routeTripOne);
   $: console.log('Route Trip Two: ', routeTripTwo);
@@ -44,12 +41,27 @@
 <Modal on:cancel>
   <form>
     <DatePicker {selectedDate} {updateSelectedDate} />
-    <Checkbox
-      value={workingFromHome}
-      label="Working from home?"
-      on:change={(event) => (workingFromHome = event.target.checked)}
-    />
-    {#if !workingFromHome}
+    <div>
+      <RadioButton
+        name="day"
+        value="Working at the Office"
+        group={day}
+        on:change={(event) => (day = event.target.value)}
+      />
+      <RadioButton
+        name="day"
+        value="Working at Home"
+        group={day}
+        on:change={(event) => (day = event.target.value)}
+      />
+      <RadioButton
+        name="day"
+        value="Day off"
+        group={day}
+        on:change={(event) => (day = event.target.value)}
+      />
+    </div>
+    {#if day === 'Working at the Office'}
       <div>
         <RadioButton
           name="transport"
@@ -94,12 +106,6 @@
         valid={durationTripTwoValid}
         validityMessage="Please write a duration in the format hh:mm"
         on:input={(event) => (durationTripTwo = event.target.value)}
-      />
-      <CostsInput
-        {costs}
-        valid={costsValid}
-        validityMessage="Please write costs in the format 0,00"
-        on:input={(event) => (costs = event.target.value)}
       />
     {/if}
   </form>
