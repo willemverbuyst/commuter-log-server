@@ -41,7 +41,7 @@
 <Modal on:cancel>
   <form>
     <DatePicker {selectedDate} {updateSelectedDate} />
-    <div>
+    <div class="radio-button__container">
       <RadioButton
         name="day"
         value="Working at the Office"
@@ -62,7 +62,7 @@
       />
     </div>
     {#if day === 'Working at the Office'}
-      <div>
+      <div class="radio-button__container">
         <RadioButton
           name="transport"
           value="Car"
@@ -114,5 +114,9 @@
 <style>
   form {
     width: 100%;
+  }
+
+  .radio-button__container {
+    margin-top: 1rem;
   }
 </style>

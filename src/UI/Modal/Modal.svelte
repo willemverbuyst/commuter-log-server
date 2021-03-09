@@ -24,6 +24,7 @@
   <footer>
     <slot name="footer">
       <Button on:click={closeModal}>Close</Button>
+      <Button on:click={closeModal}>Add</Button>
     </slot>
   </footer>
 </div>
@@ -38,7 +39,7 @@
   }
 
   .modal:before {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
     content: '';
     height: 100%;
@@ -67,5 +68,6 @@
 
   .content {
     padding: 1rem;
+    color: #aaa;
   }
 </style>
