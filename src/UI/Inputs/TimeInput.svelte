@@ -7,7 +7,7 @@
 </script>
 
 <div class="time-input__container">
-  <div class="time-input__label">hrs&nbsp;:&nbsp;min</div>
+  <div class="time-input__label">hh:mm</div>
   <div class="time-input__input">
     <input
       type="text"
@@ -17,42 +17,35 @@
       on:input
       on:blur={() => (touched = true)}
     />
-
-    {#if validityMessage && !valid && touched}
-      <p class="error-message">{validityMessage}</p>
-    {/if}
   </div>
 </div>
+{#if validityMessage && !valid && touched}
+  <p class="error-message">{validityMessage}</p>
+{/if}
 
 <style>
   .time-input__container {
     width: 100px;
-    margin: 20px auto;
-    border: 1px solid #aaa;
-    border-top: none;
-    border-radius: 7px;
-    padding: 10px 0;
-    position: relative;
+    margin: 20px 0 20px 1rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .time-input__label {
     width: 100%;
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 200;
+    color: rgba(170, 170, 170, 0.3);
   }
 
   input {
+    box-sizing: border-box;
     width: 100%;
-    padding: 0;
-    margin: 0.5rem 0 0 0;
+    padding: 1rem 0;
     font: inherit;
     color: inherit;
     border: none;
     background: transparent;
     text-align: center;
+    box-shadow: inset 2px 2px 2px #111, inset -2px -2px 2px #333;
   }
 
   input:focus {
@@ -60,11 +53,12 @@
   }
 
   .invalid {
-    border: 3px solid red;
+    border: 2px solid #222;
+    box-shadow: inset 2px 2px 2px #333, inset -2px -2px 2px #111;
   }
 
   .error-message {
-    color: red;
+    color: #aaa;
     margin: 0.25rem 0;
   }
 </style>

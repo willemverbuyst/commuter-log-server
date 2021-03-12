@@ -81,32 +81,36 @@
         label=" Round trip?"
         on:change={(event) => (roundTrip = event.target.checked)}
       />
-      <Dropdown
-        route={routeTripOne}
-        {routes}
-        on:change={(event) => (routeTripOne = event.target.value)}
-      />
-      <TimeInput
-        duration={durationTripOne}
-        valid={durationTripOneValid}
-        validityMessage="Please write a duration in the format hh:mm"
-        on:input={(event) => (durationTripOne = event.target.value)}
-      />
-      {#if !roundTrip}
+      <div class="trip-container">
         <Dropdown
-          route={routeTripTwo}
+          route={routeTripOne}
           {routes}
-          on:change={(event) => (routeTripTwo = event.target.value)}
+          on:change={(event) => (routeTripOne = event.target.value)}
         />
-      {:else}
-        <p>{routeTripTwo}</p>
-      {/if}
-      <TimeInput
-        duration={durationTripTwo}
-        valid={durationTripTwoValid}
-        validityMessage="Please write a duration in the format hh:mm"
-        on:input={(event) => (durationTripTwo = event.target.value)}
-      />
+        <TimeInput
+          duration={durationTripOne}
+          valid={durationTripOneValid}
+          validityMessage="Please write a duration in the format hh:mm"
+          on:input={(event) => (durationTripOne = event.target.value)}
+        />
+      </div>
+      <div class="trip-container">
+        {#if !roundTrip}
+          <Dropdown
+            route={routeTripTwo}
+            {routes}
+            on:change={(event) => (routeTripTwo = event.target.value)}
+          />
+        {:else}
+          <p>{routeTripTwo}</p>
+        {/if}
+        <TimeInput
+          duration={durationTripTwo}
+          valid={durationTripTwoValid}
+          validityMessage="Please write a duration in the format hh:mm"
+          on:input={(event) => (durationTripTwo = event.target.value)}
+        />
+      </div>
     {/if}
   </form>
 </Modal>
@@ -118,5 +122,12 @@
 
   .radio-button__container {
     margin-top: 1rem;
+  }
+
+  .trip-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
   }
 </style>
