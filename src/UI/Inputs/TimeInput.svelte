@@ -34,6 +34,7 @@
   .time-input__label {
     width: 100%;
     color: rgba(170, 170, 170, 0.3);
+    margin-bottom: 5px;
   }
 
   input {

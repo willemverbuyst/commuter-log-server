@@ -1,10 +1,11 @@
 <script>
   export let route;
   export let routes;
+  export let title;
 </script>
 
 <div class="trip-input__container">
-  <div class="trip-input__label">Trip One</div>
+  <div class="trip-input__label">{title}</div>
   <!-- svelte-ignore a11y-no-onchange -->
   <select value={route} on:change>
     {#each routes as r}
@@ -24,6 +25,7 @@
   .trip-input__label {
     width: 100%;
     color: rgba(170, 170, 170, 0.3);
+    margin-bottom: 5px;
   }
 
   select {

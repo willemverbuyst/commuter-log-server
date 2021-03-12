@@ -85,6 +85,7 @@
         <Dropdown
           route={routeTripOne}
           {routes}
+          title="Trip One"
           on:change={(event) => (routeTripOne = event.target.value)}
         />
         <TimeInput
@@ -95,15 +96,12 @@
         />
       </div>
       <div class="trip-container">
-        {#if !roundTrip}
-          <Dropdown
-            route={routeTripTwo}
-            {routes}
-            on:change={(event) => (routeTripTwo = event.target.value)}
-          />
-        {:else}
-          <p>{routeTripTwo}</p>
-        {/if}
+        <Dropdown
+          route={routeTripTwo}
+          {routes}
+          title="Trip Two"
+          on:change={(event) => (routeTripTwo = event.target.value)}
+        />
         <TimeInput
           duration={durationTripTwo}
           valid={durationTripTwoValid}
@@ -128,6 +126,6 @@
     width: 100%;
     margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
   }
 </style>
