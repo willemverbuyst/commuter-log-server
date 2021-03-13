@@ -8,6 +8,31 @@ const logStore = {
   setLogData: (logs) => {
     logData.set(logs);
   },
+
+  addLogDate: (date) => {
+    const newLogDate = {
+      ...date,
+    };
+    logData.update((days) => {
+      return [newLogDate, ...days];
+    });
+  },
+
+  updateLogDate: (id, date) => {
+    logData.update((days) => {
+      const dateIndex = items.findIndex((i) => i.id === id);
+      const updatedLogDate = { ...logData[dateIndex], ...date };
+      const updatedLogDates = [...days];
+      updatedLogDates[dateIndex] = updatedLogDate;
+      return updatedLogDates;
+    });
+  },
+
+  removeLogDate: (id) => {
+    logData.update((days) => {
+      return days.filter((day) => day.id !== id);
+    });
+  },
 };
 
 export default logStore;
