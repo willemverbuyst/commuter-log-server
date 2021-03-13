@@ -40,10 +40,10 @@ export const workingDays = [
     statusOfDay: 'working at the office',
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
-    routeTripTwo: '',
+    routeTripTwo: 'Vlissingen - Terneuzen',
     roundTrip: false,
     durationTripOne: 90,
-    durationTripTwo: 0,
+    durationTripTwo: 35,
   },
   {
     date: new Date('Wed Jan 27 2021 19:50:52 GMT+0100'),

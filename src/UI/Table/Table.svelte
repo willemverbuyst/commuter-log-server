@@ -1,15 +1,8 @@
 <script>
-  import { getWeekNumber } from '../../Helpers/chartLogic/chartLogic';
   import { formatDuration } from '../../Helpers/formatting';
-  import Button from '../Buttons/Button.svelte';
+  import TableButton from '../Buttons/TableButton.svelte';
 
   export let logData;
-  // export let selectedWeek;
-  let logDates;
-
-  // $: logDates = logData.filter(
-  //   (d) => getWeekNumber(d.date)[1] === +selectedWeek
-  // );
 </script>
 
 <div class="table-container">
@@ -24,14 +17,12 @@
     </tr>
     {#each logData as logDate}
       <td>{logDate.date.toString().slice(0, 15)}</td>
-      {#if logDate.holiday}
+      {#if logDate.statusOfDay === 'day off'}
         <td colspan="4" class="tc--day-off">Day off</td>
-        <Button on:click>Edit</Button>
-        <!-- <td class="tc--edit" on:click>Edit</td> -->
-      {:else if logDate.workingFromHome}
+        <TableButton on:click>Edit</TableButton>
+      {:else if logDate.statusOfDay === 'working from home'}
         <td colspan="4">Working from home</td>
-        <Button on:click>Edit</Button>
-        <!-- <td class="tc--edit" on:click>Edit</td> -->
+        <TableButton on:click>Edit</TableButton>
       {:else}
         <td>{logDate.meansOfTransport}</td>
         <td>{logDate.routeTripOne}</td>
@@ -41,9 +32,7 @@
             logDate.durationTripOne + logDate.durationTripTwo
           )}</td
         >
-        <Button on:click>Edit</Button>
-
-        <!-- <td class="tc--edit" on:click>Edit</td> -->
+        <TableButton on:click>Edit</TableButton>
       {/if}
       <tr />{/each}
   </table>
@@ -56,7 +45,6 @@
   }
 
   th {
-    /* text-transform: uppercase; */
     color: rgba(170, 170, 170, 0.3);
   }
 
@@ -68,7 +56,6 @@
 
   td {
     border: 2px solid #333;
-    /* border-radius: 7px; */
     box-shadow: inset 0.5px 0.5px 0.5px #444, inset -0.5px -0.5px 0.5px #222;
   }
 
@@ -88,14 +75,4 @@
   .tc--align-right {
     text-align: right;
   }
-
-  /* .tc--edit {
-    padding: 0.4rem 1rem;
-    border-radius: 7px;
-    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
-  } */
-
-  /* .tc--align-center {
-    text-align: center;
-  } */
 </style>
