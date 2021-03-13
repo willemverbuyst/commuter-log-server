@@ -12,6 +12,7 @@
   import showGrid from './Store/appState';
   import logData from './Store/logState';
   import { workingDays } from './dummyData';
+  import Slider from './UI/Inputs/Slider.svelte';
 
   let showForm = false;
   let selectedWeek = '5';
@@ -25,17 +26,24 @@
   }
 
   logData.setLogData(workingDays);
+
+  function updateSelectedWeek(event) {
+    selectedWeek = event.target.value;
+  }
 </script>
 
 <main>
-  <!-- svelte-ignore a11y-no-onchange -->
-  <select bind:value={selectedWeek}>
-    <option value="4">WEEK 4</option>
-    <option value="5">WEEK 5</option>
-    <option value="6">WEEK 6</option>
-  </select>
-  <Button on:click={() => (showForm = true)}>Add Day</Button>
-  <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
+  <div class="nav-container">
+    <Button on:click={() => (showForm = true)}>Add Day</Button>
+    <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
+  </div>
+
+  <div class="slider-container">
+    <Slider
+      weekNumber={selectedWeek}
+      on:change={(event) => updateSelectedWeek(event)}
+    />
+  </div>
   {#if showForm}
     <FormComponent on:cancel={cancelForm} />
   {/if}
@@ -79,5 +87,14 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+  }
+
+  .nav-container {
+    margin-bottom: 1rem;
+  }
+
+  .slider-container {
+    width: 80%;
+    margin: auto;
   }
 </style>

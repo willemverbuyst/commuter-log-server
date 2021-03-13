@@ -12,9 +12,8 @@
   );
 </script>
 
-<div class="table-container">
-  <div class="table-title">Week {selectedWeek}</div>
-  <div class="card-container">
+<div class="card-container--outer">
+  <div class="card-container--inner">
     {#each logDates as logDate}
       <div class="card">
         <div class="card-content">
@@ -45,7 +44,7 @@
 </div>
 
 <style>
-  .table-container {
+  .card-container--outer {
     width: 80%;
     font-family: 'Helvetica Neue';
     font-size: 12px;
@@ -58,13 +57,7 @@
     box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
   }
 
-  .table-title {
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  .card-container {
+  .card-container--inner {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
