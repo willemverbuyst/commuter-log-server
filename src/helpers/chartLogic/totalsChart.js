@@ -5,6 +5,8 @@ import {
   travelByPublicTransportColor,
 } from '../../UI/Colors';
 
+// STACKED LINE CHART, total travel times per week
+// Totals car, totals public transport
 export const getTotalsPerWeekData = (workingDays) => {
   const weeks = chunkArray(workingDays, 5);
   const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'car'));
@@ -32,7 +34,9 @@ export const getTotalsPerWeekData = (workingDays) => {
 
 export const getTotalsPerWeek = (week, transport) => {
   const weekTransport = week.filter(
-    (day) => !day.holiday && day.meansOfTransport === transport
+    (day) =>
+      day.statusOfDay === 'working at the office' &&
+      day.meansOfTransport === transport
   );
   const totalPerTransport =
     weekTransport.length > 0
@@ -44,6 +48,8 @@ export const getTotalsPerWeek = (week, transport) => {
   return totalPerTransport;
 };
 
+// DOUGHNUT CHART, car vs public chart
+// Display total travel times public transport vs total travel times car
 export const getCarVsPublicTotalsData = (workingDays) => {
   const totalsCar = getTotalsTransport(workingDays, 'car');
   const totalsPublic = getTotalsTransport(workingDays, 'public transport');
@@ -62,10 +68,12 @@ export const getCarVsPublicTotalsData = (workingDays) => {
   };
 };
 
+// Get the total of all working days at the office for car or for public transport
 const getTotalsTransport = (workingDays, transport) => {
   const daysTravelled = workingDays.filter(
     (day) =>
-      !day.holiday && !day.workingFromHome && day.meansOfTransport === transport
+      day.statusOfDay === 'working at the office' &&
+      day.meansOfTransport === transport
   );
   const numberOfDaystravelled = daysTravelled.length;
   const totalTimeTravelled =
