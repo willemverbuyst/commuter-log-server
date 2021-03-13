@@ -37,9 +37,9 @@ export const formatDataLabels = (value) => {
 
 const getMinutes = (dates) => {
   return dates.map((date) => {
-    return date.holiday
+    return date.statusOfDay === 'day off'
       ? 0
-      : date.workingFromHome
+      : date.statusOfDay === 'working from home'
       ? 0.00001
       : date.durationTripOne + date.durationTripTwo;
   });
@@ -118,9 +118,12 @@ export const getAllWorkingDaysData = (workingDays) => {
   const withoutDayOff = workingDays.filter(
     (day) => day.statusOfDay !== 'day off'
   );
-  const travelTimes = withoutDayOff.map(
-    (day) => day.durationTripOne + day.durationTripTwo
+  const travelTimes = withoutDayOff.map((day) =>
+    day.statusOfDay === 'working from home'
+      ? 0
+      : day.durationTripOne + day.durationTripTwo
   );
+
   const labels = withoutDayOff.map(() => '');
   const maxForDisplay = Math.max(...travelTimes) * 1.2;
   const title = `TRAVEL TIMES`;

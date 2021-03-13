@@ -59,11 +59,7 @@
     <CarVsPublicChart logData={$logData} />
   </div>
   <div class="chart-container">
-    <Table
-      logData={$logData}
-      {selectedWeek}
-      on:click={() => (showForm = true)}
-    />
+    <Table logData={$logData} on:click={() => (showForm = true)} />
   </div>
 </main>
 

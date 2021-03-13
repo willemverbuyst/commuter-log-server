@@ -22,7 +22,11 @@ const getAveragePerWeek = (week) => {
   const average =
     weekWithoutDayOff.length > 0
       ? weekWithoutDayOff
-          .map((day) => day.durationTripOne + day.durationTripTwo)
+          .map((day) =>
+            day.statusOfDay === 'working from home'
+              ? 0
+              : day.durationTripOne + day.durationTripTwo
+          )
           .reduce((a, b) => a + b) / weekWithoutDayOff.length
       : 0;
 
