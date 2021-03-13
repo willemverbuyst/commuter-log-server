@@ -49,7 +49,6 @@
   {/if}
   <div class="chart-container">
     <WeekChart showGrid={$showGrid} logData={$logData} {selectedWeek} />
-    <AllWorkingDays showGrid={$showGrid} logData={$logData} />
   </div>
   <div class="chart-container">
     <Card
@@ -58,6 +57,10 @@
       on:click={() => (showForm = true)}
     />
   </div>
+  <div class="chart-container">
+    <AllWorkingDays showGrid={$showGrid} logData={$logData} />
+  </div>
+
   <div class="chart-container">
     <TotalsPerWeekChart showGrid={$showGrid} logData={$logData} />
     <AveragesPerWeekChart showGrid={$showGrid} logData={$logData} />

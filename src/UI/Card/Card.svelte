@@ -20,9 +20,9 @@
           <div>
             <h3>{logDate.date.toString().slice(0, 15)}</h3>
           </div>
-          {#if logDate.holiday}
+          {#if logDate.statusOfDay === 'day off'}
             <p>Day off</p>
-          {:else if logDate.workingFromHome}
+          {:else if logDate.statusOfDay === 'working from home'}
             <div><p>Working from home</p></div>
           {:else}
             <div>

@@ -66,6 +66,7 @@
           fontColor: '#aaa',
         },
         maintainAspectRatio: true,
+        aspectRatio: 4,
         legend: {
           display: false,
         },
@@ -124,7 +125,7 @@
 </script>
 
 <div class="chart-container">
-  <canvas id="allWorkingDaysChart" width="500" />
+  <canvas id="allWorkingDaysChart" width="1150" />
 </div>
 
 <style>
