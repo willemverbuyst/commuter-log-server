@@ -43,6 +43,7 @@
     <Slider
       weekNumber={selectedWeek}
       on:change={(event) => updateSelectedWeek(event)}
+      logData={$logData}
     />
   </div>
   {#if showForm}

@@ -229,4 +229,22 @@ export const workingDays = [
     durationTripOne: 50,
     durationTripTwo: 20,
   },
+  {
+    date: new Date('Mon Mar 1 2021 19:50:52 GMT+0100'),
+    statusOfDay: 'working at the office',
+    meansOfTransport: 'car',
+    routeTripOne: 'Terneuzen - Vlissingen',
+    routeTripTwo: 'Vlissingen - Tilburg',
+    durationTripOne: 50,
+    durationTripTwo: 120,
+  },
+  {
+    date: new Date('Tue Mar 2 2021 19:50:52 GMT+0100'),
+    statusOfDay: 'working at the office',
+    meansOfTransport: 'public transport',
+    routeTripOne: 'Terneuzen - Vlissingen',
+    routeTripTwo: 'Vlissingen - Tilburg',
+    durationTripOne: 70,
+    durationTripTwo: 220,
+  },
 ];

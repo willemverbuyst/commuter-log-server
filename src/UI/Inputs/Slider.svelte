@@ -1,12 +1,17 @@
 <script>
+  import { getFirstAndLastWeek } from '../../Helpers/logDataLogic';
+
   export let weekNumber;
+  export let logData;
+
+  const [firstWeek, lastWeek] = getFirstAndLastWeek(logData);
 </script>
 
 <div class="slider-value">week {weekNumber}</div>
 <input
   type="range"
-  min="3"
-  max="8"
+  min={firstWeek[1]}
+  max={lastWeek[1]}
   value={weekNumber}
   on:change
   class="slider"
@@ -19,6 +24,7 @@
     margin-bottom: 1rem;
     color: #aaa;
   }
+
   .slider {
     width: 100%;
     -webkit-appearance: none;
