@@ -39,7 +39,7 @@ export const workingDays = [
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
-    durationTripOne: 90,
+    durationTripOne: 150,
     durationTripTwo: 35,
   },
   {
@@ -127,8 +127,8 @@ export const workingDays = [
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
-    durationTripOne: 35,
-    durationTripTwo: 35,
+    durationTripOne: 135,
+    durationTripTwo: 135,
   },
   {
     date: new Date('Fri Feb 12 2021 19:50:52 GMT+0100'),

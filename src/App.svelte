@@ -50,7 +50,7 @@
   {/if}
   <div class="chart-container">
     <WeekChart showGrid={$showGrid} logData={$logData} {selectedWeek} />
-    <GaugeChart />
+    <GaugeChart logData={$logData} {selectedWeek} />
   </div>
   <div class="chart-container">
     <Card

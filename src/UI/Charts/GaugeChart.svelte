@@ -2,23 +2,21 @@
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { actualTravelTime } from '../../Helpers/chartLogic/speedometerChart';
 
   let gaugeChart;
+  export let logData;
+  export let selectedWeek;
   let ctx;
   const labels = ['', ''];
 
   function createChart() {
+    const { backgroundColor, backGroundColorInner, data } = actualTravelTime(
+      logData,
+      selectedWeek
+    );
+
     ctx = document.getElementById('gaugeChart').getContext('2d');
-
-    const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillCar.addColorStop(0, 'rgba(0, 107, 151, 1)');
-    gradientFillCar.addColorStop(0.5, 'rgba(0, 133, 166, 1)');
-    gradientFillCar.addColorStop(1, 'rgba(0, 160, 175, 1)');
-
-    const gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillPublic.addColorStop(0, 'rgba(0, 187, 178, 1)');
-    gradientFillPublic.addColorStop(0.5, 'rgba(0, 213, 176, 1)');
-    gradientFillPublic.addColorStop(1, 'rgba(101, 238, 172, 1)');
 
     const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
     gradientFill.addColorStop(0, 'rgba(255, 39, 204, 1)');
@@ -33,44 +31,25 @@
         labels,
         datasets: [
           {
-            data: [400, 20, 340, 150],
-            backgroundColor: [
-              'rgba(255, 159, 64, 1)',
-              '#aaa',
-              'rgba(255, 159, 64, 1)',
-              'darkred',
-            ],
+            data,
+            backgroundColor,
             borderWidth: 0,
           },
           {
-            data: [400, 20, 490],
-            backgroundColor: ['transparent', '#aaa', 'transparent'],
+            data,
+            backgroundColor: backGroundColorInner,
             borderWidth: 0,
           },
           {
-            data: [400, 20, 490],
-            backgroundColor: ['transparent', '#aaa', 'transparent'],
+            data,
+            backgroundColor: backGroundColorInner,
             borderWidth: 0,
           },
           {
-            data: [400, 20, 490],
-            backgroundColor: ['transparent', '#aaa', 'transparent'],
+            data,
+            backgroundColor: backGroundColorInner,
             borderWidth: 0,
           },
-
-          // {
-          //   data: [100],
-          //   backgroundColor: ['transparent'],
-          //   borderWidth: 0,
-          // },
-
-          // {
-          //   data: [600, 300],
-          //   backgroundColor: ['transparent', 'transparent'],
-          //   borderWidth: 2,
-          //   borderColor: 'red',
-          //   borderSkipped: 'bottom',
-          // },
         ],
       },
       options: {

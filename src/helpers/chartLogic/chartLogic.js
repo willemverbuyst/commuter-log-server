@@ -35,7 +35,7 @@ export const formatDataLabels = (value) => {
   }
 };
 
-const getMinutes = (dates) => {
+export const getMinutes = (dates) => {
   return dates.map((date) => {
     return date.statusOfDay === 'day off'
       ? 0
