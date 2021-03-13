@@ -13,6 +13,7 @@
   import logData from './Store/logState';
   import { workingDays } from './dummyData';
   import Slider from './UI/Inputs/Slider.svelte';
+  import GaugeChart from './UI/Charts/GaugeChart.svelte';
 
   let showForm = false;
   let selectedWeek = '5';
@@ -49,6 +50,7 @@
   {/if}
   <div class="chart-container">
     <WeekChart showGrid={$showGrid} logData={$logData} {selectedWeek} />
+    <GaugeChart />
   </div>
   <div class="chart-container">
     <Card
