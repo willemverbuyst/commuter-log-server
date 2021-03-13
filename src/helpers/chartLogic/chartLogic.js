@@ -83,20 +83,7 @@ export const getWeekData = (dates, weekNumber) => {
   };
 };
 
-const getPartition = (workingDays) => {
-  const workingFromHome = workingDays.filter(
-    (day) => day.workingFromHome === true
-  ).length;
-  const travelledByCar = workingDays.filter(
-    (day) => day.meansOfTransport === 'car'
-  ).length;
-  const travelledByTrain = workingDays.filter(
-    (day) => day.meansOfTransport === 'public transport'
-  ).length;
-
-  return [workingFromHome, travelledByCar, travelledByTrain];
-};
-
+// POLAR CHART, days car, public transport, working from home
 export const getPartitionData = (workingDays) => {
   const partition = getPartition(workingDays);
   const labels = ['', '', ''];
@@ -109,8 +96,28 @@ export const getPartitionData = (workingDays) => {
   };
 };
 
+const getPartition = (workingDays) => {
+  const workingFromHome = workingDays.filter(
+    (day) => day.statusOfDay === 'working from home'
+  ).length;
+  const travelledByCar = workingDays.filter(
+    (day) =>
+      day.statusOfDay === 'working at the office' &&
+      day.meansOfTransport === 'car'
+  ).length;
+  const travelledByPublicTransport = workingDays.filter(
+    (day) =>
+      day.statusOfDay === 'working at the office' &&
+      day.meansOfTransport === 'public transport'
+  ).length;
+
+  return [workingFromHome, travelledByCar, travelledByPublicTransport];
+};
+
 export const getAllWorkingDaysData = (workingDays) => {
-  const withoutDayOff = workingDays.filter((day) => !day.holiday);
+  const withoutDayOff = workingDays.filter(
+    (day) => day.statusOfDay !== 'day off'
+  );
   const travelTimes = withoutDayOff.map(
     (day) => day.durationTripOne + day.durationTripTwo
   );

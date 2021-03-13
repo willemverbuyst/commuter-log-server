@@ -1,3 +1,4 @@
+// Chunks the array of daysm (arr) into arrays of 5 (size) - working days
 export const chunkArray = (arr, size) => {
   const chunkedArr = [];
   let index = 0;

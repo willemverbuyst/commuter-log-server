@@ -110,7 +110,7 @@ export const workingDays = [
   },
   {
     date: new Date('Thu Feb 4 2021 19:50:52 GMT+0100'),
-    statusOfDay: 'working at the office',
+    statusOfDay: 'working from home',
     holiday: false,
     workingFromHome: false,
     meansOfTransport: 'public transport',
