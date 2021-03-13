@@ -2,28 +2,22 @@ export const workingDays = [
   {
     date: new Date('Mon Jan 18 2021 19:50:52 GMT+0100'),
     statusOfDay: 'day off',
-    holiday: true,
   },
   {
     date: new Date('Tue Jan 19 2021 19:50:52 GMT+0100'),
     statusOfDay: 'day off',
-    holiday: true,
   },
   {
     date: new Date('Wed Jan 20 2021 19:50:52 GMT+0100'),
     statusOfDay: 'day off',
-    holiday: true,
   },
   {
     date: new Date('Thu Jan 21 2021 19:50:52 GMT+0100'),
     statusOfDay: 'day off',
-    holiday: true,
   },
   {
     date: new Date('Fri Jan 22 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -34,8 +28,6 @@ export const workingDays = [
   {
     date: new Date('Mon Jan 25 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -46,8 +38,6 @@ export const workingDays = [
   {
     date: new Date('Tue Jan 26 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: '',
@@ -58,21 +48,16 @@ export const workingDays = [
   {
     date: new Date('Wed Jan 27 2021 19:50:52 GMT+0100'),
     statusOfDay: 'day off',
-    holiday: true,
   },
   {
     date: new Date('Thu Jan 28 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working from home',
-    holiday: false,
-    workingFromHome: true,
     durationTripOne: 0,
     durationTripTwo: 0,
   },
   {
     date: new Date('Fri Jan 29 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -89,8 +74,6 @@ export const workingDays = [
   {
     date: new Date('Tue Feb 2 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -100,8 +83,6 @@ export const workingDays = [
   {
     date: new Date('Wed Feb 3 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -111,8 +92,6 @@ export const workingDays = [
   {
     date: new Date('Thu Feb 4 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working from home',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -122,8 +101,6 @@ export const workingDays = [
   {
     date: new Date('Fri Feb 5 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -133,8 +110,6 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 8 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -145,8 +120,6 @@ export const workingDays = [
   {
     date: new Date('Tue Feb 9 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -156,8 +129,6 @@ export const workingDays = [
   {
     date: new Date('Wed Feb 10 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -167,8 +138,6 @@ export const workingDays = [
   {
     date: new Date('Thu Feb 11 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -178,8 +147,6 @@ export const workingDays = [
   {
     date: new Date('Fri Feb 12 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -189,8 +156,6 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 15 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'public transport',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -200,8 +165,6 @@ export const workingDays = [
   {
     date: new Date('Tue Feb 16 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -211,8 +174,6 @@ export const workingDays = [
   {
     date: new Date('Wed Feb 17 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -222,8 +183,6 @@ export const workingDays = [
   {
     date: new Date('Thu Feb 18 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -233,8 +192,6 @@ export const workingDays = [
   {
     date: new Date('Fri Feb 19 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -244,8 +201,6 @@ export const workingDays = [
   {
     date: new Date('Mon Feb 22 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
@@ -255,8 +210,6 @@ export const workingDays = [
   {
     date: new Date('Tue Feb 23 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Tilburg - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -266,8 +219,6 @@ export const workingDays = [
   {
     date: new Date('Wed Feb 24 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -277,8 +228,6 @@ export const workingDays = [
   {
     date: new Date('Thu Feb 25 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Terneuzen',
@@ -288,8 +237,6 @@ export const workingDays = [
   {
     date: new Date('Fri Feb 26 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
-    holiday: false,
-    workingFromHome: false,
     meansOfTransport: 'car',
     routeTripOne: 'Terneuzen - Vlissingen',
     routeTripTwo: 'Vlissingen - Tilburg',
