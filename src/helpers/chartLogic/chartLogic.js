@@ -1,4 +1,4 @@
-import { chunkArray } from './utils';
+import { chunkArray } from '../utils';
 const weekdays = [
   'Sunday',
   'Monday',

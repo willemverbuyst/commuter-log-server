@@ -1,13 +1,21 @@
 <script>
-  import { getNumberOfWeeks } from '../../Helpers/logDataLogic';
+  import {
+    getNumberOfWeeks,
+    getYearAndWeekNumber,
+  } from '../../Helpers/logDataLogic';
 
   export let weekIndexInLogData;
   export let logData;
 
+  let yearAndWeekNumber;
+
   const max = getNumberOfWeeks(logData) - 1;
+  $: yearAndWeekNumber = getYearAndWeekNumber(logData, weekIndexInLogData);
 </script>
 
-<div class="slider-value">week {weekIndexInLogData}</div>
+<div class="slider-value">
+  week {yearAndWeekNumber[1]} - {yearAndWeekNumber[0]}
+</div>
 <input
   type="range"
   min="0"

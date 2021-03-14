@@ -33,7 +33,6 @@
   }
 
   function updateSelectedWeek(event) {
-    console.log('as ', event.target.value);
     weekIndexInLogData = event.target.value;
   }
 </script>

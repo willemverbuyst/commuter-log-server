@@ -1,5 +1,5 @@
 <script>
-  import { chunkArray } from '../../Helpers/chartLogic/utils';
+  import { chunkArray } from '../../Helpers/utils';
   import { formatDuration } from '../../Helpers/formatting';
   import CardButton from '../Buttons/CardButton.svelte';
 

@@ -1,5 +1,5 @@
 import { getWeekNumber } from './chartLogic';
-import { chunkArray } from './utils';
+import { chunkArray } from '../utils';
 
 // STEP LINE CHART, average travel time per week
 export const getAveragePerWeekData = (workingDays) => {
