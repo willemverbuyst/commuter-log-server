@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import { getWeekForCards } from '../../Helpers/logDataLogic';
   import { formatDuration } from '../../Helpers/formatting';
   import CardButton from '../Buttons/CardButton.svelte';
@@ -6,6 +7,8 @@
   export let logData;
   export let weekIndexInLogData;
   let logDates = [];
+
+  const dispatch = createEventDispatcher();
 
   $: logDates = getWeekForCards(logData, weekIndexInLogData);
 </script>
@@ -37,7 +40,9 @@
             </div>
           {/if}
         </div>
-        <CardButton on:click>Edit</CardButton>
+        <CardButton on:click={() => dispatch('edit', logDate.id)}
+          >Edit</CardButton
+        >
       </div>
     {/each}
   </div>

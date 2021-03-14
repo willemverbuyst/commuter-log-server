@@ -16,7 +16,7 @@
   import GaugeChart from './UI/Charts/GaugeChart.svelte';
 
   let showForm = false;
-  let weekIndexInLogData = 1;
+  let weekIndexInLogData = 7;
   let edittedId;
 
   logData.setLogData(workingDays);
@@ -64,23 +64,19 @@
     />
   {/if}
   <div class="chart-container">
-    <WeekChart showGrid={$showGrid} logData={$logData} {weekIndexInLogData} />
+    <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
     <GaugeChart logData={$logData} {weekIndexInLogData} />
   </div>
   <div class="chart-container">
-    <Card
-      logData={$logData}
-      {weekIndexInLogData}
-      on:click={() => (showForm = true)}
-    />
+    <Card logData={$logData} {weekIndexInLogData} on:edit={startEdit} />
   </div>
   <div class="chart-container">
-    <AllWorkingDays showGrid={$showGrid} logData={$logData} />
+    <AllWorkingDays logData={$logData} showGrid={$showGrid} />
   </div>
 
   <div class="chart-container">
-    <TotalsPerWeekChart showGrid={$showGrid} logData={$logData} />
-    <AveragesPerWeekChart showGrid={$showGrid} logData={$logData} />
+    <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
+    <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
   </div>
   <div class="chart-container">
     <PartitionChart logData={$logData} />

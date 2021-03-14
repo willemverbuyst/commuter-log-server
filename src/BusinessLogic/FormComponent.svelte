@@ -52,15 +52,23 @@
   }
 
   function submitForm() {
-    const logDate = {
-      date: selectedDate,
-      statusOfDay,
-      meansOfTransport,
-      routeTripOne,
-      routeTripTwo,
-      durationTripOne: formatTimeInput(durationTripOne),
-      durationTripTwo: formatTimeInput(durationTripTwo),
-    };
+    const logDate =
+      statusOfDay === 'working at the office'
+        ? {
+            id,
+            date: selectedDate,
+            statusOfDay,
+            meansOfTransport,
+            routeTripOne,
+            routeTripTwo,
+            durationTripOne: formatTimeInput(durationTripOne),
+            durationTripTwo: formatTimeInput(durationTripTwo),
+          }
+        : {
+            id,
+            date: selectedDate,
+            statusOfDay,
+          };
 
     if (id) {
       logData.updateLogDate(id, logDate);
