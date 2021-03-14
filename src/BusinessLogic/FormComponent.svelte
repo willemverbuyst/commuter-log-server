@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Checkbox from '../UI/Inputs/Checkbox.svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
   import Dropdown from '../UI/Inputs/Dropdown.svelte';
@@ -8,34 +9,52 @@
   import { checkDurationInput } from '../helpers/validation';
   import { reverseRoute } from '../helpers/formatting';
   import { routes } from '../constants';
+  import FormButton from '../UI/Buttons/FormButton.svelte';
+  import logData from '../Store/logState';
 
+  // Initial value for form
   let selectedDate = new Date();
-  let day = 'Working at the Office';
+  let statusOfDay = 'Working at the Office';
   let meansOfTransport = 'Car';
   let routeTripOne = routes[1];
   let routeTripTwo = '';
   let roundTrip = false;
   let durationTripOne = '00:00';
   let durationTripTwo = '00:00';
-  let costs = '0,00';
+
+  const dispatch = createEventDispatcher();
 
   $: durationTripOneValid = checkDurationInput(durationTripOne);
   $: durationTripTwoValid = checkDurationInput(durationTripTwo);
   $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
 
+  function cancel() {
+    dispatch('cancel');
+  }
+
+  function submitForm() {
+    const logDate = {
+      date: selectedDate,
+      statusOfDay,
+      meansOfTransport,
+      routeTripOne,
+      routeTripTwo,
+      durationTripOne: 35,
+      durationTripTwo: 35,
+    };
+
+    console.log('submit');
+    console.log(logDate);
+    logData.addLogDate({
+      ...logDate,
+    });
+
+    dispatch('save');
+  }
+
   function updateSelectedDate(date) {
     selectedDate = date;
   }
-
-  // FOR DEV
-  $: console.log('Date: ', selectedDate);
-  $: console.log('Means of transport: ', meansOfTransport);
-  $: console.log('Route Trip One: ', routeTripOne);
-  $: console.log('Route Trip Two: ', routeTripTwo);
-  $: console.log('Roundtrip: ', roundTrip);
-  $: console.log('Duration Trip One: ', durationTripOne);
-  $: console.log('Duration Trip Two: ', durationTripTwo);
-  $: console.log('Costs: ', costs);
 </script>
 
 <Modal on:cancel>
@@ -43,25 +62,25 @@
     <DatePicker {selectedDate} {updateSelectedDate} />
     <div class="radio-button__container">
       <RadioButton
-        name="day"
+        name="statusOfDay"
         value="Working at the Office"
-        group={day}
-        on:change={(event) => (day = event.target.value)}
+        group={statusOfDay}
+        on:change={(event) => (statusOfDay = event.target.value)}
       />
       <RadioButton
-        name="day"
+        name="statusOfDay"
         value="Working at Home"
-        group={day}
-        on:change={(event) => (day = event.target.value)}
+        group={statusOfDay}
+        on:change={(event) => (statusOfDay = event.target.value)}
       />
       <RadioButton
-        name="day"
-        value="Day off"
-        group={day}
-        on:change={(event) => (day = event.target.value)}
+        name="statusOfDay"
+        value="day off"
+        group={statusOfDay}
+        on:change={(event) => (statusOfDay = event.target.value)}
       />
     </div>
-    {#if day === 'Working at the Office'}
+    {#if statusOfDay === 'Working at the Office'}
       <div class="radio-button__container">
         <RadioButton
           name="transport"
@@ -81,7 +100,7 @@
         label=" Round trip?"
         on:change={(event) => (roundTrip = event.target.checked)}
       />
-      <div class="trip-container">
+      <div class="dropdown-input__container">
         <Dropdown
           route={routeTripOne}
           {routes}
@@ -95,7 +114,7 @@
           on:input={(event) => (durationTripOne = event.target.value)}
         />
       </div>
-      <div class="trip-container">
+      <div class="dropdown-input__container">
         <Dropdown
           route={routeTripTwo}
           {routes}
@@ -111,6 +130,10 @@
       </div>
     {/if}
   </form>
+  <div class="button__container" slot="footer">
+    <FormButton on:click={submitForm}>Save</FormButton>
+    <FormButton on:click={cancel}>Cancel</FormButton>
+  </div>
 </Modal>
 
 <style>
@@ -122,10 +145,18 @@
     margin-top: 1rem;
   }
 
-  .trip-container {
+  .dropdown-input__container {
     width: 100%;
     margin: auto;
     display: flex;
     justify-content: space-between;
+  }
+
+  .button__container {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>

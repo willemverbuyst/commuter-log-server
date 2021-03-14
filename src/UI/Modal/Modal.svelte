@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte';
   import { fly, scale } from 'svelte/transition';
   import { cubicIn } from 'svelte/easing';
-  import FormButton from '../Buttons/FormButton.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -34,8 +33,7 @@
       <h1>Add a day to log</h1>
       <slot />
       <footer>
-        <FormButton on:click={closeModal}>Add</FormButton>
-        <FormButton on:click={closeModal}>Close</FormButton>
+        <slot name="footer" />
       </footer>
     </div>
   </div>
@@ -115,13 +113,5 @@
     margin: auto;
     padding: 1rem;
     color: #aaa;
-  }
-
-  footer {
-    width: 100%;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 </style>

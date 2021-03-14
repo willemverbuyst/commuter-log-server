@@ -18,6 +18,8 @@
   let showForm = false;
   let selectedWeek = '5';
 
+  logData.setLogData(workingDays);
+
   function cancelForm() {
     showForm = false;
   }
@@ -26,7 +28,9 @@
     showGrid.toggleGrid();
   }
 
-  logData.setLogData(workingDays);
+  function saveLogDate() {
+    showForm = false;
+  }
 
   function updateSelectedWeek(event) {
     selectedWeek = event.target.value;
@@ -47,7 +51,7 @@
     />
   </div>
   {#if showForm}
-    <FormComponent on:cancel={cancelForm} />
+    <FormComponent on:cancel={cancelForm} on:save={saveLogDate} />
   {/if}
   <div class="chart-container">
     <WeekChart showGrid={$showGrid} logData={$logData} {selectedWeek} />
