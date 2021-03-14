@@ -51,12 +51,6 @@
     dispatch('cancel');
   }
 
-  function deleteDay() {
-    logData.removeLogDate(id);
-
-    dispatch('save');
-  }
-
   function submitForm() {
     const logDate = {
       date: selectedDate,
@@ -68,11 +62,13 @@
       durationTripTwo: formatTimeInput(durationTripTwo),
     };
 
-    console.log('submit');
-    console.log(logDate);
-    logData.addLogDate({
-      ...logDate,
-    });
+    if (id) {
+      logData.updateLogDate(id, logDate);
+    } else {
+      logData.addLogDate({
+        ...logDate,
+      });
+    }
 
     dispatch('save');
   }
@@ -159,9 +155,9 @@
     <FormButton on:click={submitForm}>Save</FormButton>
     <FormButton on:click={cancel}>Cancel</FormButton>
   </div>
-  {#if id}
+  <!-- {#if id}
     <FormButton on:click={deleteDay}>Delete</FormButton>
-  {/if}
+  {/if} -->
 </Modal>
 
 <style>

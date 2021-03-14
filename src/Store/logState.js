@@ -20,7 +20,7 @@ const logStore = {
 
   updateLogDate: (id, date) => {
     logData.update((days) => {
-      const dateIndex = items.findIndex((i) => i.id === id);
+      const dateIndex = days.findIndex((i) => i.id === id);
       const updatedLogDate = { ...logData[dateIndex], ...date };
       const updatedLogDates = [...days];
       updatedLogDates[dateIndex] = updatedLogDate;
