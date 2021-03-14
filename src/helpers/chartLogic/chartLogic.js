@@ -67,14 +67,15 @@ export const getWeekNumber = (day) => {
   return [d.getFullYear(), weekNo];
 };
 
-export const getWeekData = (dates, weekNumber) => {
-  // const week = dates.filter((d) => getWeekNumber(d.date)[1] === weekNumber);
-  const week = chunkArray(dates, 5)[weekNumber];
+export const getWeekData = (dates, index) => {
+  const week = chunkArray(dates, 5)[index];
+  // Use the first day of the week to get week number and year
+  const weekNumber = getWeekNumber(week[0].date);
   const travelTimes = getMinutes(week);
   const backgroundColor = getBackgroundColor(week);
   const labels = getWeekdays(week);
   const maxForDisplay = Math.max(...travelTimes) * 1.2;
-  const title = `TRAVEL TIMES WEEK ${getWeekNumber(week[0].date)[1]}`;
+  const title = `TRAVEL TIMES WEEK ${weekNumber[1]} - ${weekNumber[0]}`;
 
   return {
     travelTimes,

@@ -20,7 +20,7 @@
       labels,
       maxForDisplay,
       title,
-    } = getWeekData(logData, +weekIndexInLogData);
+    } = getWeekData(logData, weekIndexInLogData);
 
     ctx = document.getElementById('weekChart').getContext('2d');
 
