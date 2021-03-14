@@ -16,8 +16,8 @@
   }
 </script>
 
-<div class="card-container--outer">
-  <div class="card-container--inner">
+<div class="dashboard__container">
+  <div class="card__container">
     {#each logDates as logDate}
       <div class="card">
         <div class="card-content">
@@ -48,20 +48,12 @@
 </div>
 
 <style>
-  .card-container--outer {
-    width: 80%;
+  .card__container {
+    width: 1150px;
     font-family: 'Helvetica Neue';
     font-size: 12px;
     line-height: 1.2;
     color: #aaa;
-    margin-top: 4rem;
-    padding: 2rem;
-    border: 2px solid #333;
-    border-radius: 7px;
-    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
-  }
-
-  .card-container--inner {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;

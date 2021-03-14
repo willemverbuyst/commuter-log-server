@@ -15,6 +15,15 @@ body {
   background-color: #333;
 }
 
+// To change the background color of the calendar, it needs to be targeted globally
 .calendar {
   background: #333;
+}
+
+.dashboard__container {
+  margin-top: 4rem;
+  padding: 2rem;
+  border: 2px solid #333;
+  border-radius: 7px;
+  box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
 }

@@ -98,16 +98,6 @@
   afterUpdate(createChart);
 </script>
 
-<div class="chart-container">
+<div class="dashboard__container">
   <canvas id="carVsPublicChart" width="500" />
 </div>
-
-<style>
-  .chart-container {
-    margin-top: 4rem;
-    padding: 2rem;
-    border: 2px solid #333;
-    border-radius: 7px;
-    box-shadow: inset 4px 4px 4px #222, inset -4px -4px 4px #444;
-  }
-</style>
