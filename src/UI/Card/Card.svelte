@@ -1,15 +1,19 @@
 <script>
-  import { getWeekNumber } from '../../Helpers/chartLogic/chartLogic';
+  import { chunkArray } from '../../Helpers/chartLogic/utils';
   import { formatDuration } from '../../Helpers/formatting';
   import CardButton from '../Buttons/CardButton.svelte';
 
   export let logData;
-  export let selectedWeek;
-  let logDates;
+  export let weekIndexInLogData;
 
-  $: logDates = logData.filter(
-    (d) => getWeekNumber(d.date)[1] === +selectedWeek
-  );
+  $: logDates = getWeek(weekIndexInLogData);
+
+  function getWeek() {
+    const weeks = chunkArray(logData, 5);
+    const week = weeks[weekIndexInLogData];
+
+    return week;
+  }
 </script>
 
 <div class="card-container--outer">

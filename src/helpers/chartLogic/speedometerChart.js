@@ -32,7 +32,9 @@ const getHigestTravelTime = (workingDays) => {
 };
 
 export const actualTravelTime = (dates, weekNumber) => {
-  const week = dates.filter((d) => getWeekNumber(d.date)[1] === +weekNumber);
+  // const week = dates.filter((d) => getWeekNumber(d.date)[1] === +weekNumber);
+  const weeks = chunkArray(dates, 5);
+  const week = weeks[weekNumber];
 
   const max = getHigestTravelTime(dates);
 

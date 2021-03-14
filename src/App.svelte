@@ -16,7 +16,7 @@
   import GaugeChart from './UI/Charts/GaugeChart.svelte';
 
   let showForm = false;
-  let selectedWeek = '5';
+  let weekIndexInLogData = 1;
 
   logData.setLogData(workingDays);
 
@@ -33,7 +33,8 @@
   }
 
   function updateSelectedWeek(event) {
-    selectedWeek = event.target.value;
+    console.log('as ', event.target.value);
+    weekIndexInLogData = event.target.value;
   }
 </script>
 
@@ -45,7 +46,7 @@
 
   <div class="slider-container">
     <Slider
-      weekNumber={selectedWeek}
+      {weekIndexInLogData}
       on:change={(event) => updateSelectedWeek(event)}
       logData={$logData}
     />
@@ -54,13 +55,13 @@
     <FormComponent on:cancel={cancelForm} on:save={saveLogDate} />
   {/if}
   <div class="chart-container">
-    <WeekChart showGrid={$showGrid} logData={$logData} {selectedWeek} />
-    <GaugeChart logData={$logData} {selectedWeek} />
+    <WeekChart showGrid={$showGrid} logData={$logData} {weekIndexInLogData} />
+    <GaugeChart logData={$logData} {weekIndexInLogData} />
   </div>
   <div class="chart-container">
     <Card
       logData={$logData}
-      {selectedWeek}
+      {weekIndexInLogData}
       on:click={() => (showForm = true)}
     />
   </div>

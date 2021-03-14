@@ -49,6 +49,7 @@
         ],
       },
       options: {
+        cutoutPercentage: 0,
         title: {
           display: true,
           text: title,

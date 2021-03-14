@@ -14,8 +14,8 @@
 
   // Initial value for form
   let selectedDate = new Date();
-  let statusOfDay = 'Working at the Office';
-  let meansOfTransport = 'Car';
+  let statusOfDay = 'woking at the office';
+  let meansOfTransport = 'car';
   let routeTripOne = routes[1];
   let routeTripTwo = '';
   let roundTrip = false;
@@ -63,13 +63,13 @@
     <div class="radio-button__container">
       <RadioButton
         name="statusOfDay"
-        value="Working at the Office"
+        value="working at the office"
         group={statusOfDay}
         on:change={(event) => (statusOfDay = event.target.value)}
       />
       <RadioButton
         name="statusOfDay"
-        value="Working at Home"
+        value="working from home"
         group={statusOfDay}
         on:change={(event) => (statusOfDay = event.target.value)}
       />
@@ -80,17 +80,17 @@
         on:change={(event) => (statusOfDay = event.target.value)}
       />
     </div>
-    {#if statusOfDay === 'Working at the Office'}
+    {#if statusOfDay === 'working at the office'}
       <div class="radio-button__container">
         <RadioButton
           name="transport"
-          value="Car"
+          value="car"
           group={meansOfTransport}
           on:change={(event) => (meansOfTransport = event.target.value)}
         />
         <RadioButton
           name="transport"
-          value="Public Transport"
+          value="public transport"
           group={meansOfTransport}
           on:change={(event) => (meansOfTransport = event.target.value)}
         />

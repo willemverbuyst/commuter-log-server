@@ -6,14 +6,14 @@
 
   let gaugeChart;
   export let logData;
-  export let selectedWeek;
+  export let weekIndexInLogData;
   let ctx;
   const labels = ['', ''];
 
   function createChart() {
     const { backgroundColor, backGroundColorInner, data } = actualTravelTime(
       logData,
-      selectedWeek
+      weekIndexInLogData
     );
 
     ctx = document.getElementById('gaugeChart').getContext('2d');

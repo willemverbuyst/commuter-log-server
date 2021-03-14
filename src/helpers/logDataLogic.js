@@ -1,3 +1,5 @@
+import { chunkArray } from './chartLogic/utils';
+
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
 export const getWeekNumber = (day) => {
   // Copy date so don't modify original
@@ -15,9 +17,15 @@ export const getWeekNumber = (day) => {
   return [d.getFullYear(), weekNo];
 };
 
-export function getFirstAndLastWeek(workingDays) {
-  const firstWeek = getWeekNumber(workingDays[0].date);
-  const lastWeek = getWeekNumber(workingDays[workingDays.length - 1].date);
+// export const getFirstAndLastWeek = (workingDays) => {
+//   const firstWeek = getWeekNumber(workingDays[0].date);
+//   const lastWeek = getWeekNumber(workingDays[workingDays.length - 1].date);
 
-  return [firstWeek, lastWeek];
-}
+//   return [firstWeek, lastWeek];
+// };
+
+export const getNumberOfWeeks = (workingDays) => {
+  const numberOfWeeks = chunkArray(workingDays, 5);
+
+  return numberOfWeeks.length;
+};

@@ -1,3 +1,4 @@
+import { chunkArray } from './utils';
 const weekdays = [
   'Sunday',
   'Monday',
@@ -67,7 +68,8 @@ export const getWeekNumber = (day) => {
 };
 
 export const getWeekData = (dates, weekNumber) => {
-  const week = dates.filter((d) => getWeekNumber(d.date)[1] === weekNumber);
+  // const week = dates.filter((d) => getWeekNumber(d.date)[1] === weekNumber);
+  const week = chunkArray(dates, 5)[weekNumber];
   const travelTimes = getMinutes(week);
   const backgroundColor = getBackgroundColor(week);
   const labels = getWeekdays(week);

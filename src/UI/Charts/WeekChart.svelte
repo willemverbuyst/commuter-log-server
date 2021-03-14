@@ -8,7 +8,7 @@
 
   export let showGrid;
   export let logData;
-  export let selectedWeek;
+  export let weekIndexInLogData;
 
   let weekChart;
   let ctx;
@@ -20,7 +20,7 @@
       labels,
       maxForDisplay,
       title,
-    } = getWeekData(logData, +selectedWeek);
+    } = getWeekData(logData, +weekIndexInLogData);
 
     ctx = document.getElementById('weekChart').getContext('2d');
 

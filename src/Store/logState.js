@@ -14,7 +14,7 @@ const logStore = {
       ...date,
     };
     logData.update((days) => {
-      return [newLogDate, ...days];
+      return [...days, newLogDate];
     });
   },
 
