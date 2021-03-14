@@ -30,3 +30,10 @@ export const getYearAndWeekNumber = (logData, index) => {
 
   return yearAndWeekNumber;
 };
+
+export const getWeekForCards = (logData, weekIndexInLogData) => {
+  const weeks = chunkArray(logData, 5);
+  const week = weeks[weekIndexInLogData];
+
+  return week;
+};

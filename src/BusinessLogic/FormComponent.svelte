@@ -12,7 +12,9 @@
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
 
-  // Initial value for form
+  export let id = null;
+
+  // Initial values for form
   let selectedDate = new Date();
   let statusOfDay = 'working at the office';
   let meansOfTransport = 'car';
@@ -22,6 +24,23 @@
   let durationTripOne = '00:00';
   let durationTripTwo = '00:00';
 
+  if (id) {
+    const unsubscribe = logData.subscribe((days) => {
+      const selectedDay = days.find((d) => d.id === id);
+      selectedDate = selectedDay.date;
+      statusOfDay = selectedDay.statusOfDay;
+      if (selectedDay.statusOfDay === 'working at the office') {
+        meansOfTransport = selectedDay.meansOfTransport;
+        routeTripOne = selectedDay.roundTripOne;
+        routeTripTwo = selectedDay.routeTripTwo;
+        durationTripOne = '00:40';
+        durationTripTwo = '00:35';
+      }
+    });
+
+    unsubscribe();
+  }
+
   const dispatch = createEventDispatcher();
 
   $: durationTripOneValid = checkDurationInput(durationTripOne);
@@ -30,6 +49,12 @@
 
   function cancel() {
     dispatch('cancel');
+  }
+
+  function deleteDay() {
+    logData.removeLogDate(id);
+
+    dispatch('save');
   }
 
   function submitForm() {
@@ -134,6 +159,9 @@
     <FormButton on:click={submitForm}>Save</FormButton>
     <FormButton on:click={cancel}>Cancel</FormButton>
   </div>
+  {#if id}
+    <FormButton on:click={deleteDay}>Delete</FormButton>
+  {/if}
 </Modal>
 
 <style>

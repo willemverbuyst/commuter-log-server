@@ -1,19 +1,13 @@
 <script>
-  import { chunkArray } from '../../Helpers/utils';
+  import { getWeekForCards } from '../../Helpers/logDataLogic';
   import { formatDuration } from '../../Helpers/formatting';
   import CardButton from '../Buttons/CardButton.svelte';
 
   export let logData;
   export let weekIndexInLogData;
+  let logDates = [];
 
-  $: logDates = getWeek(weekIndexInLogData);
-
-  function getWeek() {
-    const weeks = chunkArray(logData, 5);
-    const week = weeks[weekIndexInLogData];
-
-    return week;
-  }
+  $: logDates = getWeekForCards(logData, weekIndexInLogData);
 </script>
 
 <div class="dashboard__container">
@@ -22,7 +16,9 @@
       <div class="card">
         <div class="card-content">
           <div>
-            <h3>{logDate.date.toString().slice(0, 15)}</h3>
+            <h3>
+              {logDate.date.toString().slice(0, 15)}
+            </h3>
           </div>
           {#if logDate.statusOfDay === 'day off'}
             <p>Day off</p>

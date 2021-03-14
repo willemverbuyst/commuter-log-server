@@ -1,15 +1,18 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import { formatDuration } from '../../Helpers/formatting';
   import TableButton from '../Buttons/TableButton.svelte';
 
   export let logData;
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <div class="dashboard__container margin-bottom">
   <div class="table__container">
     <table>
       <tr>
-        <th>Date</th>
+        <th class="tc--align-right">Date</th>
         <th>Work</th>
         <th>Trip One</th>
         <th>Trip Two</th>
@@ -17,13 +20,17 @@
         <th />
       </tr>
       {#each logData as logDate}
-        <td>{logDate.date.toString().slice(0, 15)}</td>
+        <td class="tc--align-right">{logDate.date.toString().slice(0, 15)}</td>
         {#if logDate.statusOfDay === 'day off'}
           <td colspan="4" class="tc--day-off">Day off</td>
-          <TableButton on:click>Edit</TableButton>
+          <TableButton on:click={() => dispatch('edit', logDate.id)}
+            >Edit</TableButton
+          >
         {:else if logDate.statusOfDay === 'working from home'}
           <td colspan="4">Working from home</td>
-          <TableButton on:click>Edit</TableButton>
+          <TableButton on:click={() => dispatch('edit', logDate.id)}
+            >Edit</TableButton
+          >
         {:else}
           <td>{logDate.meansOfTransport}</td>
           <td>{logDate.routeTripOne}</td>
@@ -33,7 +40,9 @@
               logDate.durationTripOne + logDate.durationTripTwo
             )}</td
           >
-          <TableButton on:click>Edit</TableButton>
+          <TableButton on:click={() => dispatch('edit', logDate.id)}
+            >Edit</TableButton
+          >
         {/if}
         <tr />{/each}
     </table>

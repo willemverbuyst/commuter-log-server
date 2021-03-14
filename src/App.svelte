@@ -17,6 +17,7 @@
 
   let showForm = false;
   let weekIndexInLogData = 1;
+  let edittedId;
 
   logData.setLogData(workingDays);
 
@@ -30,6 +31,11 @@
 
   function saveLogDate() {
     showForm = false;
+  }
+
+  function startEdit(event) {
+    showForm = true;
+    edittedId = event.detail;
   }
 
   function updateSelectedWeek(event) {
@@ -51,7 +57,11 @@
     />
   </div>
   {#if showForm}
-    <FormComponent on:cancel={cancelForm} on:save={saveLogDate} />
+    <FormComponent
+      id={edittedId}
+      on:cancel={cancelForm}
+      on:save={saveLogDate}
+    />
   {/if}
   <div class="chart-container">
     <WeekChart showGrid={$showGrid} logData={$logData} {weekIndexInLogData} />
@@ -77,7 +87,7 @@
     <CarVsPublicChart logData={$logData} />
   </div>
   <div class="chart-container">
-    <Table logData={$logData} on:click={() => (showForm = true)} />
+    <Table logData={$logData} on:edit={startEdit} />
   </div>
 </main>
 
