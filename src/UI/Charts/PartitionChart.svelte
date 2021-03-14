@@ -5,12 +5,12 @@
 
   export let logData;
 
-  const { partition, labels, title } = getPartitionData(logData);
-
   let partitionChart;
   let ctx;
 
   function createChart() {
+    const { partition, labels, title } = getPartitionData(logData);
+
     ctx = document.getElementById('partitionChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(150, 0, 0, 150);
@@ -43,7 +43,6 @@
               gradientFillPublic,
             ],
             borderWidth: 0,
-            barPercentage: 1,
           },
         ],
       },

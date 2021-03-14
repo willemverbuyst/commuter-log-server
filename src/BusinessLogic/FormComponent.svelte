@@ -14,7 +14,7 @@
 
   // Initial value for form
   let selectedDate = new Date();
-  let statusOfDay = 'woking at the office';
+  let statusOfDay = 'working at the office';
   let meansOfTransport = 'car';
   let routeTripOne = routes[1];
   let routeTripTwo = '';
@@ -142,6 +142,7 @@
   }
 
   .radio-button__container {
+    width: 100%;
     margin-top: 1rem;
   }
 
