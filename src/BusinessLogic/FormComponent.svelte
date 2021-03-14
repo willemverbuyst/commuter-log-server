@@ -7,7 +7,7 @@
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
   import { checkDurationInput } from '../helpers/validation';
-  import { reverseRoute } from '../helpers/formatting';
+  import { formatTimeInput, reverseRoute } from '../helpers/formatting';
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
@@ -39,8 +39,8 @@
       meansOfTransport,
       routeTripOne,
       routeTripTwo,
-      durationTripOne: 35,
-      durationTripTwo: 35,
+      durationTripOne: formatTimeInput(durationTripOne),
+      durationTripTwo: formatTimeInput(durationTripTwo),
     };
 
     console.log('submit');

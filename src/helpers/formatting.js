@@ -21,3 +21,10 @@ export const formatDuration = (value) => {
     return `0${Math.floor(value / 60)}:${Math.floor(value % 60)}`;
   }
 };
+
+export const formatTimeInput = (timeInput) => {
+  const [hours, minutes] = timeInput.split(':');
+  const totalTimeInMinutes = hours * 60 + minutes * 1;
+
+  return totalTimeInMinutes;
+};
