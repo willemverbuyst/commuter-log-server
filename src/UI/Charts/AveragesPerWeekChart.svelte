@@ -7,14 +7,14 @@
   export let showGrid;
   export let logData;
 
-  const { averages, labels, maxForDisplay, title } = getAveragePerWeekData(
-    logData
-  );
-
   let averagesPerWeekChart;
   let ctx;
 
   function createChart() {
+    const { averages, labels, maxForDisplay, title } = getAveragePerWeekData(
+      logData
+    );
+
     ctx = document.getElementById('averagesPerWeekChart').getContext('2d');
 
     const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);

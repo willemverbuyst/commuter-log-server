@@ -37,12 +37,7 @@ export const workingDays = [
   {
     id: 5,
     date: new Date('Fri Jan 1 2021 19:50:52 GMT+0100'),
-    statusOfDay: 'working at the office',
-    meansOfTransport: 'car',
-    routeTripOne: 'Terneuzen - Vlissingen',
-    routeTripTwo: 'Vlissingen - Tilburg',
-    durationTripOne: 150,
-    durationTripTwo: 150,
+    statusOfDay: 'working from home',
   },
   {
     id: 6,
@@ -62,7 +57,7 @@ export const workingDays = [
   {
     id: 9,
     date: new Date('Thu Jan 7 2021 19:50:52 GMT+0100'),
-    statusOfDay: 'day off',
+    statusOfDay: 'working from home',
   },
   {
     id: 10,

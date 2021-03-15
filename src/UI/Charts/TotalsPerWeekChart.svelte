@@ -7,14 +7,6 @@
   export let showGrid;
   export let logData;
 
-  const {
-    totalsPerWeekCar,
-    totalsPerWeekPublic,
-    labels,
-    maxForDisplay,
-    title,
-  } = getTotalsPerWeekData(logData);
-
   let totalsPerWeekChart;
   let ctx;
 
@@ -42,6 +34,14 @@
   };
 
   function createChart() {
+    const {
+      totalsPerWeekCar,
+      totalsPerWeekPublic,
+      labels,
+      maxForDisplay,
+      title,
+    } = getTotalsPerWeekData(logData);
+
     ctx = document.getElementById('totalsPerWeekChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);

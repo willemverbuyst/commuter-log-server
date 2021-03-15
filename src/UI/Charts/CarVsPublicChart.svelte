@@ -6,18 +6,18 @@
 
   export let logData;
 
-  const {
-    totalsCar,
-    totalsPublic,
-    labels,
-    maxForDisplay,
-    title,
-  } = getCarVsPublicTotalsData(logData);
-
   let carVsPublicChart;
   let ctx;
 
   function createChart() {
+    const {
+      totalsCar,
+      totalsPublic,
+      labels,
+      maxForDisplay,
+      title,
+    } = getCarVsPublicTotalsData(logData);
+
     ctx = document.getElementById('carVsPublicChart').getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);

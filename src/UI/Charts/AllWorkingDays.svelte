@@ -9,18 +9,18 @@
   export let showGrid;
   export let logData;
 
-  const {
-    travelTimes,
-    maxForDisplay,
-    labels,
-    title,
-    lineValue,
-  } = getAllWorkingDaysData(logData);
-
   let allWorkingDaysChart;
   let ctx;
 
   function createChart() {
+    const {
+      travelTimes,
+      maxForDisplay,
+      labels,
+      title,
+      lineValue,
+    } = getAllWorkingDaysData(logData);
+
     ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
 
     const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
