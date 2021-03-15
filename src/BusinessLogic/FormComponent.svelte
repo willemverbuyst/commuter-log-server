@@ -11,6 +11,7 @@
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
+  import { formatDuration } from '../Helpers/formatting';
 
   export let id = null;
 
@@ -33,8 +34,8 @@
         meansOfTransport = selectedDay.meansOfTransport;
         routeTripOne = selectedDay.roundTripOne;
         routeTripTwo = selectedDay.routeTripTwo;
-        durationTripOne = '00:40';
-        durationTripTwo = '00:35';
+        durationTripOne = formatDuration(selectedDay.durationTripOne);
+        durationTripTwo = formatDuration(selectedDay.durationTripTwo);
       }
     });
 
