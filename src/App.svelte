@@ -1,19 +1,19 @@
 <script>
-  import Button from './UI/Buttons/Button.svelte';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
-  import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
-  import PartitionChart from './UI/Charts/PartitionChart.svelte';
-  import WeekChart from './UI/Charts/WeekChart.svelte';
-  import CarVsPublicChart from './UI/Charts/CarVsPublicChart.svelte';
-  import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
-  import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
-  import Table from './UI/Table/Table.svelte';
+  import Button from './UI/Buttons/Button.svelte';
   import Card from './UI/Card/Card.svelte';
+  import GaugeChart from './UI/Charts/GaugeChart.svelte';
+  import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
+  import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
+  import CarVsPublicChart from './UI/Charts/CarVsPublicChart.svelte';
+  import PartitionChart from './UI/Charts/PartitionChart.svelte';
+  import TotalsPerWeekChart from './UI/Charts/TotalsPerWeekChart.svelte';
+  import WeekChart from './UI/Charts/WeekChart.svelte';
+  import Slider from './UI/Inputs/Slider.svelte';
+  import Table from './UI/Table/Table.svelte';
   import showGrid from './Store/appState';
   import logData from './Store/logState';
   import { workingDays } from './dummyData';
-  import Slider from './UI/Inputs/Slider.svelte';
-  import GaugeChart from './UI/Charts/GaugeChart.svelte';
 
   let showForm = false;
   let weekIndexInLogData = 7;
@@ -63,26 +63,25 @@
       on:save={saveLogDate}
     />
   {/if}
-  <div class="chart-container">
+  <div class="dashboard__section">
     <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
     <GaugeChart logData={$logData} {weekIndexInLogData} />
   </div>
-  <div class="chart-container">
+  <div class="dashboard__section">
     <Card logData={$logData} {weekIndexInLogData} on:edit={startEdit} />
   </div>
-  <div class="chart-container">
+  <div class="dashboard__section">
     <AllWorkingDays logData={$logData} showGrid={$showGrid} />
   </div>
-
-  <div class="chart-container">
+  <div class="dashboard__section">
     <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
     <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
   </div>
-  <div class="chart-container">
+  <div class="dashboard__section">
     <PartitionChart logData={$logData} />
     <CarVsPublicChart logData={$logData} />
   </div>
-  <div class="chart-container">
+  <div class="dashboard__section">
     <Table logData={$logData} on:edit={startEdit} />
   </div>
 </main>
@@ -96,13 +95,13 @@
     text-align: center;
     margin: 1rem auto;
   }
-  .chart-container {
+
+  .dashboard__section {
     padding: 0;
-    margin: 0;
-    width: 100%;
+    margin: 0 auto;
+    width: 1218px;
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .nav-container {
@@ -110,7 +109,7 @@
   }
 
   .slider-container {
-    width: 80%;
+    width: 1150px;
     margin: auto;
   }
 </style>
