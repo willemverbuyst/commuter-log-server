@@ -1,4 +1,4 @@
-import { chunkArray } from './utils';
+import { chunkArray, reduceDates } from './utils';
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
 export const getWeekNumber = (day) => {
@@ -17,14 +17,17 @@ export const getWeekNumber = (day) => {
   return [d.getFullYear(), weekNo];
 };
 
-export const getNumberOfWeeks = (workingDays) => {
-  const numberOfWeeks = chunkArray(workingDays, 5);
+export const getNumberOfWeeks = (logData) => {
+  const reducedDates = reduceDates(logData);
+  const numberOfWeeks = chunkArray(reducedDates, 5);
 
   return numberOfWeeks.length;
 };
 
 export const getYearAndWeekNumber = (logData, index) => {
-  const week = chunkArray(logData, 5)[index];
+  const reducedDates = reduceDates(logData);
+  // Get groups of 5
+  const week = chunkArray(reducedDates, 5)[index];
   // Use the first day of the week to get week number and year
   const yearAndWeekNumber = getWeekNumber(week[0].date);
 

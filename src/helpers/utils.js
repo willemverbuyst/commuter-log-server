@@ -9,3 +9,26 @@ export const chunkArray = (arr, size) => {
 
   return chunkedArr;
 };
+
+export const reduceDates = (dates) => {
+  let container = {};
+
+  dates.forEach(function (d) {
+    if (container.hasOwnProperty(d.date)) {
+      container[d.date] = {
+        ...d,
+        durationTrip: container[d.date].durationTrip + d.durationTrip,
+      };
+    } else {
+      container[d.date] = { ...d };
+    }
+  });
+
+  let reducedDates = [];
+
+  for (let prop in container) {
+    reducedDates.push(container[prop]);
+  }
+
+  return reducedDates;
+};

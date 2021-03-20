@@ -1,4 +1,4 @@
-import { chunkArray } from '../utils';
+import { chunkArray, reduceDates } from '../utils';
 import {
   getBackgroundColor,
   getMinutes,
@@ -6,34 +6,9 @@ import {
   getWeekNumber,
 } from './chartLogic';
 
-import { workingDays } from '../../dummyData';
-
-const reduceDates = (dates) => {
-  let container = {};
-
-  dates.forEach(function (d) {
-    if (container.hasOwnProperty(d.date)) {
-      container[d.date] = {
-        ...d,
-        durationTrip: container[d.date].durationTrip + d.durationTrip,
-      };
-    } else {
-      container[d.date] = { ...d };
-    }
-  });
-
-  let reducedDates = [];
-
-  for (let prop in container) {
-    reducedDates.push(container[prop]);
-  }
-
-  return reducedDates;
-};
-
-export const getWeekData = (dates, index) => {
+export const getWeekData = (logData, index) => {
   // Combine all the days with the same date
-  const reducedDates = reduceDates(dates);
+  const reducedDates = reduceDates(logData);
   // Get groups of 5
   const week = chunkArray(reducedDates, 5)[index];
   // Use the first day of the week to get week number and year
