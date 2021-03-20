@@ -2,7 +2,7 @@
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
-  import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsChart';
+  import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsPerWeekChart';
 
   export let showGrid;
   export let logData;
