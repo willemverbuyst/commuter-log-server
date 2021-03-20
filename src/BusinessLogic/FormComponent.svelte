@@ -19,8 +19,10 @@
   let selectedDate = new Date();
   let statusOfDay = 'working at the office';
   let meansOfTransport = 'car';
-  let routeTripOne = routes[1];
-  let routeTripTwo = '';
+  let routeTripOneFrom = routes[1];
+  let routeTripOneTo = routes[2];
+  let routeTripTwoFrom = routes[1];
+  let routeTripTwoTo = routes[2];
   let roundTrip = false;
   let durationTripOne = '00:00';
   let durationTripTwo = '00:00';
@@ -32,8 +34,10 @@
       statusOfDay = selectedDay.statusOfDay;
       if (selectedDay.statusOfDay === 'working at the office') {
         meansOfTransport = selectedDay.meansOfTransport;
-        routeTripOne = selectedDay.roundTripOne;
-        routeTripTwo = selectedDay.routeTripTwo;
+        routeTripOneFrom = selectedDay.roundTripOneFrom;
+        routeTripOneTo = selectedDay.roundTripOneTo;
+        routeTripTwoFrom = selectedDay.routeTripTwoFrom;
+        routeTripTwoTo = selectedDay.routeTripTwoTo;
         durationTripOne = formatDuration(selectedDay.durationTripOne);
         durationTripTwo = formatDuration(selectedDay.durationTripTwo);
       }
@@ -46,7 +50,7 @@
 
   $: durationTripOneValid = checkDurationInput(durationTripOne);
   $: durationTripTwoValid = checkDurationInput(durationTripTwo);
-  $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
+  // $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
 
   function cancel() {
     dispatch('cancel');
@@ -60,8 +64,10 @@
             date: selectedDate,
             statusOfDay,
             meansOfTransport,
-            routeTripOne,
-            routeTripTwo,
+            routeTripOneFrom,
+            roundTripOneTo,
+            routeTripTwoFrom,
+            routeTripTwoTo,
             durationTripOne: formatTimeInput(durationTripOne),
             durationTripTwo: formatTimeInput(durationTripTwo),
           }
@@ -125,17 +131,19 @@
           on:change={(event) => (meansOfTransport = event.target.value)}
         />
       </div>
-      <Checkbox
-        value={roundTrip}
-        label=" Round trip?"
-        on:change={(event) => (roundTrip = event.target.checked)}
-      />
+
       <div class="dropdown-input__container">
         <Dropdown
-          route={routeTripOne}
+          route={routeTripOneFrom}
           {routes}
-          title="Trip One"
-          on:change={(event) => (routeTripOne = event.target.value)}
+          title="To"
+          on:change={(event) => (routeTripOneFrom = event.target.value)}
+        />
+        <Dropdown
+          route={routeTripOneTo}
+          {routes}
+          title="From"
+          on:change={(event) => (routeTripOneTo = event.target.value)}
         />
         <TimeInput
           duration={durationTripOne}
@@ -144,12 +152,23 @@
           on:input={(event) => (durationTripOne = event.target.value)}
         />
       </div>
+      <Checkbox
+        value={roundTrip}
+        label=" Round trip?"
+        on:change={(event) => (roundTrip = event.target.checked)}
+      />
       <div class="dropdown-input__container">
         <Dropdown
-          route={routeTripTwo}
+          route={routeTripTwoFrom}
           {routes}
           title="Trip Two"
-          on:change={(event) => (routeTripTwo = event.target.value)}
+          on:change={(event) => (routeTripTwoFrom = event.target.value)}
+        />
+        <Dropdown
+          route={routeTripTwoTo}
+          {routes}
+          title="Trip Two"
+          on:change={(event) => (routeTripTwoTo = event.target.value)}
         />
         <TimeInput
           duration={durationTripTwo}

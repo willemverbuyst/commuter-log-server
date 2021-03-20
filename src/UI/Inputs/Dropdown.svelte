@@ -16,7 +16,7 @@
 
 <style>
   .trip-input__container {
-    width: 250px;
+    /* width: 250px; */
     margin: 20px 0;
     display: flex;
     flex-direction: column;
