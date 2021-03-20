@@ -1,7 +1,7 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { getPartitionData } from '../../helpers/chartLogic/chartLogic';
+  import { getPartitionData } from '../../Helpers/chartLogic/partitionChart';
 
   export let logData;
 

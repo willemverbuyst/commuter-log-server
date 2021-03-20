@@ -58,7 +58,7 @@
         cutoutPercentage: 0,
         title: {
           display: true,
-          text: 'Gauge',
+          text: '',
           fontColor: '#aaa',
         },
         maintainAspectRatio: true,

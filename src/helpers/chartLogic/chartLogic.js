@@ -1,4 +1,3 @@
-import { chunkArray } from '../utils';
 const weekdays = [
   'Sunday',
   'Monday',
@@ -65,56 +64,6 @@ export const getWeekNumber = (day) => {
   const weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
   // Return array of year and week number
   return [d.getFullYear(), weekNo];
-};
-
-export const getWeekData = (dates, index) => {
-  const week = chunkArray(dates, 5)[index];
-  // Use the first day of the week to get week number and year
-  const weekNumber = getWeekNumber(week[0].date);
-  const travelTimes = getMinutes(week);
-  const backgroundColor = getBackgroundColor(week);
-  const labels = getWeekdays(week);
-  const maxForDisplay = Math.max(...travelTimes) * 1.2;
-  const title = `TRAVEL TIMES WEEK ${weekNumber[1]} - ${weekNumber[0]}`;
-
-  return {
-    travelTimes,
-    backgroundColor,
-    labels,
-    maxForDisplay,
-    title,
-  };
-};
-
-// POLAR CHART, days car, public transport, working from home
-export const getPartitionData = (workingDays) => {
-  const partition = getPartition(workingDays);
-  const labels = ['', '', ''];
-  const title = `DAYS CAR / PUBLIC TRANSPORT / WORKING FORM HOME`;
-
-  return {
-    partition,
-    labels,
-    title,
-  };
-};
-
-const getPartition = (workingDays) => {
-  const workingFromHome = workingDays.filter(
-    (day) => day.statusOfDay === 'working from home'
-  ).length;
-  const travelledByCar = workingDays.filter(
-    (day) =>
-      day.statusOfDay === 'working at the office' &&
-      day.meansOfTransport === 'car'
-  ).length;
-  const travelledByPublicTransport = workingDays.filter(
-    (day) =>
-      day.statusOfDay === 'working at the office' &&
-      day.meansOfTransport === 'public transport'
-  ).length;
-
-  return [workingFromHome, travelledByCar, travelledByPublicTransport];
 };
 
 export const getAllWorkingDaysData = (workingDays) => {

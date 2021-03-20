@@ -77,10 +77,10 @@
     <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
     <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
   </div>
-  <!-- <div class="dashboard__section">
+  <div class="dashboard__section">
     <PartitionChart logData={$logData} />
-    <CarVsPublicChart logData={$logData} />
-  </div> -->
+    <!-- <CarVsPublicChart logData={$logData} /> -->
+  </div>
   <div class="dashboard__section">
     <Table logData={$logData} on:edit={startEdit} />
   </div>
