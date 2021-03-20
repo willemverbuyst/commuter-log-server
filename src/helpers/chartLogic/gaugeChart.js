@@ -1,5 +1,5 @@
 import { getMinutes } from './chartLogic';
-import { chunkArray } from '../utils';
+import { chunkArray, reduceDates } from '../utils';
 
 // Travel time per week which is considered acceptable according employer
 const normWorkTravel = 5 * 2 * 75;
@@ -21,8 +21,10 @@ const getTotalsPerWeek = (week) => {
   return totalPerWeek;
 };
 
-const getHigestTravelTime = (workingDays) => {
-  const weeks = chunkArray(workingDays, 5);
+const getHigestTravelTime = (logData) => {
+  // Combine all the days with the same date
+  const reducedDates = reduceDates(logData);
+  const weeks = chunkArray(reducedDates, 5);
 
   const totals = weeks.map((week) => getTotalsPerWeek(week));
 
@@ -31,12 +33,14 @@ const getHigestTravelTime = (workingDays) => {
   return maximum;
 };
 
-export const actualTravelTime = (dates, weekNumber) => {
+export const actualTravelTime = (logData, weekNumber) => {
+  // Combine all the days with the same date
+  const reducedDates = reduceDates(logData);
   // const week = dates.filter((d) => getWeekNumber(d.date)[1] === +weekNumber);
-  const weeks = chunkArray(dates, 5);
+  const weeks = chunkArray(reducedDates, 5);
   const week = weeks[weekNumber];
 
-  const max = getHigestTravelTime(dates);
+  const max = getHigestTravelTime(logData);
 
   const travelTimesPerDay = getMinutes(week);
 
