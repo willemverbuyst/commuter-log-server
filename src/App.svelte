@@ -69,11 +69,11 @@
   </div>
   <!-- <div class="dashboard__section">
     <Card logData={$logData} {weekIndexInLogData} on:edit={startEdit} />
-  </div>
+  </div> -->
   <div class="dashboard__section">
     <AllWorkingDays logData={$logData} showGrid={$showGrid} />
   </div>
-  <div class="dashboard__section">
+  <!-- <div class="dashboard__section">
     <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
     <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
   </div>

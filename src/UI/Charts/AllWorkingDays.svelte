@@ -1,10 +1,8 @@
 <script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import {
-    formatDataLabels,
-    getAllWorkingDaysData,
-  } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { getAllWorkingDaysData } from '../../Helpers/chartLogic/allWorkingDaysChart';
 
   export let showGrid;
   export let logData;
