@@ -2,7 +2,7 @@
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
-  import { getCarVsPublicTotalsData } from '../../Helpers/chartLogic/totalsChart';
+  import { getCarVsPublicTotalsData } from '../../Helpers/chartLogic/carVsPublicChart';
 
   export let logData;
 

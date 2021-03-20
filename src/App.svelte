@@ -79,7 +79,7 @@
   </div>
   <div class="dashboard__section">
     <PartitionChart logData={$logData} />
-    <!-- <CarVsPublicChart logData={$logData} /> -->
+    <CarVsPublicChart logData={$logData} />
   </div>
   <div class="dashboard__section">
     <Table logData={$logData} on:edit={startEdit} />
