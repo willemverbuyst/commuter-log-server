@@ -68,7 +68,7 @@
                 padding: 10,
                 display: showGrid,
                 beginAtZero: true,
-                suggestedMax: maxForDisplay,
+                suggestedMax: maxForDisplay > 180 ? maxForDisplay : 180,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
                   return formatDataLabels(value);

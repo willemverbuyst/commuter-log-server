@@ -47,6 +47,7 @@
           fontColor: '#aaa',
         },
         maintainAspectRatio: true,
+        aspectRatio: 4,
         legend: {
           display: false,
         },
@@ -108,5 +109,5 @@
 </script>
 
 <div class="dashboard__container">
-  <canvas id="averagesPerWeekChart" width="500" />
+  <canvas id="averagesPerWeekChart" width="1150" />
 </div>

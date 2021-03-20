@@ -121,6 +121,8 @@
     </div>
     <div class="dashboard__section">
       <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
+    </div>
+    <div class="dashboard__section">
       <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
     </div>
     <div class="dashboard__section">

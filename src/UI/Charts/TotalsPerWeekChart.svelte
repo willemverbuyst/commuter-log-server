@@ -65,13 +65,11 @@
             data: totalsPerWeekCar,
             backgroundColor: gradientFillCar,
             borderWidth: 0,
-            barPercentage: 1,
           },
           {
             data: totalsPerWeekPublic,
             backgroundColor: gradientFillPublic,
             borderWidth: 0,
-            barPercentage: 1,
           },
         ],
       },
@@ -88,6 +86,7 @@
           },
         },
         maintainAspectRatio: true,
+        aspectRatio: 4,
         legend: {
           display: false,
         },
@@ -119,7 +118,7 @@
                 display: showGrid,
                 beginAtZero: true,
                 suggestedMax: maxForDisplay,
-                stepSize: 60,
+                stepSize: 120,
                 callback: function (value, _index, _values) {
                   return formatDataLabels(value);
                 },
@@ -154,5 +153,5 @@
 </script>
 
 <div class="dashboard__container">
-  <canvas id="totalsPerWeekChart" width="500" />
+  <canvas id="totalsPerWeekChart" width="1150" />
 </div>

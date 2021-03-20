@@ -12,7 +12,7 @@ export const getWeekData = (logData, index) => {
   const travelTimes = getMinutes(week);
   const backgroundColor = getBackgroundColor(week);
   const labels = getWeekdays(week);
-  const maxForDisplay = Math.max(...travelTimes) * 1.2;
+  const maxForDisplay = Math.max(...travelTimes) * 1.1;
   const title = `TRAVEL TIMES WEEK ${weekNumber[1]} - ${weekNumber[0]}`;
 
   return {
