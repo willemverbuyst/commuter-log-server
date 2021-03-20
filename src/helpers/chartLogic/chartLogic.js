@@ -9,7 +9,7 @@ const weekdays = [
   'Saturday',
 ];
 
-const getBackgroundColor = (dates) => {
+export const getBackgroundColor = (dates) => {
   return dates.map((date) =>
     date.meansOfTransport === 'car'
       ? 'rgba(0, 107, 151, 1)'
@@ -42,11 +42,11 @@ export const getMinutes = (dates) => {
       ? 0
       : date.statusOfDay === 'working from home'
       ? 0.00001
-      : date.durationTripOne + date.durationTripTwo;
+      : date.durationTrip;
   });
 };
 
-const getWeekdays = (dates) => {
+export const getWeekdays = (dates) => {
   return dates.map((date) => weekdays[date.date.getDay()]);
 };
 

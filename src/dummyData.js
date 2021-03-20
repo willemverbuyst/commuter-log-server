@@ -57,8 +57,6 @@ export const workingDays = [
     routeTripFrom: 'Tilburg',
     routeTripTo: 'Vlissingen',
     durationTrip: 95,
-    durationTripOne: 150,
-    durationTripTwo: 150,
   },
   {
     id: '3b',
@@ -68,8 +66,6 @@ export const workingDays = [
     routeTripFrom: 'Vlissingen',
     routeTripTo: 'Terneuzen',
     durationTrip: 35,
-    durationTripOne: 150,
-    durationTripTwo: 150,
   },
   {
     id: 4,
@@ -102,15 +98,22 @@ export const workingDays = [
     statusOfDay: 'working from home',
   },
   {
-    id: 10,
+    id: '10a',
     date: new Date('Fri Jan 8 2021 19:50:52 GMT+0100'),
     statusOfDay: 'working at the office',
     meansOfTransport: 'car',
     routeTripFrom: 'Terneuzen',
     routeTripTo: 'Vlissingen',
     durationTrip: 75,
-    durationTripOne: 150,
-    durationTripTwo: 150,
+  },
+  {
+    id: '10b',
+    date: new Date('Fri Jan 8 2021 19:50:52 GMT+0100'),
+    statusOfDay: 'working at the office',
+    meansOfTransport: 'car',
+    routeTripFrom: 'Vlissingen',
+    routeTripTo: 'Terneuzen',
+    durationTrip: 150,
   },
   //   {
   //     id: 11,
