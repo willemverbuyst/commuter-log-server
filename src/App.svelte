@@ -1,4 +1,6 @@
 <script>
+  import firebase from 'firebase/app';
+  import 'firebase/auth';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import Button from './UI/Buttons/Button.svelte';
   import Card from './UI/Card/Card.svelte';
@@ -18,6 +20,18 @@
   let showForm = false;
   let weekIndexInLogData = 1;
   let edittedId;
+
+  var firebaseConfig = {
+    apiKey: __myapp.env.API_KEY,
+    authDomain: `${__myapp.env.PROJECT_ID}.firebaseapp.com`,
+    databaseURL: `https://${__myapp.env.PROJECT_ID}.firebaseio.com`,
+    projectId: __myapp.env.PROJECT_ID,
+    storageBucket: `${__myapp.env.PROJECT_ID}.appspot.com`,
+    messagingSenderId: __myapp.env.SENDER_ID,
+    appId: __myapp.env.APP_ID,
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
   logData.setLogData(workingDays);
 

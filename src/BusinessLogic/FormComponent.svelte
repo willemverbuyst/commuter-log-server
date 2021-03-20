@@ -60,7 +60,6 @@
     const logDate =
       statusOfDay === 'working at the office'
         ? {
-            id,
             date: selectedDate,
             statusOfDay,
             meansOfTransport,
@@ -72,22 +71,56 @@
             // durationTripTwo: formatTimeInput(durationTripTwo),
           }
         : {
-            id,
             date: selectedDate,
             statusOfDay,
           };
 
     if (id) {
-      logData.updateLogDate(id, logDate);
-    } else {
-      logData.addLogDate({
-        ...logDate,
-        id: 'xxxx',
-      });
-    }
+      fetch(`${__myapp.env.DATABASE}/logData/${id}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify(logDate),
+        headers: { 'Content-Type': 'application-json' },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('An error occured, please try again!');
+          }
+          logData.updateLogDate(id, logDate);
+        })
+        .catch((err) => console.log(err));
 
-    dispatch('save');
+      dispatch('save');
+    } else {
+      fetch(`${__myapp.env.DATABASE}/logdata.json`, {
+        method: 'POST',
+        body: JSON.stringify(logDate),
+        headers: { 'Content-Type': 'application-json' },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('An error occured, please try again!');
+          }
+          return res.json();
+        })
+        .then((data) => {
+          logData.addLogDate({
+            ...logDate,
+            id: data.name,
+          });
+        })
+        .catch((err) => console.log(err));
+
+      dispatch('save');
+    }
   }
+  // if (id) {
+  //   logData.updateLogDate(id, logDate);
+  // } else {
+  //   logData.addLogDate({
+  //     ...logDate,
+  //     id: 'xxxx',
+  //   });
+  // }
 
   function updateSelectedDate(date) {
     selectedDate = date;
