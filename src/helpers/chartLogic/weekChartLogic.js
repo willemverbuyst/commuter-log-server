@@ -1,10 +1,6 @@
 import { chunkArray, reduceDates } from '../utils';
-import {
-  getBackgroundColor,
-  getMinutes,
-  getWeekdays,
-  getWeekNumber,
-} from './chartLogic';
+import { getBackgroundColor, getMinutes, getWeekdays } from './chartLogic';
+import { getWeekNumber } from '../logDataLogic';
 
 export const getWeekData = (logData, index) => {
   // Combine all the days with the same date

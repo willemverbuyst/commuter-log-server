@@ -1,4 +1,4 @@
-import { getMinutes, getWeekNumber } from './chartLogic';
+import { getMinutes } from './chartLogic';
 import { chunkArray } from '../utils';
 
 // Travel time per week which is considered acceptable according employer

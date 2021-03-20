@@ -1,4 +1,4 @@
-import { getWeekNumber } from './chartLogic';
+import { getWeekNumber } from '../logDataLogic';
 import { chunkArray, reduceDates } from '../utils';
 
 // STEP LINE CHART, average travel time per week
