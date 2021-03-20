@@ -1,13 +1,13 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Checkbox from '../UI/Inputs/Checkbox.svelte';
+  // import Checkbox from '../UI/Inputs/Checkbox.svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
   import Dropdown from '../UI/Inputs/Dropdown.svelte';
   import Modal from '../UI/Modal/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
   import { checkDurationInput } from '../helpers/validation';
-  import { formatTimeInput, reverseRoute } from '../helpers/formatting';
+  import { formatTimeInput } from '../helpers/formatting';
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
@@ -19,13 +19,13 @@
   let selectedDate = new Date();
   let statusOfDay = 'working at the office';
   let meansOfTransport = 'car';
-  let routeTripOneFrom = routes[1];
-  let routeTripOneTo = routes[2];
-  let routeTripTwoFrom = routes[1];
-  let routeTripTwoTo = routes[2];
-  let roundTrip = false;
-  let durationTripOne = '00:00';
-  let durationTripTwo = '00:00';
+  let routeTripFrom = routes[1];
+  let routeTripTo = routes[2];
+  // let routeTripTwoFrom = routes[1];
+  // let routeTripTwoTo = routes[2];
+  // let roundTrip = false;
+  let durationTrip = '00:00';
+  // let durationTripTwo = '00:00';
 
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
@@ -34,12 +34,12 @@
       statusOfDay = selectedDay.statusOfDay;
       if (selectedDay.statusOfDay === 'working at the office') {
         meansOfTransport = selectedDay.meansOfTransport;
-        routeTripOneFrom = selectedDay.roundTripOneFrom;
-        routeTripOneTo = selectedDay.roundTripOneTo;
-        routeTripTwoFrom = selectedDay.routeTripTwoFrom;
-        routeTripTwoTo = selectedDay.routeTripTwoTo;
-        durationTripOne = formatDuration(selectedDay.durationTripOne);
-        durationTripTwo = formatDuration(selectedDay.durationTripTwo);
+        routeTripFrom = selectedDay.roundTripFrom;
+        routeTripTo = selectedDay.roundTripTo;
+        // routeTripTwoFrom = selectedDay.routeTripTwoFrom;
+        // routeTripTwoTo = selectedDay.routeTripTwoTo;
+        durationTrip = formatDuration(selectedDay.durationTrip);
+        // durationTripTwo = formatDuration(selectedDay.durationTripTwo);
       }
     });
 
@@ -48,8 +48,8 @@
 
   const dispatch = createEventDispatcher();
 
-  $: durationTripOneValid = checkDurationInput(durationTripOne);
-  $: durationTripTwoValid = checkDurationInput(durationTripTwo);
+  $: durationTripValid = checkDurationInput(durationTrip);
+  // $: durationTripTwoValid = checkDurationInput(durationTripTwo);
   // $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
 
   function cancel() {
@@ -64,12 +64,12 @@
             date: selectedDate,
             statusOfDay,
             meansOfTransport,
-            routeTripOneFrom,
-            roundTripOneTo,
-            routeTripTwoFrom,
-            routeTripTwoTo,
-            durationTripOne: formatTimeInput(durationTripOne),
-            durationTripTwo: formatTimeInput(durationTripTwo),
+            routeTripFrom,
+            routeTripTo,
+            // routeTripTwoFrom,
+            // routeTripTwoTo,
+            durationTrip: formatTimeInput(durationTrip),
+            // durationTripTwo: formatTimeInput(durationTripTwo),
           }
         : {
             id,
@@ -134,25 +134,25 @@
 
       <div class="dropdown-input__container">
         <Dropdown
-          route={routeTripOneFrom}
+          route={routeTripFrom}
           {routes}
           title="To"
-          on:change={(event) => (routeTripOneFrom = event.target.value)}
+          on:change={(event) => (routeTripFrom = event.target.value)}
         />
         <Dropdown
-          route={routeTripOneTo}
+          route={routeTripTo}
           {routes}
           title="From"
-          on:change={(event) => (routeTripOneTo = event.target.value)}
+          on:change={(event) => (routeTripTo = event.target.value)}
         />
         <TimeInput
-          duration={durationTripOne}
-          valid={durationTripOneValid}
+          duration={durationTrip}
+          valid={durationTripValid}
           validityMessage="Please write a duration in the format hh:mm"
-          on:input={(event) => (durationTripOne = event.target.value)}
+          on:input={(event) => (durationTrip = event.target.value)}
         />
       </div>
-      <Checkbox
+      <!-- <Checkbox
         value={roundTrip}
         label=" Round trip?"
         on:change={(event) => (roundTrip = event.target.checked)}
@@ -176,7 +176,7 @@
           validityMessage="Please write a duration in the format hh:mm"
           on:input={(event) => (durationTripTwo = event.target.value)}
         />
-      </div>
+      </div> -->
     {/if}
   </form>
   <div class="button__container" slot="footer">
