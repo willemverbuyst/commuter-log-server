@@ -60,7 +60,7 @@
     const logDate =
       statusOfDay === 'working at the office'
         ? {
-            date: selectedDate,
+            date: String(selectedDate),
             statusOfDay,
             meansOfTransport,
             routeTripFrom,
@@ -113,14 +113,6 @@
       dispatch('save');
     }
   }
-  // if (id) {
-  //   logData.updateLogDate(id, logDate);
-  // } else {
-  //   logData.addLogDate({
-  //     ...logDate,
-  //     id: 'xxxx',
-  //   });
-  // }
 
   function updateSelectedDate(date) {
     selectedDate = date;

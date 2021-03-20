@@ -1,7 +1,8 @@
 import { chunkArray, reduceDates } from './utils';
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
-export const getWeekNumber = (day) => {
+export const getWeekNumber = (date) => {
+  let day = new Date(date);
   // Copy date so don't modify original
   const d = new Date(
     Date.UTC(day.getFullYear(), day.getMonth(), day.getDate())
