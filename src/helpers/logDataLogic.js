@@ -25,7 +25,6 @@ export const getNumberOfWeeks = (logData) => {
 };
 
 export const getYearAndWeekNumber = (logData, index) => {
-  console.log(logData, 'slider');
   const reducedDates = reduceDates(logData);
   // Get groups of 5
   const week = chunkArray(reducedDates, 5)[index];

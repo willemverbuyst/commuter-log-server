@@ -20,10 +20,8 @@
 
   let showForm = false;
   let isLoading = true;
-  let weekIndexInLogData = 48;
+  let weekIndexInLogData = 0;
   let edittedId;
-
-  $: console.log(logData);
 
   var firebaseConfig = {
     apiKey: __myapp.env.API_KEY,
@@ -52,6 +50,7 @@
         loadedLogData.push({
           ...data[key],
           id: key,
+          date: new Date(data[key].date),
         });
       }
       setTimeout(() => {
