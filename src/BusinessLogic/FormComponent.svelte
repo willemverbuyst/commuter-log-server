@@ -82,6 +82,7 @@
     } else {
       logData.addLogDate({
         ...logDate,
+        id: 'xxxx',
       });
     }
 
