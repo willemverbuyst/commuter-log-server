@@ -14,13 +14,14 @@ export const reduceDates = (dates) => {
   let container = {};
 
   dates.forEach(function (d) {
-    if (container.hasOwnProperty(d.date)) {
-      container[d.date] = {
+    let adjustedDate = String(d.date).slice(0, 15);
+    if (container.hasOwnProperty(adjustedDate)) {
+      container[adjustedDate] = {
         ...d,
-        durationTrip: container[d.date].durationTrip + d.durationTrip,
+        durationTrip: container[adjustedDate].durationTrip + d.durationTrip,
       };
     } else {
-      container[d.date] = { ...d };
+      container[adjustedDate] = { ...d };
     }
   });
 
