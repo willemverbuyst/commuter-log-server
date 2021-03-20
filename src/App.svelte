@@ -65,7 +65,7 @@
   {/if}
   <div class="dashboard__section">
     <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
-    <!-- <GaugeChart logData={$logData} {weekIndexInLogData} /> -->
+    <GaugeChart logData={$logData} {weekIndexInLogData} />
   </div>
   <!-- <div class="dashboard__section">
     <Card logData={$logData} {weekIndexInLogData} on:edit={startEdit} />

@@ -2,7 +2,7 @@
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
-  import { actualTravelTime } from '../../Helpers/chartLogic/speedometerChart';
+  import { actualTravelTime } from '../../Helpers/chartLogic/gaugeChart';
 
   let gaugeChart;
   export let logData;
