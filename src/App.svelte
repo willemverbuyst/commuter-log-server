@@ -16,7 +16,7 @@
   import { workingDays } from './dummyData';
 
   let showForm = false;
-  let weekIndexInLogData = 7;
+  let weekIndexInLogData = 1;
   let edittedId;
 
   logData.setLogData(workingDays);

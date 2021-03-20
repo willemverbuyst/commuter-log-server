@@ -14,9 +14,9 @@
       <tr>
         <th class="tc--align-right">Date</th>
         <th>Work</th>
-        <th>Trip One</th>
-        <th>Trip Two</th>
-        <th class="tc--align-right">Total Travel Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th class="tc--align-right">Travel Time</th>
         <th />
       </tr>
       {#each logData as logDate}
@@ -33,12 +33,9 @@
           >
         {:else}
           <td>{logDate.meansOfTransport}</td>
-          <td>{logDate.routeTripOne}</td>
-          <td>{logDate.routeTripTwo}</td>
-          <td class="tc--align-right"
-            >{formatDuration(
-              logDate.durationTripOne + logDate.durationTripTwo
-            )}</td
+          <td>{logDate.routeTripFrom}</td>
+          <td>{logDate.routeTripTo}</td>
+          <td class="tc--align-right">{formatDuration(logDate.durationTrip)}</td
           >
           <TableButton on:click={() => dispatch('edit', logDate.id)}
             >Edit</TableButton
