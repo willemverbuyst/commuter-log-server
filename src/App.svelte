@@ -16,10 +16,14 @@
   import showGrid from './Store/appState';
   import logData from './Store/logState';
   import { workingDays } from './dummyData';
+  import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
 
   let showForm = false;
-  let weekIndexInLogData = 1;
+  let isLoading = true;
+  let weekIndexInLogData = 48;
   let edittedId;
+
+  $: console.log(logData);
 
   var firebaseConfig = {
     apiKey: __myapp.env.API_KEY,
@@ -33,7 +37,33 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  logData.setLogData(workingDays);
+  // logData.setLogData(workingDays);
+
+  fetch(`${__myapp.env.DATABASE}/logdata.json`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Fetching logdata failed, please try again!');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      const loadedLogData = [];
+      for (const key in data) {
+        loadedLogData.push({
+          ...data[key],
+          id: key,
+        });
+      }
+      setTimeout(() => {
+        isLoading = false;
+        logData.setLogData(loadedLogData);
+      }, 1000);
+    })
+    .catch((err) => {
+      error = err;
+      isloading = false;
+      console.log(err);
+    });
 
   function cancelForm() {
     showForm = false;
@@ -62,42 +92,46 @@
     <Button on:click={() => (showForm = true)}>Add Day</Button>
     <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
   </div>
+  {#if isLoading}
+    <LoadingSpinner />
+  {:else}
+    <div class="slider-container">
+      <Slider
+        {weekIndexInLogData}
+        on:change={(event) => updateSelectedWeek(event)}
+        logData={$logData}
+      />
+    </div>
+    {#if showForm}
+      <FormComponent
+        id={edittedId}
+        on:cancel={cancelForm}
+        on:save={saveLogDate}
+      />
+    {/if}
 
-  <div class="slider-container">
-    <Slider
-      {weekIndexInLogData}
-      on:change={(event) => updateSelectedWeek(event)}
-      logData={$logData}
-    />
-  </div>
-  {#if showForm}
-    <FormComponent
-      id={edittedId}
-      on:cancel={cancelForm}
-      on:save={saveLogDate}
-    />
-  {/if}
-  <div class="dashboard__section">
-    <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
-    <GaugeChart logData={$logData} {weekIndexInLogData} />
-  </div>
-  <!-- <div class="dashboard__section">
+    <div class="dashboard__section">
+      <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
+      <GaugeChart logData={$logData} {weekIndexInLogData} />
+    </div>
+    <!-- <div class="dashboard__section">
     <Card logData={$logData} {weekIndexInLogData} on:edit={startEdit} />
   </div> -->
-  <div class="dashboard__section">
-    <AllWorkingDays logData={$logData} showGrid={$showGrid} />
-  </div>
-  <div class="dashboard__section">
-    <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
-    <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
-  </div>
-  <div class="dashboard__section">
-    <PartitionChart logData={$logData} />
-    <CarVsPublicChart logData={$logData} />
-  </div>
-  <div class="dashboard__section">
-    <Table logData={$logData} on:edit={startEdit} />
-  </div>
+    <div class="dashboard__section">
+      <AllWorkingDays logData={$logData} showGrid={$showGrid} />
+    </div>
+    <div class="dashboard__section">
+      <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
+      <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
+    </div>
+    <div class="dashboard__section">
+      <PartitionChart logData={$logData} />
+      <CarVsPublicChart logData={$logData} />
+    </div>
+    <div class="dashboard__section">
+      <Table logData={$logData} on:edit={startEdit} />
+    </div>
+  {/if}
 </main>
 
 <style>

@@ -60,7 +60,7 @@
     const logDate =
       statusOfDay === 'working at the office'
         ? {
-            date: String(selectedDate),
+            date: selectedDate,
             statusOfDay,
             meansOfTransport,
             routeTripFrom,
@@ -115,6 +115,7 @@
   }
 
   function updateSelectedDate(date) {
+    date.setHours(date.getHours() + 1);
     selectedDate = date;
   }
 </script>
