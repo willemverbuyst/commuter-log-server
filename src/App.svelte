@@ -75,7 +75,7 @@
   </div>
   <div class="dashboard__section">
     <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
-    <!-- <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} /> -->
+    <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
   </div>
   <!-- <div class="dashboard__section">
     <PartitionChart logData={$logData} />

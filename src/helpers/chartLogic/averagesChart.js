@@ -1,9 +1,12 @@
 import { getWeekNumber } from './chartLogic';
-import { chunkArray } from '../utils';
+import { chunkArray, reduceDates } from '../utils';
 
 // STEP LINE CHART, average travel time per week
-export const getAveragePerWeekData = (workingDays) => {
-  const weeks = chunkArray(workingDays, 5);
+export const getAveragePerWeekData = (logData) => {
+  // Combine all the days with the same date
+  const reducedDates = reduceDates(logData);
+  // Get groups of 5
+  const weeks = chunkArray(reducedDates, 5);
   const averages = weeks.map((week) => getAveragePerWeek(week));
   const labels = weeks.map((a) => `w${getWeekNumber(a[0].date)[1]}`);
   const maxForDisplay = Math.max(...averages) * 1.2;
@@ -23,9 +26,7 @@ const getAveragePerWeek = (week) => {
     weekWithoutDayOff.length > 0
       ? weekWithoutDayOff
           .map((day) =>
-            day.statusOfDay === 'working from home'
-              ? 0
-              : day.durationTripOne + day.durationTripTwo
+            day.statusOfDay === 'working from home' ? 0 : day.durationTrip
           )
           .reduce((a, b) => a + b) / weekWithoutDayOff.length
       : 0;
