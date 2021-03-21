@@ -47,7 +47,7 @@
           {
             data: travelTimes,
             fill: true,
-            lineTension: 0.3,
+            lineTension: 0,
             backgroundColor: gradientFill,
             borderWidth: 0,
             order: 2,

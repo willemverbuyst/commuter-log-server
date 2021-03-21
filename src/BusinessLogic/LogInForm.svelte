@@ -1,5 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import firebase from 'firebase/app';
+  import 'firebase/auth';
   import Modal from '../UI/Modal/Modal.svelte';
 
   let email = '';
@@ -14,24 +16,24 @@
   function signUpWithEmailPassword() {
     console.log(email);
     console.log(password);
-    dispatch('logIn');
-    // firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     var user = userCredential.user;
-    //     console.log(user);
-    //     dispatch('logIn');
-    //     email = '';
-    //     password = '';
-    //   })
-    //   .catch((error) => {
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     console.log(errorCode);
-    //     console.log(errorMessage);
-    //   });
+    // dispatch('logIn');
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log(user);
+        dispatch('logIn');
+        email = '';
+        password = '';
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
   }
 </script>
 
