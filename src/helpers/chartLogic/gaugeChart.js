@@ -13,9 +13,7 @@ const getTotalsPerWeek = (week) => {
 
   const totalPerWeek =
     weekWithoutDayOff.length > 0
-      ? weekWithoutDayOff
-          .map((day) => day.durationTripOne + day.durationTripTwo)
-          .reduce((a, b) => a + b)
+      ? weekWithoutDayOff.map((day) => day.durationTrip).reduce((a, b) => a + b)
       : 0;
 
   return totalPerWeek;
