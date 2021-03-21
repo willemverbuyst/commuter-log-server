@@ -121,6 +121,7 @@
 </script>
 
 <Modal on:cancel>
+  <h1>Add a day to log</h1>
   <form>
     <DatePicker {selectedDate} {updateSelectedDate} />
     <div class="radio-button__container">

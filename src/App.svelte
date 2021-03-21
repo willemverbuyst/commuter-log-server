@@ -2,6 +2,7 @@
   import firebase from 'firebase/app';
   import 'firebase/auth';
   import FormComponent from './BusinessLogic/FormComponent.svelte';
+  import LogInForm from './BusinessLogic/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
   import Card from './UI/Card/Card.svelte';
   import GaugeChart from './UI/Charts/GaugeChart.svelte';
@@ -15,10 +16,11 @@
   import Table from './UI/Table/Table.svelte';
   import showGrid from './Store/appState';
   import logData from './Store/logState';
-  import { workingDays } from './dummyData';
+  // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
 
   let showForm = false;
+  let showLogIn = false;
   let isLoading = true;
   let weekIndexInLogData = 0;
   let edittedId;
@@ -66,6 +68,12 @@
 
   function cancelForm() {
     showForm = false;
+    showLogIn = false;
+  }
+
+  function logIn() {
+    console.log('user logs in');
+    showLogIn = false;
   }
 
   function toggleGrid() {
@@ -90,6 +98,7 @@
   <div class="nav-container">
     <Button on:click={() => (showForm = true)}>Add Day</Button>
     <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
+    <Button on:click={() => (showLogIn = true)}>Log In</Button>
   </div>
   {#if isLoading}
     <LoadingSpinner />
@@ -101,6 +110,10 @@
         logData={$logData}
       />
     </div>
+    {#if showLogIn}
+      <LogInForm on:cancel={cancelForm} on:logIn={logIn} />
+    {/if}
+
     {#if showForm}
       <FormComponent
         id={edittedId}

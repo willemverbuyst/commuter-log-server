@@ -22,7 +22,6 @@
     out:fly={{ y: 300 }}
   >
     <div class="form-container">
-      <h1>Add a day to log</h1>
       <slot />
       <footer>
         <slot name="footer" />
