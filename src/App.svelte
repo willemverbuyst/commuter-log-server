@@ -22,6 +22,7 @@
   let showForm = false;
   let showLogIn = false;
   let isLoading = true;
+  let signedIn = false;
   let weekIndexInLogData = 0;
   let edittedId;
 
@@ -74,6 +75,7 @@
   function logIn() {
     console.log('user logs in');
     showLogIn = false;
+    signedIn = true;
   }
 
   function toggleGrid() {
@@ -82,6 +84,19 @@
 
   function saveLogDate() {
     showForm = false;
+  }
+
+  function signOut() {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        signedIn = false;
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+    console.log(signedIn);
   }
 
   function startEdit(event) {
@@ -98,7 +113,11 @@
   <div class="nav-container">
     <Button on:click={() => (showForm = true)}>Add Day</Button>
     <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
-    <Button on:click={() => (showLogIn = true)}>Log In</Button>
+    {#if !signedIn}
+      <Button on:click={() => (showLogIn = true)}>Log In</Button>
+    {:else}
+      <Button on:click={signOut}>Sign out</Button>
+    {/if}
   </div>
   {#if isLoading}
     <LoadingSpinner />
