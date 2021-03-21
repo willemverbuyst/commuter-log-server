@@ -1,5 +1,8 @@
-export const getAllWorkingDaysData = (workingDays) => {
-  const withoutDayOff = workingDays.filter(
+import { reduceDates } from '../utils';
+
+export const getAllWorkingDaysData = (logData) => {
+  const reducedDates = reduceDates(logData);
+  const withoutDayOff = reducedDates.filter(
     (day) => day.statusOfDay !== 'day off'
   );
   const travelTimes = withoutDayOff.map((day) =>

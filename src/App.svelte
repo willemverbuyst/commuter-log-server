@@ -4,7 +4,7 @@
   import FormComponent from './BusinessLogic/FormComponent.svelte';
   import LogInForm from './BusinessLogic/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
-  import Card from './UI/Card/Card.svelte';
+  // import Card from './UI/Card/Card.svelte';
   import GaugeChart from './UI/Charts/GaugeChart.svelte';
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
@@ -39,6 +39,7 @@
   firebase.initializeApp(firebaseConfig);
 
   // logData.setLogData(workingDays);
+  // isLoading = false;
 
   fetch(`${__myapp.env.DATABASE}/logdata.json`)
     .then((res) => {
