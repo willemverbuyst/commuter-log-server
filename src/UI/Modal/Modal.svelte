@@ -92,7 +92,7 @@
   }
 
   .form-container {
-    max-width: 500px;
+    max-width: 400px;
     margin: auto;
     padding: 1rem;
     color: #aaa;
