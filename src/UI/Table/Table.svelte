@@ -7,6 +7,7 @@
     getYears,
   } from '../../Helpers/logDataLogic';
   import { getDay, getYear } from '../../Helpers/utils';
+  import { filterData } from '../../Helpers/tableLogic/filter';
   import TableButton from '../Buttons/TableButton.svelte';
   import TableDropDown from '../Inputs/TableDropdown.svelte';
   import { routes } from '../../constants';
@@ -50,65 +51,39 @@
     switch (dropdown) {
       case 'routeFrom':
         routeFrom = event.target.value;
-        filteredLogData = filteredLogData.filter((date) =>
-          status === 'no sorting' ? date : date.routeTripFrom === routeFrom
-        );
+        filteredLogData = filterData(filteredLogData, routeFrom, dropdown);
         break;
       case 'routeTo':
         routeTo = event.target.value;
-        filteredLogData = filteredLogData.filter((date) =>
-          status === 'no sorting' ? date : date.routeTripTo === routeTo
-        );
+        filteredLogData = filterData(filteredLogData, routeTo, dropdown);
         break;
       case 'sortDate':
         sortDatesOption = event.target.value;
-        filteredLogData =
-          sortDatesOption === 'ascending'
-            ? [...filteredLogData].sort(
-                (a, b) => new Date(a.date) - new Date(b.date)
-              )
-            : [...filteredLogData].sort(
-                (a, b) => new Date(b.date) - new Date(a.date)
-              );
+        filteredLogData = filterData(
+          filteredLogData,
+          sortDatesOption,
+          dropdown
+        );
         break;
       case 'sortTravelTime':
         sortTravelTimeOption = event.target.value;
-        filteredLogData =
-          sortTravelTimeOption === 'ascending'
-            ? filteredLogData
-                .map((date) =>
-                  date.statusOfDay !== 'working at the office'
-                    ? { ...date, durationTrip: 0 }
-                    : date
-                )
-                .sort((a, b) => a.durationTrip - b.durationTrip)
-            : filteredLogData
-                .map((date) =>
-                  date.statusOfDay !== 'working at the office'
-                    ? { ...date, durationTrip: 0 }
-                    : date
-                )
-                .sort((a, b) => b.durationTrip - a.durationTrip);
+        filteredLogData = filterData(
+          filteredLogData,
+          sortTravelTimeOption,
+          dropdown
+        );
         break;
       case 'status':
         status = event.target.value;
-        filteredLogData = filteredLogData.filter((date) =>
-          status === 'all' ? date : date.statusOfDay === status
-        );
+        filteredLogData = filterData(filteredLogData, status, dropdown);
         break;
       case 'week':
         weekNumber = event.target.value;
-        filteredLogData = filteredLogData.filter((date) =>
-          weekNumber === 'all'
-            ? date
-            : Number(date.weekNumber) === Number(weekNumber)
-        );
+        filteredLogData = filterData(filteredLogData, weekNumber, dropdown);
         break;
       case 'year':
         year = event.target.value;
-        filteredLogData = filteredLogData.filter((date) =>
-          year === 'all' ? date : Number(getYear(date.date)) === Number(year)
-        );
+        filteredLogData = filterData(filteredLogData, year, dropdown);
         break;
       default:
         resetFilters();
