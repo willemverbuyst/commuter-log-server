@@ -46,7 +46,7 @@
       65% 60%,
       circle,
       transparent 30%,
-      #222 30%
+      var(--main-bg-color-dark) 30%
     );
   }
   .modal__left--bottom {
@@ -59,7 +59,7 @@
       75% 80%,
       circle,
       transparent 15%,
-      #222 15%
+      var(--main-bg-color-dark) 15%
     );
   }
 
@@ -73,7 +73,7 @@
       90% 20%,
       circle,
       transparent 5%,
-      #222 5%
+      var(--main-bg-color-dark) 5%
     );
   }
 
@@ -87,7 +87,7 @@
       35% 70%,
       circle,
       transparent 15%,
-      #222 15%
+      var(--main-bg-color-dark) 15%
     );
   }
 
@@ -95,6 +95,6 @@
     max-width: 400px;
     margin: auto;
     padding: 1rem;
-    color: #aaa;
+    color: var(--main-txt-color);
   }
 </style>

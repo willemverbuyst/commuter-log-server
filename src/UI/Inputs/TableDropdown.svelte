@@ -29,25 +29,27 @@
     width: 100%;
     font-size: 12px;
     line-height: 1.2;
-    color: rgba(170, 170, 170, 0.3);
+    text-transform: uppercase;
+    color: var(--main-txt-color);
     font-weight: light;
-    border: 1px solid #333;
+    border: 1px solid var(--main-bg-color);
     border-top: 0px;
-    background: #333;
+    background: var(--main-bg-color);
     padding: 0.8rem 1rem;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
+    box-shadow: inset 1px 1px 1px var(--main-bg-color-light),
+      inset -1px -1px 1px var(--main-bg-color-dark);
     transition: 0.3s ease-in;
   }
 
   select:focus,
   select:hover {
     outline: none;
-    /* box-shadow: inset 1px 1px 1px #222, inset -1px -1px 1px #444; */
   }
 
   select:active {
-    box-shadow: inset 1px 1px 1px #222, inset -1px -1px 1px #444;
+    box-shadow: inset 1px 1px 1px var(--main-bg-color-dark),
+      inset -1px -1px 1px var(--main-bg-color-light);
   }
 </style>

@@ -15,7 +15,7 @@
     /* width: 300px; */
     font: inherit;
     color: inherit;
-    border: 1px solid #fff;
+    border: 1px solid var(--main-bg-color);
     border-radius: 7px;
     background: transparent;
     padding: 10px 20px;
@@ -23,7 +23,7 @@
   }
 
   input:focus {
-    border-color: #f1f1f1;
+    border-color: var(--main-bg-color-dark);
     outline: none;
   }
 

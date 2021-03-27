@@ -12,25 +12,26 @@
     font-size: 12px;
     line-height: 1.2;
     text-transform: uppercase;
-    color: #aaa;
+    color: var(--main-txt-color);
     font-weight: bold;
-    border: 1px solid #333;
+    border: 1px solid var(--main-bg-color);
     border-radius: 7px;
-    background: #333;
+    background: var(--main-bg-color);
     padding: 0.5rem 1rem;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: inset 1px 1px 1px #444, inset -1px -1px 1px #222;
+    box-shadow: inset 1px 1px 1px var(--main-bg-color-light),
+      inset -1px -1px 1px var(--main-bg-color-dark);
     transition: 0.3s ease-in;
   }
 
   button:focus,
   button:hover {
     outline: none;
-    /* box-shadow: inset 1px 1px 1px #222, inset -1px -1px 1px #444; */
   }
 
   button:active {
-    box-shadow: inset 1px 1px 1px #222, inset -1px -1px 1px #444;
+    box-shadow: inset 1px 1px 1px var(--main-bg-color-dark),
+      inset -1px -1px 1px var(--main-bg-color-light);
   }
 </style>

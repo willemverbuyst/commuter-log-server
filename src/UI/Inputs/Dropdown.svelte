@@ -24,7 +24,7 @@
 
   .trip-input__label {
     width: 100%;
-    color: rgba(170, 170, 170, 0.3);
+    color: var(--main-txt-color);
     margin-bottom: 5px;
   }
 
@@ -36,11 +36,12 @@
     font: inherit;
     color: inherit;
     border: none;
-    background: transparent;
+    background: var(--main-bg-color-dark);
     transition: border-color 0.1s ease-out;
     cursor: pointer;
     border: none;
-    box-shadow: inset 2px 2px 2px #111, inset -2px -2px 2px #333;
+    box-shadow: inset 2px 2px 2px var(--main-bg-color-darker),
+      inset -2px -2px 2px var(--main-bg-color);
   }
 
   select:focus {
