@@ -117,117 +117,68 @@
 </script>
 
 <div class="dashboard__container margin-bottom">
-  <div>
+  <div id="reset-btn">
     <TableButton on:click={resetFilters}>Reset Filters</TableButton>
   </div>
   <div class="table__container">
     <table>
       <tr>
         <th>
-          <!-- svelte-ignore a11y-no-onchange -->
-          <!-- <div class="trip-input__label">Year</div>
-            <select
-              value={year}
-              on:change={(event) => updateData(event, 'year')}
-            >
-              {#each years as y}
-                <option value={y}>{y}</option>
-              {/each}
-            </select>
-          </div>
-          <div class="trip-input__container">
-          </div>  -->
           <TableDropdown
             label="year"
-            values={years}
+            options={years}
             value={year}
             on:change={(event) => updateData(event, 'year')}
           />
         </th>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">Week#</div>
-            <!-- svelte-ignore a11y-no-onchange -->
-            <select
-              value={weekNumber}
-              on:change={(event) => updateData(event, 'week')}
-            >
-              {#each weekNumbers as w}
-                <option value={w}>{w}</option>
-              {/each}
-            </select>
-          </div></th
-        >
+          <TableDropdown
+            label="Week#"
+            options={weekNumbers}
+            value={weekNumber}
+            on:change={(event) => updateData(event, 'week')}
+          />
+        </th>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">Date</div>
-            <!-- svelte-ignore a11y-no-onchange -->
-            <select
-              value={sortDatesOption}
-              on:change={(event) => updateData(event, 'sortDate')}
-            >
-              {#each sortDatesOptions as sDO}
-                <option value={sDO}>{sDO}</option>
-              {/each}
-            </select>
-          </div></th
-        >
+          <TableDropdown
+            label="Date"
+            options={sortDatesOptions}
+            value={sortDatesOption}
+            on:change={(event) => updateData(event, 'sortDate')}
+          />
+        </th>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">Work</div>
-            <!-- svelte-ignore a11y-no-onchange -->
-            <select
-              value={status}
-              on:change={(event) => updateData(event, 'status')}
-            >
-              {#each statuses as s}
-                <option value={s}>{s}</option>
-              {/each}
-            </select>
-          </div></th
-        >
+          <TableDropdown
+            label="Working"
+            options={statuses}
+            value={status}
+            on:change={(event) => updateData(event, 'status')}
+          />
+        </th>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">From</div>
-            <!-- svelte-ignore a11y-no-onchange -->
-            <select
-              value={routeFrom}
-              on:change={(event) => updateData(event, 'routeFrom')}
-            >
-              {#each routesFrom as rF}
-                <option value={rF}>{rF}</option>
-              {/each}
-            </select>
-          </div></th
-        >
+          <TableDropdown
+            label="From"
+            options={routesFrom}
+            value={routeFrom}
+            on:change={(event) => updateData(event, 'routeFrom')}
+          />
+        </th>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">To</div>
-            <!-- svelte-ignore a11y-no-onchange -->
-            <select
-              value={routeTo}
-              on:change={(event) => updateData(event, 'routeTo')}
-            >
-              {#each routesTo as rT}
-                <option value={rT}>{rT}</option>
-              {/each}
-            </select>
-          </div></th
-        >
+          <TableDropdown
+            label="To"
+            options={routesTo}
+            value={routeTo}
+            on:change={(event) => updateData(event, 'routeTo')}
+          />
+        </th>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">Travel Time</div>
-            <!-- svelte-ignore a11y-no-onchange -->
-            <select
-              value={sortTravelTimeOption}
-              on:change={(event) => updateData(event, 'sortTravelTime')}
-            >
-              {#each sortTravelTimeOptions as sTTO}
-                <option value={sTTO}>{sTTO}</option>
-              {/each}
-            </select>
-          </div></th
-        >
+          <TableDropdown
+            label="Travel Time"
+            options={sortTravelTimeOptions}
+            value={sortTravelTimeOption}
+            on:change={(event) => updateData(event, 'sortTravelTime')}
+          />
+        </th>
         <th />
       </tr>
       {#each filteredLogData as logDate}
@@ -260,6 +211,10 @@
 </div>
 
 <style>
+  #reset-btn {
+    margin-bottom: 0.5rem;
+  }
+
   .table__container {
     width: 1150px;
     font-family: 'Helvetica Neue';

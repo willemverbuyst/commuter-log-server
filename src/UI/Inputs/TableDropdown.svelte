@@ -1,6 +1,6 @@
 <script>
   export let label;
-  export let values;
+  export let options;
   export let value;
 </script>
 
@@ -8,8 +8,8 @@
   <div class="table-dropdown__label">{label}</div>
   <!-- svelte-ignore a11y-no-onchange -->
   <select {value} on:change>
-    {#each values as v}
-      <option value={v}>{v}</option>
+    {#each options as option}
+      <option value={option}>{option}</option>
     {/each}
   </select>
 </div>
