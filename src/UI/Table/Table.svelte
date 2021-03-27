@@ -30,8 +30,8 @@
     sortTravelTimeOption: 'no sorting',
     statuses: ['all', ...getStatuses(filteredLogData)],
     status: 'all',
-    weekNumbers: ['all', ...getWeekNumbers(filteredLogData)],
-    weekNumber: 'all',
+    weeks: ['all', ...getWeekNumbers(filteredLogData)],
+    week: 'all',
     years: ['all', ...getYears(filteredLogData)],
     year: 'all',
   };
@@ -42,64 +42,14 @@
     filters.sortDatesOption = 'no sorting';
     filters.sortTravelTimeOption = 'no sorting';
     filters.status = 'all';
-    filters.weekNumber = 'all';
+    filters.week = 'all';
     filters.year = 'all';
     filteredLogData = logData;
   }
 
   function updateData(event, dropdown) {
-    switch (dropdown) {
-      case 'routeFrom':
-        filters.routeFrom = event.target.value;
-        filteredLogData = filterData(
-          filteredLogData,
-          filters.routeFrom,
-          dropdown
-        );
-        break;
-      case 'routeTo':
-        filters.routeTo = event.target.value;
-        filteredLogData = filterData(
-          filteredLogData,
-          filters.routeTo,
-          dropdown
-        );
-        break;
-      case 'sortDate':
-        filters.sortDatesOption = event.target.value;
-        filteredLogData = filterData(
-          filteredLogData,
-          filters.sortDatesOption,
-          dropdown
-        );
-        break;
-      case 'sortTravelTime':
-        filters.sortTravelTimeOption = event.target.value;
-        filteredLogData = filterData(
-          filteredLogData,
-          filtres.sortTravelTimeOption,
-          dropdown
-        );
-        break;
-      case 'status':
-        filters.status = event.target.value;
-        filteredLogData = filterData(filteredLogData, filters.status, dropdown);
-        break;
-      case 'week':
-        filters.weekNumber = event.target.value;
-        filteredLogData = filterData(
-          filteredLogData,
-          filters.weekNumber,
-          dropdown
-        );
-        break;
-      case 'year':
-        filters.year = event.target.value;
-        filteredLogData = filterData(filteredLogData, filters.year, dropdown);
-        break;
-      default:
-        resetFilters();
-    }
+    filters[dropdown] = event.target.value;
+    filteredLogData = filterData(filteredLogData, filters[dropdown], dropdown);
   }
 </script>
 
@@ -121,8 +71,8 @@
         <th>
           <TableDropdown
             label="Week#"
-            options={filters.weekNumbers}
-            value={filters.weekNumber}
+            options={filters.weeks}
+            value={filters.week}
             on:change={(event) => updateData(event, 'week')}
           />
         </th>
