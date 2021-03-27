@@ -15,13 +15,13 @@
     start={minDate}
     end={maxDate}
     bind:selected={selectedDate}
-    buttonBackgroundColor="#222"
-    buttonTextColor="#aaa"
+    buttonBackgroundColor="var(--main-bg-color-dark)"
+    buttonTextColor="var(--main-txt-color)"
     highlightColor="purple"
     dayBackgroundColor="rgba(255, 0, 128, 1)"
-    dayTextColor="#222"
-    dayHighlightedBackgroundColor="#222"
-    dayHighlightedTextColor="#aaa"
+    dayTextColor="var(--main-bg-color-dark)"
+    dayHighlightedBackgroundColor="var(--main-bg-color-dark)"
+    dayHighlightedTextColor="var(--main-txt-color)"
   />
 </div>
 

@@ -115,7 +115,6 @@
 
 <style>
   th {
-    color: rgba(170, 170, 170, 0.3);
     text-align: center;
   }
 

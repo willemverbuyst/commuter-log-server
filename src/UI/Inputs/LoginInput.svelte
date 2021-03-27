@@ -33,7 +33,7 @@
 
   .text-input__label {
     width: 100%;
-    color: rgba(170, 170, 170, 0.3);
+    color: var(--main-txt-color);
     margin-bottom: 5px;
   }
 
@@ -44,9 +44,10 @@
     font: inherit;
     color: inherit;
     border: none;
-    background: transparent;
+    background: var(--main-bg-color-dark);
     text-align: center;
-    box-shadow: inset 2px 2px 2px #111, inset -2px -2px 2px #333;
+    box-shadow: inset 2px 2px 2px var(--main-bg-color-darker),
+      inset -2px -2px 2px var(--main-bg-color);
   }
 
   input:focus {
@@ -54,12 +55,13 @@
   }
 
   .invalid {
-    border: 2px solid #222;
-    box-shadow: inset 2px 2px 2px #333, inset -2px -2px 2px #111;
+    border: 2px solid var(--main-bg-color-dark);
+    box-shadow: inset 2px 2px 2px var(--main-bg-color),
+      inset -2px -2px 2px var(--main-bg-color-darker);
   }
 
   .error-message {
-    color: #aaa;
+    color: var(--main-txt-color);
     margin: 0.25rem 0;
   }
 </style>

@@ -58,7 +58,7 @@
     font-family: 'Helvetica Neue';
     font-size: 12px;
     line-height: 1.2;
-    color: #aaa;
+    color: var(--main-txt-color);
   }
 
   table {
@@ -69,8 +69,9 @@
   td {
     padding: 0.8rem 2rem;
     text-align: left;
-    border: 2px solid #333;
-    box-shadow: inset 0.5px 0.5px 0.5px #444, inset -0.5px -0.5px 0.5px #222;
+    border: 2px solid var(--main-bg-color);
+    box-shadow: inset 0.5px 0.5px 0.5px var(--main-bg-color-light),
+      inset -0.5px -0.5px 0.5px var(--main-bg-color-dark);
   }
 
   .tc--align-right {
