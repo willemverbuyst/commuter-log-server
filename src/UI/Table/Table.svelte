@@ -13,16 +13,19 @@
 
   const dispatch = createEventDispatcher();
 
-  const weekNumbers = ['all', ...getWeekNumbers(logData)];
+  let filteredLogData = logData;
+
+  let sortDatesOptions = ['ascending', 'descending'];
+  let sortDatesOption = sortDatesOptions[0];
+
+  let weekNumbers = ['all', ...getWeekNumbers(filteredLogData)];
   let weekNumber = weekNumbers[0];
 
-  const years = ['all', ...getYears(logData)];
+  let years = ['all', ...getYears(filteredLogData)];
   let year = years[0];
 
-  const statuses = ['all', ...getStatuses(logData)];
+  let statuses = ['all', ...getStatuses(filteredLogData)];
   let status = statuses[0];
-
-  let filteredLogData = logData;
 
   function resetFilters() {
     weekNumber = 'all';
@@ -35,28 +38,31 @@
     switch (dropdown) {
       case 'week':
         weekNumber = event.target.value;
-        // year = 'all';
-        // status = 'all';
         filteredLogData = filteredLogData.filter((date) =>
           weekNumber === 'all'
             ? date
             : Number(date.weekNumber) === Number(weekNumber)
         );
         break;
-      case 'year':
-        year = event.target.value;
-        weekNumber = 'all';
-        status = 'all';
-        filteredLogData = logData.filter((date) =>
-          year === 'all' ? date : Number(getYear(date.date)) === Number(year)
-        );
+      case 'sortDate':
+        console.log(sortDatesOption);
+        sortDatesOption = event.target.value;
+        console.log(sortDatesOption);
+        filteredLogData =
+          sortDatesOption === 'ascending'
+            ? [...logData].sort((a, b) => new Date(a.date) - new Date(b.date))
+            : [...logData].sort((a, b) => new Date(b.date) - new Date(a.date));
         break;
       case 'status':
         status = event.target.value;
-        weekNumber = 'all';
-        year = 'all';
         filteredLogData = logData.filter((date) =>
           status === 'all' ? date : date.statusOfDay === status
+        );
+        break;
+      case 'year':
+        year = event.target.value;
+        filteredLogData = logData.filter((date) =>
+          year === 'all' ? date : Number(getYear(date.date)) === Number(year)
         );
         break;
       default:
@@ -98,7 +104,20 @@
             </select>
           </div></th
         >
-        <th class="tc--align-right">Date</th>
+        <th>
+          <div class="trip-input__container">
+            <div class="trip-input__label">Date</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select
+              value={sortDatesOption}
+              on:change={(event) => updateData(event, 'sortDate')}
+            >
+              {#each sortDatesOptions as sDO}
+                <option value={sDO}>{sDO}</option>
+              {/each}
+            </select>
+          </div></th
+        >
         <th>
           <div class="trip-input__container">
             <div class="trip-input__label">Work</div>
