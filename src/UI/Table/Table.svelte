@@ -22,17 +22,22 @@
   const statuses = ['all', ...getStatuses(logData)];
   let status = statuses[0];
 
-  let filteredLogData = logData.filter((date) =>
-    weekNumber === 'all' ? date : date.weekNumber === weekNumber
-  );
+  let filteredLogData = logData;
+
+  function resetFilters() {
+    weekNumber = 'all';
+    year = 'all';
+    status = 'all';
+    filteredLogData = logData;
+  }
 
   function updateData(event, dropdown) {
     switch (dropdown) {
       case 'week':
         weekNumber = event.target.value;
-        year = 'all';
-        status = 'all';
-        filteredLogData = logData.filter((date) =>
+        // year = 'all';
+        // status = 'all';
+        filteredLogData = filteredLogData.filter((date) =>
           weekNumber === 'all'
             ? date
             : Number(date.weekNumber) === Number(weekNumber)
@@ -54,10 +59,13 @@
           status === 'all' ? date : date.statusOfDay === status
         );
         break;
+      default:
+        resetFilters();
     }
   }
 </script>
 
+<TableButton on:click={resetFilters}>Reset Filters</TableButton>
 <div class="dashboard__container margin-bottom">
   <div class="table__container">
     <table>
