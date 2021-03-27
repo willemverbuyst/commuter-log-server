@@ -10,6 +10,9 @@ export const chunkArray = (arr, size) => {
   return chunkedArr;
 };
 
+export const getUniqueValues = (value, index, self) =>
+  self.indexOf(value) === index;
+
 export const reduceDates = (dates) => {
   let container = {};
 

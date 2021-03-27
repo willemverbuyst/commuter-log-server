@@ -1,17 +1,35 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { formatDuration } from '../../Helpers/formatting';
+  import { getWeekNumbers } from '../../Helpers/logDataLogic';
   import TableButton from '../Buttons/TableButton.svelte';
 
   export let logData;
 
   const dispatch = createEventDispatcher();
+
+  const weekNumbers = getWeekNumbers(logData);
+  const weekNumber = weekNumbers[0];
+
+  $: console.log(weekNumbers);
 </script>
 
 <div class="dashboard__container margin-bottom">
   <div class="table__container">
     <table>
       <tr>
+        <th>
+          <div class="trip-input__container">
+            <div class="trip-input__label">Week#</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select value={weekNumber} on:change>
+              <option value="All">All</option>
+              {#each weekNumbers as w}
+                <option value={w}>{w}</option>
+              {/each}
+            </select>
+          </div></th
+        >
         <th class="tc--align-right">Date</th>
         <th>Work</th>
         <th>From</th>
@@ -20,6 +38,7 @@
         <th />
       </tr>
       {#each logData as logDate}
+        <td>{logDate.weekNumber}</td>
         <td class="tc--align-right">{logDate.date.toString().slice(0, 15)}</td>
         {#if logDate.statusOfDay === 'day off'}
           <td colspan="4" class="tc--day-off">Day off</td>

@@ -1,4 +1,25 @@
-import { chunkArray, reduceDates } from './utils';
+import { chunkArray, getUniqueValues, reduceDates } from './utils';
+
+export const getNumberOfWeeks = (logData) => {
+  const reducedDates = reduceDates(logData);
+  const numberOfWeeks = chunkArray(reducedDates, 5);
+
+  return numberOfWeeks.length;
+};
+
+export const getWeekNumbers = (logData) => {
+  const weekNumbers = logData.map((date) => date.weekNumber);
+
+  const uniqueNumbers = weekNumbers.filter(getUniqueValues);
+  return uniqueNumbers;
+};
+
+export const getWeekForCards = (logData, weekIndexInLogData) => {
+  const weeks = chunkArray(logData, 5);
+  const week = weeks[weekIndexInLogData];
+
+  return week;
+};
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
 export const getWeekNumber = (day) => {
@@ -17,13 +38,6 @@ export const getWeekNumber = (day) => {
   return [d.getFullYear(), weekNo];
 };
 
-export const getNumberOfWeeks = (logData) => {
-  const reducedDates = reduceDates(logData);
-  const numberOfWeeks = chunkArray(reducedDates, 5);
-
-  return numberOfWeeks.length;
-};
-
 export const getYearAndWeekNumber = (logData, index) => {
   const reducedDates = reduceDates(logData);
   // Get groups of 5
@@ -32,11 +46,4 @@ export const getYearAndWeekNumber = (logData, index) => {
   const yearAndWeekNumber = getWeekNumber(week[0].date);
 
   return yearAndWeekNumber;
-};
-
-export const getWeekForCards = (logData, weekIndexInLogData) => {
-  const weeks = chunkArray(logData, 5);
-  const week = weeks[weekIndexInLogData];
-
-  return week;
 };

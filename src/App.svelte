@@ -1,8 +1,8 @@
 <script>
   import firebase from 'firebase/app';
   import 'firebase/auth';
-  import FormComponent from './BusinessLogic/FormComponent.svelte';
-  import LogInForm from './BusinessLogic/LogInForm.svelte';
+  import FormComponent from './Business/FormComponent.svelte';
+  import LogInForm from './Business/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
   // import Card from './UI/Card/Card.svelte';
   import GaugeChart from './UI/Charts/GaugeChart.svelte';
