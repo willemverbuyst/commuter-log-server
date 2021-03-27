@@ -1,4 +1,4 @@
-import { chunkArray, getUniqueValues, reduceDates } from './utils';
+import { chunkArray, getUniqueValues, getYear, reduceDates } from './utils';
 
 export const getNumberOfWeeks = (logData) => {
   const reducedDates = reduceDates(logData);
@@ -10,8 +10,8 @@ export const getNumberOfWeeks = (logData) => {
 export const getWeekNumbers = (logData) => {
   const weekNumbers = logData.map((date) => date.weekNumber);
 
-  const uniqueNumbers = weekNumbers.filter(getUniqueValues);
-  return uniqueNumbers;
+  const uniqueWeekNumbers = weekNumbers.filter(getUniqueValues);
+  return uniqueWeekNumbers;
 };
 
 export const getWeekForCards = (logData, weekIndexInLogData) => {
@@ -46,4 +46,11 @@ export const getYearAndWeekNumber = (logData, index) => {
   const yearAndWeekNumber = getWeekNumber(week[0].date);
 
   return yearAndWeekNumber;
+};
+
+export const getYears = (logData) => {
+  const years = logData.map((date) => getYear(date.date));
+
+  const uniqueYears = years.filter(getUniqueValues);
+  return uniqueYears;
 };

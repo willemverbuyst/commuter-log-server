@@ -36,3 +36,5 @@ export const reduceDates = (dates) => {
 
   return reducedDates;
 };
+
+export const getYear = (date) => date.toString().slice(11, 15);

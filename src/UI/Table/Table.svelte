@@ -1,17 +1,22 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { formatDuration } from '../../Helpers/formatting';
-  import { getWeekNumbers } from '../../Helpers/logDataLogic';
+  import { getWeekNumbers, getYears } from '../../Helpers/logDataLogic';
+  import { getYear } from '../../Helpers/utils';
   import TableButton from '../Buttons/TableButton.svelte';
 
   export let logData;
 
   const dispatch = createEventDispatcher();
 
-  const weekNumbers = getWeekNumbers(logData);
+  const weekNumbers = ['all', ...getWeekNumbers(logData)];
   const weekNumber = weekNumbers[0];
 
+  const years = ['all', ...getYears(logData)];
+  const year = years[0];
+
   $: console.log(weekNumbers);
+  $: console.log(years);
 </script>
 
 <div class="dashboard__container margin-bottom">
@@ -20,10 +25,20 @@
       <tr>
         <th>
           <div class="trip-input__container">
+            <div class="trip-input__label">Year</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select value={year} on:change>
+              {#each years as y}
+                <option value={y}>{y}</option>
+              {/each}
+            </select>
+          </div></th
+        >
+        <th>
+          <div class="trip-input__container">
             <div class="trip-input__label">Week#</div>
             <!-- svelte-ignore a11y-no-onchange -->
             <select value={weekNumber} on:change>
-              <option value="All">All</option>
               {#each weekNumbers as w}
                 <option value={w}>{w}</option>
               {/each}
@@ -38,6 +53,7 @@
         <th />
       </tr>
       {#each logData as logDate}
+        <td>{getYear(logDate.date)}</td>
         <td>{logDate.weekNumber}</td>
         <td class="tc--align-right">{logDate.date.toString().slice(0, 15)}</td>
         {#if logDate.statusOfDay === 'day off'}
