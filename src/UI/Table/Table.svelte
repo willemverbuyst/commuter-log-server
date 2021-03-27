@@ -62,12 +62,20 @@
         sortTravelTimeOption = event.target.value;
         filteredLogData =
           sortTravelTimeOption === 'ascending'
-            ? [...filteredLogData].sort(
-                (a, b) => a.durationTrip - b.durationTrip
-              )
-            : [...filteredLogData].sort(
-                (a, b) => b.durationTrip - a.durationTrip
-              );
+            ? filteredLogData
+                .map((date) =>
+                  date.statusOfDay !== 'working at the office'
+                    ? { ...date, durationTrip: 0 }
+                    : date
+                )
+                .sort((a, b) => a.durationTrip - b.durationTrip)
+            : filteredLogData
+                .map((date) =>
+                  date.statusOfDay !== 'working at the office'
+                    ? { ...date, durationTrip: 0 }
+                    : date
+                )
+                .sort((a, b) => b.durationTrip - a.durationTrip);
         break;
       case 'status':
         status = event.target.value;
@@ -171,12 +179,12 @@
         <td>{logDate.weekNumber}</td>
         <td class="tc--align-right">{getDay(logDate.date)}</td>
         {#if logDate.statusOfDay === 'day off'}
-          <td colspan="4" class="tc--day-off">Day off</td>
+          <td colspan="4" class="tc--day-off">day off</td>
           <TableButton on:click={() => dispatch('edit', logDate.id)}
             >Edit</TableButton
           >
         {:else if logDate.statusOfDay === 'working from home'}
-          <td colspan="4">Working from home</td>
+          <td colspan="4">working from home</td>
           <TableButton on:click={() => dispatch('edit', logDate.id)}
             >Edit</TableButton
           >
