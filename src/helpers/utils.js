@@ -10,8 +10,12 @@ export const chunkArray = (arr, size) => {
   return chunkedArr;
 };
 
+export const getDay = (date) => date.toString().slice(0, 10);
+
 export const getUniqueValues = (value, index, self) =>
   self.indexOf(value) === index;
+
+export const getYear = (date) => date.toString().slice(11, 15);
 
 export const reduceDates = (dates) => {
   let container = {};
@@ -36,5 +40,3 @@ export const reduceDates = (dates) => {
 
   return reducedDates;
 };
-
-export const getYear = (date) => date.toString().slice(11, 15);

@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { formatDuration } from '../../Helpers/formatting';
   import { getWeekNumbers, getYears } from '../../Helpers/logDataLogic';
-  import { getYear } from '../../Helpers/utils';
+  import { getDay, getYear } from '../../Helpers/utils';
   import TableButton from '../Buttons/TableButton.svelte';
 
   export let logData;
@@ -10,13 +10,38 @@
   const dispatch = createEventDispatcher();
 
   const weekNumbers = ['all', ...getWeekNumbers(logData)];
-  const weekNumber = weekNumbers[0];
+  let weekNumber = weekNumbers[0];
 
   const years = ['all', ...getYears(logData)];
-  const year = years[0];
+  let year = years[0];
 
-  $: console.log(weekNumbers);
-  $: console.log(years);
+  let filteredLogData = logData.filter((date) =>
+    weekNumber === 'all' ? date : date.weekNumber === weekNumber
+  );
+
+  function updateData(event, dropdown) {
+    if (dropdown === 'week') {
+      weekNumber = event.target.value;
+      year = 'all';
+      filteredLogData = logData.filter((date) =>
+        weekNumber === 'all'
+          ? date
+          : Number(date.weekNumber) === Number(weekNumber)
+      );
+    }
+    if (dropdown === 'year') {
+      year = event.target.value;
+      weekNumber = 'all';
+      filteredLogData = logData.filter((date) =>
+        year === 'all'
+          ? date
+          : Number(Number(getYear(date.date))) === Number(year)
+      );
+    }
+  }
+
+  $: console.log(weekNumber);
+  $: console.log(year);
 </script>
 
 <div class="dashboard__container margin-bottom">
@@ -27,7 +52,10 @@
           <div class="trip-input__container">
             <div class="trip-input__label">Year</div>
             <!-- svelte-ignore a11y-no-onchange -->
-            <select value={year} on:change>
+            <select
+              value={year}
+              on:change={(event) => updateData(event, 'year')}
+            >
               {#each years as y}
                 <option value={y}>{y}</option>
               {/each}
@@ -38,7 +66,10 @@
           <div class="trip-input__container">
             <div class="trip-input__label">Week#</div>
             <!-- svelte-ignore a11y-no-onchange -->
-            <select value={weekNumber} on:change>
+            <select
+              value={weekNumber}
+              on:change={(event) => updateData(event, 'week')}
+            >
               {#each weekNumbers as w}
                 <option value={w}>{w}</option>
               {/each}
@@ -52,10 +83,10 @@
         <th class="tc--align-right">Travel Time</th>
         <th />
       </tr>
-      {#each logData as logDate}
+      {#each filteredLogData as logDate}
         <td>{getYear(logDate.date)}</td>
         <td>{logDate.weekNumber}</td>
-        <td class="tc--align-right">{logDate.date.toString().slice(0, 15)}</td>
+        <td class="tc--align-right">{getDay(logDate.date)}</td>
         {#if logDate.statusOfDay === 'day off'}
           <td colspan="4" class="tc--day-off">Day off</td>
           <TableButton on:click={() => dispatch('edit', logDate.id)}
