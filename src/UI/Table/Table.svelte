@@ -8,7 +8,9 @@
   } from '../../Helpers/logDataLogic';
   import { getDay, getYear } from '../../Helpers/utils';
   import TableButton from '../Buttons/TableButton.svelte';
+  import TableDropDown from '../Inputs/TableDropdown.svelte';
   import { routes } from '../../constants';
+  import TableDropdown from '../Inputs/TableDropdown.svelte';
 
   export let logData;
 
@@ -114,15 +116,16 @@
   }
 </script>
 
-<TableButton on:click={resetFilters}>Reset Filters</TableButton>
 <div class="dashboard__container margin-bottom">
+  <div>
+    <TableButton on:click={resetFilters}>Reset Filters</TableButton>
+  </div>
   <div class="table__container">
     <table>
       <tr>
         <th>
-          <div class="trip-input__container">
-            <div class="trip-input__label">Year</div>
-            <!-- svelte-ignore a11y-no-onchange -->
+          <!-- svelte-ignore a11y-no-onchange -->
+          <!-- <div class="trip-input__label">Year</div>
             <select
               value={year}
               on:change={(event) => updateData(event, 'year')}
@@ -131,8 +134,16 @@
                 <option value={y}>{y}</option>
               {/each}
             </select>
-          </div></th
-        >
+          </div>
+          <div class="trip-input__container">
+          </div>  -->
+          <TableDropdown
+            label="year"
+            values={years}
+            value={year}
+            on:change={(event) => updateData(event, 'year')}
+          />
+        </th>
         <th>
           <div class="trip-input__container">
             <div class="trip-input__label">Week#</div>
@@ -264,15 +275,12 @@
 
   th {
     color: rgba(170, 170, 170, 0.3);
+    text-align: center;
   }
 
-  th,
   td {
     padding: 0.8rem 2rem;
     text-align: left;
-  }
-
-  td {
     border: 2px solid #333;
     box-shadow: inset 0.5px 0.5px 0.5px #444, inset -0.5px -0.5px 0.5px #222;
   }
