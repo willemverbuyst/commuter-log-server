@@ -2,9 +2,14 @@ import { getMinutes } from './chartLogic';
 import { chunkArray, reduceDates } from '../utils';
 
 // Travel time per week which is considered acceptable according employer
-const normWorkTravel = 5 * 2 * 75;
+const normWorkTravel = 5 * 2 * 75; //750
 // Travel time per week according to google maps
-const timeMapsTravel = 5 * 2 * 90;
+const timeMapsTravel = 5 * 2 * 90; // 900
+// Difference 900 - 750 = 150
+// Width needle = 20
+// Example max 1500
+// Difference 1500 - 900 = 600
+// Total = 1500 + 20 = 1520
 
 const getTotalsPerWeek = (week) => {
   const weekWithoutDayOff = week.filter(
@@ -63,7 +68,7 @@ export const actualTravelTime = (logData, weekNumber) => {
       data: [
         totalPerWeek,
         20,
-        normWorkTravel + 20 - totalPerWeek,
+        normWorkTravel - totalPerWeek,
         timeMapsTravel - normWorkTravel,
         max - timeMapsTravel,
       ],
@@ -86,9 +91,9 @@ export const actualTravelTime = (logData, weekNumber) => {
       ],
       data: [
         normWorkTravel,
-        timeMapsTravel - totalPerWeek,
+        totalPerWeek - normWorkTravel,
         20,
-        timeMapsTravel + 20 - totalPerWeek,
+        timeMapsTravel - totalPerWeek,
         max - timeMapsTravel,
       ],
     };
@@ -111,9 +116,9 @@ export const actualTravelTime = (logData, weekNumber) => {
       data: [
         normWorkTravel,
         timeMapsTravel - normWorkTravel,
-        max - totalPerWeek,
+        totalPerWeek - timeMapsTravel,
         20,
-        max + 20 - totalPerWeek,
+        max - totalPerWeek,
       ],
     };
   } else {
