@@ -1,7 +1,6 @@
 import { getYear } from '../utils';
 
 export const filterData = (logData, value, dropdown) => {
-  console.log(logData, value, dropdown);
   let filteredData;
   switch (dropdown) {
     case 'routeFrom':
@@ -62,6 +61,5 @@ export const filterData = (logData, value, dropdown) => {
     default:
       logData;
   }
-  console.log(filteredData);
   return filteredData;
 };

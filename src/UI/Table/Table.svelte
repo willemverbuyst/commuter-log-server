@@ -19,71 +19,83 @@
 
   let filteredLogData = logData;
 
-  let routesFrom = ['no sorting', ...routes];
-  let routeFrom = routesFrom[0];
-
-  let routesTo = ['no sorting', ...routes];
-  let routeTo = routesTo[0];
-
-  let sortDatesOptions = ['no sorting', 'ascending', 'descending'];
-  let sortDatesOption = sortDatesOptions[0];
-
-  let sortTravelTimeOptions = ['no sorting', 'ascending', 'descending'];
-  let sortTravelTimeOption = sortTravelTimeOptions[0];
-
-  let weekNumbers = ['all', ...getWeekNumbers(filteredLogData)];
-  let weekNumber = weekNumbers[0];
-
-  let years = ['all', ...getYears(filteredLogData)];
-  let year = years[0];
-
-  let statuses = ['all', ...getStatuses(filteredLogData)];
-  let status = statuses[0];
+  let filters = {
+    routesFrom: ['no sorting', ...routes],
+    routeFrom: 'no sorting',
+    routesTo: ['no sorting', ...routes],
+    routeTo: 'no sorting',
+    sortDatesOptions: ['no sorting', 'ascending', 'descending'],
+    sortDatesOption: 'no sorting',
+    sortTravelTimeOptions: ['no sorting', 'ascending', 'descending'],
+    sortTravelTimeOption: 'no sorting',
+    statuses: ['all', ...getStatuses(filteredLogData)],
+    status: 'all',
+    weekNumbers: ['all', ...getWeekNumbers(filteredLogData)],
+    weekNumber: 'all',
+    years: ['all', ...getYears(filteredLogData)],
+    year: 'all',
+  };
 
   function resetFilters() {
-    weekNumber = 'all';
-    year = 'all';
-    status = 'all';
+    filters.routeFrom = 'no sorting';
+    filters.routeTo = 'no sorting';
+    filters.sortDatesOption = 'no sorting';
+    filters.sortTravelTimeOption = 'no sorting';
+    filters.status = 'all';
+    filters.weekNumber = 'all';
+    filters.year = 'all';
     filteredLogData = logData;
   }
 
   function updateData(event, dropdown) {
     switch (dropdown) {
       case 'routeFrom':
-        routeFrom = event.target.value;
-        filteredLogData = filterData(filteredLogData, routeFrom, dropdown);
-        break;
-      case 'routeTo':
-        routeTo = event.target.value;
-        filteredLogData = filterData(filteredLogData, routeTo, dropdown);
-        break;
-      case 'sortDate':
-        sortDatesOption = event.target.value;
+        filters.routeFrom = event.target.value;
         filteredLogData = filterData(
           filteredLogData,
-          sortDatesOption,
+          filters.routeFrom,
+          dropdown
+        );
+        break;
+      case 'routeTo':
+        filters.routeTo = event.target.value;
+        filteredLogData = filterData(
+          filteredLogData,
+          filters.routeTo,
+          dropdown
+        );
+        break;
+      case 'sortDate':
+        filters.sortDatesOption = event.target.value;
+        filteredLogData = filterData(
+          filteredLogData,
+          filters.sortDatesOption,
           dropdown
         );
         break;
       case 'sortTravelTime':
-        sortTravelTimeOption = event.target.value;
+        filters.sortTravelTimeOption = event.target.value;
         filteredLogData = filterData(
           filteredLogData,
-          sortTravelTimeOption,
+          filtres.sortTravelTimeOption,
           dropdown
         );
         break;
       case 'status':
-        status = event.target.value;
-        filteredLogData = filterData(filteredLogData, status, dropdown);
+        filters.status = event.target.value;
+        filteredLogData = filterData(filteredLogData, filters.status, dropdown);
         break;
       case 'week':
-        weekNumber = event.target.value;
-        filteredLogData = filterData(filteredLogData, weekNumber, dropdown);
+        filters.weekNumber = event.target.value;
+        filteredLogData = filterData(
+          filteredLogData,
+          filters.weekNumber,
+          dropdown
+        );
         break;
       case 'year':
-        year = event.target.value;
-        filteredLogData = filterData(filteredLogData, year, dropdown);
+        filters.year = event.target.value;
+        filteredLogData = filterData(filteredLogData, filters.year, dropdown);
         break;
       default:
         resetFilters();
@@ -101,86 +113,88 @@
         <th>
           <TableDropdown
             label="year"
-            options={years}
-            value={year}
+            options={filters.years}
+            value={filters.year}
             on:change={(event) => updateData(event, 'year')}
           />
         </th>
         <th>
           <TableDropdown
             label="Week#"
-            options={weekNumbers}
-            value={weekNumber}
+            options={filters.weekNumbers}
+            value={filters.weekNumber}
             on:change={(event) => updateData(event, 'week')}
           />
         </th>
         <th>
           <TableDropdown
             label="Date"
-            options={sortDatesOptions}
-            value={sortDatesOption}
+            options={filters.sortDatesOptions}
+            value={filters.sortDatesOption}
             on:change={(event) => updateData(event, 'sortDate')}
           />
         </th>
         <th>
           <TableDropdown
             label="Working"
-            options={statuses}
-            value={status}
+            options={filters.statuses}
+            value={filters.status}
             on:change={(event) => updateData(event, 'status')}
           />
         </th>
         <th>
           <TableDropdown
             label="From"
-            options={routesFrom}
-            value={routeFrom}
+            options={filters.routesFrom}
+            value={filters.routeFrom}
             on:change={(event) => updateData(event, 'routeFrom')}
           />
         </th>
         <th>
           <TableDropdown
             label="To"
-            options={routesTo}
-            value={routeTo}
+            options={filters.routesTo}
+            value={filters.routeTo}
             on:change={(event) => updateData(event, 'routeTo')}
           />
         </th>
         <th>
           <TableDropdown
             label="Travel Time"
-            options={sortTravelTimeOptions}
-            value={sortTravelTimeOption}
+            options={filters.sortTravelTimeOptions}
+            value={filters.sortTravelTimeOption}
             on:change={(event) => updateData(event, 'sortTravelTime')}
           />
         </th>
-        <th />
       </tr>
       {#each filteredLogData as logDate}
-        <td>{getYear(logDate.date)}</td>
-        <td>{logDate.weekNumber}</td>
-        <td class="tc--align-right">{getDay(logDate.date)}</td>
-        {#if logDate.statusOfDay === 'day off'}
-          <td colspan="4" class="tc--day-off">day off</td>
-          <TableButton on:click={() => dispatch('edit', logDate.id)}
-            >Edit</TableButton
-          >
-        {:else if logDate.statusOfDay === 'working from home'}
-          <td colspan="4">working from home</td>
-          <TableButton on:click={() => dispatch('edit', logDate.id)}
-            >Edit</TableButton
-          >
-        {:else}
-          <td>{logDate.meansOfTransport}</td>
-          <td>{logDate.routeTripFrom}</td>
-          <td>{logDate.routeTripTo}</td>
-          <td class="tc--align-right">{formatDuration(logDate.durationTrip)}</td
-          >
-          <TableButton on:click={() => dispatch('edit', logDate.id)}
-            >Edit</TableButton
-          >
-        {/if}
-        <tr />{/each}
+        <tr>
+          <td>{getYear(logDate.date)}</td>
+          <td>{logDate.weekNumber}</td>
+          <td class="tc--align-right">{getDay(logDate.date)}</td>
+          {#if logDate.statusOfDay === 'day off'}
+            <td colspan="4" class="tc--day-off">day off</td>
+            <TableButton on:click={() => dispatch('edit', logDate.id)}
+              >Edit</TableButton
+            >
+          {:else if logDate.statusOfDay === 'working from home'}
+            <td colspan="4">working from home</td>
+            <TableButton on:click={() => dispatch('edit', logDate.id)}
+              >Edit</TableButton
+            >
+          {:else}
+            <td>{logDate.meansOfTransport}</td>
+            <td>{logDate.routeTripFrom}</td>
+            <td>{logDate.routeTripTo}</td>
+            <td class="tc--align-right"
+              >{formatDuration(logDate.durationTrip)}</td
+            >
+            <TableButton on:click={() => dispatch('edit', logDate.id)}
+              >Edit</TableButton
+            >
+          {/if}
+        </tr>
+      {/each}
     </table>
   </div>
 </div>
