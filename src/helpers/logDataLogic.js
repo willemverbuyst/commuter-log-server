@@ -7,6 +7,13 @@ export const getNumberOfWeeks = (logData) => {
   return numberOfWeeks.length;
 };
 
+export const getStatuses = (logData) => {
+  const statuses = logData.map((date) => date.statusOfDay);
+
+  const uniqueStatuses = statuses.filter(getUniqueValues);
+  return uniqueStatuses;
+};
+
 export const getWeekNumbers = (logData) => {
   const weekNumbers = logData.map((date) => date.weekNumber);
 

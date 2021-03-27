@@ -1,7 +1,11 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { formatDuration } from '../../Helpers/formatting';
-  import { getWeekNumbers, getYears } from '../../Helpers/logDataLogic';
+  import {
+    getWeekNumbers,
+    getStatuses,
+    getYears,
+  } from '../../Helpers/logDataLogic';
   import { getDay, getYear } from '../../Helpers/utils';
   import TableButton from '../Buttons/TableButton.svelte';
 
@@ -15,33 +19,43 @@
   const years = ['all', ...getYears(logData)];
   let year = years[0];
 
+  const statuses = ['all', ...getStatuses(logData)];
+  let status = statuses[0];
+
   let filteredLogData = logData.filter((date) =>
     weekNumber === 'all' ? date : date.weekNumber === weekNumber
   );
 
   function updateData(event, dropdown) {
-    if (dropdown === 'week') {
-      weekNumber = event.target.value;
-      year = 'all';
-      filteredLogData = logData.filter((date) =>
-        weekNumber === 'all'
-          ? date
-          : Number(date.weekNumber) === Number(weekNumber)
-      );
-    }
-    if (dropdown === 'year') {
-      year = event.target.value;
-      weekNumber = 'all';
-      filteredLogData = logData.filter((date) =>
-        year === 'all'
-          ? date
-          : Number(Number(getYear(date.date))) === Number(year)
-      );
+    switch (dropdown) {
+      case 'week':
+        weekNumber = event.target.value;
+        year = 'all';
+        status = 'all';
+        filteredLogData = logData.filter((date) =>
+          weekNumber === 'all'
+            ? date
+            : Number(date.weekNumber) === Number(weekNumber)
+        );
+        break;
+      case 'year':
+        year = event.target.value;
+        weekNumber = 'all';
+        status = 'all';
+        filteredLogData = logData.filter((date) =>
+          year === 'all' ? date : Number(getYear(date.date)) === Number(year)
+        );
+        break;
+      case 'status':
+        status = event.target.value;
+        weekNumber = 'all';
+        year = 'all';
+        filteredLogData = logData.filter((date) =>
+          status === 'all' ? date : date.statusOfDay === status
+        );
+        break;
     }
   }
-
-  $: console.log(weekNumber);
-  $: console.log(year);
 </script>
 
 <div class="dashboard__container margin-bottom">
@@ -77,7 +91,20 @@
           </div></th
         >
         <th class="tc--align-right">Date</th>
-        <th>Work</th>
+        <th>
+          <div class="trip-input__container">
+            <div class="trip-input__label">Work</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select
+              value={status}
+              on:change={(event) => updateData(event, 'status')}
+            >
+              {#each statuses as s}
+                <option value={s}>{s}</option>
+              {/each}
+            </select>
+          </div></th
+        >
         <th>From</th>
         <th>To</th>
         <th class="tc--align-right">Travel Time</th>
