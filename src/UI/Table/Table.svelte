@@ -15,8 +15,11 @@
 
   let filteredLogData = logData;
 
-  let sortDatesOptions = ['ascending', 'descending'];
+  let sortDatesOptions = ['no sorting', 'ascending', 'descending'];
   let sortDatesOption = sortDatesOptions[0];
+
+  let sortTravelTimeOptions = ['no sorting', 'ascending', 'descending'];
+  let sortTravelTimeOption = sortTravelTimeOptions[0];
 
   let weekNumbers = ['all', ...getWeekNumbers(filteredLogData)];
   let weekNumber = weekNumbers[0];
@@ -45,23 +48,36 @@
         );
         break;
       case 'sortDate':
-        console.log(sortDatesOption);
         sortDatesOption = event.target.value;
-        console.log(sortDatesOption);
         filteredLogData =
           sortDatesOption === 'ascending'
-            ? [...logData].sort((a, b) => new Date(a.date) - new Date(b.date))
-            : [...logData].sort((a, b) => new Date(b.date) - new Date(a.date));
+            ? [...filteredLogData].sort(
+                (a, b) => new Date(a.date) - new Date(b.date)
+              )
+            : [...filteredLogData].sort(
+                (a, b) => new Date(b.date) - new Date(a.date)
+              );
+        break;
+      case 'sortTravelTime':
+        sortTravelTimeOption = event.target.value;
+        filteredLogData =
+          sortTravelTimeOption === 'ascending'
+            ? [...filteredLogData].sort(
+                (a, b) => a.durationTrip - b.durationTrip
+              )
+            : [...filteredLogData].sort(
+                (a, b) => b.durationTrip - a.durationTrip
+              );
         break;
       case 'status':
         status = event.target.value;
-        filteredLogData = logData.filter((date) =>
+        filteredLogData = filteredLogData.filter((date) =>
           status === 'all' ? date : date.statusOfDay === status
         );
         break;
       case 'year':
         year = event.target.value;
-        filteredLogData = logData.filter((date) =>
+        filteredLogData = filteredLogData.filter((date) =>
           year === 'all' ? date : Number(getYear(date.date)) === Number(year)
         );
         break;
@@ -134,7 +150,20 @@
         >
         <th>From</th>
         <th>To</th>
-        <th class="tc--align-right">Travel Time</th>
+        <th>
+          <div class="trip-input__container">
+            <div class="trip-input__label">Travel Time</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select
+              value={sortTravelTimeOption}
+              on:change={(event) => updateData(event, 'sortTravelTime')}
+            >
+              {#each sortTravelTimeOptions as sTTO}
+                <option value={sTTO}>{sTTO}</option>
+              {/each}
+            </select>
+          </div></th
+        >
         <th />
       </tr>
       {#each filteredLogData as logDate}
