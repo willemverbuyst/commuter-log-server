@@ -8,12 +8,19 @@
   } from '../../Helpers/logDataLogic';
   import { getDay, getYear } from '../../Helpers/utils';
   import TableButton from '../Buttons/TableButton.svelte';
+  import { routes } from '../../constants';
 
   export let logData;
 
   const dispatch = createEventDispatcher();
 
   let filteredLogData = logData;
+
+  let routesFrom = ['no sorting', ...routes];
+  let routeFrom = routesFrom[0];
+
+  let routesTo = ['no sorting', ...routes];
+  let routeTo = routesTo[0];
 
   let sortDatesOptions = ['no sorting', 'ascending', 'descending'];
   let sortDatesOption = sortDatesOptions[0];
@@ -39,12 +46,16 @@
 
   function updateData(event, dropdown) {
     switch (dropdown) {
-      case 'week':
-        weekNumber = event.target.value;
+      case 'routeFrom':
+        routeFrom = event.target.value;
         filteredLogData = filteredLogData.filter((date) =>
-          weekNumber === 'all'
-            ? date
-            : Number(date.weekNumber) === Number(weekNumber)
+          status === 'no sorting' ? date : date.routeTripFrom === routeFrom
+        );
+        break;
+      case 'routeTo':
+        routeTo = event.target.value;
+        filteredLogData = filteredLogData.filter((date) =>
+          status === 'no sorting' ? date : date.routeTripTo === routeTo
         );
         break;
       case 'sortDate':
@@ -81,6 +92,14 @@
         status = event.target.value;
         filteredLogData = filteredLogData.filter((date) =>
           status === 'all' ? date : date.statusOfDay === status
+        );
+        break;
+      case 'week':
+        weekNumber = event.target.value;
+        filteredLogData = filteredLogData.filter((date) =>
+          weekNumber === 'all'
+            ? date
+            : Number(date.weekNumber) === Number(weekNumber)
         );
         break;
       case 'year':
@@ -156,8 +175,34 @@
             </select>
           </div></th
         >
-        <th>From</th>
-        <th>To</th>
+        <th>
+          <div class="trip-input__container">
+            <div class="trip-input__label">From</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select
+              value={routeFrom}
+              on:change={(event) => updateData(event, 'routeFrom')}
+            >
+              {#each routesFrom as rF}
+                <option value={rF}>{rF}</option>
+              {/each}
+            </select>
+          </div></th
+        >
+        <th>
+          <div class="trip-input__container">
+            <div class="trip-input__label">To</div>
+            <!-- svelte-ignore a11y-no-onchange -->
+            <select
+              value={routeTo}
+              on:change={(event) => updateData(event, 'routeTo')}
+            >
+              {#each routesTo as rT}
+                <option value={rT}>{rT}</option>
+              {/each}
+            </select>
+          </div></th
+        >
         <th>
           <div class="trip-input__container">
             <div class="trip-input__label">Travel Time</div>
