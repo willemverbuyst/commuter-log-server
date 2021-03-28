@@ -41,11 +41,13 @@ document.documentElement.style.setProperty(
   'rgba(170, 170, 170, 0.3)'
 );
 
+document.documentElement.style.setProperty('--chart-datalabels', '#fff');
+
 export const colorTravelByCar = document.documentElement.style.getPropertyValue(
   '--chart-travel-car'
 );
 export const colorTravelByPublicTransport = document.documentElement.style.getPropertyValue(
-  '--tchart-ravel-publicTransport'
+  '--chart-travel-publicTransport'
 );
 export const colorWorkingFromHomeColor = document.documentElement.style.getPropertyValue(
   '--chart-travel-workingFromHome'
@@ -67,6 +69,9 @@ export const colorTitle = document.documentElement.style.getPropertyValue(
 );
 export const colorGrid = document.documentElement.style.getPropertyValue(
   '--chart-grid'
+);
+export const colorDatalabels = document.documentElement.style.getPropertyValue(
+  '--chart-datalabels'
 );
 
 // BUTTON COLORS

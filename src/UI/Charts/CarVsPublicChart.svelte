@@ -3,6 +3,12 @@
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getCarVsPublicTotalsData } from '../../Helpers/chartLogic/carVsPublicChart';
+  import {
+    colorDatalabels,
+    colorTitle,
+    colorTravelByCar,
+    colorTravelByPublicTransport,
+  } from '../../UI/colors';
 
   export let logData;
 
@@ -16,9 +22,6 @@
 
     ctx = document.getElementById('carVsPublicChart').getContext('2d');
 
-    const fillCar = 'rgba(0, 107, 151, 1)';
-    const fillPublic = 'rgba(0, 187, 178, 1)';
-
     if (carVsPublicChart) carVsPublicChart.destroy();
 
     carVsPublicChart = new Chart(ctx, {
@@ -31,7 +34,7 @@
               totalsCar.totalTimeTravelled,
               totalsPublic.totalTimeTravelled,
             ],
-            backgroundColor: [fillCar, fillPublic],
+            backgroundColor: [colorTravelByCar, colorTravelByPublicTransport],
             borderWidth: 0,
           },
         ],
@@ -41,7 +44,7 @@
         title: {
           display: true,
           text: title,
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         maintainAspectRatio: true,
         legend: {
@@ -54,7 +57,7 @@
         plugins: {
           datalabels: {
             display: true,
-            color: '#fff',
+            color: colorDatalabels,
             formatter: (value) => formatDataLabels(value),
           },
         },
