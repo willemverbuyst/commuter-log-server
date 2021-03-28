@@ -1,8 +1,8 @@
 import { chunkArray, reduceDates } from '../utils';
 import { getWeekNumber } from '../logDataLogic';
 import {
-  travelByCarColor,
-  travelByPublicTransportColor,
+  colorTravelByCar,
+  colorTravelByPublicTransport,
 } from '../../UI/colors';
 
 // STACKED LINE CHART, total travel times per week
@@ -16,12 +16,12 @@ export const getTotalsPerWeekData = (logData) => {
   const totalsPerWeekPublic = weeks.map((week) =>
     getTotalsPerWeek(week, 'public transport')
   );
-  const backgroundColorCar = weeks.map(() => travelByCarColor);
-  const backgroundColorPublic = weeks.map(() => travelByPublicTransportColor);
+  const backgroundColorCar = weeks.map(() => colorTravelByCar);
+  const backgroundColorPublic = weeks.map(() => colorTravelByPublicTransport);
 
   const labels = weeks.map((a) => `w${getWeekNumber(a[0].date)[1]}`);
   const maxForDisplay =
-    Math.max(...totalsPerWeekCar, ...totalsPerWeekPublic) * 1.05;
+    Math.max(...totalsPerWeekCar, ...totalsPerWeekPublic) * 1.005;
   const title = `TOTAL TRAVEL TIME PER WEEK`;
 
   return {

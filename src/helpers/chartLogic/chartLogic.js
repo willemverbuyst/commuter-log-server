@@ -1,3 +1,8 @@
+import {
+  colorTravelByCar,
+  colorTravelByPublicTransport,
+} from '../../UI/colors';
+
 const weekdays = [
   'Sunday',
   'Monday',
@@ -11,8 +16,8 @@ const weekdays = [
 export const getBackgroundColor = (dates) => {
   return dates.map((date) =>
     date.meansOfTransport === 'car'
-      ? 'rgba(0, 107, 151, 1)'
-      : 'rgba(0, 187, 178, 1)'
+      ? colorTravelByCar
+      : colorTravelByPublicTransport
   );
 };
 

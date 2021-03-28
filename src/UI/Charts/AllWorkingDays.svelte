@@ -3,6 +3,14 @@
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getAllWorkingDaysData } from '../../Helpers/chartLogic/allWorkingDaysChart';
+  import {
+    colorGrid,
+    colorTitle,
+    colorTravelTimeAverage,
+    colorTravelTimeExtra,
+    colorTravelTimeMaps,
+    colorTravelTimeNormal,
+  } from '../../UI/colors';
 
   export let showGrid;
   export let logData;
@@ -22,9 +30,9 @@
     ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
 
     const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
-    gradientFill.addColorStop(0, 'rgba(255, 39, 204, 1)');
-    gradientFill.addColorStop(0.5, 'rgba(255, 99, 132, 1)');
-    gradientFill.addColorStop(1, 'rgba(255, 159, 64, 1)');
+    gradientFill.addColorStop(0, colorTravelTimeExtra);
+    gradientFill.addColorStop(0.5, colorTravelTimeMaps);
+    gradientFill.addColorStop(1, colorTravelTimeNormal);
 
     if (allWorkingDaysChart) allWorkingDaysChart.destroy();
 
@@ -40,7 +48,7 @@
             borderJoinStyle: 'miter',
             type: 'line',
             fill: false,
-            borderColor: 'rgba(21, 211, 211, 1)',
+            borderColor: colorTravelTimeAverage,
             borderWidth: 2,
             order: 1,
           },
@@ -61,7 +69,7 @@
         title: {
           display: true,
           text: title,
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         maintainAspectRatio: true,
         aspectRatio: 4,
@@ -89,8 +97,8 @@
             {
               gridLines: {
                 display: showGrid,
-                color: 'rgba(170, 170, 170, 0.3)',
-                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                color: colorGrid,
+                zeroLineColor: colorGrid,
                 tickMarkLength: 0,
                 drawBorder: false,
               },

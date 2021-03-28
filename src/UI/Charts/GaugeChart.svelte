@@ -18,11 +18,6 @@
 
     ctx = document.getElementById('gaugeChart').getContext('2d');
 
-    const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
-    gradientFill.addColorStop(0, 'rgba(255, 39, 204, 1)');
-    gradientFill.addColorStop(0.5, 'rgba(255, 99, 132, 1)');
-    gradientFill.addColorStop(1, 'rgba(255, 159, 64, 1)');
-
     if (gaugeChart) gaugeChart.destroy();
 
     gaugeChart = new Chart(ctx, {
