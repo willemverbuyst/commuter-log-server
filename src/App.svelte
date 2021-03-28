@@ -4,7 +4,6 @@
   import FormComponent from './Business/FormComponent.svelte';
   import LogInForm from './Business/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
-  // import Card from './UI/Card/Card.svelte';
   import GaugeChart from './UI/Charts/GaugeChart.svelte';
   import AveragesPerWeekChart from './UI/Charts/AveragesPerWeekChart.svelte';
   import AllWorkingDays from './UI/Charts/AllWorkingDays.svelte';
@@ -37,9 +36,6 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
-  // logData.setLogData(workingDays);
-  // isLoading = false;
 
   fetch(`${__myapp.env.DATABASE}/logdata.json`)
     .then((res) => {
@@ -146,9 +142,6 @@
       <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
       <GaugeChart logData={$logData} {weekIndexInLogData} />
     </div>
-    <!-- <div class="dashboard__section">
-    <Card logData={$logData} {weekIndexInLogData} on:edit={startEdit} />
-  </div> -->
     <div class="dashboard__section">
       <AllWorkingDays logData={$logData} showGrid={$showGrid} />
     </div>
