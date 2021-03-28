@@ -3,7 +3,7 @@ import { getWeekNumber } from '../logDataLogic';
 import {
   travelByCarColor,
   travelByPublicTransportColor,
-} from '../../UI/Colors';
+} from '../../UI/colors';
 
 // STACKED LINE CHART, total travel times per week
 // Totals car, totals public transport

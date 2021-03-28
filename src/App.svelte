@@ -13,7 +13,8 @@
   import WeekChart from './UI/Charts/WeekChart.svelte';
   import Slider from './UI/Inputs/Slider.svelte';
   import Table from './UI/Table/Table.svelte';
-  import showGrid from './Store/appState';
+  import { darkModeStore, showGridStore } from './Store/appState';
+  import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
   // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
@@ -75,8 +76,13 @@
     signedIn = true;
   }
 
+  function toggleMode() {
+    darkModeStore.toggleMode();
+    setColors($darkModeStore);
+  }
+
   function toggleGrid() {
-    showGrid.toggleGrid();
+    showGridStore.toggleGrid();
   }
 
   function saveLogDate() {
@@ -109,7 +115,12 @@
 <main>
   <div class="nav-container">
     <Button on:click={() => (showForm = true)}>Add Day</Button>
-    <Button on:click={toggleGrid}>{$showGrid ? 'Hide' : 'Show'} Grid</Button>
+    <Button on:click={toggleGrid}
+      >{$showGridStore ? 'Hide' : 'Show'} Grid</Button
+    >
+    <Button on:click={toggleMode}
+      >{$darkModeStore ? 'Dark' : 'Light'} Mode</Button
+    >
     {#if !signedIn}
       <Button on:click={() => (showLogIn = true)}>Log In</Button>
     {:else}
@@ -139,17 +150,21 @@
     {/if}
 
     <div class="dashboard__section">
-      <WeekChart logData={$logData} showGrid={$showGrid} {weekIndexInLogData} />
+      <WeekChart
+        logData={$logData}
+        showGrid={$showGridStore}
+        {weekIndexInLogData}
+      />
       <GaugeChart logData={$logData} {weekIndexInLogData} />
     </div>
     <div class="dashboard__section">
-      <AllWorkingDays logData={$logData} showGrid={$showGrid} />
+      <AllWorkingDays logData={$logData} showGrid={$showGridStore} />
     </div>
     <div class="dashboard__section">
-      <TotalsPerWeekChart logData={$logData} showGrid={$showGrid} />
+      <TotalsPerWeekChart logData={$logData} showGrid={$showGridStore} />
     </div>
     <div class="dashboard__section">
-      <AveragesPerWeekChart logData={$logData} showGrid={$showGrid} />
+      <AveragesPerWeekChart logData={$logData} showGrid={$showGridStore} />
     </div>
     <div class="dashboard__section">
       <PartitionChart logData={$logData} />
