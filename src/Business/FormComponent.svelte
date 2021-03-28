@@ -7,11 +7,11 @@
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
   import { checkDurationInput } from '../helpers/validation';
-  import { formatTimeInput } from '../helpers/formatting';
+  import { formatDuration, formatTimeInput } from '../Helpers/formatting';
+  import { getWeekNumber } from '../Helpers/logDataLogic';
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
-  import { formatDuration } from '../Helpers/formatting';
 
   export let id = null;
 
@@ -57,6 +57,7 @@
   }
 
   function submitForm() {
+    console.log(getWeekNumber(selectedDate));
     const logDate =
       statusOfDay === 'working at the office'
         ? {
@@ -69,10 +70,12 @@
             // routeTripTwoTo,
             durationTrip: formatTimeInput(durationTrip),
             // durationTripTwo: formatTimeInput(durationTripTwo),
+            weekNumber: getWeekNumber(selectedDate)[1],
           }
         : {
             date: selectedDate,
             statusOfDay,
+            weekNumber: getWeekNumber(selectedDate)[1],
           };
 
     if (id) {
@@ -211,9 +214,6 @@
     <FormButton on:click={submitForm}>Save</FormButton>
     <FormButton on:click={cancel}>Cancel</FormButton>
   </div>
-  <!-- {#if id}
-    <FormButton on:click={deleteDay}>Delete</FormButton>
-  {/if} -->
 </Modal>
 
 <style>
