@@ -10,25 +10,14 @@
   let ctx;
 
   function createChart() {
-    const {
-      totalsCar,
-      totalsPublic,
-      labels,
-      maxForDisplay,
-      title,
-    } = getCarVsPublicTotalsData(logData);
+    const { totalsCar, totalsPublic, labels, title } = getCarVsPublicTotalsData(
+      logData
+    );
 
     ctx = document.getElementById('carVsPublicChart').getContext('2d');
 
-    const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillCar.addColorStop(0, 'rgba(0, 107, 151, 1)');
-    gradientFillCar.addColorStop(0.5, 'rgba(0, 133, 166, 1)');
-    gradientFillCar.addColorStop(1, 'rgba(0, 160, 175, 1)');
-
-    const gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillPublic.addColorStop(0, 'rgba(0, 187, 178, 1)');
-    gradientFillPublic.addColorStop(0.5, 'rgba(0, 213, 176, 1)');
-    gradientFillPublic.addColorStop(1, 'rgba(101, 238, 172, 1)');
+    const fillCar = 'rgba(0, 107, 151, 1)';
+    const fillPublic = 'rgba(0, 187, 178, 1)';
 
     if (carVsPublicChart) carVsPublicChart.destroy();
 
@@ -42,9 +31,8 @@
               totalsCar.totalTimeTravelled,
               totalsPublic.totalTimeTravelled,
             ],
-            backgroundColor: [gradientFillCar, gradientFillPublic],
+            backgroundColor: [fillCar, fillPublic],
             borderWidth: 0,
-            barPercentage: 1,
           },
         ],
       },
@@ -57,37 +45,16 @@
         },
         maintainAspectRatio: true,
         legend: {
-          display: false,
+          position: 'bottom',
         },
         responsive: true,
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: false,
-              },
-              ticks: {
-                display: false,
-                beginAtZero: true,
-                suggestedMax: maxForDisplay,
-              },
-            },
-          ],
-        },
         tooltips: {
           enabled: false,
         },
         plugins: {
           datalabels: {
             display: true,
-            color: '#333',
+            color: '#fff',
             formatter: (value) => formatDataLabels(value),
           },
         },

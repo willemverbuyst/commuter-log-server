@@ -133,7 +133,7 @@
           datalabels: {
             anchor: 'end',
             align: 'end',
-            color: 'rgba(170, 170, 170, 0.3)',
+            color: '#aaa',
             formatter: (_value, ctx) => {
               const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
               return formatDataLabels(total);

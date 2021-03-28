@@ -55,8 +55,8 @@ export const actualTravelTime = (logData, weekNumber) => {
         'rgba(255, 159, 64, 1)',
         '#aaa',
         'rgba(255, 159, 64, 1)',
-        'red',
-        'darkred',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 39, 204, 1)',
       ],
       backGroundColorInner: [
         'transparent',
@@ -77,10 +77,10 @@ export const actualTravelTime = (logData, weekNumber) => {
     return {
       backgroundColor: [
         'rgba(255, 159, 64, 1)',
-        'red',
+        'rgba(255, 99, 132, 1)',
         '#aaa',
-        'red',
-        'darkred',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 39, 204, 1)',
       ],
       backGroundColorInner: [
         'transparent',
@@ -101,10 +101,10 @@ export const actualTravelTime = (logData, weekNumber) => {
     return {
       backgroundColor: [
         'rgba(255, 159, 64, 1)',
-        'red',
-        'darkred',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 39, 204, 1)',
         '#aaa',
-        'darkred',
+        'rgba(255, 39, 204, 1)',
       ],
       backGroundColorInner: [
         'transparent',
@@ -125,8 +125,8 @@ export const actualTravelTime = (logData, weekNumber) => {
     return {
       backgroundColor: [
         'rgba(255, 159, 64, 1)',
-        'red',
-        'darkred',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 39, 204, 1)',
         'transparent',
         '#aaa',
       ],

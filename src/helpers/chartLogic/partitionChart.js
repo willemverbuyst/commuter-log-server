@@ -3,8 +3,8 @@ import { reduceDates } from '../utils';
 // POLAR CHART, days car, public transport, working from home
 export const getPartitionData = (logData) => {
   const partition = getPartition(logData);
-  const labels = ['', '', ''];
-  const title = `DAYS CAR / PUBLIC TRANSPORT / WORKING FORM HOME`;
+  const labels = ['home', 'car', 'public transport'];
+  const title = `DAYS WORKING FORM HOME / TRAVELLED BY CAR / TRAVELLED BY PUBLIC TRANSPORT`;
 
   return {
     partition,

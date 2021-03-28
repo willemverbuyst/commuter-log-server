@@ -8,17 +8,13 @@ export const getCarVsPublicTotalsData = (logData) => {
 
   const totalsCar = getTotalsTransport(reducedDates, 'car');
   const totalsPublic = getTotalsTransport(reducedDates, 'public transport');
-  const labels = ['', ''];
-  const maxForDisplay =
-    Math.max(totalsCar.totalTimeTravelled, totalsPublic.totalTimeTravelled) *
-    1.2;
+  const labels = ['car', 'public transport'];
   const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
 
   return {
     totalsCar,
     totalsPublic,
     labels,
-    maxForDisplay,
     title,
   };
 };
