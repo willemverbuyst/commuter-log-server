@@ -119,7 +119,7 @@
       >{$showGridStore ? 'Hide' : 'Show'} Grid</Button
     >
     <Button on:click={toggleMode}
-      >{$darkModeStore ? 'Dark' : 'Light'} Mode</Button
+      >{$darkModeStore ? 'Light' : 'Dark'} Mode</Button
     >
     {#if !signedIn}
       <Button on:click={() => (showLogIn = true)}>Log In</Button>

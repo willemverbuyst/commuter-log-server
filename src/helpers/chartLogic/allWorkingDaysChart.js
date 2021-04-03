@@ -10,7 +10,7 @@ export const getAllWorkingDaysData = (logData) => {
   );
 
   const labels = withoutDayOff.map(() => '');
-  const maxForDisplay = Math.max(...travelTimes) * 1.2;
+  const maxForDisplay = Math.max(...travelTimes) * 1.05;
   const title = `TRAVEL TIMES`;
   const lineValue = withoutDayOff.map(
     () => travelTimes.reduce((a, b) => a + b) / travelTimes.length
