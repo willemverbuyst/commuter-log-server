@@ -77,7 +77,7 @@ export const colorDatalabels = document.documentElement.style.getPropertyValue(
 // BUTTON COLORS
 document.documentElement.style.setProperty('--buttonMain', '#170a3a');
 
-export const setColors = (darkMode) => {
+export const setColors = (darkMode: boolean): void => {
   let root = document.documentElement;
 
   if (darkMode) {
