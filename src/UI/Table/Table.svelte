@@ -1,17 +1,18 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { formatDuration } from '../../Helpers/formatting';
   import { getDay, getYear } from '../../Helpers/utils';
   import TableButton from '../Buttons/TableButton.svelte';
   import TableHeader from './TableHeader.svelte';
+  import type { LogDate } from '../../models/Logdata';
 
-  export let logData;
+  export let logData: LogDate[];
 
   const dispatch = createEventDispatcher();
 
   let filteredLogData = logData;
 
-  function doUpdate(data) {
+  function doUpdate(data: LogDate[]): void {
     filteredLogData = data;
   }
 </script>
@@ -39,9 +40,13 @@
             <td>{logDate.meansOfTransport}</td>
             <td>{logDate.routeTripFrom}</td>
             <td>{logDate.routeTripTo}</td>
-            <td class="tc--align-right"
-              >{formatDuration(logDate.durationTrip)}</td
-            >
+            {#if logDate.durationTrip}
+              <td class="tc--align-right"
+                >{formatDuration(logDate.durationTrip)}</td
+              >
+            {:else}
+              <td />
+            {/if}
             <TableButton on:click={() => dispatch('edit', logDate.id)}
               >Edit</TableButton
             >

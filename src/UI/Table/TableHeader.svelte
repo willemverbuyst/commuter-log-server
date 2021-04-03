@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { routes } from '../../constants';
   import TableButton from '../Buttons/TableButton.svelte';
   import TableDropdown from '../Inputs/TableDropdown.svelte';
@@ -8,20 +8,21 @@
     getYears,
   } from '../../Helpers/logDataLogic';
   import { filterData } from '../../Helpers/tableLogic/filter';
+  import type { LogDate } from '../../models/Logdata';
 
-  export let logData;
-  export let filteredLogData;
-  export let doUpdate;
+  export let logData: LogDate[];
+  export let filteredLogData: LogDate[];
+  export let doUpdate: any;
 
   let filters = {
     routesFrom: ['no sorting', ...routes],
     routeFrom: 'no sorting',
     routesTo: ['no sorting', ...routes],
     routeTo: 'no sorting',
-    sortDatesOptions: ['no sorting', 'ascending', 'descending'],
-    sortDatesOption: 'no sorting',
-    sortTravelTimeOptions: ['no sorting', 'ascending', 'descending'],
-    sortTravelTimeOption: 'no sorting',
+    sortDates: ['no sorting', 'ascending', 'descending'],
+    sortDate: 'no sorting',
+    sortTravelTimes: ['no sorting', 'ascending', 'descending'],
+    sortTravelTime: 'no sorting',
     statuses: ['all', ...getStatuses(filteredLogData)],
     status: 'all',
     weeks: ['all', ...getWeekNumbers(filteredLogData)],
@@ -33,8 +34,8 @@
   function resetFilters() {
     filters.routeFrom = 'no sorting';
     filters.routeTo = 'no sorting';
-    filters.sortDatesOption = 'no sorting';
-    filters.sortTravelTimeOption = 'no sorting';
+    filters.sortDate = 'no sorting';
+    filters.sortTravelTime = 'no sorting';
     filters.status = 'all';
     filters.week = 'all';
     filters.year = 'all';
@@ -42,7 +43,17 @@
     doUpdate(logData);
   }
 
-  function updateData(event, dropdown) {
+  function updateData(
+    event: any,
+    dropdown:
+      | 'routeFrom'
+      | 'routeTo'
+      | 'sortDate'
+      | 'sortTravelTime'
+      | 'status'
+      | 'week'
+      | 'year'
+  ) {
     filters[dropdown] = event.target.value;
     filteredLogData = filterData(filteredLogData, filters[dropdown], dropdown);
 
@@ -70,8 +81,8 @@
   <th>
     <TableDropdown
       label="Date"
-      options={filters.sortDatesOptions}
-      value={filters.sortDatesOption}
+      options={filters.sortDates}
+      value={filters.sortDate}
       on:change={(event) => updateData(event, 'sortDate')}
     />
   </th>
@@ -102,8 +113,8 @@
   <th>
     <TableDropdown
       label="Travel Time"
-      options={filters.sortTravelTimeOptions}
-      value={filters.sortTravelTimeOption}
+      options={filters.sortTravelTimes}
+      value={filters.sortTravelTime}
       on:change={(event) => updateData(event, 'sortTravelTime')}
     />
   </th>
