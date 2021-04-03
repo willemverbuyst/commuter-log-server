@@ -73,7 +73,7 @@
   <th>
     <TableDropdown
       label="Week#"
-      options={filters.weeks}
+      options={filters.weeks.map((w) => String(w))}
       value={filters.week}
       on:change={(event) => updateData(event, 'week')}
     />
