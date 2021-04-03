@@ -15,7 +15,7 @@ export const getDay = (date) => date.toString().slice(0, 10);
 export const getUniqueValues = (value, index, self) =>
   self.indexOf(value) === index;
 
-export const getYear = (date) => date.toString().slice(11, 15);
+export const getYear = (date: Date): string => date.toString().slice(11, 15);
 
 export const reduceDates = (dates) => {
   let container = {};

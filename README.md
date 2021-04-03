@@ -79,6 +79,5 @@ npx svelte-check
 
 - Set up Svelte-Preprocess, update rolllup.config.js
 - Create tsconfig.json
-- Add scripts to your package.json
 
 #
