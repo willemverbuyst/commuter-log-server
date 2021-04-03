@@ -43,7 +43,7 @@ export const formatDataLabels = (value: number): string => {
 };
 
 // TO DO: FIX DURATION TRIP (!)
-export const getMinutes = (dates: LogDate[]): Number[] => {
+export const getMinutes = (dates: LogDate[]): number[] => {
   return dates.map((date) => {
     return date.statusOfDay === 'day off'
       ? 0

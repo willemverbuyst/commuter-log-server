@@ -1,8 +1,18 @@
 import { chunkArray, reduceDates } from '../utils';
 import { getBackgroundColor, getMinutes, getWeekdays } from './chartLogic';
 import { getWeekNumber } from '../logDataLogic';
+import type { LogDate } from '../../models/Logdata';
 
-export const getWeekData = (logData, index) => {
+export const getWeekData = (
+  logData: LogDate[],
+  index: number
+): {
+  travelTimes: number[];
+  backgroundColor: string[];
+  labels: string[];
+  maxForDisplay: number;
+  title: string;
+} => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   // Get groups of 5
