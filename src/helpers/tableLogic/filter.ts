@@ -1,6 +1,12 @@
+import type { LogDate } from '../../models/Logdata';
 import { getYear } from '../utils';
 
-export const filterData = (logData, value, dropdown) => {
+// TO DO: ADD RETURN TYPE FIX DURATION TRIP (!)
+export const filterData = (
+  logData: LogDate[],
+  value: string,
+  dropdown: string
+) => {
   let filteredData;
   switch (dropdown) {
     case 'routeFrom':
@@ -18,8 +24,8 @@ export const filterData = (logData, value, dropdown) => {
     case 'sortDate':
       filteredData =
         value === 'ascending'
-          ? [...logData].sort((a, b) => new Date(a.date) - new Date(b.date))
-          : [...logData].sort((a, b) => new Date(b.date) - new Date(a.date));
+          ? [...logData].sort((a, b) => a.date.getTime() - b.date.getTime())
+          : [...logData].sort((a, b) => b.date.getTime() - a.date.getTime());
       break;
 
     case 'sortTravelTime':
@@ -31,14 +37,14 @@ export const filterData = (logData, value, dropdown) => {
                   ? { ...date, durationTrip: 0 }
                   : date
               )
-              .sort((a, b) => a.durationTrip - b.durationTrip)
+              .sort((a, b) => a.durationTrip! - b.durationTrip!)
           : logData
               .map((date) =>
                 date.statusOfDay !== 'working at the office'
                   ? { ...date, durationTrip: 0 }
                   : date
               )
-              .sort((a, b) => b.durationTrip - a.durationTrip);
+              .sort((a, b) => b.durationTrip! - a.durationTrip!);
       break;
     case 'status':
       filteredData = logData.filter((date) =>
