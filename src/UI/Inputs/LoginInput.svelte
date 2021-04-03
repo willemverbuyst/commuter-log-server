@@ -1,9 +1,9 @@
-<script>
-  export let value;
-  export let label;
-  export let valid = true;
-  export let validityMessage = '';
-  export let type;
+<script lang="ts">
+  export let value: string;
+  export let label: string;
+  export let valid: boolean = true;
+  export let validityMessage: string;
+  export let type: string;
 
   let touched = false;
 </script>
@@ -13,7 +13,6 @@
   <input
     {type}
     {value}
-    {validityMessage}
     class:invalid={!valid && touched}
     on:input
     on:blur={() => (touched = true)}

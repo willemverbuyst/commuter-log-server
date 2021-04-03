@@ -12,7 +12,7 @@
 
   export let logData: LogDate[];
   export let filteredLogData: LogDate[];
-  export let doUpdate: any;
+  export let doUpdate: (logData: LogDate[]) => void;
 
   let filters = {
     routesFrom: ['no sorting', ...routes],
@@ -31,7 +31,7 @@
     year: 'all',
   };
 
-  function resetFilters() {
+  function resetFilters(): void {
     filters.routeFrom = 'no sorting';
     filters.routeTo = 'no sorting';
     filters.sortDate = 'no sorting';
@@ -53,7 +53,7 @@
       | 'status'
       | 'week'
       | 'year'
-  ) {
+  ): void {
     filters[dropdown] = event.target.value;
     filteredLogData = filterData(filteredLogData, filters[dropdown], dropdown);
 
@@ -73,7 +73,7 @@
   <th>
     <TableDropdown
       label="Week#"
-      options={filters.weeks}
+      options={filters.weeks.map((w) => String(w))}
       value={filters.week}
       on:change={(event) => updateData(event, 'week')}
     />

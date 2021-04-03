@@ -1,7 +1,7 @@
-<script>
-  export let route;
-  export let routes;
-  export let title;
+<script lang="ts">
+  export let route: string;
+  export let routes: string[];
+  export let title: string;
 </script>
 
 <div class="trip-input__container">

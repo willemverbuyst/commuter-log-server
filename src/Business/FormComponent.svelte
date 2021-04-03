@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   // import Checkbox from '../UI/Inputs/Checkbox.svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
-  import Dropdown from '../UI/Inputs/Dropdown.svelte';
+  import FormDropdown from '../UI/Inputs/FormDropdown.svelte';
   import Modal from '../UI/Modal/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
@@ -164,13 +164,13 @@
       </div>
 
       <div class="dropdown-input__container">
-        <Dropdown
+        <FormDropdown
           route={routeTripFrom}
           {routes}
           title="To"
           on:change={(event) => (routeTripFrom = event.target.value)}
         />
-        <Dropdown
+        <FormDropdown
           route={routeTripTo}
           {routes}
           title="From"

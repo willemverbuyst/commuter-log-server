@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { fly, scale } from 'svelte/transition';
   import { cubicIn } from 'svelte/easing';
 </script>

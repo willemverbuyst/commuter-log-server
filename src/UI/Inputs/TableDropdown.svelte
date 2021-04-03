@@ -1,7 +1,7 @@
-<script>
-  export let label;
-  export let options;
-  export let value;
+<script lang="ts">
+  export let label: string;
+  export let options: String[];
+  export let value: string;
 </script>
 
 <div class="table-dropdown__container">
