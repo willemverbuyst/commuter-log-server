@@ -8,7 +8,7 @@
     colorTitle,
     colorTravelByCar,
     colorTravelByPublicTransport,
-  } from '../../UI/colors';
+  } from '../colors';
 
   export let logData;
 

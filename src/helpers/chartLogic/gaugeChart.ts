@@ -1,3 +1,4 @@
+import type { LogDate } from '../../models/Logdata';
 import { getMinutes } from './chartLogic';
 import { chunkArray, reduceDates } from '../utils';
 
@@ -11,20 +12,23 @@ const timeMapsTravel = 5 * 2 * 90; // 900
 // Difference 1500 - 900 = 600
 // Total = 1500 + 20 = 1520
 
-const getTotalsPerWeek = (week) => {
+// TO DO: FIX DURATION TRIP (!)
+const getTotalsPerWeek = (week: LogDate[]): number => {
   const weekWithoutDayOff = week.filter(
     (day) => day.statusOfDay === 'working at the office'
   );
 
   const totalPerWeek =
     weekWithoutDayOff.length > 0
-      ? weekWithoutDayOff.map((day) => day.durationTrip).reduce((a, b) => a + b)
+      ? weekWithoutDayOff
+          .map((day) => day.durationTrip!)
+          .reduce((a, b) => a + b)
       : 0;
 
   return totalPerWeek;
 };
 
-const getHigestTravelTime = (logData) => {
+const getHigestTravelTime = (logData: LogDate[]): number => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const weeks = chunkArray(reducedDates, 5);
@@ -36,7 +40,14 @@ const getHigestTravelTime = (logData) => {
   return maximum;
 };
 
-export const actualTravelTime = (logData, weekNumber) => {
+export const actualTravelTime = (
+  logData: LogDate[],
+  weekNumber: number
+): {
+  backgroundColor: string[];
+  backGroundColorInner: string[];
+  data: number[];
+} => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   // const week = dates.filter((d) => getWeekNumber(d.date)[1] === +weekNumber);

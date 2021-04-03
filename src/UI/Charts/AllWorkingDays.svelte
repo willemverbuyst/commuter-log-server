@@ -10,7 +10,7 @@
     colorTravelTimeExtra,
     colorTravelTimeMaps,
     colorTravelTimeNormal,
-  } from '../../UI/colors';
+  } from '../colors';
 
   export let showGrid;
   export let logData;

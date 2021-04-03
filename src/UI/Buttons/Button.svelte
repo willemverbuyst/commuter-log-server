@@ -1,6 +1,6 @@
-<script>
-  export let type = 'button';
-  export let disabled = false;
+<script lang="ts">
+  export let type: string = 'button';
+  export let disabled: boolean = false;
 </script>
 
 <button {type} {disabled} on:click><slot /></button>

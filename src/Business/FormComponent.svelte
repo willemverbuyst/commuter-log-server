@@ -6,7 +6,7 @@
   import Modal from '../UI/Modal/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
-  import { checkDurationInput } from '../helpers/validation';
+  import { checkDurationInput } from '../Helpers/validation';
   import { formatDuration, formatTimeInput } from '../Helpers/formatting';
   import { getWeekNumber } from '../Helpers/logDataLogic';
   import { routes } from '../constants';

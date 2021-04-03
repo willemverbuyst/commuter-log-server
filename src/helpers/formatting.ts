@@ -1,28 +1,10 @@
-import {
-  colorTravelByCar,
-  colorTravelByPublicTransport,
-} from '../../UI/colors';
-
-const weekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-export const getBackgroundColor = (dates) => {
-  return dates.map((date) =>
-    date.meansOfTransport === 'car'
-      ? colorTravelByCar
-      : colorTravelByPublicTransport
-  );
+export const reverseRoute = (route: string): string => {
+  const [start, end] = route.split(' - ');
+  return `${end} - ${start}`;
 };
 
 // change the number in minutes to hh:mm
-export const formatDataLabels = (value) => {
+export const formatDuration = (value: number): string => {
   if (value === 0.00001) {
     return 'day off';
   } else if (value >= 600 && value % 60 === 0) {
@@ -40,16 +22,9 @@ export const formatDataLabels = (value) => {
   }
 };
 
-export const getMinutes = (dates) => {
-  return dates.map((date) => {
-    return date.statusOfDay === 'day off'
-      ? 0
-      : date.statusOfDay === 'working from home'
-      ? 0.00001
-      : date.durationTrip;
-  });
-};
+export const formatTimeInput = (timeInput: string): number => {
+  const [hours, minutes] = timeInput.split(':');
+  const totalTimeInMinutes = Number(hours) * 60 + Number(minutes) * 1;
 
-export const getWeekdays = (dates) => {
-  return dates.map((date) => weekdays[date.date.getDay()]);
+  return totalTimeInMinutes;
 };

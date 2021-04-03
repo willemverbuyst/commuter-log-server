@@ -1,3 +1,4 @@
+import type { LogDate } from '../../models/Logdata';
 import { chunkArray, reduceDates } from '../utils';
 import { getWeekNumber } from '../logDataLogic';
 import {
@@ -7,7 +8,17 @@ import {
 
 // STACKED LINE CHART, total travel times per week
 // Totals car, totals public transport
-export const getTotalsPerWeekData = (logData) => {
+export const getTotalsPerWeekData = (
+  logData: LogDate[]
+): {
+  totalsPerWeekCar: number[];
+  totalsPerWeekPublic: number[];
+  backgroundColorCar: string[];
+  backgroundColorPublic: string[];
+  labels: string[];
+  maxForDisplay: number;
+  title: string;
+} => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   // Get groups of 5
@@ -35,7 +46,11 @@ export const getTotalsPerWeekData = (logData) => {
   };
 };
 
-export const getTotalsPerWeek = (week, transport) => {
+// TO DO: FIX DURATION TRIP (!)
+export const getTotalsPerWeek = (
+  week: LogDate[],
+  transport: string
+): number => {
   const weekTransport = week.filter(
     (day) =>
       day.statusOfDay === 'working at the office' &&
@@ -43,7 +58,7 @@ export const getTotalsPerWeek = (week, transport) => {
   );
   const totalPerTransport =
     weekTransport.length > 0
-      ? weekTransport.map((day) => day.durationTrip).reduce((a, b) => a + b)
+      ? weekTransport.map((day) => day.durationTrip!).reduce((a, b) => a + b)
       : 0;
 
   return totalPerTransport;

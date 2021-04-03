@@ -62,3 +62,24 @@ npm install --save-dev dotenv @rollup/plugin-replace
 ```
 npm install --save firebase
 ```
+
+#
+
+## TypeScript
+
+[Adding TypeScript to an existing project](https://svelte.dev/blog/svelte-and-typescript)
+
+[How to use Typescript with Svelte (updated)](https://codechips.me/how-to-use-typescript-with-svelte/)
+
+```
+npm install --save-dev @tsconfig/svelte typescript svelte-preprocess svelte-check
+
+npm install @rollup/plugin-typescript --save-dev
+
+npx svelte-check
+```
+
+- Set up Svelte-Preprocess, update rolllup.config.js
+- Create tsconfig.json
+
+#
