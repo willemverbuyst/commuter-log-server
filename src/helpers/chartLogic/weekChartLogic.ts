@@ -1,7 +1,7 @@
+import type { LogDate } from '../../models/Logdata';
 import { chunkArray, reduceDates } from '../utils';
 import { getBackgroundColor, getMinutes, getWeekdays } from './chartLogic';
 import { getWeekNumber } from '../logDataLogic';
-import type { LogDate } from '../../models/Logdata';
 
 export const getWeekData = (
   logData: LogDate[],
