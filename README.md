@@ -74,6 +74,8 @@ npm install --save firebase
 ```
 npm install --save-dev @tsconfig/svelte typescript svelte-preprocess svelte-check
 
+npm install @rollup/plugin-typescript --save-dev
+
 npx svelte-check
 ```
 
