@@ -1,10 +1,10 @@
-export const reverseRoute = (route) => {
+export const reverseRoute = (route: string): string => {
   const [start, end] = route.split(' - ');
   return `${end} - ${start}`;
 };
 
 // change the number in minutes to hh:mm
-export const formatDuration = (value) => {
+export const formatDuration = (value: number): string => {
   if (value === 0.00001) {
     return 'day off';
   } else if (value >= 600 && value % 60 === 0) {
@@ -22,9 +22,9 @@ export const formatDuration = (value) => {
   }
 };
 
-export const formatTimeInput = (timeInput) => {
+export const formatTimeInput = (timeInput: string): number => {
   const [hours, minutes] = timeInput.split(':');
-  const totalTimeInMinutes = hours * 60 + minutes * 1;
+  const totalTimeInMinutes = Number(hours) * 60 + Number(minutes) * 1;
 
   return totalTimeInMinutes;
 };
