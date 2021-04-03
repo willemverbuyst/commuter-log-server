@@ -1,7 +1,7 @@
-<script>
-  export let duration;
-  export let valid = true;
-  export let validityMessage = '';
+<script lang="ts">
+  export let duration: string;
+  export let valid: boolean = true;
+  export let validityMessage: string;
 
   let touched = false;
 </script>
@@ -12,7 +12,6 @@
     <input
       type="text"
       value={duration}
-      {validityMessage}
       class:invalid={!valid && touched}
       on:input
       on:blur={() => (touched = true)}
