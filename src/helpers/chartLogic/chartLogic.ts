@@ -1,3 +1,4 @@
+import type { LogDate } from '../../models/Logdata';
 import {
   colorTravelByCar,
   colorTravelByPublicTransport,
@@ -13,7 +14,7 @@ const weekdays = [
   'Saturday',
 ];
 
-export const getBackgroundColor = (dates) => {
+export const getBackgroundColor = (dates: LogDate[]): string[] => {
   return dates.map((date) =>
     date.meansOfTransport === 'car'
       ? colorTravelByCar
@@ -21,8 +22,9 @@ export const getBackgroundColor = (dates) => {
   );
 };
 
+// REMOVE, USE FUNCTION IN FORMATTING
 // change the number in minutes to hh:mm
-export const formatDataLabels = (value) => {
+export const formatDataLabels = (value: number): string => {
   if (value === 0.00001) {
     return 'day off';
   } else if (value >= 600 && value % 60 === 0) {
@@ -40,16 +42,17 @@ export const formatDataLabels = (value) => {
   }
 };
 
-export const getMinutes = (dates) => {
+// TO DO: FIX DURATION TRIP (!)
+export const getMinutes = (dates: LogDate[]): Number[] => {
   return dates.map((date) => {
     return date.statusOfDay === 'day off'
       ? 0
       : date.statusOfDay === 'working from home'
       ? 0.00001
-      : date.durationTrip;
+      : date.durationTrip!;
   });
 };
 
-export const getWeekdays = (dates) => {
+export const getWeekdays = (dates: LogDate[]): string[] => {
   return dates.map((date) => weekdays[date.date.getDay()]);
 };
