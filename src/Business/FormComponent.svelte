@@ -7,7 +7,7 @@
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
   import { formatDuration, formatTimeInput } from '../Helpers/formatting';
-  import { checkDurationInput } from '../Helpers/validationing';
+  import { checkDurationInput } from '../Helpers/validation';
   import { getWeekNumber } from '../Helpers/logDataLogic';
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
