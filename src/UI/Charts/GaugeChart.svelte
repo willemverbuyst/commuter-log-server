@@ -1,13 +1,17 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { actualTravelTime } from '../../Helpers/chartLogic/gaugeChart';
+  import type { LogDate } from '../../models/Logdata';
+  import Chart from 'chart.js';
 
-  let gaugeChart;
-  export let logData;
-  export let weekIndexInLogData;
-  let ctx;
+  export let logData: LogDate[];
+  export let weekIndexInLogData: number;
+
+  let gaugeChart: Chart;
+  let ctx: CanvasRenderingContext2D;
+
   const labels = ['', ''];
 
   function createChart() {
@@ -16,7 +20,8 @@
       weekIndexInLogData
     );
 
-    ctx = document.getElementById('gaugeChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>document.getElementById('gaugeChart');
+    ctx = canvas.getContext('2d')!;
 
     if (gaugeChart) gaugeChart.destroy();
 
@@ -88,7 +93,7 @@
           datalabels: {
             display: false,
             color: '#333',
-            formatter: (value) => formatDataLabels(value),
+            formatter: (value: number) => formatDataLabels(value),
           },
         },
       },
