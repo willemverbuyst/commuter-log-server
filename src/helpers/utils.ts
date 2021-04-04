@@ -29,7 +29,7 @@ export const reduceDates = (dates: LogDate[]): LogDate[] => {
     if (container.hasOwnProperty(adjustedDate)) {
       container[adjustedDate] = {
         ...d,
-        durationTrip: container[adjustedDate].durationTrip! + d.durationTrip!,
+        durationTrip: container[adjustedDate].durationTrip + d.durationTrip,
       };
     } else {
       container[adjustedDate] = { ...d };
