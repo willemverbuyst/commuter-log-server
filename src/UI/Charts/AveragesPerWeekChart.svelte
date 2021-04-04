@@ -1,21 +1,26 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getAveragePerWeekData } from '../../Helpers/chartLogic/averagesChart';
+  import type { LogDate } from '../../models/Logdata';
+  import Chart from 'chart.js';
 
-  export let showGrid;
-  export let logData;
+  export let showGrid: boolean;
+  export let logData: LogDate[];
 
-  let averagesPerWeekChart;
-  let ctx;
+  let averagesPerWeekChart: Chart;
+  let ctx: CanvasRenderingContext2D;
 
   function createChart() {
     const { averages, labels, maxForDisplay, title } = getAveragePerWeekData(
       logData
     );
 
-    ctx = document.getElementById('averagesPerWeekChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>(
+      document.getElementById('averagesPerWeekChart')
+    );
+    ctx = canvas.getContext('2d')!;
 
     const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);
     gradientStroke.addColorStop(0, 'rgba(255, 0, 128, 1)');
@@ -84,7 +89,7 @@
                 suggestedMax: maxForDisplay,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(value);
+                  return formatDataLabels(Number(value));
                 },
               },
             },
@@ -99,7 +104,7 @@
             align: 'top',
             display: !showGrid,
             color: 'rgba(170, 170, 170, 0.3)',
-            formatter: (value) => formatDataLabels(value),
+            formatter: (value: number) => formatDataLabels(value),
           },
         },
       },

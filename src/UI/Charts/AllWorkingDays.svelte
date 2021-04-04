@@ -34,7 +34,7 @@
     );
     ctx = canvas.getContext('2d')!;
 
-    const gradientFill = ctx!.createLinearGradient(0, 100, 0, 250);
+    const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
     gradientFill.addColorStop(0, colorTravelTimeExtra);
     gradientFill.addColorStop(0.5, colorTravelTimeMaps);
     gradientFill.addColorStop(1, colorTravelTimeNormal);
