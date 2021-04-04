@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
   // import Checkbox from '../UI/Inputs/Checkbox.svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
@@ -6,14 +6,15 @@
   import Modal from '../UI/Modal/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
-  import { checkDurationInput } from '../Helpers/validation';
   import { formatDuration, formatTimeInput } from '../Helpers/formatting';
+  import { checkDurationInput } from '../Helpers/validation';
   import { getWeekNumber } from '../Helpers/logDataLogic';
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
+  import type { LogDate } from '../models/Logdata';
 
-  export let id = null;
+  export let id: string | undefined;
 
   // Initial values for form
   let selectedDate = new Date();
@@ -29,16 +30,19 @@
 
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
-      const selectedDay = days.find((d) => d.id === id);
-      selectedDate = selectedDay.date;
-      statusOfDay = selectedDay.statusOfDay;
-      if (selectedDay.statusOfDay === 'working at the office') {
-        meansOfTransport = selectedDay.meansOfTransport;
-        routeTripFrom = selectedDay.roundTripFrom;
-        routeTripTo = selectedDay.roundTripTo;
+      const selectedDay: LogDate | undefined = days.find(
+        (d: LogDate) => d.id === id
+      );
+
+      selectedDate = selectedDay!.date;
+      statusOfDay = selectedDay!.statusOfDay;
+      if (selectedDay!.statusOfDay === 'working at the office') {
+        meansOfTransport = selectedDay!.meansOfTransport!;
+        routeTripFrom = selectedDay!.routeTripFrom!;
+        routeTripTo = selectedDay!.routeTripTo!;
         // routeTripTwoFrom = selectedDay.routeTripTwoFrom;
         // routeTripTwoTo = selectedDay.routeTripTwoTo;
-        durationTrip = formatDuration(selectedDay.durationTrip);
+        durationTrip = formatDuration(selectedDay!.durationTrip!);
         // durationTripTwo = formatDuration(selectedDay.durationTripTwo);
       }
     });
@@ -79,6 +83,7 @@
           };
 
     if (id) {
+      //  @ts-ignore
       fetch(`${__myapp.env.DATABASE}/logData/${id}.json`, {
         method: 'PATCH',
         body: JSON.stringify(logDate),
@@ -94,6 +99,7 @@
 
       dispatch('save');
     } else {
+      //  @ts-ignore
       fetch(`${__myapp.env.DATABASE}/logdata.json`, {
         method: 'POST',
         body: JSON.stringify(logDate),
@@ -117,7 +123,7 @@
     }
   }
 
-  function updateSelectedDate(date) {
+  function updateSelectedDate(date: Date) {
     date.setHours(date.getHours() + 1);
     selectedDate = date;
   }
@@ -130,57 +136,41 @@
     <div class="radio-button__container">
       <RadioButton
         name="statusOfDay"
-        value="working at the office"
         group={statusOfDay}
-        on:change={(event) => (statusOfDay = event.target.value)}
+        bind:value={statusOfDay}
       />
       <RadioButton
         name="statusOfDay"
-        value="working from home"
         group={statusOfDay}
-        on:change={(event) => (statusOfDay = event.target.value)}
+        bind:value={statusOfDay}
       />
       <RadioButton
         name="statusOfDay"
-        value="day off"
         group={statusOfDay}
-        on:change={(event) => (statusOfDay = event.target.value)}
+        bind:value={statusOfDay}
       />
     </div>
     {#if statusOfDay === 'working at the office'}
       <div class="radio-button__container">
         <RadioButton
           name="transport"
-          value="car"
           group={meansOfTransport}
-          on:change={(event) => (meansOfTransport = event.target.value)}
+          bind:value={meansOfTransport}
         />
         <RadioButton
           name="transport"
-          value="public transport"
           group={meansOfTransport}
-          on:change={(event) => (meansOfTransport = event.target.value)}
+          bind:value={meansOfTransport}
         />
       </div>
 
       <div class="dropdown-input__container">
-        <FormDropdown
-          route={routeTripFrom}
-          {routes}
-          title="To"
-          on:change={(event) => (routeTripFrom = event.target.value)}
-        />
-        <FormDropdown
-          route={routeTripTo}
-          {routes}
-          title="From"
-          on:change={(event) => (routeTripTo = event.target.value)}
-        />
+        <FormDropdown {routes} title="To" bind:value={routeTripFrom} />
+        <FormDropdown {routes} title="From" bind:value={routeTripTo} />
         <TimeInput
-          duration={durationTrip}
           valid={durationTripValid}
           validityMessage="Please write a duration in the format hh:mm"
-          on:input={(event) => (durationTrip = event.target.value)}
+          bind:value={durationTrip}
         />
       </div>
       <!-- <Checkbox
