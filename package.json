@@ -38,7 +38,8 @@
     "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
     "firebase": "^8.3.0",
-    "sirv-cli": "^1.0.0"
+    "sirv-cli": "^1.0.0",
+    "ts-jest": "^26.5.4"
   },
   "jest": {
     "transform": {

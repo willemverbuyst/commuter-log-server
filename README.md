@@ -109,6 +109,8 @@ npm install --save-dev babel-jest
 
 npm install --save-dev @testing-library/jest-dom
 
+npm install ts-jest
+
 ```
 
 - Add test scripts to your package.json
