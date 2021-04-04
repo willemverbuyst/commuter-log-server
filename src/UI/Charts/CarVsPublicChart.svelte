@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
@@ -9,18 +9,23 @@
     colorTravelByCar,
     colorTravelByPublicTransport,
   } from '../colors';
+  import type { LogDate } from '../../models/Logdata';
+  import Chart from 'chart.js';
 
-  export let logData;
+  export let logData: LogDate[];
 
-  let carVsPublicChart;
-  let ctx;
+  let carVsPublicChart: Chart;
+  let ctx: CanvasRenderingContext2D;
 
   function createChart() {
     const { totalsCar, totalsPublic, labels, title } = getCarVsPublicTotalsData(
       logData
     );
 
-    ctx = document.getElementById('carVsPublicChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>(
+      document.getElementById('carVsPublicChart')
+    );
+    ctx = canvas.getContext('2d')!;
 
     if (carVsPublicChart) carVsPublicChart.destroy();
 
@@ -58,7 +63,7 @@
           datalabels: {
             display: true,
             color: colorDatalabels,
-            formatter: (value) => formatDataLabels(value),
+            formatter: (value: number) => formatDataLabels(value),
           },
         },
       },

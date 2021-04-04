@@ -1,26 +1,30 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsPerWeekChart';
+  import Chart from 'chart.js';
+  import type { LogDate } from '../../models/Logdata';
+  import type { Context } from 'chartjs-plugin-datalabels';
 
-  export let showGrid;
-  export let logData;
+  export let showGrid: boolean;
+  export let logData: LogDate[];
 
-  let totalsPerWeekChart;
-  let ctx;
+  let totalsPerWeekChart: Chart;
+  let ctx: CanvasRenderingContext2D;
 
+  // TO DO: FIX ANY TYPES
   const totalizer = {
     id: 'totalizer',
 
-    beforeUpdate: (chart) => {
-      let totals = {};
+    beforeUpdate: (chart: any) => {
+      let totals: { [key: number]: number } = {};
       let utmost = 0;
 
-      chart.data.datasets.forEach((dataset, datasetIndex) => {
+      chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
         if (chart.isDatasetVisible(datasetIndex)) {
           utmost = datasetIndex;
-          dataset.data.forEach((value, index) => {
+          dataset.data.forEach((value: number, index: number) => {
             totals[index] = (totals[index] || 0) + value;
           });
         }
@@ -42,7 +46,10 @@
       title,
     } = getTotalsPerWeekData(logData);
 
-    ctx = document.getElementById('totalsPerWeekChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>(
+      document.getElementById('totalsPerWeekChart')
+    );
+    ctx = canvas.getContext('2d')!;
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
     gradientFillCar.addColorStop(0, 'rgba(0, 107, 151, 1)');
@@ -120,7 +127,7 @@
                 suggestedMax: maxForDisplay,
                 stepSize: 120,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(value);
+                  return formatDataLabels(Number(value));
                 },
               },
             },
@@ -134,12 +141,12 @@
             anchor: 'end',
             align: 'end',
             color: '#aaa',
-            formatter: (_value, ctx) => {
+            formatter: (_value: string | number, ctx: Context) => {
               const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
               return formatDataLabels(total);
             },
             display: !showGrid
-              ? function (ctx) {
+              ? function (ctx: Context) {
                   return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
                 }
               : false,
