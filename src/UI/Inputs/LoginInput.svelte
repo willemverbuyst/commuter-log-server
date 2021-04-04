@@ -6,15 +6,18 @@
   export let type: string;
 
   let touched = false;
+
+  function typeAction(node: HTMLInputElement) {
+    node.type = type;
+  }
 </script>
 
 <div class="text-input__container">
   <div class="text-input__label">{label}</div>
   <input
-    {type}
-    {value}
+    use:typeAction
     class:invalid={!valid && touched}
-    on:input
+    bind:value
     on:blur={() => (touched = true)}
   />
 </div>
