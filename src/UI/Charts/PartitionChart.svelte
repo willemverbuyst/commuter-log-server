@@ -1,17 +1,20 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { getPartitionData } from '../../Helpers/chartLogic/partitionChart';
+  import type { LogDate } from '../../models/Logdata';
+  import Chart from 'chart.js';
 
-  export let logData;
+  export let logData: LogDate[];
 
-  let partitionChart;
-  let ctx;
+  let partitionChart: Chart;
+  let ctx: CanvasRenderingContext2D;
 
   function createChart() {
     const { partition, labels, title } = getPartitionData(logData);
 
-    ctx = document.getElementById('partitionChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>document.getElementById('partitionChart');
+    ctx = canvas.getContext('2d')!;
 
     const fillCar = 'rgba(0, 107, 151, 1)';
     const fillPublic = 'rgba(0, 187, 178, 1)';
