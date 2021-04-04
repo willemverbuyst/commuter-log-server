@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  // import Checkbox from '../UI/Inputs/Checkbox.svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
   import FormDropdown from '../UI/Inputs/FormDropdown.svelte';
   import Modal from '../UI/Modal/Modal.svelte';
@@ -12,38 +11,36 @@
   import { routes } from '../constants';
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import logData from '../Store/logState';
-  import type { LogDate } from '../models/Logdata';
+  import type {
+    LogDate,
+    MeansOfTransport,
+    StatusOfDay,
+  } from '../models/Logdata';
 
   export let id: string | undefined;
 
   // Initial values for form
-  let selectedDate = new Date();
-  let statusOfDay = 'working at the office';
-  let meansOfTransport = 'car';
-  let routeTripFrom = routes[1];
-  let routeTripTo = routes[2];
-  // let routeTripTwoFrom = routes[1];
-  // let routeTripTwoTo = routes[2];
-  // let roundTrip = false;
-  let durationTrip = '00:00';
-  // let durationTripTwo = '00:00';
+  let selectedDate: Date = new Date();
+  let statusOfDay: StatusOfDay = 'working at the office';
+  let meansOfTransport: MeansOfTransport = 'car';
+  let routeTripFrom: string = routes[1];
+  let routeTripTo: string = routes[2];
+  let durationTrip: string = '00:00';
 
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
       const selectedDay: LogDate | undefined = days.find(
         (d: LogDate) => d.id === id
       );
-
-      selectedDate = selectedDay!.date;
-      statusOfDay = selectedDay!.statusOfDay;
-      if (selectedDay!.statusOfDay === 'working at the office') {
-        meansOfTransport = selectedDay!.meansOfTransport!;
-        routeTripFrom = selectedDay!.routeTripFrom!;
-        routeTripTo = selectedDay!.routeTripTo!;
-        // routeTripTwoFrom = selectedDay.routeTripTwoFrom;
-        // routeTripTwoTo = selectedDay.routeTripTwoTo;
-        durationTrip = formatDuration(selectedDay!.durationTrip!);
-        // durationTripTwo = formatDuration(selectedDay.durationTripTwo);
+      if (selectedDay) {
+        selectedDate = selectedDay.date;
+        statusOfDay = selectedDay.statusOfDay;
+        if (selectedDay.statusOfDay === 'working at the office') {
+          meansOfTransport = selectedDay.meansOfTransport;
+          routeTripFrom = selectedDay.routeTripFrom;
+          routeTripTo = selectedDay.routeTripTo;
+          durationTrip = formatDuration(selectedDay.durationTrip);
+        }
       }
     });
 
@@ -53,8 +50,6 @@
   const dispatch = createEventDispatcher();
 
   $: durationTripValid = checkDurationInput(durationTrip);
-  // $: durationTripTwoValid = checkDurationInput(durationTripTwo);
-  // $: routeTripTwo = roundTrip ? reverseRoute(routeTripOne) : routeTripTwo;
 
   function cancel() {
     dispatch('cancel');
@@ -62,25 +57,15 @@
 
   function submitForm() {
     console.log(getWeekNumber(selectedDate));
-    const logDate =
-      statusOfDay === 'working at the office'
-        ? {
-            date: selectedDate,
-            statusOfDay,
-            meansOfTransport,
-            routeTripFrom,
-            routeTripTo,
-            // routeTripTwoFrom,
-            // routeTripTwoTo,
-            durationTrip: formatTimeInput(durationTrip),
-            // durationTripTwo: formatTimeInput(durationTripTwo),
-            weekNumber: getWeekNumber(selectedDate)[1],
-          }
-        : {
-            date: selectedDate,
-            statusOfDay,
-            weekNumber: getWeekNumber(selectedDate)[1],
-          };
+    const logDate: LogDate = {
+      date: selectedDate,
+      statusOfDay,
+      meansOfTransport,
+      routeTripFrom,
+      routeTripTo,
+      durationTrip: formatTimeInput(durationTrip),
+      weekNumber: getWeekNumber(selectedDate)[1],
+    };
 
     if (id) {
       //  @ts-ignore
@@ -93,7 +78,7 @@
           if (!res.ok) {
             throw new Error('An error occured, please try again!');
           }
-          logData.updateLogDate(id, logDate);
+          if (id) logData.updateLogDate(id, logDate);
         })
         .catch((err) => console.log(err));
 
@@ -173,31 +158,6 @@
           bind:value={durationTrip}
         />
       </div>
-      <!-- <Checkbox
-        value={roundTrip}
-        label=" Round trip?"
-        on:change={(event) => (roundTrip = event.target.checked)}
-      />
-      <div class="dropdown-input__container">
-        <Dropdown
-          route={routeTripTwoFrom}
-          {routes}
-          title="Trip Two"
-          on:change={(event) => (routeTripTwoFrom = event.target.value)}
-        />
-        <Dropdown
-          route={routeTripTwoTo}
-          {routes}
-          title="Trip Two"
-          on:change={(event) => (routeTripTwoTo = event.target.value)}
-        />
-        <TimeInput
-          duration={durationTripTwo}
-          valid={durationTripTwoValid}
-          validityMessage="Please write a duration in the format hh:mm"
-          on:input={(event) => (durationTripTwo = event.target.value)}
-        />
-      </div> -->
     {/if}
   </form>
   <div class="button__container" slot="footer">

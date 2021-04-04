@@ -1,5 +1,5 @@
 export type LogDate = {
-  id: string;
+  id?: string;
   date: Date;
   durationTrip: number;
   meansOfTransport: MeansOfTransport;
@@ -9,6 +9,9 @@ export type LogDate = {
   weekNumber: number;
 };
 
-type MeansOfTransport = 'car' | 'public transport' | '';
+export type MeansOfTransport = 'car' | 'public transport' | '';
 
-type StatusOfDay = 'day off' | 'working at the office' | 'working from home';
+export type StatusOfDay =
+  | 'day off'
+  | 'working at the office'
+  | 'working from home';
