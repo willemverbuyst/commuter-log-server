@@ -109,7 +109,7 @@ npm install --save-dev babel-jest
 
 npm install --save-dev @testing-library/jest-dom
 
-npm install ts-jest
+npm install --save-dev ts-jest
 
 ```
 
@@ -119,4 +119,3 @@ npm install ts-jest
 - Update Jest configuration
 - Create a svelte.config.js
 - Add Jest to type property of tsconfig.json
-- Add @testing-library/jest-dom to type property of tsconfig.json
