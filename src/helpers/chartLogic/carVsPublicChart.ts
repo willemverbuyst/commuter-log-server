@@ -33,7 +33,6 @@ export const getCarVsPublicTotalsData = (
   };
 };
 
-// TO DO: FIX DURATION TRIP (!)
 // Get the total of all working days at the office for car or for public transport
 const getTotalsTransport = (
   workingDays: LogDate[],
@@ -50,7 +49,7 @@ const getTotalsTransport = (
   const numberOfDaystravelled = daysTravelled.length;
   const totalTimeTravelled =
     daysTravelled.length > 0
-      ? daysTravelled.map((day) => day.durationTrip!).reduce((a, b) => a + b)
+      ? daysTravelled.map((day) => day.durationTrip).reduce((a, b) => a + b)
       : 0;
 
   return {

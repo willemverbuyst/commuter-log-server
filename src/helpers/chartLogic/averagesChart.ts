@@ -28,15 +28,12 @@ export const getAveragePerWeekData = (
   };
 };
 
-// TO DO: FIX DURATION TRIP (!)
 const getAveragePerWeek = (week: LogDate[]): number => {
   const weekWithoutDayOff = week.filter((day) => day.statusOfDay !== 'day off');
   const average =
     weekWithoutDayOff.length > 0
       ? weekWithoutDayOff
-          .map((day) =>
-            day.statusOfDay === 'working from home' ? 0 : day.durationTrip!
-          )
+          .map((day) => day.durationTrip)
           .reduce((a, b) => a + b) / weekWithoutDayOff.length
       : 0;
 

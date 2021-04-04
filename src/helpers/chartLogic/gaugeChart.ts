@@ -12,7 +12,6 @@ const timeMapsTravel = 5 * 2 * 90; // 900
 // Difference 1500 - 900 = 600
 // Total = 1500 + 20 = 1520
 
-// TO DO: FIX DURATION TRIP (!)
 const getTotalsPerWeek = (week: LogDate[]): number => {
   const weekWithoutDayOff = week.filter(
     (day) => day.statusOfDay === 'working at the office'
@@ -20,9 +19,7 @@ const getTotalsPerWeek = (week: LogDate[]): number => {
 
   const totalPerWeek =
     weekWithoutDayOff.length > 0
-      ? weekWithoutDayOff
-          .map((day) => day.durationTrip!)
-          .reduce((a, b) => a + b)
+      ? weekWithoutDayOff.map((day) => day.durationTrip).reduce((a, b) => a + b)
       : 0;
 
   return totalPerWeek;

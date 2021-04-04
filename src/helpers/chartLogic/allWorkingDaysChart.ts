@@ -1,7 +1,6 @@
 import type { LogDate } from '../../models/Logdata';
 import { reduceDates } from '../utils';
 
-// TO DO: FIX DURATION TRIP (!)
 export const getAllWorkingDaysData = (
   logData: LogDate[]
 ): {
@@ -15,9 +14,7 @@ export const getAllWorkingDaysData = (
   const withoutDayOff = reducedDates.filter(
     (day) => day.statusOfDay !== 'day off'
   );
-  const travelTimes = withoutDayOff.map((day) =>
-    day.statusOfDay === 'working from home' ? 0 : day.durationTrip!
-  );
+  const travelTimes = withoutDayOff.map((day) => day.durationTrip);
 
   const labels = withoutDayOff.map(() => '');
   const maxForDisplay = Math.max(...travelTimes) * 1.05;

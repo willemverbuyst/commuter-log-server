@@ -1,7 +1,7 @@
 export type LogDate = {
   id?: string;
   date: Date;
-  durationTrip?: number;
+  durationTrip: number;
   meansOfTransport?: MeansOfTransport;
   routeTripFrom?: string;
   routeTripTo?: string;

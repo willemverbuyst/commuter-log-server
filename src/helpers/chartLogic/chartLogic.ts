@@ -42,14 +42,11 @@ export const formatDataLabels = (value: number): string => {
   }
 };
 
-// TO DO: FIX DURATION TRIP (!)
 export const getMinutes = (dates: LogDate[]): number[] => {
   return dates.map((date) => {
-    return date.statusOfDay === 'day off'
-      ? 0
-      : date.statusOfDay === 'working from home'
+    return date.statusOfDay === 'working from home'
       ? 0.00001
-      : date.durationTrip!;
+      : date.durationTrip;
   });
 };
 

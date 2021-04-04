@@ -46,7 +46,6 @@ export const getTotalsPerWeekData = (
   };
 };
 
-// TO DO: FIX DURATION TRIP (!)
 export const getTotalsPerWeek = (
   week: LogDate[],
   transport: string
@@ -58,7 +57,7 @@ export const getTotalsPerWeek = (
   );
   const totalPerTransport =
     weekTransport.length > 0
-      ? weekTransport.map((day) => day.durationTrip!).reduce((a, b) => a + b)
+      ? weekTransport.map((day) => day.durationTrip).reduce((a, b) => a + b)
       : 0;
 
   return totalPerTransport;
