@@ -6,6 +6,16 @@
   import Chart from 'chart.js';
   import type { LogDate } from '../../models/Logdata';
   // import type { Context } from 'chartjs-plugin-datalabels';
+  import {
+    colorGrid,
+    colorTitle,
+    colorTravelByCar,
+    colorTravelByCarSecond,
+    colorTravelByCarThird,
+    colorTravelByPublicTransport,
+    colorTravelByPublicTransportSecond,
+    colorTravelByPublicTransportThird,
+  } from '../colors';
 
   export let showGrid: boolean;
   export let logData: LogDate[];
@@ -52,14 +62,14 @@
     ctx = canvas.getContext('2d')!;
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillCar.addColorStop(0, 'rgba(0, 107, 151, 1)');
-    gradientFillCar.addColorStop(0.5, 'rgba(0, 133, 166, 1)');
-    gradientFillCar.addColorStop(1, 'rgba(0, 160, 175, 1)');
+    gradientFillCar.addColorStop(0, colorTravelByCar);
+    gradientFillCar.addColorStop(0.5, colorTravelByCarSecond);
+    gradientFillCar.addColorStop(1, colorTravelByCarThird);
 
     const gradientFillPublic = ctx.createLinearGradient(0, 0, 0, 250);
-    gradientFillPublic.addColorStop(0, 'rgba(0, 187, 178, 1)');
-    gradientFillPublic.addColorStop(0.5, 'rgba(0, 213, 176, 1)');
-    gradientFillPublic.addColorStop(1, 'rgba(101, 238, 172, 1)');
+    gradientFillPublic.addColorStop(0, colorTravelByPublicTransport);
+    gradientFillPublic.addColorStop(0.5, colorTravelByPublicTransportSecond);
+    gradientFillPublic.addColorStop(1, colorTravelByPublicTransportThird);
 
     if (totalsPerWeekChart) totalsPerWeekChart.destroy();
 
@@ -85,7 +95,7 @@
         title: {
           display: true,
           text: title,
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         elements: {
           point: {
@@ -115,8 +125,8 @@
               stacked: true,
               gridLines: {
                 display: showGrid,
-                color: 'rgba(170, 170, 170, 0.3)',
-                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                color: colorGrid,
+                zeroLineColor: colorGrid,
                 tickMarkLength: 0,
                 drawBorder: false,
               },
@@ -140,7 +150,7 @@
         //   datalabels: {
         //     anchor: 'end',
         //     align: 'end',
-        //     color: '#aaa',
+        //     color: colorTitle,
         //     formatter: (_value: string | number, ctx: Context) => {
         //       const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
         //       return formatDataLabels(total);
