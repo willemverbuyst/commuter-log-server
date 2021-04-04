@@ -1,15 +1,17 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
   import { getWeekData } from '../../Helpers/chartLogic/weekChartLogic';
+  import type { LogDate } from '../../models/Logdata';
+  import Chart from 'chart.js';
 
-  export let showGrid;
-  export let logData;
-  export let weekIndexInLogData;
+  export let showGrid: boolean;
+  export let logData: LogDate[];
+  export let weekIndexInLogData: number;
 
-  let weekChart;
-  let ctx;
+  let weekChart: Chart;
+  let ctx: CanvasRenderingContext2D;
 
   function createChart() {
     const {
@@ -20,7 +22,8 @@
       title,
     } = getWeekData(logData, weekIndexInLogData);
 
-    ctx = document.getElementById('weekChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>document.getElementById('weekChart');
+    ctx = canvas.getContext('2d')!;
 
     if (weekChart) weekChart.destroy();
 
@@ -71,7 +74,7 @@
                 suggestedMax: maxForDisplay > 180 ? maxForDisplay : 180,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(value);
+                  return formatDataLabels(Number(value));
                 },
               },
             },
@@ -87,14 +90,14 @@
             display: true,
             color: 'rgba(170, 170, 170, 0.3)',
             formatter: !showGrid
-              ? (value) => {
+              ? (value: number) => {
                   return value === 0
                     ? ''
                     : value === 0.00001
                     ? 'WFH'
                     : formatDataLabels(value);
                 }
-              : (value) => {
+              : (value: number) => {
                   return value === 0 ? '' : value === 0.00001 ? 'WFH' : '';
                 },
           },
