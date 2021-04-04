@@ -1,7 +1,6 @@
 import type { LogDate } from '../../models/Logdata';
 import { getYear } from '../utils';
 
-// TO DO: ADD RETURN TYPE FIX DURATION TRIP (!)
 export const filterData = (
   logData: LogDate[],
   value: string,
@@ -31,20 +30,8 @@ export const filterData = (
     case 'sortTravelTime':
       filteredData =
         value === 'ascending'
-          ? logData
-              .map((date) =>
-                date.statusOfDay !== 'working at the office'
-                  ? { ...date, durationTrip: 0 }
-                  : date
-              )
-              .sort((a, b) => a.durationTrip! - b.durationTrip!)
-          : logData
-              .map((date) =>
-                date.statusOfDay !== 'working at the office'
-                  ? { ...date, durationTrip: 0 }
-                  : date
-              )
-              .sort((a, b) => b.durationTrip! - a.durationTrip!);
+          ? [...logData].sort((a, b) => a.durationTrip - b.durationTrip)
+          : [...logData].sort((a, b) => b.durationTrip - a.durationTrip);
       return filteredData.length > 0 ? filteredData : [];
 
     case 'status':
