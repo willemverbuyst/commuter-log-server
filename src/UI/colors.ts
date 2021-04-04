@@ -11,7 +11,7 @@ document.documentElement.style.setProperty(
 
 document.documentElement.style.setProperty(
   '--chart-travel-workingFromHome',
-  'rgba(255, 39, 204, 1)'
+  'rgba(17, 77, 108, 1)'
 );
 
 document.documentElement.style.setProperty(
