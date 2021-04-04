@@ -17,6 +17,8 @@
   export let showGrid: boolean;
   export let logData: LogDate[];
 
+  console.log('hello');
+
   let allWorkingDaysChart: Chart;
   let ctx: CanvasRenderingContext2D;
 

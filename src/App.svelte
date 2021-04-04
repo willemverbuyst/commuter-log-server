@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import firebase from 'firebase/app';
   import 'firebase/auth';
   import FormComponent from './Business/FormComponent.svelte';
@@ -18,26 +18,35 @@
   import logData from './Store/logState';
   // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
+  import type { LogDate } from './models/Logdata';
 
   let showForm = false;
   let showLogIn = false;
   let isLoading = true;
   let signedIn = false;
   let weekIndexInLogData = 0;
-  let edittedId;
+  let edittedId: string;
 
   var firebaseConfig = {
+    // @ts-ignore
     apiKey: __myapp.env.API_KEY,
+    // @ts-ignore
     authDomain: `${__myapp.env.PROJECT_ID}.firebaseapp.com`,
+    // @ts-ignore
     databaseURL: `https://${__myapp.env.PROJECT_ID}.firebaseio.com`,
+    // @ts-ignore
     projectId: __myapp.env.PROJECT_ID,
+    // @ts-ignore
     storageBucket: `${__myapp.env.PROJECT_ID}.appspot.com`,
+    // @ts-ignore
     messagingSenderId: __myapp.env.SENDER_ID,
+    // @ts-ignore
     appId: __myapp.env.APP_ID,
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+  // @ts-ignore
   fetch(`${__myapp.env.DATABASE}/logdata.json`)
     .then((res) => {
       if (!res.ok) {
@@ -46,7 +55,7 @@
       return res.json();
     })
     .then((data) => {
-      const loadedLogData = [];
+      const loadedLogData: LogDate[] = [];
       for (const key in data) {
         loadedLogData.push({
           ...data[key],
@@ -60,8 +69,8 @@
       }, 1000);
     })
     .catch((err) => {
-      error = err;
-      isloading = false;
+      //error = err;
+      isLoading = false;
       console.log(err);
     });
 
@@ -102,12 +111,12 @@
     console.log(signedIn);
   }
 
-  function startEdit(event) {
+  function startEdit(event: any) {
     showForm = true;
     edittedId = event.detail;
   }
 
-  function updateSelectedWeek(event) {
+  function updateSelectedWeek(event: any) {
     weekIndexInLogData = event.target.value;
   }
 </script>
