@@ -1,9 +1,7 @@
-import { subscribe } from 'svelte/internal';
-import { writable } from 'svelte/store';
+import { Writable, writable } from 'svelte/store';
 
-let showGrid = writable(true);
-let darkMode = writable(false);
-let dark = false;
+let showGrid: Writable<boolean> = writable(true);
+let darkMode: Writable<boolean> = writable(false);
 
 export const darkModeStore = {
   subscribe: darkMode.subscribe,

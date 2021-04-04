@@ -1,10 +1,10 @@
 export type LogDate = {
-  id?: string;
+  id: string;
   date: Date;
   durationTrip: number;
-  meansOfTransport?: MeansOfTransport;
-  routeTripFrom?: string;
-  routeTripTo?: string;
+  meansOfTransport: MeansOfTransport;
+  routeTripFrom: string;
+  routeTripTo: string;
   statusOfDay: StatusOfDay;
   weekNumber: number;
 };
