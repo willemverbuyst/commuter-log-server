@@ -3,11 +3,11 @@ import {
   colorTravelByCar,
   colorTravelByPublicTransport,
 } from '../../UI/colors';
-import { getBackgroundColor, getMinutes } from './chartLogic';
+import { getBackgroundColor, getMinutes, getWeekdays } from './chartLogic';
 
 const testLogDateOne: LogDate = {
   id: 'test_id',
-  date: new Date(),
+  date: new Date('2021-01-04T00:00:00.000Z'),
   durationTrip: 90,
   meansOfTransport: 'car',
   routeTripFrom: 'test_start',
@@ -18,7 +18,7 @@ const testLogDateOne: LogDate = {
 
 const testLogDateTwo: LogDate = {
   id: 'test_id',
-  date: new Date(),
+  date: new Date('2021-01-05T00:00:00.000Z'),
   durationTrip: 60,
   meansOfTransport: 'public transport',
   routeTripFrom: 'test_start',
@@ -29,7 +29,7 @@ const testLogDateTwo: LogDate = {
 
 const testLogDateThree: LogDate = {
   id: 'test_id',
-  date: new Date(),
+  date: new Date('2021-01-06T00:00:00.000Z'),
   durationTrip: 0,
   meansOfTransport: '',
   routeTripFrom: '',
@@ -61,5 +61,21 @@ describe('if getMinutes is given an array of logDates', () => {
     expect(
       getMinutes([testLogDateOne, testLogDateTwo, testLogDateThree])
     ).toEqual([90, 60, 0.00001]);
+  });
+});
+
+describe('if getWeekdays is given an array of logDates', () => {
+  test('returns a the array with weekdays', () => {
+    expect(getWeekdays([testLogDateOne])).toEqual(['Monday']);
+    expect(getWeekdays([testLogDateTwo])).toEqual(['Tuesday']);
+    expect(getWeekdays([testLogDateThree])).toEqual(['Wednesday']);
+    expect(getWeekdays([testLogDateThree])).not.toEqual(['Friday']);
+    expect(getWeekdays([testLogDateOne, testLogDateTwo])).toEqual([
+      'Monday',
+      'Tuesday',
+    ]);
+    expect(
+      getWeekdays([testLogDateOne, testLogDateTwo, testLogDateThree])
+    ).toEqual(['Monday', 'Tuesday', 'Wednesday']);
   });
 });
