@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let route: string;
+  export let value: string;
   export let routes: string[];
   export let title: string;
 </script>
@@ -7,7 +7,7 @@
 <div class="trip-input__container">
   <div class="trip-input__label">{title}</div>
   <!-- svelte-ignore a11y-no-onchange -->
-  <select value={route} on:change>
+  <select on:change bind:value>
     {#each routes as r}
       <option value={r}>{r}</option>
     {/each}
