@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let duration: string;
+  export let value: string;
   export let valid: boolean = true;
   export let validityMessage: string;
 
@@ -11,9 +11,8 @@
   <div class="time-input__input">
     <input
       type="text"
-      value={duration}
       class:invalid={!valid && touched}
-      on:input
+      bind:value
       on:blur={() => (touched = true)}
     />
   </div>

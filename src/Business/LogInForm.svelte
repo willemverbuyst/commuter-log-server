@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import firebase from 'firebase/app';
   import 'firebase/auth';
@@ -69,18 +69,16 @@
     <LoginInput
       label="Email"
       type="email"
-      value={email}
       valid={true}
       validityMessage="Please write a correct email"
-      on:input={(event) => (email = event.target.value)}
+      bind:value={email}
     />
     <LoginInput
       label="Password"
       type="password"
-      value={password}
       valid={true}
       validityMessage="Please enter a password"
-      on:input={(event) => (password = event.target.value)}
+      bind:value={password}
     />
   </form>
   <div class="button__container" slot="footer">

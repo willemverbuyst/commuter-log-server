@@ -5,7 +5,7 @@
   import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsPerWeekChart';
   import Chart from 'chart.js';
   import type { LogDate } from '../../models/Logdata';
-  import type { Context } from 'chartjs-plugin-datalabels';
+  // import type { Context } from 'chartjs-plugin-datalabels';
 
   export let showGrid: boolean;
   export let logData: LogDate[];
@@ -14,28 +14,28 @@
   let ctx: CanvasRenderingContext2D;
 
   // TO DO: FIX ANY TYPES
-  const totalizer = {
-    id: 'totalizer',
+  // const totalizer = {
+  //   id: 'totalizer',
 
-    beforeUpdate: (chart: any) => {
-      let totals: { [key: number]: number } = {};
-      let utmost = 0;
+  //   beforeUpdate: (chart: any) => {
+  //     let totals: { [key: number]: number } = {};
+  //     let utmost = 0;
 
-      chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
-        if (chart.isDatasetVisible(datasetIndex)) {
-          utmost = datasetIndex;
-          dataset.data.forEach((value: number, index: number) => {
-            totals[index] = (totals[index] || 0) + value;
-          });
-        }
-      });
+  //     chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
+  //       if (chart.isDatasetVisible(datasetIndex)) {
+  //         utmost = datasetIndex;
+  //         dataset.data.forEach((value: number, index: number) => {
+  //           totals[index] = (totals[index] || 0) + value;
+  //         });
+  //       }
+  //     });
 
-      chart.$totalizer = {
-        totals: totals,
-        utmost: utmost,
-      };
-    },
-  };
+  //     chart.$totalizer = {
+  //       totals: totals,
+  //       utmost: utmost,
+  //     };
+  //   },
+  // };
 
   function createChart() {
     const {
@@ -80,7 +80,7 @@
           },
         ],
       },
-      plugins: [totalizer],
+      // plugins: [totalizer],
       options: {
         title: {
           display: true,
@@ -136,22 +136,22 @@
         tooltips: {
           enabled: false,
         },
-        plugins: {
-          datalabels: {
-            anchor: 'end',
-            align: 'end',
-            color: '#aaa',
-            formatter: (_value: string | number, ctx: Context) => {
-              const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
-              return formatDataLabels(total);
-            },
-            display: !showGrid
-              ? function (ctx: Context) {
-                  return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
-                }
-              : false,
-          },
-        },
+        // plugins: {
+        //   datalabels: {
+        //     anchor: 'end',
+        //     align: 'end',
+        //     color: '#aaa',
+        //     formatter: (_value: string | number, ctx: Context) => {
+        //       const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
+        //       return formatDataLabels(total);
+        //     },
+        //     display: !showGrid
+        //       ? function (ctx: Context) {
+        //           return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
+        //         }
+        //       : false,
+        //   },
+        // },
       },
     });
   }
