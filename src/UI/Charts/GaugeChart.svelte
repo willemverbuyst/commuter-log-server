@@ -5,6 +5,7 @@
   import { actualTravelTime } from '../../Helpers/chartLogic/gaugeChart';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
+  import { colorTitle } from '../colors';
 
   export let logData: LogDate[];
   export let weekIndexInLogData: number;
@@ -59,7 +60,7 @@
         title: {
           display: true,
           text: '',
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         maintainAspectRatio: true,
         legend: {
@@ -92,7 +93,7 @@
         plugins: {
           datalabels: {
             display: false,
-            color: '#333',
+            color: colorTitle,
             formatter: (value: number) => formatDataLabels(value),
           },
         },

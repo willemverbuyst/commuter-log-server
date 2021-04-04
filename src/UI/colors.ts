@@ -5,13 +5,33 @@ document.documentElement.style.setProperty(
 );
 
 document.documentElement.style.setProperty(
+  '--chart-travel-car-second',
+  'rgba(0, 133, 166, 1)'
+);
+
+document.documentElement.style.setProperty(
+  '--chart-travel-car-third',
+  'rgba(0, 160, 175, 1)'
+);
+
+document.documentElement.style.setProperty(
   '--chart-travel-publicTransport',
   'rgba(0, 187, 178, 1)'
 );
 
 document.documentElement.style.setProperty(
+  '--chart-travel-publicTransport-second',
+  'rgba(0, 213, 176, 1)'
+);
+
+document.documentElement.style.setProperty(
+  '--chart-travel-publicTransport-third',
+  'rgba(101, 238, 172, 1)'
+);
+
+document.documentElement.style.setProperty(
   '--chart-travel-workingFromHome',
-  'rgba(255, 39, 204, 1)'
+  'rgba(17, 77, 108, 1)'
 );
 
 document.documentElement.style.setProperty(
@@ -46,8 +66,20 @@ document.documentElement.style.setProperty('--chart-datalabels', '#fff');
 export const colorTravelByCar = document.documentElement.style.getPropertyValue(
   '--chart-travel-car'
 );
+export const colorTravelByCarSecond = document.documentElement.style.getPropertyValue(
+  '--chart-travel-car-second'
+);
+export const colorTravelByCarThird = document.documentElement.style.getPropertyValue(
+  '--chart-travel-car-third'
+);
 export const colorTravelByPublicTransport = document.documentElement.style.getPropertyValue(
   '--chart-travel-publicTransport'
+);
+export const colorTravelByPublicTransportSecond = document.documentElement.style.getPropertyValue(
+  '--chart-travel-publicTransport-second'
+);
+export const colorTravelByPublicTransportThird = document.documentElement.style.getPropertyValue(
+  '--chart-travel-publicTransport-third'
 );
 export const colorWorkingFromHomeColor = document.documentElement.style.getPropertyValue(
   '--chart-travel-workingFromHome'

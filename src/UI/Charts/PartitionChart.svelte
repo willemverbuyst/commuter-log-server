@@ -4,6 +4,12 @@
   import { getPartitionData } from '../../Helpers/chartLogic/partitionChart';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
+  import {
+    colorTitle,
+    colorTravelByCar,
+    colorTravelByPublicTransport,
+    colorWorkingFromHomeColor,
+  } from '../colors';
 
   export let logData: LogDate[];
 
@@ -16,10 +22,6 @@
     const canvas = <HTMLCanvasElement>document.getElementById('partitionChart');
     ctx = canvas.getContext('2d')!;
 
-    const fillCar = 'rgba(0, 107, 151, 1)';
-    const fillPublic = 'rgba(0, 187, 178, 1)';
-    const fillHome = 'rgba(255, 39, 204, 1)';
-
     if (partitionChart) partitionChart.destroy();
 
     partitionChart = new Chart(ctx, {
@@ -29,7 +31,11 @@
         datasets: [
           {
             data: partition,
-            backgroundColor: [fillHome, fillCar, fillPublic],
+            backgroundColor: [
+              colorWorkingFromHomeColor,
+              colorTravelByCar,
+              colorTravelByPublicTransport,
+            ],
             borderWidth: 0,
           },
         ],
@@ -38,7 +44,7 @@
         title: {
           display: true,
           text: title,
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         maintainAspectRatio: true,
         legend: {

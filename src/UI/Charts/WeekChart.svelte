@@ -5,6 +5,7 @@
   import { getWeekData } from '../../Helpers/chartLogic/weekChartLogic';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
+  import { colorGrid, colorTitle } from '../colors';
 
   export let showGrid: boolean;
   export let logData: LogDate[];
@@ -43,7 +44,7 @@
         title: {
           display: true,
           text: title,
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         maintainAspectRatio: true,
         legend: {
@@ -62,8 +63,8 @@
             {
               gridLines: {
                 display: showGrid,
-                color: 'rgba(170, 170, 170, 0.3)',
-                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                color: colorGrid,
+                zeroLineColor: colorGrid,
                 tickMarkLength: 0,
                 drawBorder: false,
               },
@@ -88,7 +89,7 @@
             anchor: 'end',
             align: 'top',
             display: true,
-            color: 'rgba(170, 170, 170, 0.3)',
+            color: colorGrid,
             formatter: !showGrid
               ? (value: number) => {
                   return value === 0
