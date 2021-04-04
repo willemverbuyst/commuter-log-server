@@ -76,6 +76,8 @@ npm install --save-dev @tsconfig/svelte typescript svelte-preprocess svelte-chec
 
 npm install @rollup/plugin-typescript --save-dev
 
+npm install @types/chart.js --save-dev
+
 npx svelte-check
 ```
 

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
   import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
@@ -11,12 +11,14 @@
     colorTravelTimeMaps,
     colorTravelTimeNormal,
   } from '../colors';
+  import type { LogDate } from '../../models/Logdata';
+  import Chart from 'chart.js';
 
-  export let showGrid;
-  export let logData;
+  export let showGrid: boolean;
+  export let logData: LogDate[];
 
-  let allWorkingDaysChart;
-  let ctx;
+  let allWorkingDaysChart: Chart;
+  let ctx: CanvasRenderingContext2D;
 
   function createChart() {
     const {
@@ -27,9 +29,12 @@
       lineValue,
     } = getAllWorkingDaysData(logData);
 
-    ctx = document.getElementById('allWorkingDaysChart').getContext('2d');
+    const canvas = <HTMLCanvasElement>(
+      document.getElementById('allWorkingDaysChart')
+    );
+    ctx = canvas.getContext('2d')!;
 
-    const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
+    const gradientFill = ctx!.createLinearGradient(0, 100, 0, 250);
     gradientFill.addColorStop(0, colorTravelTimeExtra);
     gradientFill.addColorStop(0.5, colorTravelTimeMaps);
     gradientFill.addColorStop(1, colorTravelTimeNormal);
@@ -109,7 +114,7 @@
                 suggestedMax: maxForDisplay,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(value);
+                  return formatDataLabels(Number(value));
                 },
               },
             },
