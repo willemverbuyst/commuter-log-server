@@ -85,3 +85,36 @@ npx svelte-check
 - Create tsconfig.json
 
 #
+
+## Jest
+
+[Svelte Testing Library](https://testing-library.com/docs/svelte-testing-library/intro)
+
+[Svelte with TypeScript and Jest (Starter Project)](https://daveceddia.com/svelte-typescript-jest/)
+
+[svelte-jester](https://github.com/mihar-22/svelte-jester#typescript)
+
+[Svelte Testing Library](https://github.com/testing-library/svelte-testing-library)
+
+[Testing Svelte components with Jest ](https://dev.to/jpblancodb/testing-svelte-components-with-jest-53h3)
+
+```
+npm install --save-dev @testing-library/svelte
+
+npm install --save-dev jest
+
+npm install --save-dev svelte-jester
+
+npm install --save-dev babel-jest
+
+npm install --save-dev @testing-library/jest-dom
+
+```
+
+- Add test scripts to your package.json
+- Add Jest configuration to your package.json
+- Add a .babelrc
+- Update Jest configuration
+- Create a svelte.config.js
+- Add Jest to type property of tsconfig.json
+- Add @testing-library/jest-dom to type property of tsconfig.json
