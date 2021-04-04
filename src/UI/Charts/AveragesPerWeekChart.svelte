@@ -5,6 +5,13 @@
   import { getAveragePerWeekData } from '../../Helpers/chartLogic/averagesChart';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
+  import {
+    colorGrid,
+    colorTitle,
+    colorTravelTimeExtra,
+    colorTravelTimeMaps,
+    colorTravelTimeNormal,
+  } from '../colors';
 
   export let showGrid: boolean;
   export let logData: LogDate[];
@@ -23,9 +30,9 @@
     ctx = canvas.getContext('2d')!;
 
     const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);
-    gradientStroke.addColorStop(0, 'rgba(255, 0, 128, 1)');
-    gradientStroke.addColorStop(0.5, 'rgba(255, 140, 0, 1)');
-    gradientStroke.addColorStop(1, 'rgba(64, 224, 208, 1)');
+    gradientStroke.addColorStop(0, colorTravelTimeExtra);
+    gradientStroke.addColorStop(0.5, colorTravelTimeMaps);
+    gradientStroke.addColorStop(1, colorTravelTimeNormal);
 
     if (averagesPerWeekChart) averagesPerWeekChart.destroy();
 
@@ -49,7 +56,7 @@
         title: {
           display: true,
           text: title,
-          fontColor: '#aaa',
+          fontColor: colorTitle,
         },
         maintainAspectRatio: true,
         aspectRatio: 4,
@@ -77,8 +84,8 @@
             {
               gridLines: {
                 display: showGrid,
-                color: 'rgba(170, 170, 170, 0.3)',
-                zeroLineColor: 'rgba(170, 170, 170, 0.3)',
+                color: colorGrid,
+                zeroLineColor: colorGrid,
                 tickMarkLength: 0,
                 drawBorder: false,
               },
@@ -103,7 +110,7 @@
             anchor: 'end',
             align: 'top',
             display: !showGrid,
-            color: 'rgba(170, 170, 170, 0.3)',
+            color: colorGrid,
             formatter: (value: number) => formatDataLabels(value),
           },
         },
