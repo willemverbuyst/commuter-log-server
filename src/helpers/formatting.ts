@@ -1,8 +1,3 @@
-export const reverseRoute = (route: string): string => {
-  const [start, end] = route.split(' - ');
-  return `${end} - ${start}`;
-};
-
 // change the number in minutes to hh:mm
 export const formatDuration = (value: number): string => {
   if (value === 0.00001) {

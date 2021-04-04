@@ -1,14 +1,14 @@
 import { isEmpty, checkDurationInput } from './validation';
 
-describe('if given string', () => {
+describe('if isEmpty is given a string', () => {
   test('returns true if empty', () => {
     expect(isEmpty('hahaha')).toBe(false);
     expect(isEmpty('')).toBe(true);
   });
 });
 
-describe('if given string', () => {
-  test('returns true if string is in the correct format', () => {
+describe('if checkDurationInput iss given a string', () => {
+  test('returns true if the string is in the correct format', () => {
     expect(checkDurationInput('00:65')).toBe(false);
     expect(checkDurationInput('00:5')).toBe(false);
     expect(checkDurationInput('time')).toBe(false);
