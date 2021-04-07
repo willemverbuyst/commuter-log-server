@@ -40,6 +40,11 @@
           routeTripFrom = selectedDay.routeTripFrom;
           routeTripTo = selectedDay.routeTripTo;
           durationTrip = formatDuration(selectedDay.durationTrip);
+        } else {
+          meansOfTransport = '';
+          routeTripFrom = '';
+          routeTripTo = '';
+          durationTrip = '00:00';
         }
       }
     });
