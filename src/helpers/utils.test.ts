@@ -49,8 +49,8 @@ describe('if chunkArray is given an array', () => {
 
 describe('if getDay is given a date', () => {
   test('returns a string', () => {
-    const testDay = new Date('1/1/2021');
-    expect(getDay(testDay)).toBe('Fri Jan 01');
+    expect(getDay(new Date('2021-01-01T00:00:00.000Z'))).toBe('Fri Jan 01');
+    expect(getDay(new Date('1/1/2021'))).toBe('Fri Jan 01');
   });
 });
 
@@ -65,8 +65,8 @@ describe('if getUniqueValues is given an value, index and array', () => {
 
 describe('if getYear is given a date', () => {
   test('returns a string', () => {
-    const testDay = new Date('1/1/2021');
-    expect(getYear(testDay)).toBe('2021');
+    expect(getYear(new Date('1/1/2021'))).toBe('2021');
+    expect(getYear(new Date('2021-01-06T00:00:00.000Z'))).toBe('2021');
   });
 });
 
