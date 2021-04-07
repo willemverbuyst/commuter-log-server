@@ -1,4 +1,9 @@
-import { getNumberOfWeeks, getStatuses, getWeekNumbers } from './logDataLogic';
+import {
+  getNumberOfWeeks,
+  getStatuses,
+  getWeekNumber,
+  getWeekNumbers,
+} from './logDataLogic';
 import {
   testLogDateArrayWeekOne,
   testLogDateArrayWeekTwo,
@@ -30,5 +35,15 @@ describe('if getWeekNumbers is given an array', () => {
     expect(getWeekNumbers(testLogDateArrayWeekOne)).toEqual([1]);
     expect(getWeekNumbers(testLogDateArrayWeekTwo)).toEqual([2]);
     expect(getWeekNumbers(testLogDateArrayTwoWeeks)).toEqual([1, 2]);
+  });
+});
+
+describe('if getWeekNumber is given a date', () => {
+  test('returns an array with year and weeknumber', () => {
+    expect(getWeekNumber(new Date('1/1/2021'))).toEqual([2020, 53]);
+    expect(getWeekNumber(new Date('2021-01-06T00:00:00.000Z'))).toEqual([
+      2021,
+      1,
+    ]);
   });
 });
