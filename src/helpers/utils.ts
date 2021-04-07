@@ -15,8 +15,11 @@ export const chunkArray = (arr: LogDate[], size: number): LogDate[][] => {
 export const getDay = (date: Date): string => date.toString().slice(0, 10);
 
 // TO DO: CHECK TYPE OF SELF AND VALUE
-export const getUniqueValues = (value: any, index: number, self: any) =>
-  self.indexOf(value) === index;
+export const getUniqueValues = (
+  value: string | number,
+  index: number,
+  self: Array<string | number>
+): boolean => self.indexOf(value) === index;
 
 export const getYear = (date: Date): string => date.toString().slice(11, 15);
 
