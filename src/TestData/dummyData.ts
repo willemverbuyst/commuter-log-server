@@ -111,7 +111,7 @@ const testLogDateTen: LogDate = {
   weekNumber: 2,
 };
 
-export const testLogDateArrayOneWeek = [
+export const testLogDateArrayWeekOne = [
   testLogDateOneA,
   testLogDateOneB,
   testLogDateTwo,
@@ -120,11 +120,15 @@ export const testLogDateArrayOneWeek = [
   testLogDateFive,
 ];
 
-export const testLogDateArrayTwoWeeks = [
-  ...testLogDateArrayOneWeek,
+export const testLogDateArrayWeekTwo = [
   testLogDateSix,
   testLogDateSeven,
   testLogDateEight,
   testLogDateNine,
   testLogDateTen,
+];
+
+export const testLogDateArrayTwoWeeks = [
+  ...testLogDateArrayWeekOne,
+  ...testLogDateArrayWeekTwo,
 ];

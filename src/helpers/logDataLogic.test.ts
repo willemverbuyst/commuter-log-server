@@ -1,19 +1,20 @@
-import { getNumberOfWeeks, getStatuses } from './logDataLogic';
+import { getNumberOfWeeks, getStatuses, getWeekNumbers } from './logDataLogic';
 import {
-  testLogDateArrayOneWeek,
+  testLogDateArrayWeekOne,
+  testLogDateArrayWeekTwo,
   testLogDateArrayTwoWeeks,
 } from '../TestData/dummyData';
 
 describe('if getNumberOfWeeks is given an array', () => {
   test('returns number of weeks', () => {
-    expect(getNumberOfWeeks(testLogDateArrayOneWeek)).toBe(1);
+    expect(getNumberOfWeeks(testLogDateArrayWeekOne)).toBe(1);
     expect(getNumberOfWeeks(testLogDateArrayTwoWeeks)).toBe(2);
   });
 });
 
-describe('if getStatus is given an array', () => {
+describe('if getStatuses is given an array', () => {
   test('returns an array with unique statuses', () => {
-    expect(getStatuses(testLogDateArrayOneWeek)).toEqual([
+    expect(getStatuses(testLogDateArrayWeekOne)).toEqual([
       'working at the office',
     ]);
     expect(getStatuses(testLogDateArrayTwoWeeks)).toEqual([
@@ -21,5 +22,13 @@ describe('if getStatus is given an array', () => {
       'working from home',
       'day off',
     ]);
+  });
+});
+
+describe('if getWeekNumbers is given an array', () => {
+  test('returns an array with unique weeknumbers', () => {
+    expect(getWeekNumbers(testLogDateArrayWeekOne)).toEqual([1]);
+    expect(getWeekNumbers(testLogDateArrayWeekTwo)).toEqual([2]);
+    expect(getWeekNumbers(testLogDateArrayTwoWeeks)).toEqual([1, 2]);
   });
 });
