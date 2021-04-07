@@ -7,7 +7,7 @@ describe('if isEmpty is given a string', () => {
   });
 });
 
-describe('if checkDurationInput iss given a string', () => {
+describe('if checkDurationInput is given a string', () => {
   test('returns true if the string is in the correct format', () => {
     expect(checkDurationInput('00:65')).toBe(false);
     expect(checkDurationInput('00:5')).toBe(false);
