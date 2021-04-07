@@ -4,6 +4,7 @@ import {
   getWeekNumber,
   getWeekNumbers,
   getYearAndWeekNumber,
+  getYears,
 } from './logDataLogic';
 import {
   testLogDateArrayWeekOne,
@@ -59,5 +60,12 @@ describe('if getYearAndWeekNumber is given an array and a index', () => {
       2021,
       2,
     ]);
+  });
+});
+
+describe('if getYears is given an array', () => {
+  test('returns an array with unique years', () => {
+    expect(getYears(testLogDateArrayWeekOne)).toEqual(['2021']);
+    expect(getYears(testLogDateArrayTwoWeeks)).toEqual(['2021']);
   });
 });
