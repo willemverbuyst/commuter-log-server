@@ -15,7 +15,7 @@ export const chunkArray = <T>(arr: T[], size: number): T[][] => {
 export const getUniqueValues = <T>(
   value: T,
   index: number,
-  self: Array<T>
+  self: T[]
 ): boolean => self.indexOf(value) === index;
 
 export const reduceDates = (dates: LogDate[]): LogDate[] => {
