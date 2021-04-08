@@ -22,7 +22,7 @@ export const getTotalsPerWeekData = (
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   // Get groups of 5
-  const weeks = chunkArray(reducedDates, 5);
+  const weeks = chunkArray<LogDate>(reducedDates, 5);
   const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'car'));
   const totalsPerWeekPublic = weeks.map((week) =>
     getTotalsPerWeek(week, 'public transport')

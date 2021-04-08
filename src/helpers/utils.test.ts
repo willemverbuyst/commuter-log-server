@@ -36,9 +36,15 @@ const logDateFour = [logDate, logDate, logDate, logDate];
 
 describe('if chunkArray is given an array', () => {
   test('returns a chunked array', () => {
-    expect(chunkArray(logDateThree, 1)).toEqual([[logDate], [logDate]]);
-    expect(chunkArray(logDateFour, 2)).toEqual([logDateThree, logDateThree]);
-    expect(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual([
+    expect(chunkArray<LogDate>(logDateThree, 1)).toEqual([
+      [logDate],
+      [logDate],
+    ]);
+    expect(chunkArray<LogDate>(logDateFour, 2)).toEqual([
+      logDateThree,
+      logDateThree,
+    ]);
+    expect(chunkArray<Number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual([
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9],
@@ -54,6 +60,7 @@ describe('if getUniqueValues is given an value, index and array', () => {
     expect(getUniqueValues('y', 3, ['y', 'x', 'x', 'y', 'z'])).toBe(false);
     expect(getUniqueValues(1, 1, [0, 1, 2, 3])).toBe(true);
     expect(getUniqueValues(3, 3, [3, 3, 3, 3, 3])).toBe(false);
+    expect(getUniqueValues(true, 1, [false, true, true])).toBe(true);
     expect(getUniqueValues(true, 1, [false, true, true])).toBe(true);
   });
 });
