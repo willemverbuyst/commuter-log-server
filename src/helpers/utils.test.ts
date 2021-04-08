@@ -38,6 +38,11 @@ describe('if chunkArray is given an array', () => {
   test('returns a chunked array', () => {
     expect(chunkArray(logDateThree, 1)).toEqual([[logDate], [logDate]]);
     expect(chunkArray(logDateFour, 2)).toEqual([logDateThree, logDateThree]);
+    expect(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
   });
 });
 
