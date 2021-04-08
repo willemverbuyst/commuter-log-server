@@ -1,7 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
   import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsPerWeekChart';
   import Chart from 'chart.js';
   import type { LogDate } from '../../models/Logdata';
@@ -137,7 +137,7 @@
                 suggestedMax: maxForDisplay,
                 stepSize: 120,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(Number(value));
+                  return formatDuration(Number(value));
                 },
               },
             },
@@ -153,7 +153,7 @@
         //     color: colorTitle,
         //     formatter: (_value: string | number, ctx: Context) => {
         //       const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
-        //       return formatDataLabels(total);
+        //       return formatDuration(total);
         //     },
         //     display: !showGrid
         //       ? function (ctx: Context) {

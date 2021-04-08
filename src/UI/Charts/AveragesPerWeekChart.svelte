@@ -1,7 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
   import { getAveragePerWeekData } from '../../Helpers/chartLogic/averagesChart';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
@@ -96,7 +96,7 @@
                 suggestedMax: maxForDisplay,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(Number(value));
+                  return formatDuration(Number(value));
                 },
               },
             },
@@ -111,7 +111,7 @@
             align: 'top',
             display: !showGrid,
             color: colorGrid,
-            formatter: (value: number) => formatDataLabels(value),
+            formatter: (value: number) => formatDuration(value),
           },
         },
       },
