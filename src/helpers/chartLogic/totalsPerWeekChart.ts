@@ -1,6 +1,6 @@
 import type { LogDate } from '../../models/Logdata';
 import { chunkArray, reduceDates } from '../utils';
-import { getWeekNumber } from '../logDataLogic';
+import { getWeekNumber } from '../dateLogic';
 import {
   colorTravelByCar,
   colorTravelByPublicTransport,

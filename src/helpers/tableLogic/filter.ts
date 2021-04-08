@@ -1,5 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
-import { getYear } from '../utils';
+import { getYear } from '../dateLogic';
 
 export const filterData = (
   logData: LogDate[],

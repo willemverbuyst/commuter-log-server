@@ -1,11 +1,5 @@
 import type { LogDate } from '../models/Logdata';
-import {
-  chunkArray,
-  getDay,
-  getUniqueValues,
-  getYear,
-  reduceDates,
-} from './utils';
+import { chunkArray, getUniqueValues, reduceDates } from './utils';
 
 const logDate: LogDate = {
   date: new Date('1/1/2021'),
@@ -47,26 +41,12 @@ describe('if chunkArray is given an array', () => {
   });
 });
 
-describe('if getDay is given a date', () => {
-  test('returns a string', () => {
-    expect(getDay(new Date('2021-01-01T00:00:00.000Z'))).toBe('Fri Jan 01');
-    expect(getDay(new Date('1/1/2021'))).toBe('Fri Jan 01');
-  });
-});
-
 describe('if getUniqueValues is given an value, index and array', () => {
   test('returns a boolean', () => {
     expect(getUniqueValues('x', 0, ['x', 'y', 'z'])).toBe(true);
     expect(getUniqueValues('x', 1, ['x', 'x', 'y', 'z'])).toBe(false);
     expect(getUniqueValues('y', 2, ['x', 'x', 'y', 'z'])).toBe(true);
     expect(getUniqueValues('y', 3, ['y', 'x', 'x', 'y', 'z'])).toBe(false);
-  });
-});
-
-describe('if getYear is given a date', () => {
-  test('returns a string', () => {
-    expect(getYear(new Date('1/1/2021'))).toBe('2021');
-    expect(getYear(new Date('2021-01-06T00:00:00.000Z'))).toBe('2021');
   });
 });
 

@@ -1,5 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
-import { getWeekNumber } from '../logDataLogic';
+import { getWeekNumber } from '../dateLogic';
 import { chunkArray, reduceDates } from '../utils';
 
 // STEP LINE CHART, average travel time per week

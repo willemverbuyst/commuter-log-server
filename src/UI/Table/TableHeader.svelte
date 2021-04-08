@@ -3,9 +3,9 @@
   import TableButton from '../Buttons/TableButton.svelte';
   import TableDropdown from '../Inputs/TableDropdown.svelte';
   import {
-    getWeekNumbers,
-    getStatuses,
-    getYears,
+    getUniqueWeekNumbers,
+    getUniqueStatuses,
+    getUniqueYears,
   } from '../../Helpers/logDataLogic';
   import { filterData } from '../../Helpers/tableLogic/filter';
   import type { LogDate } from '../../models/Logdata';
@@ -23,11 +23,11 @@
     sortDate: 'no sorting',
     sortTravelTimes: ['no sorting', 'ascending', 'descending'],
     sortTravelTime: 'no sorting',
-    statuses: ['all', ...getStatuses(filteredLogData)],
+    statuses: ['all', ...getUniqueStatuses(filteredLogData)],
     status: 'all',
-    weeks: ['all', ...getWeekNumbers(filteredLogData)],
+    weeks: ['all', ...getUniqueWeekNumbers(filteredLogData)],
     week: 'all',
-    years: ['all', ...getYears(filteredLogData)],
+    years: ['all', ...getUniqueYears(filteredLogData)],
     year: 'all',
   };
 
