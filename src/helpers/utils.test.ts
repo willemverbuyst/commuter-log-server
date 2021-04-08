@@ -52,6 +52,9 @@ describe('if getUniqueValues is given an value, index and array', () => {
     expect(getUniqueValues('x', 1, ['x', 'x', 'y', 'z'])).toBe(false);
     expect(getUniqueValues('y', 2, ['x', 'x', 'y', 'z'])).toBe(true);
     expect(getUniqueValues('y', 3, ['y', 'x', 'x', 'y', 'z'])).toBe(false);
+    expect(getUniqueValues(1, 1, [0, 1, 2, 3])).toBe(true);
+    expect(getUniqueValues(3, 3, [3, 3, 3, 3, 3])).toBe(false);
+    expect(getUniqueValues(true, 1, [false, true, true])).toBe(true);
   });
 });
 
