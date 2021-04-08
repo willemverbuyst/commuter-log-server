@@ -1,7 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
   import { getWeekData } from '../../Helpers/chartLogic/weekChartLogic';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
@@ -75,7 +75,7 @@
                 suggestedMax: maxForDisplay > 180 ? maxForDisplay : 180,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(Number(value));
+                  return formatDuration(Number(value));
                 },
               },
             },
@@ -96,7 +96,7 @@
                     ? ''
                     : value === 0.00001
                     ? 'WFH'
-                    : formatDataLabels(value);
+                    : formatDuration(value);
                 }
               : (value: number) => {
                   return value === 0 ? '' : value === 0.00001 ? 'WFH' : '';

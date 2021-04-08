@@ -1,5 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
-import { getWeekNumber } from '../logDataLogic';
+import { getWeekNumber } from '../dateLogic';
 import { chunkArray, reduceDates } from '../utils';
 
 // STEP LINE CHART, average travel time per week
@@ -14,7 +14,7 @@ export const getAveragePerWeekData = (
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   // Get groups of 5
-  const weeks = chunkArray(reducedDates, 5);
+  const weeks = chunkArray<LogDate>(reducedDates, 5);
   const averages = weeks.map((week) => getAveragePerWeek(week));
   const labels = weeks.map((a) => `w${getWeekNumber(a[0].date)[1]}`);
   const maxForDisplay = Math.max(...averages) * 1.2;

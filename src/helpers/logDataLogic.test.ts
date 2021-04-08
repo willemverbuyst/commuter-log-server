@@ -1,10 +1,9 @@
 import {
   getNumberOfWeeks,
-  getStatuses,
-  getWeekNumber,
-  getWeekNumbers,
+  getUniqueStatuses,
+  getUniqueWeekNumbers,
   getYearAndWeekNumber,
-  getYears,
+  getUniqueYears,
 } from './logDataLogic';
 import {
   testLogDateArrayWeekOne,
@@ -19,12 +18,12 @@ describe('if getNumberOfWeeks is given an array', () => {
   });
 });
 
-describe('if getStatuses is given an array', () => {
+describe('if getUniqueStatuses is given an array', () => {
   test('returns an array with unique statuses', () => {
-    expect(getStatuses(testLogDateArrayWeekOne)).toEqual([
+    expect(getUniqueStatuses(testLogDateArrayWeekOne)).toEqual([
       'working at the office',
     ]);
-    expect(getStatuses(testLogDateArrayTwoWeeks)).toEqual([
+    expect(getUniqueStatuses(testLogDateArrayTwoWeeks)).toEqual([
       'working at the office',
       'working from home',
       'day off',
@@ -32,21 +31,11 @@ describe('if getStatuses is given an array', () => {
   });
 });
 
-describe('if getWeekNumbers is given an array', () => {
+describe('if getUniqueWeekNumbers is given an array', () => {
   test('returns an array with unique weeknumbers', () => {
-    expect(getWeekNumbers(testLogDateArrayWeekOne)).toEqual([1]);
-    expect(getWeekNumbers(testLogDateArrayWeekTwo)).toEqual([2]);
-    expect(getWeekNumbers(testLogDateArrayTwoWeeks)).toEqual([1, 2]);
-  });
-});
-
-describe('if getWeekNumber is given a date', () => {
-  test('returns an array with year and weeknumber', () => {
-    expect(getWeekNumber(new Date('1/1/2021'))).toEqual([2020, 53]);
-    expect(getWeekNumber(new Date('2021-01-06T00:00:00.000Z'))).toEqual([
-      2021,
-      1,
-    ]);
+    expect(getUniqueWeekNumbers(testLogDateArrayWeekOne)).toEqual([1]);
+    expect(getUniqueWeekNumbers(testLogDateArrayWeekTwo)).toEqual([2]);
+    expect(getUniqueWeekNumbers(testLogDateArrayTwoWeeks)).toEqual([1, 2]);
   });
 });
 
@@ -63,9 +52,9 @@ describe('if getYearAndWeekNumber is given an array and a index', () => {
   });
 });
 
-describe('if getYears is given an array', () => {
+describe('if getUniqueYears is given an array', () => {
   test('returns an array with unique years', () => {
-    expect(getYears(testLogDateArrayWeekOne)).toEqual(['2021']);
-    expect(getYears(testLogDateArrayTwoWeeks)).toEqual(['2021']);
+    expect(getUniqueYears(testLogDateArrayWeekOne)).toEqual(['2021']);
+    expect(getUniqueYears(testLogDateArrayTwoWeeks)).toEqual(['2021']);
   });
 });

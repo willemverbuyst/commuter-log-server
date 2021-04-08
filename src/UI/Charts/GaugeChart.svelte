@@ -1,7 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
   import { actualTravelTime } from '../../Helpers/chartLogic/gaugeChart';
   import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
@@ -94,7 +94,7 @@
           datalabels: {
             display: false,
             color: colorTitle,
-            formatter: (value: number) => formatDataLabels(value),
+            formatter: (value: number) => formatDuration(value),
           },
         },
       },

@@ -1,11 +1,5 @@
 import type { LogDate } from '../models/Logdata';
-import {
-  chunkArray,
-  getDay,
-  getUniqueValues,
-  getYear,
-  reduceDates,
-} from './utils';
+import { chunkArray, getUniqueValues, reduceDates } from './utils';
 
 const logDate: LogDate = {
   date: new Date('1/1/2021'),
@@ -42,15 +36,19 @@ const logDateFour = [logDate, logDate, logDate, logDate];
 
 describe('if chunkArray is given an array', () => {
   test('returns a chunked array', () => {
-    expect(chunkArray(logDateThree, 1)).toEqual([[logDate], [logDate]]);
-    expect(chunkArray(logDateFour, 2)).toEqual([logDateThree, logDateThree]);
-  });
-});
-
-describe('if getDay is given a date', () => {
-  test('returns a string', () => {
-    expect(getDay(new Date('2021-01-01T00:00:00.000Z'))).toBe('Fri Jan 01');
-    expect(getDay(new Date('1/1/2021'))).toBe('Fri Jan 01');
+    expect(chunkArray<LogDate>(logDateThree, 1)).toEqual([
+      [logDate],
+      [logDate],
+    ]);
+    expect(chunkArray<LogDate>(logDateFour, 2)).toEqual([
+      logDateThree,
+      logDateThree,
+    ]);
+    expect(chunkArray<Number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual([
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+    ]);
   });
 });
 
@@ -60,13 +58,10 @@ describe('if getUniqueValues is given an value, index and array', () => {
     expect(getUniqueValues('x', 1, ['x', 'x', 'y', 'z'])).toBe(false);
     expect(getUniqueValues('y', 2, ['x', 'x', 'y', 'z'])).toBe(true);
     expect(getUniqueValues('y', 3, ['y', 'x', 'x', 'y', 'z'])).toBe(false);
-  });
-});
-
-describe('if getYear is given a date', () => {
-  test('returns a string', () => {
-    expect(getYear(new Date('1/1/2021'))).toBe('2021');
-    expect(getYear(new Date('2021-01-06T00:00:00.000Z'))).toBe('2021');
+    expect(getUniqueValues(1, 1, [0, 1, 2, 3])).toBe(true);
+    expect(getUniqueValues(3, 3, [3, 3, 3, 3, 3])).toBe(false);
+    expect(getUniqueValues(true, 1, [false, true, true])).toBe(true);
+    expect(getUniqueValues(true, 1, [false, true, true])).toBe(true);
   });
 });
 

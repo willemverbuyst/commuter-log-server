@@ -1,7 +1,7 @@
 import type { LogDate } from '../models/Logdata';
 
-// Chunks the array of daysm (arr) into arrays of 5 (size) - working days
-export const chunkArray = (arr: LogDate[], size: number): LogDate[][] => {
+// Chunks the array of days (arr) into arrays of 5 (size) - working days
+export const chunkArray = <T>(arr: T[], size: number): T[][] => {
   const chunkedArr = [];
   let index = 0;
   while (index < arr.length) {
@@ -12,37 +12,33 @@ export const chunkArray = (arr: LogDate[], size: number): LogDate[][] => {
   return chunkedArr;
 };
 
-export const getDay = (date: Date): string => date.toString().slice(0, 10);
-
-// TO DO: CHECK TYPE OF SELF AND VALUE
-export const getUniqueValues = (
-  value: string | number,
+export const getUniqueValues = <T>(
+  value: T,
   index: number,
-  self: Array<string | number>
+  self: T[]
 ): boolean => self.indexOf(value) === index;
 
-export const getYear = (date: Date): string => date.toString().slice(11, 15);
-
-// TO DO: REFACTOR???
 export const reduceDates = (dates: LogDate[]): LogDate[] => {
   let container: { [key: string]: LogDate } = {};
 
-  dates.forEach(function (d) {
-    let adjustedDate = String(d.date).slice(0, 15);
+  dates.forEach((date) => {
+    // Get the date without timestamp
+    let adjustedDate = String(date.date).slice(0, 15);
+
     if (container.hasOwnProperty(adjustedDate)) {
       container[adjustedDate] = {
-        ...d,
-        durationTrip: container[adjustedDate].durationTrip + d.durationTrip,
+        ...date,
+        durationTrip: container[adjustedDate].durationTrip + date.durationTrip,
       };
     } else {
-      container[adjustedDate] = { ...d };
+      container[adjustedDate] = { ...date };
     }
   });
 
   let reducedDates = [];
 
-  for (let prop in container) {
-    reducedDates.push(container[prop]);
+  for (let checkedDate in container) {
+    reducedDates.push(container[checkedDate]);
   }
 
   return reducedDates;

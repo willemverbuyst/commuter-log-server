@@ -1,7 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
   import { getCarVsPublicTotalsData } from '../../Helpers/chartLogic/carVsPublicChart';
   import {
     colorDatalabels,
@@ -63,7 +63,7 @@
           datalabels: {
             display: true,
             color: colorDatalabels,
-            formatter: (value: number) => formatDataLabels(value),
+            formatter: (value: number) => formatDuration(value),
           },
         },
       },

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDataLabels } from '../../Helpers/chartLogic/chartLogic';
+  import { formatDuration } from '../../Helpers/formatting';
   import { getAllWorkingDaysData } from '../../Helpers/chartLogic/allWorkingDaysChart';
   import {
     colorGrid,
@@ -116,7 +116,7 @@
                 suggestedMax: maxForDisplay,
                 stepSize: 60,
                 callback: function (value, _index, _values) {
-                  return formatDataLabels(Number(value));
+                  return formatDuration(Number(value));
                 },
               },
             },
