@@ -1,8 +1,4 @@
-import type {
-  LogDate,
-  WorkingAtTheOffice,
-  WorkingFromHome,
-} from '../../models/Logdata';
+import type { LogDate } from '../../models/Logdata';
 import {
   colorTravelByCar,
   colorTravelByPublicTransport,
@@ -18,9 +14,11 @@ const weekdays = [
   'Saturday',
 ];
 
-export const getBackgroundColor = (dates: WorkingAtTheOffice[]): string[] => {
+export const getBackgroundColor = (dates: LogDate[]): string[] => {
   return dates.map((date) =>
-    date.meansOfTransport === 'car'
+    date.statusOfDay === 'day off' || date.statusOfDay === 'working from home'
+      ? ''
+      : date.meansOfTransport === 'car'
       ? colorTravelByCar
       : colorTravelByPublicTransport
   );

@@ -50,11 +50,6 @@ export const actualTravelTime = (
   const reducedDates = reduceDates(logData);
   const weeks = chunkArray(reducedDates, 5);
 
-  // Use .flatMap for type safe filtering
-  const weekWithoutDayOff = week.flatMap((day) =>
-    day.statusOfDay !== 'day off' ? [day] : []
-  );
-
   const week = weeks[weekNumber];
 
   const max = getHigestTravelTime(logData);
