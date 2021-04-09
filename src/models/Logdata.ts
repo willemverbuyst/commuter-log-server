@@ -1,34 +1,24 @@
-// export interface LogDate {
-//   id?: string;
-//   date: Date;
-//   durationTrip: number;
-//   meansOfTransport: MeansOfTransport;
-//   routeTripFrom: string;
-//   routeTripTo: string;
-//   statusOfDay: StatusOfDay;
-//   weekNumber: number;
-// }
-
 interface Day {
   id?: string;
   date: Date;
   weekNumber: number;
 }
 
-interface DayOff extends Day {
+export interface DayOff extends Day {
   statusOfDay: 'day off';
 }
 
-interface WorkingFromHome extends Day {
-  statusOfDay: 'working from home';
-}
-
-interface WorkingAtTheOffice extends Day {
+export interface WorkingAtTheOffice extends Day {
   durationTrip: number;
   meansOfTransport: MeansOfTransport;
   routeTripFrom: string;
   routeTripTo: string;
   statusOfDay: 'working at the office';
+}
+
+export interface WorkingFromHome extends Day {
+  durationTrip: number;
+  statusOfDay: 'working from home';
 }
 
 export type LogDate = DayOff | WorkingFromHome | WorkingAtTheOffice;

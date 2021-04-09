@@ -41,11 +41,14 @@ const getTotalsTransport = (
   numberOfDaystravelled: number;
   totalTimeTravelled: number;
 } => {
-  const daysTravelled = workingDays.filter(
-    (day) =>
-      day.statusOfDay === 'working at the office' &&
-      day.meansOfTransport === transport
+  // Use .flatMap for type safe filtering
+  const daysTravelled = workingDays.flatMap((day) =>
+    day.statusOfDay === 'working at the office' &&
+    day.meansOfTransport === transport
+      ? [day]
+      : []
   );
+
   const numberOfDaystravelled = daysTravelled.length;
   const totalTimeTravelled =
     daysTravelled.length > 0

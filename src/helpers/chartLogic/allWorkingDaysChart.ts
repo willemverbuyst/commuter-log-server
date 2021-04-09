@@ -1,4 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
+
 import { reduceDates } from '../utils';
 
 export const getAllWorkingDaysData = (
@@ -10,10 +11,13 @@ export const getAllWorkingDaysData = (
   title: string;
   lineValue: number[];
 } => {
-  const reducedDates = reduceDates(logData);
-  const withoutDayOff = reducedDates.filter(
-    (day) => day.statusOfDay !== 'day off'
+  const reducedDates: LogDate[] = reduceDates(logData);
+
+  // Use .flatMap for type safe filtering
+  const withoutDayOff = reducedDates.flatMap((day) =>
+    day.statusOfDay !== 'day off' ? [day] : []
   );
+
   const travelTimes = withoutDayOff.map((day) => day.durationTrip);
 
   const labels = withoutDayOff.map(() => '');

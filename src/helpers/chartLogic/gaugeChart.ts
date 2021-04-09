@@ -13,8 +13,9 @@ const timeMapsTravel = 5 * 2 * 90; // 900
 // Total = 1500 + 20 = 1520
 
 const getTotalsPerWeek = (week: LogDate[]): number => {
-  const weekWithoutDayOff = week.filter(
-    (day) => day.statusOfDay === 'working at the office'
+  // Use .flatMap for type safe filtering
+  const weekWithoutDayOff = week.flatMap((day) =>
+    day.statusOfDay !== 'day off' ? [day] : []
   );
 
   const totalPerWeek =
@@ -47,8 +48,13 @@ export const actualTravelTime = (
 } => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
-  // const week = dates.filter((d) => getWeekNumber(d.date)[1] === +weekNumber);
   const weeks = chunkArray(reducedDates, 5);
+
+  // Use .flatMap for type safe filtering
+  const weekWithoutDayOff = week.flatMap((day) =>
+    day.statusOfDay !== 'day off' ? [day] : []
+  );
+
   const week = weeks[weekNumber];
 
   const max = getHigestTravelTime(logData);

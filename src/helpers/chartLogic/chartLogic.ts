@@ -1,4 +1,8 @@
-import type { LogDate } from '../../models/Logdata';
+import type {
+  LogDate,
+  WorkingAtTheOffice,
+  WorkingFromHome,
+} from '../../models/Logdata';
 import {
   colorTravelByCar,
   colorTravelByPublicTransport,
@@ -14,7 +18,7 @@ const weekdays = [
   'Saturday',
 ];
 
-export const getBackgroundColor = (dates: LogDate[]): string[] => {
+export const getBackgroundColor = (dates: WorkingAtTheOffice[]): string[] => {
   return dates.map((date) =>
     date.meansOfTransport === 'car'
       ? colorTravelByCar
@@ -23,7 +27,12 @@ export const getBackgroundColor = (dates: LogDate[]): string[] => {
 };
 
 export const getMinutes = (dates: LogDate[]): number[] => {
-  return dates.map((date) => {
+  // Use .flatMap for type safe filtering
+  const daysWithoutDayOff = dates.flatMap((day) =>
+    day.statusOfDay !== 'day off' ? [day] : []
+  );
+
+  return daysWithoutDayOff.map((date) => {
     return date.statusOfDay === 'working from home'
       ? 0.00001
       : date.durationTrip;
