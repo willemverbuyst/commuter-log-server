@@ -1,48 +1,25 @@
 import type { LogDate } from '../models/Logdata';
 import { chunkArray, getUniqueValues, reduceDates } from './utils';
-
-const logDate: LogDate = {
-  date: new Date('1/1/2021'),
-  durationTrip: 30,
-  meansOfTransport: 'car',
-  routeTripFrom: 'test_from',
-  routeTripTo: 'test_to',
-  statusOfDay: 'working at the office',
-  weekNumber: 1,
-};
-
-const logDateTwo: LogDate = {
-  date: new Date('1/2/2021'),
-  durationTrip: 90,
-  meansOfTransport: 'car',
-  routeTripFrom: 'test_from',
-  routeTripTo: 'test_to',
-  statusOfDay: 'working at the office',
-  weekNumber: 1,
-};
-
-const logDateReduced = {
-  date: new Date('1/1/2021'),
-  durationTrip: 60,
-  meansOfTransport: 'car',
-  routeTripFrom: 'test_from',
-  routeTripTo: 'test_to',
-  statusOfDay: 'working at the office',
-  weekNumber: 1,
-};
-
-const logDateThree = [logDate, logDate];
-const logDateFour = [logDate, logDate, logDate, logDate];
+import {
+  testLogDateOneA,
+  testLogDateOneB,
+  testLogDateTwo,
+  testLogDateThree,
+  testLogDateFour,
+  testLogDateFive,
+  testLogDateArrayWeekOne,
+  testLogDateArrayTwoWeeks,
+} from '../TestData/dummyData';
 
 describe('if chunkArray is given an array', () => {
   test('returns a chunked array', () => {
-    expect(chunkArray<LogDate>(logDateThree, 1)).toEqual([
-      [logDate],
-      [logDate],
-    ]);
-    expect(chunkArray<LogDate>(logDateFour, 2)).toEqual([
-      logDateThree,
-      logDateThree,
+    expect(chunkArray<LogDate>(testLogDateArrayTwoWeeks, 1).length).toBe(
+      testLogDateArrayTwoWeeks.length
+    );
+    expect(chunkArray<LogDate>(testLogDateArrayWeekOne, 2)).toEqual([
+      [testLogDateOneA, testLogDateOneB],
+      [testLogDateTwo, testLogDateThree],
+      [testLogDateFour, testLogDateFive],
     ]);
     expect(chunkArray<Number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual([
       [1, 2, 3],
@@ -66,17 +43,25 @@ describe('if getUniqueValues is given an value, index and array', () => {
 });
 
 describe('if reduceDates is given an array', () => {
+  const testDateReduced = {
+    id: 'test_id',
+    date: new Date('2021-01-04T00:00:00.000Z'),
+    durationTrip: 180,
+    meansOfTransport: 'car',
+    routeTripFrom: 'test_start',
+    routeTripTo: 'test_destination',
+    statusOfDay: 'working at the office',
+    weekNumber: 1,
+  };
+
   test('returns a reduces array', () => {
-    expect(reduceDates([logDate, logDate, logDateTwo])).toEqual([
-      logDateReduced,
-      logDateTwo,
-    ]);
+    expect(
+      reduceDates([testLogDateOneA, testLogDateOneB, testLogDateTwo])
+    ).toEqual([testDateReduced, testLogDateTwo]);
   });
   test('returns a reduces array', () => {
-    expect(reduceDates([logDate, logDate, logDateTwo])).not.toEqual([
-      logDate,
-      logDate,
-      logDateTwo,
-    ]);
+    expect(
+      reduceDates([testLogDateOneA, testLogDateOneB, testLogDateTwo])
+    ).not.toEqual([testLogDateOneA, testLogDateOneB, testLogDateTwo]);
   });
 });

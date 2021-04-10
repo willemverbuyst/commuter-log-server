@@ -28,7 +28,7 @@ export const getAveragePerWeekData = (
   };
 };
 
-const getAveragePerWeek = (week: LogDate[]): number => {
+export const getAveragePerWeek = (week: LogDate[]): number => {
   // Use .flatMap for type safe filtering
   const weekWithoutDayOff = week.flatMap((day) =>
     day.statusOfDay !== 'day off' ? [day] : []

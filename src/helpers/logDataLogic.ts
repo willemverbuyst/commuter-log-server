@@ -13,7 +13,8 @@ export const getUniqueStatuses = (logData: LogDate[]): string[] => {
   const statuses = logData.map((date) => date.statusOfDay);
 
   const uniqueStatuses = statuses.filter(getUniqueValues);
-  return uniqueStatuses;
+  const sortedUniqueStatus = [...uniqueStatuses].sort();
+  return sortedUniqueStatus;
 };
 
 export const getUniqueWeekNumbers = (logData: LogDate[]): number[] => {

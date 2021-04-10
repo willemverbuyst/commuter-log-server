@@ -34,7 +34,7 @@ export const getCarVsPublicTotalsData = (
 };
 
 // Get the total of all working days at the office for car or for public transport
-const getTotalsTransport = (
+export const getTotalsTransport = (
   workingDays: LogDate[],
   transport: string
 ): {
