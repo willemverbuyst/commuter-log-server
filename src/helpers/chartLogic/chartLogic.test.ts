@@ -31,9 +31,6 @@ const testLogDateThree: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-06T00:00:00.000Z'),
   durationTrip: 0,
-  meansOfTransport: '',
-  routeTripFrom: '',
-  routeTripTo: '',
   statusOfDay: 'working from home',
   weekNumber: 1,
 };

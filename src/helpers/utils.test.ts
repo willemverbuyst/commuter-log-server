@@ -5,19 +5,19 @@ const logDate: LogDate = {
   date: new Date('1/1/2021'),
   durationTrip: 30,
   meansOfTransport: 'car',
-  routeTripFrom: '',
-  routeTripTo: '',
-  statusOfDay: 'working from home',
+  routeTripFrom: 'test_from',
+  routeTripTo: 'test_to',
+  statusOfDay: 'working at the office',
   weekNumber: 1,
 };
 
 const logDateTwo: LogDate = {
   date: new Date('1/2/2021'),
-  durationTrip: 0,
+  durationTrip: 90,
   meansOfTransport: 'car',
-  routeTripFrom: '',
-  routeTripTo: '',
-  statusOfDay: 'working from home',
+  routeTripFrom: 'test_from',
+  routeTripTo: 'test_to',
+  statusOfDay: 'working at the office',
   weekNumber: 1,
 };
 
@@ -25,9 +25,9 @@ const logDateReduced = {
   date: new Date('1/1/2021'),
   durationTrip: 60,
   meansOfTransport: 'car',
-  routeTripFrom: '',
-  routeTripTo: '',
-  statusOfDay: 'working from home',
+  routeTripFrom: 'test_from',
+  routeTripTo: 'test_to',
+  statusOfDay: 'working at the office',
   weekNumber: 1,
 };
 
