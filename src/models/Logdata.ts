@@ -1,13 +1,27 @@
-export type LogDate = {
+interface Day {
   id?: string;
   date: Date;
+  weekNumber: number;
+}
+
+export interface DayOff extends Day {
+  statusOfDay: 'day off';
+}
+
+export interface WorkingAtTheOffice extends Day {
   durationTrip: number;
   meansOfTransport: MeansOfTransport;
   routeTripFrom: string;
   routeTripTo: string;
-  statusOfDay: StatusOfDay;
-  weekNumber: number;
-};
+  statusOfDay: 'working at the office';
+}
+
+export interface WorkingFromHome extends Day {
+  durationTrip: number;
+  statusOfDay: 'working from home';
+}
+
+export type LogDate = DayOff | WorkingFromHome | WorkingAtTheOffice;
 
 export type MeansOfTransport = 'car' | 'public transport' | '';
 

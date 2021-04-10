@@ -50,11 +50,14 @@ export const getTotalsPerWeek = (
   week: LogDate[],
   transport: string
 ): number => {
-  const weekTransport = week.filter(
-    (day) =>
-      day.statusOfDay === 'working at the office' &&
-      day.meansOfTransport === transport
+  // Use .flatMap for type safe filtering
+  const weekTransport = week.flatMap((day) =>
+    day.statusOfDay === 'working at the office' &&
+    day.meansOfTransport === transport
+      ? [day]
+      : []
   );
+
   const totalPerTransport =
     weekTransport.length > 0
       ? weekTransport.map((day) => day.durationTrip).reduce((a, b) => a + b)

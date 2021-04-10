@@ -16,14 +16,21 @@ const weekdays = [
 
 export const getBackgroundColor = (dates: LogDate[]): string[] => {
   return dates.map((date) =>
-    date.meansOfTransport === 'car'
+    date.statusOfDay === 'day off' || date.statusOfDay === 'working from home'
+      ? ''
+      : date.meansOfTransport === 'car'
       ? colorTravelByCar
       : colorTravelByPublicTransport
   );
 };
 
 export const getMinutes = (dates: LogDate[]): number[] => {
-  return dates.map((date) => {
+  // Use .flatMap for type safe filtering
+  const daysWithoutDayOff = dates.flatMap((day) =>
+    day.statusOfDay !== 'day off' ? [day] : []
+  );
+
+  return daysWithoutDayOff.map((date) => {
     return date.statusOfDay === 'working from home'
       ? 0.00001
       : date.durationTrip;

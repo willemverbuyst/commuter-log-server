@@ -6,33 +6,53 @@ export const filterData = (
   value: string,
   dropdown: string
 ): LogDate[] | [] => {
-  let filteredData;
+  let filteredData: LogDate[];
+  const daysOff = logData.flatMap((date) =>
+    date.statusOfDay === 'day off' ? [date] : []
+  );
+  const daysWorkingFromHome = logData.flatMap((date) =>
+    date.statusOfDay === 'working from home' ? [date] : []
+  );
+  const daysWorkingAtTheOffice = logData.flatMap((date) =>
+    date.statusOfDay === 'working at the office' ? [date] : []
+  );
+
   switch (dropdown) {
     case 'routeFrom':
-      filteredData = logData.filter((date) =>
+      filteredData = daysWorkingAtTheOffice.filter((date) =>
         value === 'no sorting' ? date : date.routeTripFrom === value
       );
       return filteredData.length > 0 ? filteredData : [];
 
     case 'routeTo':
-      filteredData = logData.filter((date) =>
+      filteredData = daysWorkingAtTheOffice.filter((date) =>
         value === 'no sorting' ? date : date.routeTripTo === value
       );
       return filteredData.length > 0 ? filteredData : [];
 
     case 'sortDate':
-      filteredData =
-        value === 'ascending'
-          ? [...logData].sort((a, b) => a.date.getTime() - b.date.getTime())
-          : [...logData].sort((a, b) => b.date.getTime() - a.date.getTime());
-      return filteredData.length > 0 ? filteredData : [];
+      return value === 'ascending'
+        ? [...logData].sort((a, b) => a.date.getTime() - b.date.getTime())
+        : [...logData].sort((a, b) => b.date.getTime() - a.date.getTime());
 
     case 'sortTravelTime':
-      filteredData =
-        value === 'ascending'
-          ? [...logData].sort((a, b) => a.durationTrip - b.durationTrip)
-          : [...logData].sort((a, b) => b.durationTrip - a.durationTrip);
-      return filteredData.length > 0 ? filteredData : [];
+      return daysWorkingAtTheOffice.length < 1
+        ? [...daysWorkingFromHome, ...daysOff]
+        : value === 'ascending'
+        ? [
+            ...daysOff,
+            ...daysWorkingFromHome,
+            ...[...daysWorkingAtTheOffice].sort(
+              (a, b) => a.durationTrip - b.durationTrip
+            ),
+          ]
+        : [
+            ...[...daysWorkingAtTheOffice].sort(
+              (a, b) => b.durationTrip - a.durationTrip
+            ),
+            ...daysWorkingFromHome,
+            ...daysOff,
+          ];
 
     case 'status':
       filteredData = logData.filter((date) =>

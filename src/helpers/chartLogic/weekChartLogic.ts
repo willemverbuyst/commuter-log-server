@@ -17,6 +17,7 @@ export const getWeekData = (
   const reducedDates = reduceDates(logData);
   // Get groups of 5
   const week = chunkArray<LogDate>(reducedDates, 5)[index];
+
   // Use the first day of the week to get week number and year
   const weekNumber = getWeekNumber(week[0].date);
   const travelTimes = getMinutes(week);

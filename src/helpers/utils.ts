@@ -25,15 +25,31 @@ export const reduceDates = (dates: LogDate[]): LogDate[] => {
     // Get the date without timestamp
     let adjustedDate = String(date.date).slice(0, 15);
 
-    if (container.hasOwnProperty(adjustedDate)) {
-      container[adjustedDate] = {
-        ...date,
-        durationTrip: container[adjustedDate].durationTrip + date.durationTrip,
-      };
+    if (
+      date.statusOfDay === 'working at the office' &&
+      container.hasOwnProperty(adjustedDate)
+    ) {
+      let temperoryCopyofObject = container[adjustedDate];
+
+      // Use helper function
+      if (hasOwnProperty(temperoryCopyofObject, 'durationTrip')) {
+        temperoryCopyofObject = {
+          ...date,
+          durationTrip: temperoryCopyofObject.durationTrip + date.durationTrip,
+        };
+      }
     } else {
       container[adjustedDate] = { ...date };
     }
   });
+
+  // https://fettblog.eu/typescript-hasownproperty/
+  function hasOwnProperty<X extends {}, Y extends PropertyKey>(
+    obj: X,
+    prop: Y
+  ): obj is X & Record<Y, unknown> {
+    return obj.hasOwnProperty(prop);
+  }
 
   let reducedDates = [];
 

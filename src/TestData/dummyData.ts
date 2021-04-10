@@ -94,19 +94,12 @@ const testLogDateNine: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-14T00:00:00.000Z'),
   durationTrip: 0,
-  meansOfTransport: '',
-  routeTripFrom: '',
-  routeTripTo: '',
   statusOfDay: 'working from home',
   weekNumber: 2,
 };
 const testLogDateTen: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-15T00:00:00.000Z'),
-  durationTrip: 0,
-  meansOfTransport: '',
-  routeTripFrom: '',
-  routeTripTo: '',
   statusOfDay: 'day off',
   weekNumber: 2,
 };

@@ -119,3 +119,17 @@ npm install --save-dev ts-jest
 - Update Jest configuration
 - Create a svelte.config.js
 - Add Jest to type property of tsconfig.json
+
+#
+
+## Tips & Tricks
+
+[Type-safe filters in TypeScript](https://marcinbiernat.pl/2020/02/Type-safe-filters/)
+
+Use .flatMap for type safe filtering
+
+```
+const weekWithoutDayOff = week.flatMap((day) =>
+day.statusOfDay !== 'day off' ? [day] : []
+);
+```
