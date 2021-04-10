@@ -33,7 +33,7 @@ export const reduceDates = (dates: LogDate[]): LogDate[] => {
 
       // Use helper function
       if (hasOwnProperty(temperoryCopyofObject, 'durationTrip')) {
-        temperoryCopyofObject = {
+        container[adjustedDate] = {
           ...date,
           durationTrip: temperoryCopyofObject.durationTrip + date.durationTrip,
         };

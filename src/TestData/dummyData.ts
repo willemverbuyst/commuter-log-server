@@ -20,37 +20,37 @@ export const testLogDateOneB: LogDate = {
   statusOfDay: 'working at the office',
   weekNumber: 1,
 };
-const testLogDateTwo: LogDate = {
+export const testLogDateTwo: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-05T00:00:00.000Z'),
-  durationTrip: 90,
+  durationTrip: 30,
   meansOfTransport: 'car',
   routeTripFrom: 'test_start',
   routeTripTo: 'test_destination',
   statusOfDay: 'working at the office',
   weekNumber: 1,
 };
-const testLogDateThree: LogDate = {
+export const testLogDateThree: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-06T00:00:00.000Z'),
-  durationTrip: 90,
+  durationTrip: 60,
   meansOfTransport: 'car',
   routeTripFrom: 'test_start',
   routeTripTo: 'test_destination',
   statusOfDay: 'working at the office',
   weekNumber: 1,
 };
-const testLogDateFour: LogDate = {
+export const testLogDateFour: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-07T00:00:00.000Z'),
-  durationTrip: 90,
-  meansOfTransport: 'car',
+  durationTrip: 300,
+  meansOfTransport: 'public transport',
   routeTripFrom: 'test_start',
   routeTripTo: 'test_destination',
   statusOfDay: 'working at the office',
   weekNumber: 1,
 };
-const testLogDateFive: LogDate = {
+export const testLogDateFive: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-08T00:00:00.000Z'),
   durationTrip: 90,
@@ -60,7 +60,7 @@ const testLogDateFive: LogDate = {
   statusOfDay: 'working at the office',
   weekNumber: 1,
 };
-const testLogDateSix: LogDate = {
+export const testLogDateSix: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-11T00:00:00.000Z'),
   durationTrip: 90,
@@ -70,7 +70,7 @@ const testLogDateSix: LogDate = {
   statusOfDay: 'working at the office',
   weekNumber: 2,
 };
-const testLogDateSeven: LogDate = {
+export const testLogDateSeven: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-12T00:00:00.000Z'),
   durationTrip: 90,
@@ -80,7 +80,7 @@ const testLogDateSeven: LogDate = {
   statusOfDay: 'working at the office',
   weekNumber: 2,
 };
-const testLogDateEight: LogDate = {
+export const testLogDateEight: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-13T00:00:00.000Z'),
   durationTrip: 90,
@@ -90,14 +90,14 @@ const testLogDateEight: LogDate = {
   statusOfDay: 'working at the office',
   weekNumber: 2,
 };
-const testLogDateNine: LogDate = {
+export const testLogDateNine: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-14T00:00:00.000Z'),
   durationTrip: 0,
   statusOfDay: 'working from home',
   weekNumber: 2,
 };
-const testLogDateTen: LogDate = {
+export const testLogDateTen: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-15T00:00:00.000Z'),
   statusOfDay: 'day off',
