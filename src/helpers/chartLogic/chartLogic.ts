@@ -25,13 +25,10 @@ export const getBackgroundColor = (dates: LogDate[]): string[] => {
 };
 
 export const getMinutes = (dates: LogDate[]): number[] => {
-  // Use .flatMap for type safe filtering
-  const daysWithoutDayOff = dates.flatMap((day) =>
-    day.statusOfDay !== 'day off' ? [day] : []
-  );
-
-  return daysWithoutDayOff.map((date) => {
-    return date.statusOfDay === 'working from home'
+  return dates.map((date) => {
+    return date.statusOfDay === 'day off'
+      ? 0
+      : date.statusOfDay === 'working from home'
       ? 0.00001
       : date.durationTrip;
   });
