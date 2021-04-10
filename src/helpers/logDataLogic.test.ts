@@ -25,8 +25,8 @@ describe('if getUniqueStatuses is given an array', () => {
     ]);
     expect(getUniqueStatuses(testLogDateArrayTwoWeeks)).toEqual([
       'working at the office',
-      'working from home',
       'day off',
+      'working from home',
     ]);
   });
 });

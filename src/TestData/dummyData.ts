@@ -73,11 +73,7 @@ export const testLogDateSix: LogDate = {
 export const testLogDateSeven: LogDate = {
   id: 'test_id',
   date: new Date('2021-01-12T00:00:00.000Z'),
-  durationTrip: 90,
-  meansOfTransport: 'car',
-  routeTripFrom: 'test_start',
-  routeTripTo: 'test_destination',
-  statusOfDay: 'working at the office',
+  statusOfDay: 'day off',
   weekNumber: 2,
 };
 export const testLogDateEight: LogDate = {
