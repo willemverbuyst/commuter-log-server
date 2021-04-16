@@ -19,6 +19,7 @@
   // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import type { LogDate } from './models/Logdata';
+  import { firebaseConfig } from './Firebase/config';
 
   let showForm = false;
   let showLogIn = false;
@@ -27,22 +28,6 @@
   let weekIndexInLogData = 0;
   let edittedId: string;
 
-  var firebaseConfig = {
-    // @ts-ignore
-    apiKey: __myapp.env.API_KEY,
-    // @ts-ignore
-    authDomain: `${__myapp.env.PROJECT_ID}.firebaseapp.com`,
-    // @ts-ignore
-    databaseURL: `https://${__myapp.env.PROJECT_ID}.firebaseio.com`,
-    // @ts-ignore
-    projectId: __myapp.env.PROJECT_ID,
-    // @ts-ignore
-    storageBucket: `${__myapp.env.PROJECT_ID}.appspot.com`,
-    // @ts-ignore
-    messagingSenderId: __myapp.env.SENDER_ID,
-    // @ts-ignore
-    appId: __myapp.env.APP_ID,
-  };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
