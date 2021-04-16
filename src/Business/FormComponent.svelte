@@ -72,7 +72,6 @@
     } else if (statusOfDay === 'working from home') {
       logDate = {
         date: selectedDate,
-        durationTrip: 0,
         statusOfDay,
         weekNumber: getWeekNumber(selectedDate)[1],
       };

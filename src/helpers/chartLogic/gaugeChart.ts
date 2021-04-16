@@ -20,7 +20,11 @@ const getTotalsPerWeek = (week: LogDate[]): number => {
 
   const totalPerWeek =
     weekWithoutDayOff.length > 0
-      ? weekWithoutDayOff.map((day) => day.durationTrip).reduce((a, b) => a + b)
+      ? weekWithoutDayOff
+          .map((day) =>
+            day.statusOfDay === 'working from home' ? 0 : day.durationTrip
+          )
+          .reduce((a, b) => a + b)
       : 0;
 
   return totalPerWeek;

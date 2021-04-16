@@ -17,7 +17,6 @@ export interface WorkingAtTheOffice extends Day {
 }
 
 export interface WorkingFromHome extends Day {
-  durationTrip: 0;
   statusOfDay: 'working from home';
 }
 

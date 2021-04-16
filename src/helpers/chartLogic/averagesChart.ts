@@ -37,7 +37,9 @@ export const getAveragePerWeek = (week: LogDate[]): number => {
   const average =
     weekWithoutDayOff.length > 0
       ? weekWithoutDayOff
-          .map((day) => day.durationTrip)
+          .map((day) =>
+            day.statusOfDay === 'working from home' ? 0 : day.durationTrip
+          )
           .reduce((a, b) => a + b) / weekWithoutDayOff.length
       : 0;
 

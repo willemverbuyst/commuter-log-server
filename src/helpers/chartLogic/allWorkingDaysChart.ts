@@ -18,7 +18,9 @@ export const getAllWorkingDaysData = (
     day.statusOfDay !== 'day off' ? [day] : []
   );
 
-  const travelTimes = withoutDayOff.map((day) => day.durationTrip);
+  const travelTimes = withoutDayOff.map((day) =>
+    day.statusOfDay === 'working from home' ? 0 : day.durationTrip
+  );
 
   const labels = withoutDayOff.map(() => '');
   const maxForDisplay = Math.max(...travelTimes) * 1.05;
