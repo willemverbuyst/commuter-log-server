@@ -41,9 +41,6 @@
           routeTripTo = selectedDay.routeTripTo;
           durationTrip = formatDuration(selectedDay.durationTrip);
         } else {
-          meansOfTransport = '';
-          routeTripFrom = '';
-          routeTripTo = '';
           durationTrip = '00:00';
         }
       }
@@ -61,17 +58,31 @@
   }
 
   function submitForm() {
-    console.log(getWeekNumber(selectedDate));
-    const logDate: LogDate = {
-      date: selectedDate,
-      statusOfDay,
-      meansOfTransport,
-      routeTripFrom,
-      routeTripTo,
-      durationTrip: formatTimeInput(durationTrip),
-      weekNumber: getWeekNumber(selectedDate)[1],
-    };
-
+    let logDate: LogDate;
+    if (statusOfDay === 'working at the office') {
+      logDate = {
+        date: selectedDate,
+        statusOfDay,
+        meansOfTransport,
+        routeTripFrom,
+        routeTripTo,
+        durationTrip: formatTimeInput(durationTrip),
+        weekNumber: getWeekNumber(selectedDate)[1],
+      };
+    } else if (statusOfDay === 'working from home') {
+      logDate = {
+        date: selectedDate,
+        durationTrip: 0,
+        statusOfDay,
+        weekNumber: getWeekNumber(selectedDate)[1],
+      };
+    } else {
+      logDate = {
+        date: selectedDate,
+        statusOfDay: 'day off',
+        weekNumber: getWeekNumber(selectedDate)[1],
+      };
+    }
     if (id) {
       //  @ts-ignore
       fetch(`${__myapp.env.DATABASE}/logData/${id}.json`, {

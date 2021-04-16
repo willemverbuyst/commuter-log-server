@@ -17,13 +17,13 @@ export interface WorkingAtTheOffice extends Day {
 }
 
 export interface WorkingFromHome extends Day {
-  durationTrip: number;
+  durationTrip: 0;
   statusOfDay: 'working from home';
 }
 
 export type LogDate = DayOff | WorkingFromHome | WorkingAtTheOffice;
 
-export type MeansOfTransport = 'car' | 'public transport' | '';
+export type MeansOfTransport = 'car' | 'public transport';
 
 export type StatusOfDay =
   | 'day off'
