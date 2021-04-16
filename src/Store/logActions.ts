@@ -1,4 +1,10 @@
+import type { LogDate } from '../models/Logdata';
 import logData from './logState';
+import { isLoadingStore } from './appState';
+
+function updateIsLoading() {
+  isLoadingStore.updateIsLoading();
+}
 
 export const fetchLogData = () =>
   // @ts-ignore
@@ -19,12 +25,12 @@ export const fetchLogData = () =>
         });
       }
       setTimeout(() => {
-        isLoading = false;
+        updateIsLoading();
         logData.setLogData(loadedLogData);
       }, 1000);
     })
     .catch((err) => {
       //error = err;
-      isLoading = false;
+      updateIsLoading();
       console.log(err);
     });

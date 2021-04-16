@@ -16,18 +16,17 @@
   import {
     darkModeStore,
     showGridStore,
-    showIsLoadingStore,
+    isLoadingStore,
   } from './Store/appState';
   import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
   // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
-  import type { LogDate } from './models/Logdata';
   import { firebaseConfig } from './Firebase/config';
+  import { fetchLogData } from './Store/logActions';
 
   let showForm = false;
   let showLogIn = false;
-  let isLoading = true;
   let signedIn = false;
   let weekIndexInLogData = 0;
   let edittedId: string;
@@ -35,33 +34,8 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  // @ts-ignore
-  fetch(`${__myapp.env.DATABASE}/logdata.json`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('Fetching logdata failed, please try again!');
-      }
-      return res.json();
-    })
-    .then((data) => {
-      const loadedLogData: LogDate[] = [];
-      for (const key in data) {
-        loadedLogData.push({
-          ...data[key],
-          id: key,
-          date: new Date(data[key].date),
-        });
-      }
-      setTimeout(() => {
-        isLoading = false;
-        logData.setLogData(loadedLogData);
-      }, 1000);
-    })
-    .catch((err) => {
-      //error = err;
-      isLoading = false;
-      console.log(err);
-    });
+  // Get log data from firebase
+  fetchLogData();
 
   function cancelForm() {
     showForm = false;
@@ -81,10 +55,6 @@
 
   function toggleGrid() {
     showGridStore.toggleGrid();
-  }
-
-  function updateIsLoading() {
-    showIsLoadingStore.updateIsLoading();
   }
 
   function saveLogDate() {
@@ -129,7 +99,7 @@
       <Button on:click={signOut}>Sign out</Button>
     {/if}
   </div>
-  {#if isLoading}
+  {#if $isLoadingStore}
     <LoadingSpinner />
   {:else}
     <div class="slider-container">

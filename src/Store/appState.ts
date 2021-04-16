@@ -18,7 +18,7 @@ export const showGridStore = {
   toggleGrid: () => showGrid.update((show) => !show),
 };
 
-export const showIsLoadingStore = {
+export const isLoadingStore = {
   subscribe: isLoading.subscribe,
 
   updateIsLoading: () => isLoading.update((loading) => !loading),
