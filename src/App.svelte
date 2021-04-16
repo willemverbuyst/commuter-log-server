@@ -13,7 +13,11 @@
   import WeekChart from './UI/Charts/WeekChart.svelte';
   import Slider from './UI/Inputs/Slider.svelte';
   import Table from './UI/Table/Table.svelte';
-  import { darkModeStore, showGridStore } from './Store/appState';
+  import {
+    darkModeStore,
+    showGridStore,
+    showIsLoadingStore,
+  } from './Store/appState';
   import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
   // import { workingDays } from './dummyData';
@@ -77,6 +81,10 @@
 
   function toggleGrid() {
     showGridStore.toggleGrid();
+  }
+
+  function updateIsLoading() {
+    showIsLoadingStore.updateIsLoading();
   }
 
   function saveLogDate() {
