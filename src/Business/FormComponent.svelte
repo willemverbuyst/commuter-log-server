@@ -16,6 +16,8 @@
     MeansOfTransport,
     StatusOfDay,
   } from '../models/Logdata';
+  import { addOneHour } from '../Helpers/dateLogic';
+  import type { HTMLElementEvent } from '../models/HTMLElements';
 
   export let id: string | undefined;
 
@@ -53,11 +55,11 @@
 
   $: durationTripValid = checkDurationInput(durationTrip);
 
-  function cancel() {
+  function cancel(): void {
     dispatch('cancel');
   }
 
-  function onChange(e: any) {
+  function onChange(e: HTMLElementEvent<HTMLFormElement>): void {
     if (e.target.name === 'transport') {
       meansOfTransport = e.target.value;
     } else {
@@ -65,7 +67,7 @@
     }
   }
 
-  function submitForm() {
+  function submitForm(): void {
     let logDate: LogDate;
     if (statusOfDay === 'working at the office') {
       logDate = {
@@ -131,9 +133,8 @@
     }
   }
 
-  function updateSelectedDate(date: Date) {
-    date.setHours(date.getHours() + 1);
-    selectedDate = date;
+  function updateSelectedDate(date: Date): void {
+    selectedDate = addOneHour(date);
   }
 </script>
 
