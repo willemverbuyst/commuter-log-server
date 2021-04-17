@@ -16,6 +16,8 @@
     MeansOfTransport,
     StatusOfDay,
   } from '../models/Logdata';
+  import { addOneHour } from '../Helpers/dateLogic';
+  import type { HTMLElementEvent } from '../models/HTMLElements';
 
   export let id: string | undefined;
 
@@ -26,6 +28,8 @@
   let routeTripFrom: string = routes[1];
   let routeTripTo: string = routes[2];
   let durationTrip: string = '00:00';
+
+  const dispatch = createEventDispatcher();
 
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
@@ -49,15 +53,21 @@
     unsubscribe();
   }
 
-  const dispatch = createEventDispatcher();
-
   $: durationTripValid = checkDurationInput(durationTrip);
 
-  function cancel() {
+  function cancel(): void {
     dispatch('cancel');
   }
 
-  function submitForm() {
+  function onChange(e: HTMLElementEvent<HTMLFormElement>): void {
+    if (e.target.name === 'transport') {
+      meansOfTransport = e.target.value;
+    } else {
+      statusOfDay = e.target.value;
+    }
+  }
+
+  function submitForm(): void {
     let logDate: LogDate;
     if (statusOfDay === 'working at the office') {
       logDate = {
@@ -123,9 +133,8 @@
     }
   }
 
-  function updateSelectedDate(date: Date) {
-    date.setHours(date.getHours() + 1);
-    selectedDate = date;
+  function updateSelectedDate(date: Date): void {
+    selectedDate = addOneHour(date);
   }
 </script>
 
@@ -136,31 +145,36 @@
     <div class="radio-button__container">
       <RadioButton
         name="statusOfDay"
-        group={statusOfDay}
-        bind:value={statusOfDay}
+        bind:group={statusOfDay}
+        value="day off"
+        {onChange}
       />
       <RadioButton
         name="statusOfDay"
-        group={statusOfDay}
-        bind:value={statusOfDay}
+        bind:group={statusOfDay}
+        value="working from home"
+        {onChange}
       />
       <RadioButton
         name="statusOfDay"
-        group={statusOfDay}
-        bind:value={statusOfDay}
+        bind:group={statusOfDay}
+        value="working at the office"
+        {onChange}
       />
     </div>
     {#if statusOfDay === 'working at the office'}
       <div class="radio-button__container">
         <RadioButton
           name="transport"
-          group={meansOfTransport}
-          bind:value={meansOfTransport}
+          bind:group={meansOfTransport}
+          value="car"
+          {onChange}
         />
         <RadioButton
           name="transport"
-          group={meansOfTransport}
-          bind:value={meansOfTransport}
+          bind:group={meansOfTransport}
+          value="public transport"
+          {onChange}
         />
       </div>
 

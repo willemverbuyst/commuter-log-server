@@ -20,3 +20,6 @@ export const getWeekNumber = (day: Date): [number, number] => {
 };
 
 export const getYear = (date: Date): string => date.toString().slice(11, 15);
+
+export const addOneHour = (date: Date): Date =>
+  new Date(date.setHours(date.getHours() + 1));

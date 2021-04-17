@@ -1,6 +1,7 @@
 <script lang="ts">
   import firebase from 'firebase/app';
   import 'firebase/auth';
+  import 'firebase/database';
   import FormComponent from './Business/FormComponent.svelte';
   import LogInForm from './Business/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
@@ -18,16 +19,16 @@
     showGridStore,
     isLoadingStore,
   } from './Store/appState';
+  import { isSignedInStore, userStore } from './Store/userState';
+  import { signOut } from './Store/userActions';
   import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
-  // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import { firebaseConfig } from './Firebase/config';
   import { fetchLogData } from './Store/logActions';
 
   let showForm = false;
   let showLogIn = false;
-  let signedIn = false;
   let weekIndexInLogData = 0;
   let edittedId: string;
 
@@ -37,15 +38,27 @@
   // Get log data from firebase
   fetchLogData();
 
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log(user);
+    if (user && user.email) {
+      userStore.setUser(user.email);
+      isSignedInStore.setSignedInToTrue();
+    }
+  });
+
   function cancelForm() {
     showForm = false;
     showLogIn = false;
   }
 
-  function logIn() {
+  function loggingIn() {
     console.log('user logs in');
     showLogIn = false;
-    signedIn = true;
+  }
+
+  function signingOut() {
+    console.log('user logs out');
+    signOut();
   }
 
   function toggleMode() {
@@ -61,19 +74,6 @@
     showForm = false;
   }
 
-  function signOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        signedIn = false;
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-    console.log(signedIn);
-  }
-
   function startEdit(event: any) {
     showForm = true;
     edittedId = event.detail;
@@ -85,18 +85,21 @@
 </script>
 
 <main>
+  <div>{$userStore}</div>
   <div class="nav-container">
-    <Button on:click={() => (showForm = true)}>Add Day</Button>
+    {#if $isSignedInStore}
+      <Button on:click={() => (showForm = true)}>Add Day</Button>
+    {/if}
     <Button on:click={toggleGrid}
       >{$showGridStore ? 'Hide' : 'Show'} Grid</Button
     >
     <Button on:click={toggleMode}
       >{$darkModeStore ? 'Light' : 'Dark'} Mode</Button
     >
-    {#if !signedIn}
+    {#if !$isSignedInStore}
       <Button on:click={() => (showLogIn = true)}>Log In</Button>
     {:else}
-      <Button on:click={signOut}>Sign out</Button>
+      <Button on:click={signingOut}>Sign out</Button>
     {/if}
   </div>
   {#if $isLoadingStore}
@@ -110,7 +113,7 @@
       />
     </div>
     {#if showLogIn}
-      <LogInForm on:cancel={cancelForm} on:logIn={logIn} />
+      <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
     {/if}
 
     {#if showForm}
