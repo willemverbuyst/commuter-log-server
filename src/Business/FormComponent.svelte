@@ -27,6 +27,8 @@
   let routeTripTo: string = routes[2];
   let durationTrip: string = '00:00';
 
+  const dispatch = createEventDispatcher();
+
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
       const selectedDay: LogDate | undefined = days.find(
@@ -49,12 +51,18 @@
     unsubscribe();
   }
 
-  const dispatch = createEventDispatcher();
-
   $: durationTripValid = checkDurationInput(durationTrip);
 
   function cancel() {
     dispatch('cancel');
+  }
+
+  function onChange(e: any) {
+    if (e.target.name === 'transport') {
+      meansOfTransport = e.target.value;
+    } else {
+      statusOfDay = e.target.value;
+    }
   }
 
   function submitForm() {
@@ -136,31 +144,36 @@
     <div class="radio-button__container">
       <RadioButton
         name="statusOfDay"
-        group={statusOfDay}
-        bind:value={statusOfDay}
+        bind:group={statusOfDay}
+        value="day off"
+        {onChange}
       />
       <RadioButton
         name="statusOfDay"
-        group={statusOfDay}
-        bind:value={statusOfDay}
+        bind:group={statusOfDay}
+        value="working from home"
+        {onChange}
       />
       <RadioButton
         name="statusOfDay"
-        group={statusOfDay}
-        bind:value={statusOfDay}
+        bind:group={statusOfDay}
+        value="working at the office"
+        {onChange}
       />
     </div>
     {#if statusOfDay === 'working at the office'}
       <div class="radio-button__container">
         <RadioButton
           name="transport"
-          group={meansOfTransport}
-          bind:value={meansOfTransport}
+          bind:group={meansOfTransport}
+          value="car"
+          {onChange}
         />
         <RadioButton
           name="transport"
-          group={meansOfTransport}
-          bind:value={meansOfTransport}
+          bind:group={meansOfTransport}
+          value="public transport"
+          {onChange}
         />
       </div>
 
