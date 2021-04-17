@@ -1,7 +1,8 @@
 export const getDay = (date: Date): string => date.toString().slice(0, 10);
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
-export const getWeekNumber = (day: Date): [number, number] => {
+export const getWeekNumber = (date: Date): [number, number] => {
+  const day = new Date(date);
   // Copy date so don't modify original
   const d = new Date(
     Date.UTC(day.getFullYear(), day.getMonth(), day.getDate())

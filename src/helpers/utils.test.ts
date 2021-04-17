@@ -1,33 +1,10 @@
 import type { LogDate } from '../models/Logdata';
-import { chunkArray, getUniqueValues, reduceDates } from './utils';
+import { getUniqueValues, reduceDates } from './utils';
 import {
   testLogDateOneA,
   testLogDateOneB,
   testLogDateTwo,
-  testLogDateThree,
-  testLogDateFour,
-  testLogDateFive,
-  testLogDateArrayWeekOne,
-  testLogDateArrayTwoWeeks,
 } from '../TestData/dummyData';
-
-describe('if chunkArray is given an array', () => {
-  test('returns a chunked array', () => {
-    expect(chunkArray<LogDate>(testLogDateArrayTwoWeeks, 1).length).toBe(
-      testLogDateArrayTwoWeeks.length
-    );
-    expect(chunkArray<LogDate>(testLogDateArrayWeekOne, 2)).toEqual([
-      [testLogDateOneA, testLogDateOneB],
-      [testLogDateTwo, testLogDateThree],
-      [testLogDateFour, testLogDateFive],
-    ]);
-    expect(chunkArray<Number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual([
-      [1, 2, 3],
-      [4, 5, 6],
-      [7, 8, 9],
-    ]);
-  });
-});
 
 describe('if getUniqueValues is given an value, index and array', () => {
   test('returns a boolean', () => {

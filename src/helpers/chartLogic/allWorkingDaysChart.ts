@@ -1,5 +1,4 @@
 import type { LogDate } from '../../models/Logdata';
-
 import { reduceDates } from '../utils';
 
 export const getAllWorkingDaysData = (

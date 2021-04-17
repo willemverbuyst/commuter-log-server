@@ -1,5 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
-import { chunkArray, reduceDates } from '../utils';
+import { groupByWeekNumber, reduceDates } from '../utils';
 import { getBackgroundColor, getMinutes, getWeekdays } from './chartLogic';
 import { getWeekNumber } from '../dateLogic';
 
@@ -15,11 +15,10 @@ export const getWeekData = (
 } => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
-  // Get groups of 5
-  const week = chunkArray<LogDate>(reducedDates, 5)[index];
+  const week = groupByWeekNumber(reducedDates)[index];
 
   // Use the first day of the week to get week number and year
-  const weekNumber = getWeekNumber(week[0].date);
+  const weekNumber = getWeekNumber(new Date(week[0].date));
   const travelTimes = getMinutes(week);
   const backgroundColor = getBackgroundColor(week);
   const labels = getWeekdays(week);

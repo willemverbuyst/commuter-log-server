@@ -1,5 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
-import { chunkArray, reduceDates } from '../utils';
+import { groupByWeekNumber, reduceDates } from '../utils';
 import { getWeekNumber } from '../dateLogic';
 import {
   colorTravelByCar,
@@ -21,8 +21,7 @@ export const getTotalsPerWeekData = (
 } => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
-  // Get groups of 5
-  const weeks = chunkArray<LogDate>(reducedDates, 5);
+  const weeks = groupByWeekNumber(reducedDates);
   const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'car'));
   const totalsPerWeekPublic = weeks.map((week) =>
     getTotalsPerWeek(week, 'public transport')
@@ -30,7 +29,7 @@ export const getTotalsPerWeekData = (
   const backgroundColorCar = weeks.map(() => colorTravelByCar);
   const backgroundColorPublic = weeks.map(() => colorTravelByPublicTransport);
 
-  const labels = weeks.map((a) => `w${getWeekNumber(a[0].date)[1]}`);
+  const labels = weeks.map((a) => `w${getWeekNumber(new Date(a[0].date))[1]}`);
   const maxForDisplay =
     Math.max(...totalsPerWeekCar, ...totalsPerWeekPublic) * 1.005;
   const title = `TOTAL TRAVEL TIME PER WEEK`;

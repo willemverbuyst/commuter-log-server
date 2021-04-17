@@ -5,7 +5,7 @@
   import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsPerWeekChart';
   import Chart from 'chart.js';
   import type { LogDate } from '../../models/Logdata';
-  // import type { Context } from 'chartjs-plugin-datalabels';
+  import type { Context } from 'chartjs-plugin-datalabels';
   import {
     colorGrid,
     colorTitle,
@@ -22,30 +22,6 @@
 
   let totalsPerWeekChart: Chart;
   let ctx: CanvasRenderingContext2D;
-
-  // TO DO: FIX ANY TYPES
-  // const totalizer = {
-  //   id: 'totalizer',
-
-  //   beforeUpdate: (chart: any) => {
-  //     let totals: { [key: number]: number } = {};
-  //     let utmost = 0;
-
-  //     chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
-  //       if (chart.isDatasetVisible(datasetIndex)) {
-  //         utmost = datasetIndex;
-  //         dataset.data.forEach((value: number, index: number) => {
-  //           totals[index] = (totals[index] || 0) + value;
-  //         });
-  //       }
-  //     });
-
-  //     chart.$totalizer = {
-  //       totals: totals,
-  //       utmost: utmost,
-  //     };
-  //   },
-  // };
 
   function createChart() {
     const {
@@ -73,6 +49,35 @@
 
     if (totalsPerWeekChart) totalsPerWeekChart.destroy();
 
+    const totalizer = {
+      id: 'totalizer',
+
+      beforeUpdate: (
+        chart: Chart & {
+          $totalizer: { totals: { [key: number]: number }; utmost: number };
+        }
+      ) => {
+        let totals: { [key: number]: number } = {};
+        let utmost = 0;
+
+        if (chart && chart.data && chart.data.datasets) {
+          chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
+            if (chart.isDatasetVisible(datasetIndex)) {
+              utmost = datasetIndex;
+              dataset.data.forEach((value: number, index: number) => {
+                totals[index] = (totals[index] || 0) + value;
+              });
+            }
+          });
+        }
+
+        chart.$totalizer = {
+          totals: totals,
+          utmost: utmost,
+        };
+      },
+    };
+
     totalsPerWeekChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -90,7 +95,7 @@
           },
         ],
       },
-      // plugins: [totalizer],
+      plugins: [totalizer],
       options: {
         title: {
           display: true,
@@ -146,22 +151,24 @@
         tooltips: {
           enabled: false,
         },
-        // plugins: {
-        //   datalabels: {
-        //     anchor: 'end',
-        //     align: 'end',
-        //     color: colorTitle,
-        //     formatter: (_value: string | number, ctx: Context) => {
-        //       const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
-        //       return formatDuration(total);
-        //     },
-        //     display: !showGrid
-        //       ? function (ctx: Context) {
-        //           return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
-        //         }
-        //       : false,
-        //   },
-        // },
+        plugins: {
+          datalabels: {
+            anchor: 'end',
+            align: 'end',
+            color: colorTitle,
+            formatter: (_value: string | number, ctx: Context) => {
+              // @ts-ignore
+              const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
+              return formatDuration(total);
+            },
+            display: !showGrid
+              ? function (ctx: Context) {
+                  // @ts-ignore
+                  return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
+                }
+              : false,
+          },
+        },
       },
     });
   }
