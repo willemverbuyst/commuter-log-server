@@ -18,11 +18,10 @@
     showGridStore,
     isLoadingStore,
   } from './Store/appState';
-  import { isSignedInStore } from './Store/userState';
+  import { isSignedInStore, userStore } from './Store/userState';
   import { signOut } from './Store/userActions';
   import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
-  // import { workingDays } from './dummyData';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import { firebaseConfig } from './Firebase/config';
   import { fetchLogData } from './Store/logActions';
@@ -37,6 +36,11 @@
 
   // Get log data from firebase
   fetchLogData();
+
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log(user);
+    if (user && user.email) userStore.setUser(user.email);
+  });
 
   function cancelForm() {
     showForm = false;
@@ -77,6 +81,7 @@
 </script>
 
 <main>
+  <div>{$userStore}</div>
   <div class="nav-container">
     <Button on:click={() => (showForm = true)}>Add Day</Button>
     <Button on:click={toggleGrid}

@@ -1,12 +1,13 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { createEventDispatcher } from 'svelte';
-import { isSignedInStore } from './userState';
-
-// const dispatch = createEventDispatcher();
+import { isSignedInStore, userStore } from './userState';
 
 function updateIsSignedIn() {
   isSignedInStore.updateIsSignedIn();
+}
+
+function setUserEmail(email: string) {
+  userStore.setUser(email);
 }
 
 export const signInWithEmailPassword = (
@@ -20,7 +21,7 @@ export const signInWithEmailPassword = (
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      if (user) console.log(user);
+      if (user && user.email) setUserEmail(user.email);
       updateIsSignedIn();
     })
     .catch((error) => {
@@ -42,7 +43,7 @@ export const signUpWithEmailPassword = (
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      console.log(user);
+      if (user && user.email) setUserEmail(user.email);
       updateIsSignedIn();
     })
     .catch((error) => {
@@ -58,10 +59,10 @@ export const signOut = () => {
     .auth()
     .signOut()
     .then(() => {
+      setUserEmail('');
       updateIsSignedIn();
     })
     .catch((error) => {
       // An error happened.
     });
-  console.log('user logged out');
 };
