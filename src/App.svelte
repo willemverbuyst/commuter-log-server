@@ -39,7 +39,10 @@
 
   firebase.auth().onAuthStateChanged((user) => {
     console.log(user);
-    if (user && user.email) userStore.setUser(user.email);
+    if (user && user.email) {
+      userStore.setUser(user.email);
+      isSignedInStore.setSignedInToTrue();
+    }
   });
 
   function cancelForm() {

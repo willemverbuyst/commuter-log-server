@@ -14,5 +14,7 @@ export const userStore = {
 export const isSignedInStore = {
   subscribe: isSignedIn.subscribe,
 
+  setSignedInToTrue: () => isSignedIn.set(true),
+
   updateIsSignedIn: () => isSignedIn.update((signedIn) => !signedIn),
 };
