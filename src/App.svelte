@@ -18,6 +18,8 @@
     showGridStore,
     isLoadingStore,
   } from './Store/appState';
+  import { isSignedInStore } from './Store/userState';
+  import { signOut } from './Store/userActions';
   import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
   // import { workingDays } from './dummyData';
@@ -27,7 +29,6 @@
 
   let showForm = false;
   let showLogIn = false;
-  let signedIn = false;
   let weekIndexInLogData = 0;
   let edittedId: string;
 
@@ -42,10 +43,14 @@
     showLogIn = false;
   }
 
-  function logIn() {
+  function loggingIn() {
     console.log('user logs in');
     showLogIn = false;
-    signedIn = true;
+  }
+
+  function signingOut() {
+    console.log('user logs out');
+    signOut();
   }
 
   function toggleMode() {
@@ -59,19 +64,6 @@
 
   function saveLogDate() {
     showForm = false;
-  }
-
-  function signOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        signedIn = false;
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-    console.log(signedIn);
   }
 
   function startEdit(event: any) {
@@ -93,10 +85,10 @@
     <Button on:click={toggleMode}
       >{$darkModeStore ? 'Light' : 'Dark'} Mode</Button
     >
-    {#if !signedIn}
+    {#if !$isSignedInStore}
       <Button on:click={() => (showLogIn = true)}>Log In</Button>
     {:else}
-      <Button on:click={signOut}>Sign out</Button>
+      <Button on:click={signingOut}>Sign out</Button>
     {/if}
   </div>
   {#if $isLoadingStore}
@@ -110,7 +102,7 @@
       />
     </div>
     {#if showLogIn}
-      <LogInForm on:cancel={cancelForm} on:logIn={logIn} />
+      <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
     {/if}
 
     {#if showForm}
