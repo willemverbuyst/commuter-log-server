@@ -70,27 +70,21 @@
 
   function submitForm(): void {
     let logDate: LogDate;
-    if (statusOfDay === 'working at the office') {
+    if (statusOfDay === 'day off' || statusOfDay === 'working from home') {
       logDate = {
         date: selectedDate.toString(),
-        statusOfDay,
-        meansOfTransport,
-        routeTripFrom,
-        routeTripTo,
-        durationTrip: formatTimeInput(durationTrip),
-        weekNumber: getWeekNumber(selectedDate)[1],
-      };
-    } else if (statusOfDay === 'working from home') {
-      logDate = {
-        date: selectedDate.toString(),
-        statusOfDay,
+        statusOfDay: statusOfDay,
         weekNumber: getWeekNumber(selectedDate)[1],
       };
     } else {
       logDate = {
         date: selectedDate.toString(),
-        statusOfDay: 'day off',
+        statusOfDay: statusOfDay,
         weekNumber: getWeekNumber(selectedDate)[1],
+        meansOfTransport: meansOfTransport,
+        routeTripFrom: routeTripFrom,
+        routeTripTo: routeTripTo,
+        durationTrip: formatTimeInput(durationTrip),
       };
     }
     if (id) {
