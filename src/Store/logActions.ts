@@ -3,6 +3,7 @@ import logData from './logState';
 import { isLoadingStore } from './appState';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import logStore from './logState';
 
 function updateIsLoading() {
   isLoadingStore.updateIsLoading();
@@ -43,6 +44,7 @@ export const postNewLogData = async (logDate: LogDate): Promise<void> => {
 
     setTimeout(() => {
       ref.push(logDate);
+      logStore.addLogDate(logDate);
     }, 1000);
     updateIsLoading();
   } catch (error) {
@@ -62,6 +64,7 @@ export const updateLogData = async (
 
     setTimeout(() => {
       ref.update(logDate);
+      logStore.updateLogDate(id, logDate);
     }, 1000);
     updateIsLoading();
   } catch (error) {

@@ -35,5 +35,5 @@ export const getMinutes = (dates: LogDate[]): number[] => {
 };
 
 export const getWeekdays = (dates: LogDate[]): string[] => {
-  return dates.map((date) => weekdays[date.date.getDay()]);
+  return dates.map((date) => weekdays[new Date(date.date).getDay()]);
 };
