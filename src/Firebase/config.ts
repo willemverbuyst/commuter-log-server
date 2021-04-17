@@ -4,7 +4,7 @@ export const firebaseConfig = {
   // @ts-ignore
   authDomain: `${__myapp.env.PROJECT_ID}.firebaseapp.com`,
   // @ts-ignore
-  databaseURL: `https://${__myapp.env.PROJECT_ID}.firebaseio.com`,
+  databaseURL: `${__myapp.env.DATABASE}`,
   // @ts-ignore
   projectId: __myapp.env.PROJECT_ID,
   // @ts-ignore

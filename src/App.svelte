@@ -1,6 +1,7 @@
 <script lang="ts">
   import firebase from 'firebase/app';
   import 'firebase/auth';
+  import 'firebase/database';
   import FormComponent from './Business/FormComponent.svelte';
   import LogInForm from './Business/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
@@ -86,7 +87,9 @@
 <main>
   <div>{$userStore}</div>
   <div class="nav-container">
-    <Button on:click={() => (showForm = true)}>Add Day</Button>
+    {#if $isSignedInStore}
+      <Button on:click={() => (showForm = true)}>Add Day</Button>
+    {/if}
     <Button on:click={toggleGrid}
       >{$showGridStore ? 'Hide' : 'Show'} Grid</Button
     >
