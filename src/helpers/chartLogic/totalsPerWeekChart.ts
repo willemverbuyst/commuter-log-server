@@ -1,5 +1,5 @@
 import type { LogDate } from '../../models/Logdata';
-import { chunkArray, reduceDates } from '../utils';
+import { groupByWeekNumber, reduceDates } from '../utils';
 import { getWeekNumber } from '../dateLogic';
 import {
   colorTravelByCar,
@@ -21,8 +21,7 @@ export const getTotalsPerWeekData = (
 } => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
-  // Get groups of 5
-  const weeks = chunkArray<LogDate>(reducedDates, 5);
+  const weeks = groupByWeekNumber(reducedDates);
   const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'car'));
   const totalsPerWeekPublic = weeks.map((week) =>
     getTotalsPerWeek(week, 'public transport')

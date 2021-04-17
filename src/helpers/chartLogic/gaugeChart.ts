@@ -1,6 +1,6 @@
 import type { LogDate } from '../../models/Logdata';
 import { getMinutes } from './chartLogic';
-import { chunkArray, reduceDates } from '../utils';
+import { groupByWeekNumber, reduceDates } from '../utils';
 
 // Travel time per week which is considered acceptable according employer
 const normWorkTravel = 5 * 2 * 75; //750
@@ -33,7 +33,7 @@ const getTotalsPerWeek = (week: LogDate[]): number => {
 const getHigestTravelTime = (logData: LogDate[]): number => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
-  const weeks = chunkArray<LogDate>(reducedDates, 5);
+  const weeks = groupByWeekNumber(reducedDates);
 
   const totals = weeks.map((week) => getTotalsPerWeek(week));
 
@@ -52,7 +52,7 @@ export const actualTravelTime = (
 } => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
-  const weeks = chunkArray(reducedDates, 5);
+  const weeks = groupByWeekNumber(reducedDates);
 
   const week = weeks[weekNumber];
 

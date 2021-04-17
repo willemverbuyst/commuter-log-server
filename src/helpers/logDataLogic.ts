@@ -1,10 +1,10 @@
 import type { LogDate } from '../models/Logdata';
-import { chunkArray, getUniqueValues, reduceDates } from './utils';
+import { getUniqueValues, groupByWeekNumber, reduceDates } from './utils';
 import { getWeekNumber, getYear } from './dateLogic';
 
 export const getNumberOfWeeks = (logData: LogDate[]): number => {
   const reducedDates = reduceDates(logData);
-  const numberOfWeeks = chunkArray(reducedDates, 5);
+  const numberOfWeeks = groupByWeekNumber(reducedDates);
 
   return numberOfWeeks.length;
 };
@@ -36,8 +36,7 @@ export const getYearAndWeekNumber = (
   index: number
 ): [number, number] => {
   const reducedDates = reduceDates(logData);
-  // Get groups of 5
-  const week = chunkArray<LogDate>(reducedDates, 5)[index];
+  const week = groupByWeekNumber(reducedDates)[index];
   // Use the first day of the week to get week number and year
   const yearAndWeekNumber = getWeekNumber(new Date(week[0].date));
 

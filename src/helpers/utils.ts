@@ -1,22 +1,21 @@
 import type { LogDate } from '../models/Logdata';
 
-// Chunks the array of days (arr) into arrays of 5 (size) - working days
-export const chunkArray = <T>(arr: T[], size: number): T[][] => {
-  const chunkedArr = [];
-  let index = 0;
-  while (index < arr.length) {
-    chunkedArr.push(arr.slice(index, size + index));
-    index += size;
-  }
-
-  return chunkedArr;
-};
-
 export const getUniqueValues = <T>(
   value: T,
   index: number,
   self: T[]
 ): boolean => self.indexOf(value) === index;
+
+export const groupByWeekNumber = (logData: LogDate[]) => {
+  const groups = Object.values(
+    logData.reduce((a: { [key: number]: LogDate[] }, b: LogDate) => {
+      a[b.weekNumber] = a[b.weekNumber] || [];
+      a[b.weekNumber].push(b);
+      return a;
+    }, [])
+  );
+  return groups;
+};
 
 export const reduceDates = (dates: LogDate[]): LogDate[] => {
   let container: { [key: string]: LogDate } = {};
