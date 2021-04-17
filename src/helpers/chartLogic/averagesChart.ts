@@ -16,7 +16,7 @@ export const getAveragePerWeekData = (
   // Get groups of 5
   const weeks = chunkArray<LogDate>(reducedDates, 5);
   const averages = weeks.map((week) => getAveragePerWeek(week));
-  const labels = weeks.map((a) => `w${getWeekNumber(a[0].date)[1]}`);
+  const labels = weeks.map((a) => `w${getWeekNumber(new Date(a[0].date))[1]}`);
   const maxForDisplay = Math.max(...averages) * 1.2;
   const title = `AVERAGE TRAVEL TIMES PER WEEK`;
 

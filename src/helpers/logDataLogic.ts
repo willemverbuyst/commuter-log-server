@@ -25,7 +25,7 @@ export const getUniqueWeekNumbers = (logData: LogDate[]): number[] => {
 };
 
 export const getUniqueYears = (logData: LogDate[]): string[] => {
-  const years = logData.map((date) => getYear(date.date));
+  const years = logData.map((date) => getYear(new Date(date.date)));
 
   const uniqueYears = years.filter(getUniqueValues);
   return uniqueYears;
@@ -39,7 +39,7 @@ export const getYearAndWeekNumber = (
   // Get groups of 5
   const week = chunkArray<LogDate>(reducedDates, 5)[index];
   // Use the first day of the week to get week number and year
-  const yearAndWeekNumber = getWeekNumber(week[0].date);
+  const yearAndWeekNumber = getWeekNumber(new Date(week[0].date));
 
   return yearAndWeekNumber;
 };

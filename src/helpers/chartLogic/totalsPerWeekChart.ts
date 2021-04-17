@@ -30,7 +30,7 @@ export const getTotalsPerWeekData = (
   const backgroundColorCar = weeks.map(() => colorTravelByCar);
   const backgroundColorPublic = weeks.map(() => colorTravelByPublicTransport);
 
-  const labels = weeks.map((a) => `w${getWeekNumber(a[0].date)[1]}`);
+  const labels = weeks.map((a) => `w${getWeekNumber(new Date(a[0].date))[1]}`);
   const maxForDisplay =
     Math.max(...totalsPerWeekCar, ...totalsPerWeekPublic) * 1.005;
   const title = `TOTAL TRAVEL TIME PER WEEK`;

@@ -32,8 +32,12 @@ export const filterData = (
 
     case 'sortDate':
       return value === 'ascending'
-        ? [...logData].sort((a, b) => a.date.getTime() - b.date.getTime())
-        : [...logData].sort((a, b) => b.date.getTime() - a.date.getTime());
+        ? [...logData].sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          )
+        : [...logData].sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
 
     case 'sortTravelTime':
       return daysWorkingAtTheOffice.length < 1
@@ -68,7 +72,9 @@ export const filterData = (
 
     case 'year':
       filteredData = logData.filter((date) =>
-        value === 'all' ? date : Number(getYear(date.date)) === Number(value)
+        value === 'all'
+          ? date
+          : Number(getYear(new Date(date.date))) === Number(value)
       );
       return filteredData.length > 0 ? filteredData : [];
 

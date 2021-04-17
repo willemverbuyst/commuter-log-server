@@ -19,7 +19,7 @@ export const getWeekData = (
   const week = chunkArray<LogDate>(reducedDates, 5)[index];
 
   // Use the first day of the week to get week number and year
-  const weekNumber = getWeekNumber(week[0].date);
+  const weekNumber = getWeekNumber(new Date(week[0].date));
   const travelTimes = getMinutes(week);
   const backgroundColor = getBackgroundColor(week);
   const labels = getWeekdays(week);
