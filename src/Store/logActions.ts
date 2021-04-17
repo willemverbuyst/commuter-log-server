@@ -8,17 +8,16 @@ function updateIsLoading() {
   isLoadingStore.updateIsLoading();
 }
 
-export const fetchLogData = async () => {
+export const fetchLogData = async (): Promise<void> => {
   try {
     const db = firebase.database();
     const ref = db.ref('/logdata');
 
     ref.once('value', function (snapshot) {
       const data = snapshot.val();
-      // console.log(data);
       const loadedLogData: LogDate[] = [];
+
       for (const key in data) {
-        // console.log(key);
         loadedLogData.push({
           ...data[key],
           id: key,
@@ -33,5 +32,40 @@ export const fetchLogData = async () => {
   } catch (error) {
     updateIsLoading();
     console.log(error);
+  }
+};
+
+export const postNewLogData = async (logDate: LogDate): Promise<void> => {
+  updateIsLoading();
+  try {
+    const db = firebase.database();
+    const ref = db.ref('/logdata');
+
+    setTimeout(() => {
+      ref.push(logDate);
+    }, 1000);
+    updateIsLoading();
+  } catch (error) {
+    console.log(error);
+    updateIsLoading();
+  }
+};
+
+export const updateLogData = async (
+  id: string,
+  logDate: LogDate
+): Promise<void> => {
+  updateIsLoading();
+  try {
+    const db = firebase.database();
+    const ref = db.ref(`/logdata/${id}`);
+
+    setTimeout(() => {
+      ref.update(logDate);
+    }, 1000);
+    updateIsLoading();
+  } catch (error) {
+    console.log(error);
+    updateIsLoading();
   }
 };

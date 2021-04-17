@@ -18,6 +18,7 @@
   } from '../models/Logdata';
   import { addOneHour } from '../Helpers/dateLogic';
   import type { HTMLElementEvent } from '../models/HTMLElements';
+  import { postNewLogData, updateLogData } from '../Store/logActions';
 
   export let id: string | undefined;
 
@@ -31,13 +32,14 @@
 
   const dispatch = createEventDispatcher();
 
+  // Fill in the form on edit
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
       const selectedDay: LogDate | undefined = days.find(
         (d: LogDate) => d.id === id
       );
       if (selectedDay) {
-        selectedDate = selectedDay.date;
+        selectedDate = new Date(selectedDay.date);
         statusOfDay = selectedDay.statusOfDay;
         if (selectedDay.statusOfDay === 'working at the office') {
           meansOfTransport = selectedDay.meansOfTransport;
@@ -49,7 +51,6 @@
         }
       }
     });
-
     unsubscribe();
   }
 
@@ -71,7 +72,7 @@
     let logDate: LogDate;
     if (statusOfDay === 'working at the office') {
       logDate = {
-        date: selectedDate,
+        date: selectedDate.toString(),
         statusOfDay,
         meansOfTransport,
         routeTripFrom,
@@ -81,56 +82,23 @@
       };
     } else if (statusOfDay === 'working from home') {
       logDate = {
-        date: selectedDate,
+        date: selectedDate.toString(),
         statusOfDay,
         weekNumber: getWeekNumber(selectedDate)[1],
       };
     } else {
       logDate = {
-        date: selectedDate,
+        date: selectedDate.toString(),
         statusOfDay: 'day off',
         weekNumber: getWeekNumber(selectedDate)[1],
       };
     }
     if (id) {
-      //  @ts-ignore
-      fetch(`${__myapp.env.DATABASE}/logData/${id}.json`, {
-        method: 'PATCH',
-        body: JSON.stringify(logDate),
-        headers: { 'Content-Type': 'application-json' },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('An error occured, please try again!');
-          }
-          if (id) logData.updateLogDate(id, logDate);
-        })
-        .catch((err) => console.log(err));
-
-      dispatch('save');
+      updateLogData(id, logDate);
     } else {
-      //  @ts-ignore
-      fetch(`${__myapp.env.DATABASE}/logdata.json`, {
-        method: 'POST',
-        body: JSON.stringify(logDate),
-        headers: { 'Content-Type': 'application-json' },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('An error occured, please try again!');
-          }
-          return res.json();
-        })
-        .then((data) => {
-          logData.addLogDate({
-            ...logDate,
-            id: data.name,
-          });
-        })
-        .catch((err) => console.log(err));
-
-      dispatch('save');
+      postNewLogData(logDate);
     }
+    dispatch('save');
   }
 
   function updateSelectedDate(date: Date): void {

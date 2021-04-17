@@ -1,6 +1,6 @@
 interface Day {
   id?: string;
-  date: Date;
+  date: Date | string;
   weekNumber: number;
 }
 

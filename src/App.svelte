@@ -26,6 +26,7 @@
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import { firebaseConfig } from './Firebase/config';
   import { fetchLogData } from './Store/logActions';
+  import logStore from './Store/logState';
 
   let showForm = false;
   let showLogIn = false;
@@ -39,7 +40,6 @@
   fetchLogData();
 
   firebase.auth().onAuthStateChanged((user) => {
-    console.log(user);
     if (user && user.email) {
       userStore.setUser(user.email);
       isSignedInStore.setSignedInToTrue();
@@ -102,9 +102,20 @@
       <Button on:click={signingOut}>Sign out</Button>
     {/if}
   </div>
+  {#if showLogIn}
+    <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
+  {/if}
+
+  {#if showForm}
+    <FormComponent
+      id={edittedId}
+      on:cancel={cancelForm}
+      on:save={saveLogDate}
+    />
+  {/if}
   {#if $isLoadingStore}
     <LoadingSpinner />
-  {:else}
+  {:else if $logStore.length}
     <div class="slider-container">
       <Slider
         {weekIndexInLogData}
@@ -112,17 +123,6 @@
         logData={$logData}
       />
     </div>
-    {#if showLogIn}
-      <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
-    {/if}
-
-    {#if showForm}
-      <FormComponent
-        id={edittedId}
-        on:cancel={cancelForm}
-        on:save={saveLogDate}
-      />
-    {/if}
 
     <div class="dashboard__section">
       <WeekChart
