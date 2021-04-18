@@ -20,7 +20,7 @@ export const getPartitionData = (
   };
 };
 
-const getPartition = (logData: LogDate[]): number[] => {
+export const getPartition = (logData: LogDate[]): number[] => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
 
