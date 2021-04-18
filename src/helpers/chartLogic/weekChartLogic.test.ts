@@ -11,7 +11,9 @@ describe('if getWeekData is given an array of logDates and a index', () => {
   const testBackgroundColor = getBackgroundColor(testLogDateArrayWeekTwo);
   const testLabels = getWeekdays(testLogDateArrayWeekTwo);
   const testMaxforDisplay = 90 * 1.1;
-  const testWeekNumber = getWeekNumber(testLogDateArrayWeekTwo[0].date);
+  const testWeekNumber = getWeekNumber(
+    new Date(testLogDateArrayWeekTwo[0].date)
+  );
   const testTitle = `TRAVEL TIMES WEEK ${testWeekNumber[1]} - ${testWeekNumber[0]}`;
 
   test('returns object with right properties', () => {

@@ -13,8 +13,8 @@ describe('if getAveragePerWeekData is given an array of logDates', () => {
     getAveragePerWeek(testLogDateArrayWeekTwo),
   ];
   const testLabels = [
-    `w${getWeekNumber(testLogDateArrayWeekOne[0].date)[1]}`,
-    `w${getWeekNumber(testLogDateArrayWeekTwo[0].date)[1]}`,
+    `w${getWeekNumber(new Date(testLogDateArrayWeekOne[0].date))[1]}`,
+    `w${getWeekNumber(new Date(testLogDateArrayWeekTwo[0].date))[1]}`,
   ];
   const testMaxforDisplay = Math.max(...testAverages) * 1.2;
   const testTitle = `AVERAGE TRAVEL TIMES PER WEEK`;
