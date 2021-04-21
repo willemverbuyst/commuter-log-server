@@ -3,44 +3,14 @@ import { getMinutes } from './chartLogic';
 import { groupByWeekNumber, reduceDates } from '../utils';
 
 // Travel time per week which is considered acceptable according employer
-const normWorkTravel = 5 * 2 * 75; //750
+export const normWorkTravel = 5 * 2 * 75; //750
 // Travel time per week according to google maps
-const timeMapsTravel = 5 * 2 * 90; // 900
+export const timeMapsTravel = 5 * 2 * 90; // 900
 // Difference 900 - 750 = 150
 // Width needle = 20
 // Example max 1500
 // Difference 1500 - 900 = 600
 // Total = 1500 + 20 = 1520
-
-const getTotalsPerWeek = (week: LogDate[]): number => {
-  // Use .flatMap for type safe filtering
-  const weekWithoutDayOff = week.flatMap((day) =>
-    day.statusOfDay !== 'day off' ? [day] : []
-  );
-
-  const totalPerWeek =
-    weekWithoutDayOff.length > 0
-      ? weekWithoutDayOff
-          .map((day) =>
-            day.statusOfDay === 'working from home' ? 0 : day.durationTrip
-          )
-          .reduce((a, b) => a + b)
-      : 0;
-
-  return totalPerWeek;
-};
-
-const getHigestTravelTime = (logData: LogDate[]): number => {
-  // Combine all the days with the same date
-  const reducedDates = reduceDates(logData);
-  const weeks = groupByWeekNumber(reducedDates);
-
-  const totals = weeks.map((week) => getTotalsPerWeek(week));
-
-  const maximum = Math.max(...totals);
-
-  return maximum;
-};
 
 export const actualTravelTime = (
   logData: LogDate[],
@@ -159,4 +129,34 @@ export const actualTravelTime = (
       ],
     };
   }
+};
+
+export const getHigestTravelTime = (logData: LogDate[]): number => {
+  // Combine all the days with the same date
+  const reducedDates = reduceDates(logData);
+  const weeks = groupByWeekNumber(reducedDates);
+
+  const totals = weeks.map((week) => getTotalsPerWeek(week));
+
+  const maximum = Math.max(...totals);
+
+  return maximum;
+};
+
+export const getTotalsPerWeek = (week: LogDate[]): number => {
+  // Use .flatMap for type safe filtering
+  const weekWithoutDayOff = week.flatMap((day) =>
+    day.statusOfDay !== 'day off' ? [day] : []
+  );
+
+  const totalPerWeek =
+    weekWithoutDayOff.length > 0
+      ? weekWithoutDayOff
+          .map((day) =>
+            day.statusOfDay === 'working from home' ? 0 : day.durationTrip
+          )
+          .reduce((a, b) => a + b)
+      : 0;
+
+  return totalPerWeek;
 };
