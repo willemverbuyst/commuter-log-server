@@ -25,8 +25,8 @@ describe('if reduceDates is given an array', () => {
     date: new Date('2021-01-04T00:00:00.000Z'),
     durationTrip: 180,
     meansOfTransport: 'car',
-    routeTripFrom: 'test_start',
-    routeTripTo: 'test_destination',
+    routeTripFrom: 'test_start_A',
+    routeTripTo: 'test_destination_B',
     statusOfDay: 'working at the office',
     weekNumber: 1,
   };
