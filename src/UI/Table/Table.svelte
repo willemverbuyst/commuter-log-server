@@ -23,9 +23,9 @@
       <TableHeader {doUpdate} {filteredLogData} {logData} />
       {#each filteredLogData as logDate}
         <tr>
-          <td>{getYear(logDate.date)}</td>
+          <td>{getYear(new Date(logDate.date))}</td>
           <td>{logDate.weekNumber}</td>
-          <td class="tc--align-right">{getDay(logDate.date)}</td>
+          <td class="tc--align-right">{getDay(new Date(logDate.date))}</td>
           {#if logDate.statusOfDay === 'day off'}
             <td colspan="4" class="tc--day-off">day off</td>
             <TableButton on:click={() => dispatch('edit', logDate.id)}
