@@ -4,12 +4,14 @@ import { isLoadingStore } from './appState';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import logStore from './logState';
+import { sortByDateAscending } from '../Helpers/dateLogic';
 
 function updateIsLoading() {
   isLoadingStore.updateIsLoading();
 }
 
 export const fetchLogData = async (): Promise<void> => {
+  console.log('fetching logData');
   try {
     const db = firebase.database();
     const ref = db.ref('/logdata');
@@ -25,9 +27,13 @@ export const fetchLogData = async (): Promise<void> => {
           date: new Date(data[key].date),
         });
       }
+      const sortedLogData = sortByDateAscending([...loadedLogData]);
+
       setTimeout(() => {
         updateIsLoading();
         logData.setLogData(loadedLogData);
+        console.log(loadedLogData);
+        console.log(sortedLogData);
       }, 1000);
     });
   } catch (error) {
@@ -37,6 +43,7 @@ export const fetchLogData = async (): Promise<void> => {
 };
 
 export const postNewLogData = async (logDate: LogDate): Promise<void> => {
+  console.log('posting logData');
   updateIsLoading();
   try {
     const db = firebase.database();
@@ -57,6 +64,7 @@ export const updateLogData = async (
   id: string,
   logDate: LogDate
 ): Promise<void> => {
+  console.log('upating logData');
   updateIsLoading();
   try {
     const db = firebase.database();

@@ -1,5 +1,9 @@
 import type { LogDate } from '../../models/Logdata';
-import { getYear } from '../dateLogic';
+import {
+  getYear,
+  sortByDateAscending,
+  sortByDateDescending,
+} from '../dateLogic';
 
 export const filterData = (
   logData: LogDate[],
@@ -32,12 +36,8 @@ export const filterData = (
 
     case 'sortDate':
       return value === 'ascending'
-        ? [...logData].sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-          )
-        : [...logData].sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
+        ? sortByDateAscending([...logData])
+        : sortByDateDescending([...logData]);
 
     case 'sortTravelTime':
       return daysWorkingAtTheOffice.length < 1

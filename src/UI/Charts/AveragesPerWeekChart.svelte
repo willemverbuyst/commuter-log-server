@@ -110,7 +110,7 @@
             anchor: 'end',
             align: 'top',
             display: !showGrid,
-            color: colorGrid,
+            color: colorTitle,
             formatter: (value: number) => formatDuration(value),
           },
         },

@@ -89,7 +89,7 @@
             anchor: 'end',
             align: 'top',
             display: true,
-            color: colorGrid,
+            color: colorTitle,
             formatter: !showGrid
               ? (value: number) => {
                   return value === 0
