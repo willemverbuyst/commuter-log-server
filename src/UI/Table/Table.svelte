@@ -8,12 +8,15 @@
 
   export let logData: LogDate[];
 
+  $: doUpdate(logData);
+
   const dispatch = createEventDispatcher();
 
-  let filteredLogData = logData;
+  let filteredLogData: LogDate[] = logData;
 
   function doUpdate(data: LogDate[]): void {
     filteredLogData = data;
+    console.log(data);
   }
 </script>
 
