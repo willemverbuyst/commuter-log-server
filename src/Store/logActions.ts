@@ -38,39 +38,37 @@ export const fetchLogData = async (): Promise<void> => {
 };
 
 export const postNewLogData = async (logDate: LogDate): Promise<void> => {
-  updateIsLoading();
   try {
     const db = firebase.database();
     const ref = db.ref('/logdata');
 
     setTimeout(() => {
-      const x = ref.push(logDate);
-      logStore.addLogDate(logDate);
+      updateIsLoading();
+      ref.push(logDate);
     }, 1000);
-    updateIsLoading();
   } catch (error) {
-    console.log(error);
     updateIsLoading();
+    console.log(error);
   }
+  updateIsLoading();
 };
 
 export const updateLogData = async (
   id: string,
   logDate: LogDate
 ): Promise<void> => {
-  console.log('upating logData');
-  updateIsLoading();
   try {
     const db = firebase.database();
     const ref = db.ref(`/logdata/${id}`);
 
     setTimeout(() => {
+      updateIsLoading();
       ref.update(logDate);
       logStore.updateLogDate(id, logDate);
     }, 1000);
-    updateIsLoading();
   } catch (error) {
-    console.log(error);
     updateIsLoading();
+    console.log(error);
   }
+  updateIsLoading();
 };
