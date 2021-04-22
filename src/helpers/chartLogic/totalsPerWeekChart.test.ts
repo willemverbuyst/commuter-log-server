@@ -18,8 +18,7 @@ describe('if getTotalsPerWeekData is given an array of logDates', () => {
     colorTravelByPublicTransport,
   ];
   const testLabels = ['w1', 'w2'];
-  const testMaxForDisplay =
-    Math.max(...testTotalsPerWeekCar, ...testTotalsPerWeekPublic) * 1.005;
+  const testMaxForDisplay = 660 * 1.05;
   const testTitle = `TOTAL TRAVEL TIME PER WEEK`;
 
   test('returns object with right properties', () => {
