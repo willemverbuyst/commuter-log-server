@@ -14,7 +14,11 @@ export const groupByWeekNumber = (logData: LogDate[]) => {
       return a;
     }, [])
   );
-  return groups;
+  const groupsOrderedByDate = [...groups].sort(
+    (a, b) => new Date(a[0].date).getTime() - new Date(b[0].date).getTime()
+  );
+
+  return groupsOrderedByDate;
 };
 
 export const reduceDates = (dates: LogDate[]): LogDate[] => {

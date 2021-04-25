@@ -75,7 +75,6 @@ export const updateLogData = async (
 };
 
 // For development, seed database
-
 // export const postLogData = async (): Promise<void> => {
 //   try {
 //     const db = firebase.database();

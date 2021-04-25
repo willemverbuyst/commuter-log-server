@@ -26,7 +26,7 @@
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import { firebaseConfig } from './Firebase/config';
   import { fetchLogData } from './Store/logActions';
-  // import {  postLogData } from './Store/logActions';
+  // import { postLogData } from './Store/logActions';
   import logStore from './Store/logState';
 
   let showForm = false;
