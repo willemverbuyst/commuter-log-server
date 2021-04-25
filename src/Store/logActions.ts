@@ -4,6 +4,7 @@ import { isLoadingStore } from './appState';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import logStore from './logState';
+import { logDataSeed } from '../../data/logData';
 
 function updateIsLoading() {
   isLoadingStore.updateIsLoading();
@@ -72,3 +73,17 @@ export const updateLogData = async (
   }
   updateIsLoading();
 };
+
+// For development, seed database
+
+// export const postLogData = async (): Promise<void> => {
+//   try {
+//     const db = firebase.database();
+//     const ref = db.ref('/logdata');
+
+//     ref.set(logDataSeed);
+//     console.log('database seeded');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
