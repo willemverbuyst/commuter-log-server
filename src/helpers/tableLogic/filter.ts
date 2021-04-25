@@ -59,9 +59,15 @@ export const filterData = (
           ];
 
     case 'status':
-      filteredData = logData.filter((date) =>
-        value === 'all' ? date : date.statusOfDay === value
-      );
+      if (value === 'car' || value === 'public transport') {
+        filteredData = daysWorkingAtTheOffice.flatMap((date) =>
+          date.meansOfTransport === value ? date : []
+        );
+      } else {
+        filteredData = logData.filter((date) =>
+          value === 'all' ? date : date.statusOfDay === value
+        );
+      }
       return filteredData.length > 0 ? filteredData : [];
 
     case 'week':

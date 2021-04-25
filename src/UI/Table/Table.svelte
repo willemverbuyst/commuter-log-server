@@ -16,7 +16,6 @@
 
   function doUpdate(data: LogDate[]): void {
     filteredLogData = data;
-    console.log(data);
   }
 </script>
 
