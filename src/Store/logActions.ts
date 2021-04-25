@@ -4,14 +4,13 @@ import { isLoadingStore } from './appState';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import logStore from './logState';
-import { sortByDateAscending } from '../Helpers/dateLogic';
+import { logDataSeed } from '../../data/logData';
 
 function updateIsLoading() {
   isLoadingStore.updateIsLoading();
 }
 
 export const fetchLogData = async (): Promise<void> => {
-  console.log('fetching logData');
   try {
     const db = firebase.database();
     const ref = db.ref('/logdata');
@@ -27,13 +26,10 @@ export const fetchLogData = async (): Promise<void> => {
           date: new Date(data[key].date),
         });
       }
-      const sortedLogData = sortByDateAscending([...loadedLogData]);
 
       setTimeout(() => {
         updateIsLoading();
         logData.setLogData(loadedLogData);
-        console.log(loadedLogData);
-        console.log(sortedLogData);
       }, 1000);
     });
   } catch (error) {
@@ -43,40 +39,51 @@ export const fetchLogData = async (): Promise<void> => {
 };
 
 export const postNewLogData = async (logDate: LogDate): Promise<void> => {
-  console.log('posting logData');
-  updateIsLoading();
   try {
     const db = firebase.database();
     const ref = db.ref('/logdata');
 
     setTimeout(() => {
+      updateIsLoading();
       ref.push(logDate);
-      logStore.addLogDate(logDate);
     }, 1000);
-    updateIsLoading();
   } catch (error) {
-    console.log(error);
     updateIsLoading();
+    console.log(error);
   }
+  updateIsLoading();
 };
 
 export const updateLogData = async (
   id: string,
   logDate: LogDate
 ): Promise<void> => {
-  console.log('upating logData');
-  updateIsLoading();
   try {
     const db = firebase.database();
     const ref = db.ref(`/logdata/${id}`);
 
     setTimeout(() => {
+      updateIsLoading();
       ref.update(logDate);
       logStore.updateLogDate(id, logDate);
     }, 1000);
-    updateIsLoading();
   } catch (error) {
-    console.log(error);
     updateIsLoading();
+    console.log(error);
   }
+  updateIsLoading();
 };
+
+// For development, seed database
+
+// export const postLogData = async (): Promise<void> => {
+//   try {
+//     const db = firebase.database();
+//     const ref = db.ref('/logdata');
+
+//     ref.set(logDataSeed);
+//     console.log('database seeded');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

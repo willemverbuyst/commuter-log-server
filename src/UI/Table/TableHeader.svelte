@@ -23,7 +23,12 @@
     sortDate: 'no sorting',
     sortTravelTimes: ['no sorting', 'ascending', 'descending'],
     sortTravelTime: 'no sorting',
-    statuses: ['all', ...getUniqueStatuses(filteredLogData)],
+    statuses: [
+      'all',
+      ...getUniqueStatuses(filteredLogData),
+      'car',
+      'public transport',
+    ],
     status: 'all',
     weeks: ['all', ...getUniqueWeekNumbers(filteredLogData)],
     week: 'all',
@@ -55,9 +60,17 @@
       | 'year'
   ): void {
     filters[dropdown] = event.target.value;
-    filteredLogData = filterData(filteredLogData, filters[dropdown], dropdown);
 
-    doUpdate(filteredLogData);
+    if (event.target.value === 'all' || event.target.value === 'no sorting') {
+      doUpdate(logData);
+    } else {
+      filteredLogData = filterData(
+        filteredLogData,
+        filters[dropdown],
+        dropdown
+      );
+      doUpdate(filteredLogData);
+    }
   }
 </script>
 

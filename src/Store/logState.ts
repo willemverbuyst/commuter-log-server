@@ -1,4 +1,5 @@
 import { writable, Writable } from 'svelte/store';
+import { sortByDateAscending } from '../Helpers/dateLogic';
 import type { LogDate } from '../models/Logdata';
 
 let logData: Writable<LogDate[]> = writable([]);
@@ -7,7 +8,7 @@ const logStore = {
   subscribe: logData.subscribe,
 
   setLogData: (logs: LogDate[]) => {
-    logData.set(logs);
+    logData.set(sortByDateAscending([...logs]));
   },
 
   addLogDate: (date: LogDate) => {
@@ -15,7 +16,7 @@ const logStore = {
       ...date,
     };
     logData.update((days: LogDate[]) => {
-      return [...days, newLogDate];
+      return sortByDateAscending([...days, newLogDate]);
     });
   },
 
@@ -25,7 +26,7 @@ const logStore = {
       const updatedLogDate = { ...days[dateIndex], ...date };
       const updatedLogDates = [...days];
       updatedLogDates[dateIndex] = updatedLogDate;
-      return updatedLogDates;
+      return sortByDateAscending([...updatedLogDates]);
     });
   },
 
