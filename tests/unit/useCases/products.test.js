@@ -1,4 +1,5 @@
 const Chance = require('chance');
+const { cloneDeep } = require('lodash');
 const { v4: uuidv4 } = require('uuid');
 const {
   product: {
@@ -12,6 +13,15 @@ const {
 const chance = new Chance();
 
 describe('Product use cases', () => {
+  const testProductData = {
+    name: chance.name(),
+    description: chance.sentence(),
+    images: [chance.url(), chance.url()],
+    price: chance.natural(),
+    color: chance.color(),
+    meta: { comment: 'test' },
+  };
+
   const mockProductRepo = {
     add: jest.fn(async (product) => ({
       ...product,
@@ -36,18 +46,9 @@ describe('Product use cases', () => {
 
   describe('Add product use case', () => {
     test('Product shoud be added', async () => {
-      // create product data
-      const testProductData = {
-        name: chance.name(),
-        description: chance.sentence(),
-        images: [chance.url(), chance.url()],
-        price: chance.natural(),
-        color: chance.color(),
-        meta: { comment: 'test' },
-      };
-      // add a product using the use case
+      // add product using the use case
       const addedProduct = await addProductUseCase(depencies).execute(
-        testProductData
+        testProductData,
       );
       // check the received data
       expect(addedProduct).toBeDefined();
@@ -59,12 +60,8 @@ describe('Product use cases', () => {
       expect(addedProduct.color).toBe(testProductData.color);
       expect(addedProduct.meta).toEqual(testProductData.meta);
       // check that the depencies are called as expected
-      const call = mockProductRepo.add.mock.calls[0][0];
-      expect(call.id).toBeUndefined();
-      expect(call.name).toBe(testProductData.name);
-      expect(call.lastName).toBe(testProductData.lastName);
-      expect(call.gender).toBe(testProductData.gender);
-      expect(call.meta).toEqual(testProductData.meta);
+      const expectedProduct = mockProductRepo.add.mock.calls[0][0];
+      expect(expectedProduct).toEqual(testProductData);
     });
   });
 
@@ -94,48 +91,39 @@ describe('Product use cases', () => {
   describe('Update product use case', () => {
     test('Product should be updated', async () => {
       // create product
-      const testData = {
+      const mockProduct = {
         id: uuidv4(),
-        name: chance.name(),
-        description: chance.sentence(),
-        images: [chance.url(), chance.url()],
-        price: chance.natural(),
-        color: chance.color(),
-        meta: {},
+        ...testProductData,
       };
       const updatedProduct = await updateProductUseCase(depencies).execute({
-        product: testData,
+        product: cloneDeep(mockProduct),
       });
       // check the result
-      expect(updatedProduct).toEqual(testData);
+      expect(updatedProduct).toEqual(mockProduct);
 
       // check the call
       const expectedProduct = mockProductRepo.update.mock.calls[0][0];
-      expect(expectedProduct).toEqual(testData);
+      expect(expectedProduct).toEqual(mockProduct);
     });
   });
 
   describe('Delete product use case', () => {
     test('Product should be deleted', async () => {
       // create product
-      const testData = {
+      const mockProduct = {
         id: uuidv4(),
-        name: chance.name(),
-        description: chance.sentence(),
-        images: [chance.url(), chance.url()],
-        price: chance.natural(),
-        color: chance.color(),
-        meta: {},
+        ...testProductData,
       };
+
       const deletedProduct = await deleteProductUseCase(depencies).execute({
-        product: testData,
+        product: cloneDeep(mockProduct),
       });
       // check the result
-      expect(deletedProduct).toEqual(testData);
+      expect(deletedProduct).toEqual(mockProduct);
 
       // check the call
       const expectedProduct = mockProductRepo.delete.mock.calls[0][0];
-      expect(expectedProduct).toEqual(testData);
+      expect(expectedProduct).toEqual(mockProduct);
     });
   });
 });

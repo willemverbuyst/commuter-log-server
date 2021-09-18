@@ -1,10 +1,10 @@
 const { inMemory: inMemoryDb } = require('../../database/index');
-const { v4: uuuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   add: async (order) => {
     if (!order.id) {
-      order.id = uuuidv4();
+      order.id = uuidv4();
     }
     inMemoryDb.orders.push(order);
     return order;
