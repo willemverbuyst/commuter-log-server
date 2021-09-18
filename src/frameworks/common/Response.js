@@ -7,11 +7,19 @@ module.exports.Response = class Response {
 };
 
 module.exports.ResponseError = class ResponseError {
-  constructor({ status, message, reason, url, ip }) {
+  constructor({ status, message, reason, url, ip, validationErrors = [] }) {
     this.status = status;
     this.message = message;
     this.reason = reason;
     this.url = url;
     this.ip = ip;
+    this.validationErrors = validationErrors;
+  }
+};
+
+module.exports.ValidationError = class ValidationError {
+  constructor({ field, msg }) {
+    this.field = field;
+    this.msg = msg;
   }
 };
