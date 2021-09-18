@@ -3,20 +3,21 @@ const { Response } = require('../../frameworks/common/Response');
 module.exports = (dependencies) => {
   const {
     useCases: {
-      user: { addUserUseCase },
+      order: { addOrderUseCase },
     },
   } = dependencies;
 
   return async (req, res, next) => {
     try {
       const { body = {} } = req;
-      const { name, lastName, gender, meta } = body;
+      const { userId, productIds, date, isPayed, meta } = body;
 
-      const addUser = addUserUseCase(dependencies);
-      const response = await addUser.execute({
-        name,
-        lastName,
-        gender,
+      const addOrder = addOrderUseCase(dependencies);
+      const response = await addOrder.execute({
+        userId,
+        productIds,
+        date,
+        isPayed,
         meta,
       });
 
