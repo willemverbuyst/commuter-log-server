@@ -1,4 +1,5 @@
 const Chance = require('chance');
+const { cloneDeep } = require('lodash');
 const { v4: uuidv4 } = require('uuid');
 const {
   user: {
@@ -17,6 +18,13 @@ const {
 const chance = new Chance();
 
 describe('User use cases', () => {
+  const testUserData = {
+    name: chance.name(),
+    lastName: chance.last(),
+    gender: genders.FEMALE,
+    meta: { hair: { color: chance.color() } },
+  };
+
   const mockUserRepo = {
     add: jest.fn(async (user) => ({
       ...user,
@@ -39,13 +47,6 @@ describe('User use cases', () => {
 
   describe('Add user use case', () => {
     test('User shoud be added', async () => {
-      // create user data
-      const testUserData = {
-        name: chance.name(),
-        lastName: chance.last(),
-        gender: genders.FEMALE,
-        meta: { hair: { color: chance.color() } },
-      };
       // add a user using the use case
       const addedUser = await addUserUseCase(depencies).execute(testUserData);
       // check the received data
@@ -89,44 +90,38 @@ describe('User use cases', () => {
   describe('Update user use case', () => {
     test('User should be updated', async () => {
       // create user
-      const testData = {
+      const mockUser = {
+        ...testUserData,
         id: uuidv4(),
-        name: chance.name(),
-        lastName: chance.last(),
-        gender: genders.FEMALE,
-        meta: { hair: { color: chance.color() } },
       };
       const updatedUser = await updateUserUseCase(depencies).execute({
-        user: testData,
+        user: cloneDeep(mockUser),
       });
       // check the result
-      expect(updatedUser).toEqual(testData);
+      expect(updatedUser).toEqual(mockUser);
 
       // check the call
       const expectedUser = mockUserRepo.update.mock.calls[0][0];
-      expect(expectedUser).toEqual(testData);
+      expect(expectedUser).toEqual(mockUser);
     });
   });
 
   describe('Delete user use case', () => {
     test('User should be deleted', async () => {
       // create user
-      const testData = {
+      const mockUser = {
+        ...testUserData,
         id: uuidv4(),
-        name: chance.name(),
-        lastName: chance.last(),
-        gender: genders.FEMALE,
-        meta: { hair: { color: chance.color() } },
       };
       const deletedUser = await deleteUserUseCase(depencies).execute({
-        user: testData,
+        user: cloneDeep(mockUser),
       });
       // check the result
-      expect(deletedUser).toEqual(testData);
+      expect(deletedUser).toEqual(mockUser);
 
       // check the call
       const expectedUser = mockUserRepo.delete.mock.calls[0][0];
-      expect(expectedUser).toEqual(testData);
+      expect(expectedUser).toEqual(mockUser);
     });
   });
 });
