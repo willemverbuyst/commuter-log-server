@@ -5,13 +5,8 @@ const {
   productsRepository,
   usersRepository,
 } = require('../../frameworks/repositories/inMemory');
+const deleteOrderUseCase = require('./deleteOrder.useCase');
 const {
-  order: {
-    addOrderUseCase,
-    deleteOrderUseCase,
-    getOrderByIdUseCase,
-    updateOrderUseCase,
-  },
   user: { addUserUseCase, getUserByIdUseCase },
   product: { addProductUseCase, getProductByIdUseCase },
 } = require('../');
@@ -20,7 +15,6 @@ const {
     userConstants: { genders },
   },
 } = require('../../entities');
-const { ValidationError } = require('../../frameworks/common');
 
 const chance = new Chance();
 
@@ -103,43 +97,22 @@ describe('Order use cases', () => {
     };
   });
 
-  describe('GetById order use case', () => {
-    test('Order should be returned by id', async () => {
-      // generate fake id
-      const fakeId = uuidv4();
-      // call get order by id
-      const orderById = await getOrderByIdUseCase(dependencies).execute({
-        id: fakeId,
-      });
-      // check the data
-      expect(orderById).toBeDefined();
-      expect(orderById.id).toBe(fakeId);
-      expect(orderById.userId).toBeDefined();
-      expect(orderById.productIds).toBeDefined();
-      expect(orderById.date).toBeDefined();
-      expect(orderById.isPayed).toBeDefined();
-      expect(orderById.meta).toBeDefined();
-      // check the call
-      const expectedId = mockOrderRepo.getById.mock.calls[0][0];
-      expect(expectedId).toBe(fakeId);
-    });
-  });
-
-  describe('Update product use case', () => {
-    test('Product should be updated', async () => {
+  describe('Delete order use case', () => {
+    test('Order should be deleted', async () => {
       // create order
       const mockOrder = {
-        ...testOrder,
         id: uuidv4(),
+        ...testOrder,
       };
-      const updatedOrder = await updateOrderUseCase(dependencies).execute({
+
+      const deletedOrder = await deleteOrderUseCase(dependencies).execute({
         order: cloneDeep(mockOrder),
       });
       // check the result
-      expect(updatedOrder).toEqual(mockOrder);
+      expect(deletedOrder).toEqual(mockOrder);
 
       // check the call
-      const expectedOrder = mockOrderRepo.update.mock.calls[0][0];
+      const expectedOrder = mockOrderRepo.delete.mock.calls[0][0];
       expect(expectedOrder).toEqual(mockOrder);
     });
   });
