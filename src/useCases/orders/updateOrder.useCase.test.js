@@ -5,13 +5,8 @@ const {
   productsRepository,
   usersRepository,
 } = require('../../frameworks/repositories/inMemory');
+const updateOrderUseCase = require('./updateOrder.useCase');
 const {
-  order: {
-    addOrderUseCase,
-    deleteOrderUseCase,
-    getOrderByIdUseCase,
-    updateOrderUseCase,
-  },
   user: { addUserUseCase, getUserByIdUseCase },
   product: { addProductUseCase, getProductByIdUseCase },
 } = require('../');
@@ -20,7 +15,6 @@ const {
     userConstants: { genders },
   },
 } = require('../../entities');
-const { ValidationError } = require('../../frameworks/common');
 
 const chance = new Chance();
 
