@@ -1,6 +1,6 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
-const { usersRepository } = require('./');
+const { usersRepository } = require('.');
 const {
   User,
   constants: {

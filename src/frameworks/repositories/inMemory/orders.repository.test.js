@@ -1,7 +1,7 @@
 const Chance = require('chance');
 const { v4: uuidv4 } = require('uuid');
 const { cloneDeep } = require('lodash');
-const { ordersRepository } = require('./');
+const { ordersRepository } = require('.');
 const { Order } = require('../../../entities');
 
 const chance = new Chance();

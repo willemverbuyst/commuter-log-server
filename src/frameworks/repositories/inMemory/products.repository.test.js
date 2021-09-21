@@ -1,6 +1,6 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
-const { productsRepository } = require('./');
+const { productsRepository } = require('.');
 const { Product } = require('../../../entities');
 
 const chance = new Chance();
