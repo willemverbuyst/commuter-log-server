@@ -1,17 +1,11 @@
 const Chance = require('chance');
-const { cloneDeep } = require('lodash');
 const { v4: uuidv4 } = require('uuid');
 const {
   productsRepository,
   usersRepository,
 } = require('../../frameworks/repositories/inMemory');
+const addOrderUseCase = require('./addOrder.useCase');
 const {
-  order: {
-    addOrderUseCase,
-    deleteOrderUseCase,
-    getOrderByIdUseCase,
-    updateOrderUseCase,
-  },
   user: { addUserUseCase, getUserByIdUseCase },
   product: { addProductUseCase, getProductByIdUseCase },
 } = require('../');
@@ -103,64 +97,61 @@ describe('Order use cases', () => {
     };
   });
 
-  describe('GetById order use case', () => {
-    test('Order should be returned by id', async () => {
-      // generate fake id
+  describe('Add order use case', () => {
+    test('Order shoud be added', async () => {
+      // add an order using the use case
+      const addedOrder = await addOrderUseCase(dependencies).execute(testOrder);
+      // check the received data
+      expect(addedOrder).toBeDefined();
+      expect(addedOrder.id).toBeDefined();
+      expect(addedOrder.userId).toBe(testOrder.userId);
+      expect(addedOrder.productIds).toEqual(testOrder.productIds);
+      expect(addedOrder.date).toBe(testOrder.date);
+      expect(addedOrder.isPayed).toBe(testOrder.isPayed);
+      expect(addedOrder.meta).toEqual(testOrder.meta);
+      // check that the dependencies are called as expected
+      const expectedOrder = mockOrderRepo.add.mock.calls[0][0];
+      expect(expectedOrder).toEqual(testOrder);
+    });
+
+    test('Should return validation error when product id unknown', async () => {
       const fakeId = uuidv4();
-      // call get order by id
-      const orderById = await getOrderByIdUseCase(dependencies).execute({
-        id: fakeId,
-      });
-      // check the data
-      expect(orderById).toBeDefined();
-      expect(orderById.id).toBe(fakeId);
-      expect(orderById.userId).toBeDefined();
-      expect(orderById.productIds).toBeDefined();
-      expect(orderById.date).toBeDefined();
-      expect(orderById.isPayed).toBeDefined();
-      expect(orderById.meta).toBeDefined();
-      // check the call
-      const expectedId = mockOrderRepo.getById.mock.calls[0][0];
-      expect(expectedId).toBe(fakeId);
+      try {
+        await addOrderUseCase(dependencies).execute({
+          ...testOrder,
+          productIds: [...testOrder.productIds, fakeId],
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err.status).toBe(403);
+        expect(err.validationErrors).toEqual([
+          new ValidationError({
+            field: 'productIds',
+            message: 'Something failed!',
+            msg: `No products with ids ${fakeId}`,
+          }),
+        ]);
+      }
     });
-  });
 
-  describe('Update product use case', () => {
-    test('Product should be updated', async () => {
-      // create order
-      const mockOrder = {
-        ...testOrder,
-        id: uuidv4(),
-      };
-      const updatedOrder = await updateOrderUseCase(dependencies).execute({
-        order: cloneDeep(mockOrder),
-      });
-      // check the result
-      expect(updatedOrder).toEqual(mockOrder);
-
-      // check the call
-      const expectedOrder = mockOrderRepo.update.mock.calls[0][0];
-      expect(expectedOrder).toEqual(mockOrder);
-    });
-  });
-
-  describe('Delete order use case', () => {
-    test('Order should be deleted', async () => {
-      // create order
-      const mockOrder = {
-        id: uuidv4(),
-        ...testOrder,
-      };
-
-      const deletedOrder = await deleteOrderUseCase(dependencies).execute({
-        order: cloneDeep(mockOrder),
-      });
-      // check the result
-      expect(deletedOrder).toEqual(mockOrder);
-
-      // check the call
-      const expectedOrder = mockOrderRepo.delete.mock.calls[0][0];
-      expect(expectedOrder).toEqual(mockOrder);
+    test('Should return validation error when user id unknown', async () => {
+      const fakeId = uuidv4();
+      try {
+        await addOrderUseCase(dependencies).execute({
+          ...testOrder,
+          userId: fakeId,
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err.status).toBe(403);
+        expect(err.validationErrors).toEqual([
+          new ValidationError({
+            field: 'userId',
+            message: 'Something failed!',
+            msg: `No user with id ${fakeId}`,
+          }),
+        ]);
+      }
     });
   });
 });
