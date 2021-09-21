@@ -14,7 +14,6 @@ const {
   },
   user: { addUserUseCase, getUserByIdUseCase },
   product: { addProductUseCase, getProductByIdUseCase },
-  product,
 } = require('../../../src/useCases');
 const {
   constants: {
@@ -155,7 +154,7 @@ describe('Order use cases', () => {
           new ValidationError({
             field: 'userId',
             message: 'Something failed!',
-            msg: `No user found with id ${fakeId}`,
+            msg: `No user with id ${fakeId}`,
           }),
         ]);
       }
