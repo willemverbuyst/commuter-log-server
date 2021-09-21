@@ -1,14 +1,7 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
 const { v4: uuidv4 } = require('uuid');
-const {
-  product: {
-    addProductUseCase,
-    deleteProductUseCase,
-    getProductByIdUseCase,
-    updateProductUseCase,
-  },
-} = require('../');
+const updateProductUseCase = require('./updateProduct.useCase');
 
 const chance = new Chance();
 
