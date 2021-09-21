@@ -1,10 +1,8 @@
 const Chance = require('chance');
 const { v4: uuidv4 } = require('uuid');
 const { cloneDeep } = require('lodash');
-const {
-  ordersRepository,
-} = require('../../../src/frameworks/repositories/inMemory');
-const { Order } = require('../../../src/entities');
+const { ordersRepository } = require('./');
+const { Order } = require('../../../entities');
 
 const chance = new Chance();
 
@@ -65,12 +63,12 @@ describe('Orders repository', () => {
     expect(deletedOrder).toEqual(willBeDeletedAddedOrder);
     // try to get deleted order - should be undefined
     const shouldBeUndefinedOrder = await ordersRepository.getById(
-      deletedOrder.id
+      deletedOrder.id,
     );
     expect(shouldBeUndefinedOrder).toBeUndefined();
     // check if the second order is not deleted - is defined
     const shouldBeDefinedOrder = await ordersRepository.getById(
-      shouldStayAddedOrder.id
+      shouldStayAddedOrder.id,
     );
     expect(shouldBeDefinedOrder).toBeDefined();
   });

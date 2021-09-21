@@ -1,9 +1,7 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
-const {
-  productsRepository,
-} = require('../../../src/frameworks/repositories/inMemory');
-const { Product } = require('../../../src/entities');
+const { productsRepository } = require('./');
+const { Product } = require('../../../entities');
 
 const chance = new Chance();
 
@@ -66,17 +64,17 @@ describe('Products repository', () => {
     expect(shouldStayAddedProduct).toBeDefined();
     // delete one product
     const deletedProduct = await productsRepository.delete(
-      willBeDeletedAddedProduct
+      willBeDeletedAddedProduct,
     );
     expect(deletedProduct).toEqual(willBeDeletedAddedProduct);
     // try to get deleted product - should be undefined
     const shouldBeUndefinedProduct = await productsRepository.getById(
-      deletedProduct.id
+      deletedProduct.id,
     );
     expect(shouldBeUndefinedProduct).toBeUndefined();
     // check if the second product is not deleted - is defined
     const shouldBeDefinedProduct = await productsRepository.getById(
-      shouldStayAddedProduct.id
+      shouldStayAddedProduct.id,
     );
     expect(shouldBeDefinedProduct).toBeDefined();
   });

@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const {
   productsRepository,
   usersRepository,
-} = require('../../../src/frameworks/repositories/inMemory');
+} = require('../../frameworks/repositories/inMemory');
 const {
   order: {
     addOrderUseCase,
@@ -14,13 +14,13 @@ const {
   },
   user: { addUserUseCase, getUserByIdUseCase },
   product: { addProductUseCase, getProductByIdUseCase },
-} = require('../../../src/useCases');
+} = require('../');
 const {
   constants: {
     userConstants: { genders },
   },
-} = require('../../../src/entities');
-const { ValidationError } = require('../../../src/frameworks/common');
+} = require('../../entities');
+const { ValidationError } = require('../../frameworks/common');
 
 const chance = new Chance();
 

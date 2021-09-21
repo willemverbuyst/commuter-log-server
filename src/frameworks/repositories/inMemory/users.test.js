@@ -1,14 +1,12 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
-const {
-  usersRepository,
-} = require('../../../src/frameworks/repositories/inMemory');
+const { usersRepository } = require('./');
 const {
   User,
   constants: {
     userConstants: { genders },
   },
-} = require('../../../src/entities');
+} = require('../../../entities');
 
 const chance = new Chance();
 
@@ -62,7 +60,7 @@ describe('Users repository', () => {
     expect(shouldBeUndefinedUser).toBeUndefined();
     // check if the second user is not deleted - is defined
     const shouldBeDefinedUser = await usersRepository.getById(
-      shouldStayAddedUser.id
+      shouldStayAddedUser.id,
     );
     expect(shouldBeDefinedUser).toBeDefined();
   });

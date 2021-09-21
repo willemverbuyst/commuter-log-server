@@ -8,12 +8,12 @@ const {
     getUserByIdUseCase,
     updateUserUseCase,
   },
-} = require('../../../src/useCases');
+} = require('../');
 const {
   constants: {
     userConstants: { genders },
   },
-} = require('../../../src/entities');
+} = require('../../entities');
 
 const chance = new Chance();
 

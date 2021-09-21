@@ -8,7 +8,7 @@ const {
     getProductByIdUseCase,
     updateProductUseCase,
   },
-} = require('../../../src/useCases');
+} = require('../');
 
 const chance = new Chance();
 
