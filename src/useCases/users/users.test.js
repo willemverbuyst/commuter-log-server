@@ -45,27 +45,6 @@ describe('User use cases', () => {
     usersRepository: mockUserRepo,
   };
 
-  describe('Add user use case', () => {
-    test('User shoud be added', async () => {
-      // add a user using the use case
-      const addedUser = await addUserUseCase(depencies).execute(testUserData);
-      // check the received data
-      expect(addedUser).toBeDefined();
-      expect(addedUser.id).toBeDefined();
-      expect(addedUser.name).toBe(testUserData.name);
-      expect(addedUser.lastName).toBe(testUserData.lastName);
-      expect(addedUser.gender).toBe(testUserData.gender);
-      expect(addedUser.meta).toEqual(testUserData.meta);
-      // check that the depencies are called as expected
-      const call = mockUserRepo.add.mock.calls[0][0];
-      expect(call.id).toBeUndefined();
-      expect(call.name).toBe(testUserData.name);
-      expect(call.lastName).toBe(testUserData.lastName);
-      expect(call.gender).toBe(testUserData.gender);
-      expect(call.meta).toEqual(testUserData.meta);
-    });
-  });
-
   describe('GetById user use case', () => {
     test('User should be returned by id', async () => {
       // generate fake id
