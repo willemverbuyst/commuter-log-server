@@ -1,5 +1,4 @@
 const { isEmpty } = require('lodash');
-
 const { ValidationError } = require('../../frameworks/common');
 
 module.exports = (dependencies) => {
@@ -23,7 +22,6 @@ module.exports = (dependencies) => {
 
   return async ({ order = {} }) => {
     const returnable = [];
-
     const { productIds = [], userId } = order;
 
     const products = await Promise.all(

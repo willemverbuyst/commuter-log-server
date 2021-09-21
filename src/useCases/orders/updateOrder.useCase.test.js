@@ -15,6 +15,7 @@ const {
     userConstants: { genders },
   },
 } = require('../../entities');
+const { ValidationError } = require('../../frameworks/common');
 
 const chance = new Chance();
 
@@ -113,6 +114,50 @@ describe('Order use cases', () => {
       // check the call
       const expectedOrder = mockOrderRepo.update.mock.calls[0][0];
       expect(expectedOrder).toEqual(mockOrder);
+    });
+
+    test('Should return validation error when product id unknown', async () => {
+      const fakeId = uuidv4();
+      try {
+        await updateOrderUseCase(dependencies).execute({
+          order: {
+            ...testOrder,
+            productIds: [...testOrder.productIds, fakeId],
+          },
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err.status).toBe(403);
+        expect(err.validationErrors).toEqual([
+          new ValidationError({
+            field: 'productIds',
+            message: 'Something failed!',
+            msg: `No products with ids ${fakeId}`,
+          }),
+        ]);
+      }
+    });
+
+    test('Should return validation error when user id unknown', async () => {
+      const fakeId = uuidv4();
+      try {
+        await updateOrderUseCase(dependencies).execute({
+          order: {
+            ...testOrder,
+            userId: fakeId,
+          },
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err.status).toBe(403);
+        expect(err.validationErrors).toEqual([
+          new ValidationError({
+            field: 'userId',
+            message: 'Something failed!',
+            msg: `No user with id ${fakeId}`,
+          }),
+        ]);
+      }
     });
   });
 });
