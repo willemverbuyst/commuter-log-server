@@ -44,29 +44,6 @@ describe('Product use cases', () => {
     productsRepository: mockProductRepo,
   };
 
-  describe('GetById product use case', () => {
-    test('Product should be returned by id', async () => {
-      // generate fake id
-      const fakeId = uuidv4();
-      // call get product by id
-      const productById = await getProductByIdUseCase(depencies).execute({
-        id: fakeId,
-      });
-      // check the data
-      expect(productById).toBeDefined();
-      expect(productById.id).toBe(fakeId);
-      expect(productById.name).toBeDefined();
-      expect(productById.description).toBeDefined();
-      expect(productById.images).toBeDefined();
-      expect(productById.price).toBeDefined();
-      expect(productById.color).toBeDefined();
-      expect(productById.meta).toBeDefined();
-      // check the call
-      const expectedId = mockProductRepo.getById.mock.calls[0][0];
-      expect(expectedId).toBe(fakeId);
-    });
-  });
-
   describe('Update product use case', () => {
     test('Product should be updated', async () => {
       // create product
@@ -82,26 +59,6 @@ describe('Product use cases', () => {
 
       // check the call
       const expectedProduct = mockProductRepo.update.mock.calls[0][0];
-      expect(expectedProduct).toEqual(mockProduct);
-    });
-  });
-
-  describe('Delete product use case', () => {
-    test('Product should be deleted', async () => {
-      // create product
-      const mockProduct = {
-        id: uuidv4(),
-        ...testProductData,
-      };
-
-      const deletedProduct = await deleteProductUseCase(depencies).execute({
-        product: cloneDeep(mockProduct),
-      });
-      // check the result
-      expect(deletedProduct).toEqual(mockProduct);
-
-      // check the call
-      const expectedProduct = mockProductRepo.delete.mock.calls[0][0];
       expect(expectedProduct).toEqual(mockProduct);
     });
   });
