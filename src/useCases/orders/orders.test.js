@@ -103,28 +103,6 @@ describe('Order use cases', () => {
     };
   });
 
-  describe('GetById order use case', () => {
-    test('Order should be returned by id', async () => {
-      // generate fake id
-      const fakeId = uuidv4();
-      // call get order by id
-      const orderById = await getOrderByIdUseCase(dependencies).execute({
-        id: fakeId,
-      });
-      // check the data
-      expect(orderById).toBeDefined();
-      expect(orderById.id).toBe(fakeId);
-      expect(orderById.userId).toBeDefined();
-      expect(orderById.productIds).toBeDefined();
-      expect(orderById.date).toBeDefined();
-      expect(orderById.isPayed).toBeDefined();
-      expect(orderById.meta).toBeDefined();
-      // check the call
-      const expectedId = mockOrderRepo.getById.mock.calls[0][0];
-      expect(expectedId).toBe(fakeId);
-    });
-  });
-
   describe('Update product use case', () => {
     test('Product should be updated', async () => {
       // create order
