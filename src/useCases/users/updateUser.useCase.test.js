@@ -1,14 +1,7 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
 const { v4: uuidv4 } = require('uuid');
-const {
-  user: {
-    addUserUseCase,
-    deleteUserUseCase,
-    getUserByIdUseCase,
-    updateUserUseCase,
-  },
-} = require('../');
+const updateUserUseCase = require('./updateUser.useCase');
 const {
   constants: {
     userConstants: { genders },
