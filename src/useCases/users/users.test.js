@@ -45,27 +45,6 @@ describe('User use cases', () => {
     usersRepository: mockUserRepo,
   };
 
-  describe('GetById user use case', () => {
-    test('User should be returned by id', async () => {
-      // generate fake id
-      const fakeId = uuidv4();
-      // call get user by id
-      const userById = await getUserByIdUseCase(depencies).execute({
-        id: fakeId,
-      });
-      // check the data
-      expect(userById).toBeDefined();
-      expect(userById.id).toBe(fakeId);
-      expect(userById.name).toBeDefined();
-      expect(userById.lastName).toBeDefined();
-      expect(userById.gender).toBeDefined();
-      expect(userById.meta).toBeDefined();
-      // check the call
-      const expectedId = mockUserRepo.getById.mock.calls[0][0];
-      expect(expectedId).toBe(fakeId);
-    });
-  });
-
   describe('Update user use case', () => {
     test('User should be updated', async () => {
       // create user
@@ -81,25 +60,6 @@ describe('User use cases', () => {
 
       // check the call
       const expectedUser = mockUserRepo.update.mock.calls[0][0];
-      expect(expectedUser).toEqual(mockUser);
-    });
-  });
-
-  describe('Delete user use case', () => {
-    test('User should be deleted', async () => {
-      // create user
-      const mockUser = {
-        ...testUserData,
-        id: uuidv4(),
-      };
-      const deletedUser = await deleteUserUseCase(depencies).execute({
-        user: cloneDeep(mockUser),
-      });
-      // check the result
-      expect(deletedUser).toEqual(mockUser);
-
-      // check the call
-      const expectedUser = mockUserRepo.delete.mock.calls[0][0];
       expect(expectedUser).toEqual(mockUser);
     });
   });
