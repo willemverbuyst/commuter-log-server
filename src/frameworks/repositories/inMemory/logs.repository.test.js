@@ -76,24 +76,26 @@ describe('Logs repository', () => {
     );
     expect(shouldBeDefinedLog).toBeDefined();
   });
-  // test('User should be updated', async () => {
-  //   // add a user
-  //   const testUser = new User({
-  //     name: chance.name(),
-  //     lastName: chance.last(),
-  //     gender: genders.FEMALE,
-  //     meta: { hair: { color: 'Black' } },
-  //   });
-  //   const addedUser = await usersRepository.add(testUser);
-  //   expect(addedUser).toBeDefined();
+  test('Log should be updated', async () => {
+    // add a log
+    const testLog = new Log({
+      date: chance.date(),
+      statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
+      durationTrip: chance.natural(),
+      meansOfTransport: meansOfTransport.CAR,
+      startingPoint: chance.city(),
+      destination: chance.city(),
+      meta: { comment: chance.sentence() },
+    });
+    const addedLog = await logsRepository.add(testLog);
+    expect(addedLog).toBeDefined();
 
-  //   // update a user
-  //   const clonedUser = cloneDeep({
-  //     ...addedUser,
-  //     name: chance.name(),
-  //     gender: genders.MALE,
-  //   });
-  //   const updatedUser = await usersRepository.update(clonedUser);
-  //   expect(updatedUser).toEqual(clonedUser);
-  // });
+    // update a log
+    const clonedLog = cloneDeep({
+      ...addedLog,
+      meansOfTransport: meansOfTransport.PUBLIC_TRANSPORT,
+    });
+    const updatedLog = await logsRepository.update(clonedLog);
+    expect(updatedLog).toEqual(clonedLog);
+  });
 });
