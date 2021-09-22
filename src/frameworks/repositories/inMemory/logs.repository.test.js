@@ -1,7 +1,12 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
 const { logsRepository } = require('.');
-const { Log } = require('../../../entities');
+const {
+  Log,
+  constants: {
+    logConstants: { meansOfTransport, statusOfDay },
+  },
+} = require('../../../entities');
 
 const chance = new Chance();
 
@@ -9,8 +14,9 @@ describe('Logs repository', () => {
   test('New log should be added and returned', async () => {
     const testLog = new Log({
       date: chance.date(),
+      statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
-      meansOfTransport: 'transport',
+      meansOfTransport: meansOfTransport.CAR,
       startingPoint: chance.city(),
       destination: chance.city(),
       meta: { comment: chance.sentence() },
@@ -21,6 +27,7 @@ describe('Logs repository', () => {
     expect(addedLog).toBeDefined();
     expect(addedLog.id).toBeDefined();
     expect(addedLog.date).toBe(testLog.date);
+    expect(addedLog.statusOfDay).toBe(testLog.statusOfDay);
     expect(addedLog.durationTrip).toBe(testLog.durationTrip);
     expect(addedLog.meansOfTransport).toBe(testLog.meansOfTransport);
     expect(addedLog.startingPoint).toBe(testLog.startingPoint);
