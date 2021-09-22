@@ -4,9 +4,9 @@ const { Schema } = mongoose;
 
 module.exports = new Schema({
   date: Date,
-  statusOfDay: String,
+  statusOfDay: Number,
   durationTrip: Number,
-  meansOfTransport: String,
+  meansOfTransport: Number,
   startingPoint: String,
   destination: String,
   meta: Object,
