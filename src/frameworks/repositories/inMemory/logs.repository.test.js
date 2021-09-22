@@ -37,39 +37,45 @@ describe('Logs repository', () => {
     const returnedLog = await logsRepository.getById(addedLog.id);
     expect(returnedLog).toEqual(addedLog);
   });
-  // test('User should be deleted', async () => {
-  //   // init two users
-  //   const willBeDeletedUser = new User({
-  //     name: chance.name(),
-  //     lastName: chance.last(),
-  //     gender: genders.FEMALE,
-  //     meta: { hair: { color: 'Black' } },
-  //   });
-  //   const shouldStayUser = new User({
-  //     name: chance.name(),
-  //     lastName: chance.last(),
-  //     gender: genders.FEMALE,
-  //     meta: { hair: { color: 'Blond' } },
-  //   });
-  //   // add two users
-  //   const [willBeDeletedAddedUser, shouldStayAddedUser] = await Promise.all([
-  //     usersRepository.add(willBeDeletedUser),
-  //     usersRepository.add(shouldStayUser),
-  //   ]);
-  //   expect(willBeDeletedAddedUser).toBeDefined();
-  //   expect(shouldStayAddedUser).toBeDefined();
-  //   // delete one user
-  //   const deletedUser = await usersRepository.delete(willBeDeletedAddedUser);
-  //   expect(deletedUser).toEqual(willBeDeletedAddedUser);
-  //   // try to get deleted user - should be undefined
-  //   const shouldBeUndefinedUser = await usersRepository.getById(deletedUser.id);
-  //   expect(shouldBeUndefinedUser).toBeUndefined();
-  //   // check if the second user is not deleted - is defined
-  //   const shouldBeDefinedUser = await usersRepository.getById(
-  //     shouldStayAddedUser.id,
-  //   );
-  //   expect(shouldBeDefinedUser).toBeDefined();
-  // });
+  test('Log should be deleted', async () => {
+    // init two logs
+    const willBeDeletedLog = new Log({
+      date: chance.date(),
+      statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
+      durationTrip: chance.natural(),
+      meansOfTransport: meansOfTransport.CAR,
+      startingPoint: chance.city(),
+      destination: chance.city(),
+      meta: { comment: chance.sentence() },
+    });
+    const shouldStayLog = new Log({
+      date: chance.date(),
+      statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
+      durationTrip: chance.natural(),
+      meansOfTransport: meansOfTransport.CAR,
+      startingPoint: chance.city(),
+      destination: chance.city(),
+      meta: { comment: chance.sentence() },
+    });
+    // add two logs
+    const [willBeDeletedAddedLog, shouldStayAddedLog] = await Promise.all([
+      logsRepository.add(willBeDeletedLog),
+      logsRepository.add(shouldStayLog),
+    ]);
+    expect(willBeDeletedAddedLog).toBeDefined();
+    expect(shouldStayAddedLog).toBeDefined();
+    // delete one log
+    const deletedLog = await logsRepository.delete(willBeDeletedAddedLog);
+    expect(deletedLog).toEqual(willBeDeletedAddedLog);
+    // try to get deleted log - should be undefined
+    const shouldBeUndefinedLog = await logsRepository.getById(deletedLog.id);
+    expect(shouldBeUndefinedLog).toBeUndefined();
+    // check if the second log is not deleted - is defined
+    const shouldBeDefinedLog = await logsRepository.getById(
+      shouldStayAddedLog.id,
+    );
+    expect(shouldBeDefinedLog).toBeDefined();
+  });
   // test('User should be updated', async () => {
   //   // add a user
   //   const testUser = new User({
