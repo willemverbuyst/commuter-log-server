@@ -4,7 +4,8 @@
   "description": "udemy_course",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest",
+    "test:verbose": "jest --verbose",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
