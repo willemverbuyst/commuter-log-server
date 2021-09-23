@@ -12,6 +12,7 @@ module.exports = (dependencies) => {
       const { body = {} } = req;
       const {
         id,
+        userId,
         date,
         statusOfDay,
         durationTrip,
@@ -25,6 +26,7 @@ module.exports = (dependencies) => {
       const response = await deleteLog.execute({
         log: {
           id,
+          userId,
           date,
           statusOfDay,
           durationTrip,

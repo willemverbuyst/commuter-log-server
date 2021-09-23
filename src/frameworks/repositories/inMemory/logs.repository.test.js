@@ -1,5 +1,6 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
+const { v4: uuidv4 } = require('uuid');
 const { logsRepository } = require('.');
 const {
   Log,
@@ -13,6 +14,7 @@ const chance = new Chance();
 describe('Logs repository', () => {
   test('New log should be added and returned', async () => {
     const testLog = new Log({
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
@@ -26,6 +28,7 @@ describe('Logs repository', () => {
 
     expect(addedLog).toBeDefined();
     expect(addedLog.id).toBeDefined();
+    expect(addedLog.userId).toBe(testLog.userId);
     expect(addedLog.date).toBe(testLog.date);
     expect(addedLog.statusOfDay).toBe(testLog.statusOfDay);
     expect(addedLog.durationTrip).toBe(testLog.durationTrip);
@@ -40,6 +43,7 @@ describe('Logs repository', () => {
   test('Log should be deleted', async () => {
     // init two logs
     const willBeDeletedLog = new Log({
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
@@ -49,6 +53,7 @@ describe('Logs repository', () => {
       meta: { comment: chance.sentence() },
     });
     const shouldStayLog = new Log({
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
@@ -79,6 +84,7 @@ describe('Logs repository', () => {
   test('Log should be updated', async () => {
     // add a log
     const testLog = new Log({
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),

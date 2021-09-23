@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
+const { ObjectId, Schema } = mongoose;
 
 module.exports = new Schema({
   date: Date,
+  userId: ObjectId,
   statusOfDay: Number,
   durationTrip: Number,
   meansOfTransport: Number,

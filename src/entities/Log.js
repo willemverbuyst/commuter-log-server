@@ -1,6 +1,7 @@
 module.exports.Log = class Log {
   constructor({
     id,
+    userId = null,
     date = null,
     statusOfDay = null,
     durationTrip = null,
@@ -10,6 +11,7 @@ module.exports.Log = class Log {
     meta = {},
   }) {
     this.id = id;
+    this.userId = userId;
     this.date = date;
     this.statusOfDay = statusOfDay;
     this.durationTrip = durationTrip;

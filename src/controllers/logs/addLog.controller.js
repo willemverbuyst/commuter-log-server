@@ -11,6 +11,7 @@ module.exports = (dependencies) => {
     try {
       const { body = {} } = req;
       const {
+        userId,
         date,
         statusOfDay,
         durationTrip,
@@ -22,6 +23,7 @@ module.exports = (dependencies) => {
 
       const addLog = addLogUseCase(dependencies);
       const response = await addLog.execute({
+        userId,
         date,
         statusOfDay,
         durationTrip,
