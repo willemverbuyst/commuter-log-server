@@ -17,6 +17,7 @@ describe('Log use cases', () => {
     })),
     getById: jest.fn(async (id) => ({
       id,
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
@@ -44,6 +45,7 @@ describe('Log use cases', () => {
       // check the data
       expect(logById).toBeDefined();
       expect(logById.id).toBe(fakeId);
+      expect(logById.userId).toBeDefined();
       expect(logById.date).toBeDefined();
       expect(logById.statusOfDay).toBeDefined();
       expect(logById.durationTrip).toBeDefined();

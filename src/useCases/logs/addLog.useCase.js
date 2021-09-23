@@ -7,6 +7,7 @@ module.exports = (dependencies) => {
   }
 
   const execute = ({
+    userId,
     date,
     statusOfDay,
     durationTrip,
@@ -16,6 +17,7 @@ module.exports = (dependencies) => {
     meta,
   }) => {
     const log = new Log({
+      userId,
       date,
       statusOfDay,
       durationTrip,

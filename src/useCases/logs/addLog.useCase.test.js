@@ -11,6 +11,7 @@ const chance = new Chance();
 
 describe('Log use cases', () => {
   const testLogData = {
+    userId: uuidv4(),
     date: chance.date(),
     statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
     durationTrip: chance.natural(),
@@ -27,6 +28,7 @@ describe('Log use cases', () => {
     })),
     getById: jest.fn(async (id) => ({
       id,
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
@@ -50,6 +52,7 @@ describe('Log use cases', () => {
       // check the received data
       expect(addedLog).toBeDefined();
       expect(addedLog.id).toBeDefined();
+      expect(addedLog.userId).toBe(testLogData.userId);
       expect(addedLog.date).toBe(testLogData.date);
       expect(addedLog.statusOfDay).toBe(testLogData.statusOfDay);
       expect(addedLog.durationTrip).toBe(testLogData.durationTrip);
@@ -60,6 +63,7 @@ describe('Log use cases', () => {
       // check that the depencies are called as expected
       const call = mockLogRepo.add.mock.calls[0][0];
       expect(call.id).toBeUndefined();
+      expect(call.userId).toBe(testLogData.userId);
       expect(call.date).toBe(testLogData.date);
       expect(call.statusOfDay).toBe(testLogData.statusOfDay);
       expect(call.durationTrip).toBe(testLogData.durationTrip);

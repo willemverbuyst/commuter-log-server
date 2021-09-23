@@ -12,6 +12,7 @@ const chance = new Chance();
 
 describe('Log use cases', () => {
   const testLogData = {
+    userId: uuidv4(),
     date: chance.date(),
     statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
     durationTrip: chance.natural(),
@@ -28,6 +29,7 @@ describe('Log use cases', () => {
     })),
     getById: jest.fn(async (id) => ({
       id,
+      userId: uuidv4(),
       date: chance.date(),
       statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
       durationTrip: chance.natural(),
