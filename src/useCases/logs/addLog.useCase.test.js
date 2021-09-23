@@ -4,22 +4,19 @@ const addLogUseCase = require('./addLog.useCase');
 const {
   constants: {
     logConstants: { meansOfTransport, statusOfDay },
+    userConstants: { genders },
   },
 } = require('../../entities');
+const { usersRepository } = require('../../frameworks/repositories/inMemory');
+const {
+  user: { addUserUseCase, getUserByIdUseCase },
+} = require('../');
+const { ValidationError } = require('../../frameworks/common');
 
 const chance = new Chance();
 
 describe('Log use cases', () => {
-  const testLogData = {
-    userId: uuidv4(),
-    date: chance.date(),
-    statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
-    durationTrip: chance.natural(),
-    meansOfTransport: meansOfTransport.CAR,
-    startingPoint: chance.city(),
-    destination: chance.city(),
-    meta: { comment: chance.sentence() },
-  };
+  let testLogData;
 
   const mockLogRepo = {
     add: jest.fn(async (log) => ({
@@ -41,14 +38,44 @@ describe('Log use cases', () => {
     delete: jest.fn(async (log) => log),
   };
 
-  const depencies = {
+  const dependencies = {
     logsRepository: mockLogRepo,
+    usersRepository,
+    useCases: {
+      user: {
+        getUserByIdUseCase: jest.fn((dependencies) =>
+          getUserByIdUseCase(dependencies),
+        ),
+      },
+    },
   };
+
+  beforeAll(async () => {
+    const addUser = addUserUseCase(dependencies).execute;
+
+    mockUser = await addUser({
+      name: chance.name(),
+      lastName: chance.last(),
+      gender: genders.FEMALE,
+      meta: { hair: { color: chance.color() } },
+    });
+
+    testLogData = {
+      userId: mockUser.id,
+      date: chance.date(),
+      statusOfDay: statusOfDay.WORKING_AT_THE_OFFICE,
+      durationTrip: chance.natural(),
+      meansOfTransport: meansOfTransport.CAR,
+      startingPoint: chance.city(),
+      destination: chance.city(),
+      meta: { comment: chance.sentence() },
+    };
+  });
 
   describe('Add log use case', () => {
     test('Log shoud be added', async () => {
       // add a log using the use case
-      const addedLog = await addLogUseCase(depencies).execute(testLogData);
+      const addedLog = await addLogUseCase(dependencies).execute(testLogData);
       // check the received data
       expect(addedLog).toBeDefined();
       expect(addedLog.id).toBeDefined();
@@ -60,7 +87,7 @@ describe('Log use cases', () => {
       expect(addedLog.startingPoint).toBe(testLogData.startingPoint);
       expect(addedLog.destination).toBe(testLogData.destination);
       expect(addedLog.meta).toEqual(testLogData.meta);
-      // check that the depencies are called as expected
+      // check that the dependencies are called as expected
       const call = mockLogRepo.add.mock.calls[0][0];
       expect(call.id).toBeUndefined();
       expect(call.userId).toBe(testLogData.userId);
@@ -71,6 +98,26 @@ describe('Log use cases', () => {
       expect(call.startingPoint).toBe(testLogData.startingPoint);
       expect(call.destination).toBe(testLogData.destination);
       expect(call.meta).toEqual(testLogData.meta);
+    });
+
+    test('Should return validation error when user id unknown', async () => {
+      const fakeId = uuidv4();
+      try {
+        await addLogUseCase(dependencies).execute({
+          ...testLogData,
+          userId: fakeId,
+        });
+        expect(true).toBe(false);
+      } catch (err) {
+        expect(err.status).toBe(403);
+        expect(err.validationErrors).toEqual([
+          new ValidationError({
+            field: 'userId',
+            message: 'Something failed!',
+            msg: `No user with id ${fakeId}`,
+          }),
+        ]);
+      }
     });
   });
 });
