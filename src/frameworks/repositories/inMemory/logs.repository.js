@@ -1,5 +1,6 @@
 const { inMemory: inMemoryDb } = require('../../database/index');
 const { v4: uuidv4 } = require('uuid');
+const { Log } = require('../../../entities');
 
 module.exports = {
   add: async (log) => {

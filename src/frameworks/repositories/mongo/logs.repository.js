@@ -15,6 +15,9 @@ const repository = () => {
       const mongoObject = new Log(log);
       return mongoObject.save();
     },
+    addMany: async (logs) => {
+      Log.collection.insertMany(logs);
+    },
     update: async (log) => {
       const { id } = log;
       delete log.id;
