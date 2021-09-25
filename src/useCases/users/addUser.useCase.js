@@ -6,8 +6,8 @@ module.exports = (dependencies) => {
     throw new Error('The users repository should exist in dependencies');
   }
 
-  const execute = ({ name, lastName, gender, meta }) => {
-    const user = new User({ name, lastName, gender, meta });
+  const execute = ({ userName, email, meta }) => {
+    const user = new User({ userName, email, meta });
 
     return usersRepository.add(user);
   };

@@ -1,20 +1,14 @@
 const Chance = require('chance');
 const { v4: uuidv4 } = require('uuid');
 const addUserUseCase = require('./addUser.useCase');
-const {
-  constants: {
-    userConstants: { genders },
-  },
-} = require('../../entities');
 
 const chance = new Chance();
 
 describe('User use cases', () => {
   const testUserData = {
-    name: chance.name(),
-    lastName: chance.last(),
-    gender: genders.FEMALE,
-    meta: { hair: { color: chance.color() } },
+    userName: chance.name(),
+    email: chance.email(),
+    meta: { suffix: chance.suffix({ full: true }) },
   };
 
   const mockUserRepo = {
@@ -24,9 +18,8 @@ describe('User use cases', () => {
     })),
     getById: jest.fn(async (id) => ({
       id,
-      name: chance.name(),
-      lastName: chance.last(),
-      gender: genders.MALE,
+      userName: chance.userName(),
+      email: chance.email(),
       meta: {},
     })),
     update: jest.fn(async (user) => user),
@@ -44,16 +37,14 @@ describe('User use cases', () => {
       // check the received data
       expect(addedUser).toBeDefined();
       expect(addedUser.id).toBeDefined();
-      expect(addedUser.name).toBe(testUserData.name);
-      expect(addedUser.lastName).toBe(testUserData.lastName);
-      expect(addedUser.gender).toBe(testUserData.gender);
+      expect(addedUser.userName).toBe(testUserData.userName);
+      expect(addedUser.email).toBe(testUserData.email);
       expect(addedUser.meta).toEqual(testUserData.meta);
       // check that the depencies are called as expected
       const call = mockUserRepo.add.mock.calls[0][0];
       expect(call.id).toBeUndefined();
-      expect(call.name).toBe(testUserData.name);
-      expect(call.lastName).toBe(testUserData.lastName);
-      expect(call.gender).toBe(testUserData.gender);
+      expect(call.userName).toBe(testUserData.userName);
+      expect(call.email).toBe(testUserData.email);
       expect(call.meta).toEqual(testUserData.meta);
     });
   });

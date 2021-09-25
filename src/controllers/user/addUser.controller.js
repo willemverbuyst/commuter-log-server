@@ -10,13 +10,12 @@ module.exports = (dependencies) => {
   return async (req, res, next) => {
     try {
       const { body = {} } = req;
-      const { name, lastName, gender, meta } = body;
+      const { userName, email, meta } = body;
 
       const addUser = addUserUseCase(dependencies);
       const response = await addUser.execute({
-        name,
-        lastName,
-        gender,
+        userName,
+        email,
         meta,
       });
 

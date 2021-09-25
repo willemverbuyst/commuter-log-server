@@ -4,7 +4,6 @@ const addLogUseCase = require('./addLog.useCase');
 const {
   constants: {
     logConstants: { meansOfTransport, statusOfDay },
-    userConstants: { genders },
   },
 } = require('../../entities');
 const { usersRepository } = require('../../frameworks/repositories/inMemory');
@@ -54,10 +53,9 @@ describe('Log use cases', () => {
     const addUser = addUserUseCase(dependencies).execute;
 
     mockUser = await addUser({
-      name: chance.name(),
-      lastName: chance.last(),
-      gender: genders.FEMALE,
-      meta: { hair: { color: chance.color() } },
+      userName: chance.name(),
+      email: chance.email(),
+      meta: { suffix: chance.suffix({ full: true }) },
     });
 
     testLogData = {

@@ -1,31 +1,24 @@
 const Chance = require('chance');
 const { cloneDeep } = require('lodash');
 const { usersRepository } = require('.');
-const {
-  User,
-  constants: {
-    userConstants: { genders },
-  },
-} = require('../../../entities');
+const { User } = require('../../../entities');
 
 const chance = new Chance();
 
 describe('Users repository', () => {
   test('New user should be added and returned', async () => {
     const testUser = new User({
-      name: chance.name(),
-      lastName: chance.last(),
-      gender: genders.FEMALE,
-      meta: { hair: { color: 'Black' } },
+      userName: chance.name(),
+      email: chance.email(),
+      meta: { suffix: chance.suffix({ full: true }) },
     });
 
     const addedUser = await usersRepository.add(testUser);
 
     expect(addedUser).toBeDefined();
     expect(addedUser.id).toBeDefined();
-    expect(addedUser.name).toBe(testUser.name);
-    expect(addedUser.lastName).toBe(testUser.lastName);
-    expect(addedUser.gender).toBe(testUser.gender);
+    expect(addedUser.userName).toBe(testUser.userName);
+    expect(addedUser.email).toBe(testUser.email);
     expect(addedUser.meta).toEqual(testUser.meta);
 
     const returnedUser = await usersRepository.getById(addedUser.id);
@@ -34,16 +27,14 @@ describe('Users repository', () => {
   test('User should be deleted', async () => {
     // init two users
     const willBeDeletedUser = new User({
-      name: chance.name(),
-      lastName: chance.last(),
-      gender: genders.FEMALE,
-      meta: { hair: { color: 'Black' } },
+      userName: chance.name(),
+      email: chance.email(),
+      meta: { suffix: chance.suffix({ full: true }) },
     });
     const shouldStayUser = new User({
-      name: chance.name(),
-      lastName: chance.last(),
-      gender: genders.FEMALE,
-      meta: { hair: { color: 'Blond' } },
+      userName: chance.name(),
+      email: chance.email(),
+      meta: { suffix: chance.suffix({ full: true }) },
     });
     // add two users
     const [willBeDeletedAddedUser, shouldStayAddedUser] = await Promise.all([
@@ -67,10 +58,9 @@ describe('Users repository', () => {
   test('User should be updated', async () => {
     // add a user
     const testUser = new User({
-      name: chance.name(),
-      lastName: chance.last(),
-      gender: genders.FEMALE,
-      meta: { hair: { color: 'Black' } },
+      userName: chance.name(),
+      email: chance.email(),
+      meta: { suffix: chance.suffix({ full: true }) },
     });
     const addedUser = await usersRepository.add(testUser);
     expect(addedUser).toBeDefined();
@@ -78,8 +68,8 @@ describe('Users repository', () => {
     // update a user
     const clonedUser = cloneDeep({
       ...addedUser,
-      name: chance.name(),
-      gender: genders.MALE,
+      userName: chance.name(),
+      email: chance.email(),
     });
     const updatedUser = await usersRepository.update(clonedUser);
     expect(updatedUser).toEqual(clonedUser);

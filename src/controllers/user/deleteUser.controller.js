@@ -10,15 +10,14 @@ module.exports = (dependencies) => {
   return async (req, res, next) => {
     try {
       const { body = {} } = req;
-      const { id, name, lastName, gender, meta } = body;
+      const { id, userName, email, meta } = body;
 
       const deleteUser = deleteUserUseCase(dependencies);
       const response = await deleteUser.execute({
         user: {
           id,
-          name,
-          lastName,
-          gender,
+          userName,
+          email,
           meta,
         },
       });
