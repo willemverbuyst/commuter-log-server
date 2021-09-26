@@ -11,7 +11,7 @@ replace code temporarily with:
 ```
 const dummyLogsWithId = dummyLogs.map((log) => ({
   ...log,
-  id: '<ID OF DUMMY USER>',
+  userId: '<ID OF DUMMY USER>',
 }));
 Log.collection.insertMany(dummyLogsWithId);
 ```

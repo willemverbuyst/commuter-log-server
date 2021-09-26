@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const entityName = 'User';
 
@@ -43,12 +44,24 @@ const repository = () => {
       ).lean();
     },
     getById: async (id) => {
-      return User.findOne({
-        _id: id,
-        deletedAt: {
-          $exists: false,
+      return await User.aggregate([
+        {
+          $match: {
+            _id: ObjectId(id),
+            deletedAt: {
+              $exists: false,
+            },
+          },
         },
-      });
+        {
+          $lookup: {
+            from: 'logs',
+            localField: '_id',
+            foreignField: 'userId',
+            as: 'logs',
+          },
+        },
+      ]);
     },
   };
 };
