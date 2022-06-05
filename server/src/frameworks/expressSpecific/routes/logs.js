@@ -5,6 +5,7 @@ module.exports = (dependencies) => {
   const router = express.Router();
 
   const {
+    addDummyLogsController,
     addLogController,
     deleteLogController,
     getLogByIdController,
@@ -19,6 +20,7 @@ module.exports = (dependencies) => {
     .delete(deleteLogController)
     .put(updateLogController);
   router.route('/:id').get(getLogByIdController);
+  router.route('/dummy').post(addDummyLogsController);
 
   return router;
 };
