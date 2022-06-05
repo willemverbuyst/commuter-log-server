@@ -4,6 +4,7 @@ node_modules
 
 dummy_logs.txt
 dummyLogs.js
+dummyUser.js
 
 /public/build/
 /data/

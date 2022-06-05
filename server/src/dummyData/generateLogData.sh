@@ -36,6 +36,7 @@ do
   if [[ $rec_column3 == "day off" ]]
   then
     arr_csv+=("{
+  userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 0,
   durationTrip: null,
@@ -47,6 +48,7 @@ do
   elif [[ $rec_column3 == "home" ]]
   then
     arr_csv+=("{
+  userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 2,
   durationTrip: null,
@@ -58,6 +60,7 @@ do
   elif [[ $rec_column3 == "public" ]]
   then
     arr_csv+=("{
+  userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 1,
   durationTrip: $(parseDuration $rec_column6), 
@@ -68,6 +71,7 @@ do
   }")
   else 
     arr_csv+=("{
+  userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 0,
   durationTrip: $(parseDuration $rec_column6), 
