@@ -14,6 +14,9 @@ const repository = () => {
       const mongoObject = new Log(log);
       return mongoObject.save();
     },
+    addDummyLogs: async (logs) => {
+      return Log.insertMany(logs);
+    },
     update: async (log) => {
       const { id } = log;
       delete log.id;
@@ -44,6 +47,13 @@ const repository = () => {
     getById: async (id) => {
       return Log.findOne({
         _id: id,
+        deletedAt: {
+          $exists: false,
+        },
+      });
+    },
+    getAll: async () => {
+      return Log.find({
         deletedAt: {
           $exists: false,
         },
