@@ -31,7 +31,7 @@ function parseDate () {
 
 # Loop through csv and build js-objects
 arr_csv=() 
-while IFS=";" read -r rec_column1 rec_column2 rec_column3 rec_column4 rec_column5 rec_column6
+while IFS="|" read -r rec_column1 rec_column2 rec_column3 rec_column4 rec_column5 rec_column6
 do
   if [[ $rec_column3 == "day off" ]]
   then
