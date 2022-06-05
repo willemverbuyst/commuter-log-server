@@ -1,7 +1,4 @@
 <script lang="ts">
-  import firebase from 'firebase/app';
-  import 'firebase/auth';
-  import 'firebase/database';
   import FormComponent from './Business/FormComponent.svelte';
   import LogInForm from './Business/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
@@ -20,11 +17,9 @@
     isLoadingStore,
   } from './Store/appState';
   import { isSignedInStore, userStore } from './Store/userState';
-  import { signOut } from './Store/userActions';
   import { setColors } from './UI/colors.js';
   import logData from './Store/logState';
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
-  import { firebaseConfig } from './Firebase/config';
   import { fetchLogData } from './Store/logActions';
   // import { postLogData } from './Store/logActions';
   import logStore from './Store/logState';
@@ -34,18 +29,7 @@
   let weekIndexInLogData = 0;
   let edittedId: string;
 
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  // Get log data from firebase
   fetchLogData();
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user && user.email) {
-      userStore.setUser(user.email);
-      isSignedInStore.setSignedInToTrue();
-    }
-  });
 
   // For dev only
   // postLogData();
@@ -62,7 +46,6 @@
 
   function signingOut() {
     console.log('user logs out');
-    signOut();
   }
 
   function toggleMode() {
@@ -117,7 +100,7 @@
       on:save={saveLogDate}
     />
   {/if}
-  {#if $isLoadingStore}
+  <!-- {#if $isLoadingStore}
     <LoadingSpinner />
   {:else if $logStore.length}
     <div class="slider-container">
@@ -152,7 +135,7 @@
     <div class="dashboard__section">
       <Table logData={$logData} on:edit={startEdit} />
     </div>
-  {/if}
+  {/if} -->
 </main>
 
 <style>

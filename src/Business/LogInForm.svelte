@@ -3,10 +3,6 @@
   import FormButton from '../UI/Buttons/FormButton.svelte';
   import Modal from '../UI/Modal/Modal.svelte';
   import LoginInput from '../UI/Inputs/LoginInput.svelte';
-  import {
-    signInWithEmailPassword,
-    signUpWithEmailPassword,
-  } from '../Store/userActions';
 
   let email = '';
   let password = '';
@@ -18,14 +14,14 @@
   }
 
   function signIn() {
-    signInWithEmailPassword(email, password);
+    console.log(email, password);
     dispatch('logIn');
     email = '';
     password = '';
   }
 
   function signUp() {
-    signUpWithEmailPassword(email, password);
+    console.log(email, password);
     dispatch('logIn');
     email = '';
     password = '';
