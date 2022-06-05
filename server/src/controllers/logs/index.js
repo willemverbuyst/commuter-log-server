@@ -1,3 +1,4 @@
+const addDummyLogsController = require('./addDummyLogs.controller');
 const addLogController = require('./addLog.controller');
 const deleteLogController = require('./deleteLog.controller');
 const getLogByIdController = require('./getLogById.controller');
@@ -6,6 +7,7 @@ const updateLogController = require('./updateLog.controller');
 
 module.exports = (dependencies) => {
   return {
+    addDummyLogsController: addDummyLogsController(dependencies),
     addLogController: addLogController(dependencies),
     deleteLogController: deleteLogController(dependencies),
     getLogByIdController: getLogByIdController(dependencies),
