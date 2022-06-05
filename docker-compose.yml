@@ -4,8 +4,21 @@ services:
     build:
       context: './server'
       dockerfile: 'Dockerfile'
+    env_file:
+      - ./server/.env
+    depends_on:
+      - mongo
     ports:
       - 4000:4000
     volumes:
-      - ./:/app
-      - /app/node_modules
+      - ./:/server
+      - /server/node_modules
+  mongo:
+    image: mongo
+    env_file:
+      - ./server/.env
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:

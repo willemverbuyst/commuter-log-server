@@ -1,10 +1,16 @@
 const mongoose = require('mongoose');
 const schemas = require('./schemas');
 
+const MONGO_IP = 'mongo';
+const MONGO_PORT = 27017;
+const MONGO_USER = process.env.MONGO_USER;
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
+
+const DB_CONNECTION_STRING = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+
 module.exports = {
   connect: () => {
-    const db_conn_str = process.env.DB_CONNECTION_STRING;
-    mongoose.connect(db_conn_str);
+    mongoose.connect(DB_CONNECTION_STRING);
 
     const db = mongoose.connection;
     db.on(
