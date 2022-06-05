@@ -1,7 +1,7 @@
 node_modules
 .env
 
-.DS_Store
-
 dummy_logs.txt
 dummyLogs.js
+
+.DS_Store
