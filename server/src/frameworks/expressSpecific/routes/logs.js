@@ -8,11 +8,13 @@ module.exports = (dependencies) => {
     addLogController,
     deleteLogController,
     getLogByIdController,
+    getLogsController,
     updateLogController,
   } = logControllers(dependencies);
 
   router
     .route('/')
+    .get(getLogsController)
     .post(addLogController)
     .delete(deleteLogController)
     .put(updateLogController);
