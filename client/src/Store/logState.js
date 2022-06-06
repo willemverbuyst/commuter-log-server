@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { sortByDateAscending } from '../helpers';
+import { sortByDateAscending } from '../helpers/dateLogic';
 
 let logData = writable([]);
 

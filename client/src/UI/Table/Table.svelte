@@ -1,19 +1,19 @@
-<script lang="ts">
+<script>
   import { createEventDispatcher } from 'svelte';
-  import { formatDuration, getDay, getYear } from '../../helpers';
+  import { formatDuration } from '../../helpers/formatting';
+  import { getDay, getYear } from '../../helpers/dateLogic';
   import TableButton from '../Buttons/TableButton.svelte';
   import TableHeader from './TableHeader.svelte';
-  import type { LogDate } from '../../models/Logdata';
 
-  export let logData: LogDate[];
+  export let logData;
 
   $: doUpdate(logData);
 
   const dispatch = createEventDispatcher();
 
-  let filteredLogData: LogDate[] = logData;
+  let filteredLogData = logData;
 
-  function doUpdate(data: LogDate[]): void {
+  function doUpdate(data) {
     filteredLogData = data;
   }
 </script>

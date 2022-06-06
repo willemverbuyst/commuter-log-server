@@ -3,10 +3,10 @@
   import TableButton from '../Buttons/TableButton.svelte';
   import TableDropdown from '../Inputs/TableDropdown.svelte';
   import {
-    filterData,
     getUniqueWeekNumbers,
     getUniqueStatuses,
-  } from '../../helpers/dateLogic';
+  } from '../../helpers/logDataLogic';
+  import { filterData } from '../../helpers/tableLogic/filter';
   import { getUniqueYears } from '../../helpers/logDataLogic';
 
   export let logData;

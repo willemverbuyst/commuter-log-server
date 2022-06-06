@@ -1,16 +1,11 @@
-import type { LogDate } from '../../models/Logdata';
 import {
   getYear,
   sortByDateAscending,
   sortByDateDescending,
 } from '../dateLogic';
 
-export const filterData = (
-  logData: LogDate[],
-  value: string,
-  dropdown: string
-): LogDate[] | [] => {
-  let filteredData: LogDate[];
+export const filterData = (logData, value, dropdown) => {
+  let filteredData;
   const daysOff = logData.flatMap((date) =>
     date.statusOfDay === 'day off' ? [date] : []
   );

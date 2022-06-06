@@ -30,6 +30,7 @@
   let edittedId;
 
   fetchLogData();
+  // setColors();
 
   // For dev only
   // postLogData();
@@ -148,20 +149,20 @@
     margin: 1rem auto;
   }
 
-  .dashboard__section {
+  /* .dashboard__section {
     padding: 0;
     margin: 0 auto;
     width: 1218px;
     display: flex;
     justify-content: space-between;
-  }
+  } */
 
   .nav-container {
     margin-bottom: 1rem;
   }
 
-  .slider-container {
+  /* .slider-container {
     width: 1150px;
     margin: auto;
-  }
+  } */
 </style>
