@@ -1,9 +1,8 @@
-<script lang="ts">
+<script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDuration } from '../../Helpers/formatting';
-  import { getAveragePerWeekData } from '../../Helpers/chartLogic/averagesChart';
-  import type { LogDate } from '../../models/Logdata';
+  import { formatDuration } from '../../helpers/formatting';
+  import { getAveragePerWeekData } from '../../helpers/chartLogic/averagesChart';
   import Chart from 'chart.js';
   import {
     colorGrid,
@@ -13,21 +12,18 @@
     colorTravelTimeNormal,
   } from '../colors';
 
-  export let showGrid: boolean;
-  export let logData: LogDate[];
+  export let showGrid;
+  export let logData;
 
-  let averagesPerWeekChart: Chart;
-  let ctx: CanvasRenderingContext2D;
+  let averagesPerWeekChart;
+  let ctx;
 
   function createChart() {
-    const { averages, labels, maxForDisplay, title } = getAveragePerWeekData(
-      logData
-    );
+    const { averages, labels, maxForDisplay, title } =
+      getAveragePerWeekData(logData);
 
-    const canvas = <HTMLCanvasElement>(
-      document.getElementById('averagesPerWeekChart')
-    );
-    ctx = canvas.getContext('2d')!;
+    const canvas = document.getElementById('averagesPerWeekChart');
+    ctx = canvas.getContext('2d');
 
     const gradientStroke = ctx.createLinearGradient(0, 100, 0, 250);
     gradientStroke.addColorStop(0, colorTravelTimeExtra);
@@ -111,7 +107,7 @@
             align: 'top',
             display: !showGrid,
             color: colorTitle,
-            formatter: (value: number) => formatDuration(value),
+            formatter: (value) => formatDuration(value),
           },
         },
       },

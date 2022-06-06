@@ -1,4 +1,3 @@
-import type { LogDate } from '../../models/Logdata';
 import { groupByWeekNumber, reduceDates } from '../utils';
 import { getWeekNumber } from '../dateLogic';
 import {
@@ -8,17 +7,7 @@ import {
 
 // STACKED LINE CHART, total travel times per week
 // Totals car, totals public transport
-export const getTotalsPerWeekData = (
-  logData: LogDate[]
-): {
-  totalsPerWeekCar: number[];
-  totalsPerWeekPublic: number[];
-  backgroundColorCar: string[];
-  backgroundColorPublic: string[];
-  labels: string[];
-  maxForDisplay: number;
-  title: string;
-} => {
+export const getTotalsPerWeekData = (logData) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const weeks = groupByWeekNumber(reducedDates);
@@ -49,10 +38,7 @@ export const getTotalsPerWeekData = (
   };
 };
 
-export const getTotalsPerWeek = (
-  week: LogDate[],
-  transport: string
-): number => {
+export const getTotalsPerWeek = (week, transport) => {
   // Use .flatMap for type safe filtering
   const weekTransport = week.flatMap((day) =>
     day.statusOfDay === 'working at the office' &&

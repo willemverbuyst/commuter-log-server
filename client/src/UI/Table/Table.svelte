@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { formatDuration } from '../../Helpers/formatting';
-  import { getDay, getYear } from '../../Helpers/dateLogic';
+  import { formatDuration, getDay, getYear } from '../../helpers';
   import TableButton from '../Buttons/TableButton.svelte';
   import TableHeader from './TableHeader.svelte';
   import type { LogDate } from '../../models/Logdata';

@@ -1,9 +1,7 @@
-import type { LogDate } from '../models/Logdata';
-
-export const getDay = (date: Date): string => date.toString().slice(0, 10);
+export const getDay = (date) => date.toString().slice(0, 10);
 
 // https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
-export const getWeekNumber = (date: Date): [number, number] => {
+export const getWeekNumber = (date) => {
   const day = new Date(date);
   // Copy date so don't modify original
   const d = new Date(
@@ -22,17 +20,17 @@ export const getWeekNumber = (date: Date): [number, number] => {
   return [d.getFullYear(), weekNo];
 };
 
-export const getYear = (date: Date): string => date.toString().slice(11, 15);
+export const getYear = (date) => date.toString().slice(11, 15);
 
-export const addOneHour = (date: Date): Date =>
+export const addOneHour = (date) =>
   new Date(date.setHours(date.getHours() + 1));
 
-export const sortByDateAscending = (dates: LogDate[]): LogDate[] =>
+export const sortByDateAscending = (dates) =>
   [...dates].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-export const sortByDateDescending = (dates: LogDate[]): LogDate[] =>
+export const sortByDateDescending = (dates) =>
   [...dates].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );

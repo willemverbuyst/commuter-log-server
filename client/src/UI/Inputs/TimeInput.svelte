@@ -1,7 +1,7 @@
-<script lang="ts">
-  export let value: string;
-  export let valid: boolean = true;
-  export let validityMessage: string;
+<script>
+  export let value;
+  export let valid = true;
+  export let validityMessage;
 
   let touched = false;
 </script>

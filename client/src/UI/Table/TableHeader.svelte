@@ -1,18 +1,17 @@
-<script lang="ts">
+<script>
   import { routes } from '../../constants';
   import TableButton from '../Buttons/TableButton.svelte';
   import TableDropdown from '../Inputs/TableDropdown.svelte';
   import {
+    filterData,
     getUniqueWeekNumbers,
     getUniqueStatuses,
-    getUniqueYears,
-  } from '../../Helpers/logDataLogic';
-  import { filterData } from '../../Helpers/tableLogic/filter';
-  import type { LogDate } from '../../models/Logdata';
+  } from '../../helpers/dateLogic';
+  import { getUniqueYears } from '../../helpers/logDataLogic';
 
-  export let logData: LogDate[];
-  export let filteredLogData: LogDate[];
-  export let doUpdate: (logData: LogDate[]) => void;
+  export let logData;
+  export let filteredLogData;
+  export let doUpdate;
 
   let filters = {
     routesFrom: ['no sorting', ...routes],
@@ -36,7 +35,7 @@
     year: 'all',
   };
 
-  function resetFilters(): void {
+  function resetFilters() {
     filters.routeFrom = 'no sorting';
     filters.routeTo = 'no sorting';
     filters.sortDate = 'no sorting';
@@ -48,17 +47,7 @@
     doUpdate(logData);
   }
 
-  function updateData(
-    event: any,
-    dropdown:
-      | 'routeFrom'
-      | 'routeTo'
-      | 'sortDate'
-      | 'sortTravelTime'
-      | 'status'
-      | 'week'
-      | 'year'
-  ): void {
+  function updateData(event, dropdown) {
     filters[dropdown] = event.target.value;
 
     if (event.target.value === 'all' || event.target.value === 'no sorting') {

@@ -1,14 +1,13 @@
-<script lang="ts">
+<script>
   import {
     getNumberOfWeeks,
     getYearAndWeekNumber,
-  } from '../../Helpers/logDataLogic';
-  import type { LogDate } from '../../models/Logdata';
+  } from '../../helpers/logDataLogic';
 
-  export let weekIndexInLogData: number;
-  export let logData: LogDate[];
+  export let weekIndexInLogData;
+  export let logData;
 
-  let yearAndWeekNumber: [number, number];
+  let yearAndWeekNumber;
 
   const max = getNumberOfWeeks(logData) - 1;
   $: yearAndWeekNumber = getYearAndWeekNumber(logData, weekIndexInLogData);

@@ -1,13 +1,13 @@
-<script lang="ts">
-  export let value: string;
-  export let label: string;
-  export let valid: boolean = true;
-  export let validityMessage: string;
-  export let type: string;
+<script>
+  export let value;
+  export let label;
+  export let valid = true;
+  export let validityMessage;
+  export let type;
 
   let touched = false;
 
-  function typeAction(node: HTMLInputElement) {
+  function typeAction(node) {
     node.type = type;
   }
 </script>

@@ -1,30 +1,24 @@
-<script lang="ts">
+<script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDuration } from '../../Helpers/formatting';
-  import { getWeekData } from '../../Helpers/chartLogic/weekChartLogic';
-  import type { LogDate } from '../../models/Logdata';
+  import { formatDuration } from '../../helpers/formatting';
+  import { getWeekData } from '../../helpers/chartLogic/weekChartLogic';
   import Chart from 'chart.js';
   import { colorGrid, colorTitle } from '../colors';
 
-  export let showGrid: boolean;
-  export let logData: LogDate[];
-  export let weekIndexInLogData: number;
+  export let showGrid;
+  export let logData;
+  export let weekIndexInLogData;
 
-  let weekChart: Chart;
-  let ctx: CanvasRenderingContext2D;
+  let weekChart;
+  let ctx;
 
   function createChart() {
-    const {
-      travelTimes,
-      backgroundColor,
-      labels,
-      maxForDisplay,
-      title,
-    } = getWeekData(logData, weekIndexInLogData);
+    const { travelTimes, backgroundColor, labels, maxForDisplay, title } =
+      getWeekData(logData, weekIndexInLogData);
 
-    const canvas = <HTMLCanvasElement>document.getElementById('weekChart');
-    ctx = canvas.getContext('2d')!;
+    const canvas = document.getElementById('weekChart');
+    ctx = canvas.getContext('2d');
 
     if (weekChart) weekChart.destroy();
 
@@ -91,14 +85,14 @@
             display: true,
             color: colorTitle,
             formatter: !showGrid
-              ? (value: number) => {
+              ? (value) => {
                   return value === 0
                     ? ''
                     : value === 0.00001
                     ? 'WFH'
                     : formatDuration(value);
                 }
-              : (value: number) => {
+              : (value) => {
                   return value === 0 ? '' : value === 0.00001 ? 'WFH' : '';
                 },
           },

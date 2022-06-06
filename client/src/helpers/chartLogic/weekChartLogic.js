@@ -1,18 +1,8 @@
-import type { LogDate } from '../../models/Logdata';
 import { groupByWeekNumber, reduceDates } from '../utils';
 import { getBackgroundColor, getMinutes, getWeekdays } from './chartLogic';
 import { getWeekNumber } from '../dateLogic';
 
-export const getWeekData = (
-  logData: LogDate[],
-  index: number
-): {
-  travelTimes: number[];
-  backgroundColor: string[];
-  labels: string[];
-  maxForDisplay: number;
-  title: string;
-} => {
+export const getWeekData = (logData, index) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const week = groupByWeekNumber(reducedDates)[index];

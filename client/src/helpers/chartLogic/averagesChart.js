@@ -1,16 +1,8 @@
-import type { LogDate } from '../../models/Logdata';
 import { getWeekNumber } from '../dateLogic';
 import { groupByWeekNumber, reduceDates } from '../utils';
 
 // STEP LINE CHART, average travel time per week
-export const getAveragePerWeekData = (
-  logData: LogDate[]
-): {
-  averages: number[];
-  labels: string[];
-  maxForDisplay: number;
-  title: string;
-} => {
+export const getAveragePerWeekData = (logData) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const weeks = groupByWeekNumber(reducedDates);
@@ -27,7 +19,7 @@ export const getAveragePerWeekData = (
   };
 };
 
-export const getAveragePerWeek = (week: LogDate[]): number => {
+export const getAveragePerWeek = (week) => {
   // Use .flatMap for type safe filtering
   const weekWithoutDayOff = week.flatMap((day) =>
     day.statusOfDay !== 'day off' ? [day] : []

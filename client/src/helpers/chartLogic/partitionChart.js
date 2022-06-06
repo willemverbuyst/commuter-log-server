@@ -1,14 +1,7 @@
-import type { LogDate } from '../../models/Logdata';
 import { reduceDates } from '../utils';
 
 // POLAR CHART, days car, public transport, working from home
-export const getPartitionData = (
-  logData: LogDate[]
-): {
-  partition: number[];
-  labels: string[];
-  title: string;
-} => {
+export const getPartitionData = (logData) => {
   const partition = getPartition(logData);
   const labels = ['home', 'car', 'public transport'];
   const title = `DAYS WORKING FORM HOME / TRAVELLED BY CAR / TRAVELLED BY PUBLIC TRANSPORT`;
@@ -20,7 +13,7 @@ export const getPartitionData = (
   };
 };
 
-export const getPartition = (logData: LogDate[]): number[] => {
+export const getPartition = (logData) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
 

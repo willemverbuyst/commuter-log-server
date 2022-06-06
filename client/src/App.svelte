@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import FormComponent from './Business/FormComponent.svelte';
   import LogInForm from './Business/LogInForm.svelte';
   import Button from './UI/Buttons/Button.svelte';
@@ -27,7 +27,7 @@
   let showForm = false;
   let showLogIn = false;
   let weekIndexInLogData = 0;
-  let edittedId: string;
+  let edittedId;
 
   fetchLogData();
 
@@ -61,12 +61,12 @@
     showForm = false;
   }
 
-  function startEdit(event: any) {
+  function startEdit(event) {
     showForm = true;
     edittedId = event.detail;
   }
 
-  function updateSelectedWeek(event: any) {
+  function updateSelectedWeek(event) {
     weekIndexInLogData = event.target.value;
   }
 </script>

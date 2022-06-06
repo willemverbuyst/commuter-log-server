@@ -1,4 +1,3 @@
-import type { LogDate } from '../../models/Logdata';
 import {
   colorTravelByCar,
   colorTravelByPublicTransport,
@@ -14,7 +13,7 @@ const weekdays = [
   'Saturday',
 ];
 
-export const getBackgroundColor = (dates: LogDate[]): string[] => {
+export const getBackgroundColor = (dates) => {
   return dates.map((date) =>
     date.statusOfDay === 'day off' || date.statusOfDay === 'working from home'
       ? ''
@@ -24,7 +23,7 @@ export const getBackgroundColor = (dates: LogDate[]): string[] => {
   );
 };
 
-export const getMinutes = (dates: LogDate[]): number[] => {
+export const getMinutes = (dates) => {
   return dates.map((date) => {
     return date.statusOfDay === 'day off'
       ? 0
@@ -34,6 +33,6 @@ export const getMinutes = (dates: LogDate[]): number[] => {
   });
 };
 
-export const getWeekdays = (dates: LogDate[]): string[] => {
+export const getWeekdays = (dates) => {
   return dates.map((date) => weekdays[new Date(date.date).getDay()]);
 };

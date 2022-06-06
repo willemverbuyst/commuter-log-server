@@ -1,8 +1,7 @@
-<script lang="ts">
+<script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { getPartitionData } from '../../Helpers/chartLogic/partitionChart';
-  import type { LogDate } from '../../models/Logdata';
+  import { getPartitionData } from '../../helpers/chartLogic/partitionChart';
   import Chart from 'chart.js';
   import {
     colorTitle,
@@ -11,16 +10,16 @@
     colorWorkingFromHomeColor,
   } from '../colors';
 
-  export let logData: LogDate[];
+  export let logData;
 
-  let partitionChart: Chart;
-  let ctx: CanvasRenderingContext2D;
+  let partitionChart;
+  let ctx;
 
   function createChart() {
     const { partition, labels, title } = getPartitionData(logData);
 
-    const canvas = <HTMLCanvasElement>document.getElementById('partitionChart');
-    ctx = canvas.getContext('2d')!;
+    const canvas = document.getElementById('partitionChart');
+    ctx = canvas.getContext('2d');
 
     if (partitionChart) partitionChart.destroy();
 

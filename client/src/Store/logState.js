@@ -1,28 +1,27 @@
-import { writable, Writable } from 'svelte/store';
-import { sortByDateAscending } from '../Helpers/dateLogic';
-import type { LogDate } from '../models/Logdata';
+import { writable } from 'svelte/store';
+import { sortByDateAscending } from '../helpers';
 
-let logData: Writable<LogDate[]> = writable([]);
+let logData = writable([]);
 
 const logStore = {
   subscribe: logData.subscribe,
 
-  setLogData: (logs: LogDate[]) => {
+  setLogData: (logs) => {
     logData.set(sortByDateAscending([...logs]));
   },
 
-  addLogDate: (date: LogDate) => {
-    const newLogDate: LogDate = {
+  addLogDate: (date) => {
+    const newLogDate = {
       ...date,
     };
-    logData.update((days: LogDate[]) => {
+    logData.update((days) => {
       return sortByDateAscending([...days, newLogDate]);
     });
   },
 
-  updateLogDate: (id: string, date: LogDate) => {
+  updateLogDate: (id, date) => {
     logData.update((days) => {
-      const dateIndex: number = days.findIndex((i) => i.id === id);
+      const dateIndex = days.findIndex((i) => i.id === id);
       const updatedLogDate = { ...days[dateIndex], ...date };
       const updatedLogDates = [...days];
       updatedLogDates[dateIndex] = updatedLogDate;
@@ -30,7 +29,7 @@ const logStore = {
     });
   },
 
-  removeLogDate: (id: string) => {
+  removeLogDate: (id) => {
     logData.update((days) => {
       return days.filter((day) => day.id !== id);
     });

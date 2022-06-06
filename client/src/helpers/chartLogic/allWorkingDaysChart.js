@@ -1,16 +1,7 @@
-import type { LogDate } from '../../models/Logdata';
 import { reduceDates } from '../utils';
 
-export const getAllWorkingDaysData = (
-  logData: LogDate[]
-): {
-  travelTimes: number[];
-  maxForDisplay: number;
-  labels: string[];
-  title: string;
-  lineValue: number[];
-} => {
-  const reducedDates: LogDate[] = reduceDates(logData);
+export const getAllWorkingDaysData = (logData) => {
+  const reducedDates = reduceDates(logData);
 
   // Use .flatMap for type safe filtering
   const withoutDayOff = reducedDates.flatMap((day) =>

@@ -1,14 +1,9 @@
-import type { LogDate } from '../models/Logdata';
+export const getUniqueValues = (value, index, self) =>
+  self.indexOf(value) === index;
 
-export const getUniqueValues = <T>(
-  value: T,
-  index: number,
-  self: T[]
-): boolean => self.indexOf(value) === index;
-
-export const groupByWeekNumber = (logData: LogDate[]) => {
+export const groupByWeekNumber = (logData) => {
   const groups = Object.values(
-    logData.reduce((a: { [key: number]: LogDate[] }, b: LogDate) => {
+    logData.reduce((a, b) => {
       a[b.weekNumber] = a[b.weekNumber] || [];
       a[b.weekNumber].push(b);
       return a;
@@ -21,8 +16,8 @@ export const groupByWeekNumber = (logData: LogDate[]) => {
   return groupsOrderedByDate;
 };
 
-export const reduceDates = (dates: LogDate[]): LogDate[] => {
-  let container: { [key: string]: LogDate } = {};
+export const reduceDates = (dates) => {
+  let container = {};
 
   dates.forEach((date) => {
     // Get the date without timestamp
@@ -47,10 +42,7 @@ export const reduceDates = (dates: LogDate[]): LogDate[] => {
   });
 
   // https://fettblog.eu/typescript-hasownproperty/
-  function hasOwnProperty<X extends {}, Y extends PropertyKey>(
-    obj: X,
-    prop: Y
-  ): obj is X & Record<Y, unknown> {
+  function hasOwnProperty(obj, prop) {
     return obj.hasOwnProperty(prop);
   }
 

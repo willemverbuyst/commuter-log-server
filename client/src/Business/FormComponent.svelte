@@ -1,43 +1,35 @@
-<script lang="ts">
+<script>
   import { createEventDispatcher } from 'svelte';
   import DatePicker from '../UI/Inputs/DatePicker.svelte';
+  import FormButton from '../UI/Buttons/FormButton.svelte';
   import FormDropdown from '../UI/Inputs/FormDropdown.svelte';
   import Modal from '../UI/Modal/Modal.svelte';
   import TimeInput from '../UI/Inputs/TimeInput.svelte';
   import RadioButton from '../UI/Inputs/RadioButton.svelte';
-  import { formatDuration, formatTimeInput } from '../Helpers/formatting';
-  import { checkDurationInput } from '../Helpers/validation';
-  import { getWeekNumber } from '../Helpers/dateLogic';
+  import { formatDuration, formatTimeInput } from '../helpers/formatting';
+  import { checkDurationInput } from '../helpers/validation';
+  import { getWeekNumber } from '../helpers/dateLogic';
   import { routes } from '../constants';
-  import FormButton from '../UI/Buttons/FormButton.svelte';
-  import logData from '../Store/logState';
-  import type {
-    LogDate,
-    MeansOfTransport,
-    StatusOfDay,
-  } from '../models/Logdata';
-  import { addOneHour } from '../Helpers/dateLogic';
-  import type { HTMLElementEvent } from '../models/HTMLElements';
+  import { addOneHour } from '../helpers/dateLogic';
   import { postNewLogData, updateLogData } from '../Store/logActions';
+  import logData from '../Store/logState';
 
-  export let id: string | undefined;
+  export let id;
 
   // Initial values for form
-  let selectedDate: Date = new Date();
-  let statusOfDay: StatusOfDay = 'working at the office';
-  let meansOfTransport: MeansOfTransport = 'car';
-  let routeTripFrom: string = routes[1];
-  let routeTripTo: string = routes[2];
-  let durationTrip: string = '00:00';
+  let selectedDate = new Date();
+  let statusOfDay = 'working at the office';
+  let meansOfTransport = 'car';
+  let routeTripFrom = routes[1];
+  let routeTripTo = routes[2];
+  let durationTrip = '00:00';
 
   const dispatch = createEventDispatcher();
 
   // Fill in the form on edit
   if (id) {
     const unsubscribe = logData.subscribe((days) => {
-      const selectedDay: LogDate | undefined = days.find(
-        (d: LogDate) => d.id === id
-      );
+      const selectedDay = days.find((d) => d.id === id);
       if (selectedDay) {
         selectedDate = new Date(selectedDay.date);
         statusOfDay = selectedDay.statusOfDay;
@@ -56,11 +48,11 @@
 
   $: durationTripValid = checkDurationInput(durationTrip);
 
-  function cancel(): void {
+  function cancel() {
     dispatch('cancel');
   }
 
-  function onChange(e: HTMLElementEvent<HTMLFormElement>): void {
+  function onChange(e) {
     if (e.target.name === 'transport') {
       meansOfTransport = e.target.value;
     } else {
@@ -68,8 +60,8 @@
     }
   }
 
-  function submitForm(): void {
-    let logDate: LogDate;
+  function submitForm() {
+    let logDate;
     if (statusOfDay === 'day off' || statusOfDay === 'working from home') {
       logDate = {
         date: selectedDate.toString(),
@@ -95,7 +87,7 @@
     dispatch('save');
   }
 
-  function updateSelectedDate(date: Date): void {
+  function updateSelectedDate(date) {
     selectedDate = addOneHour(date);
   }
 </script>

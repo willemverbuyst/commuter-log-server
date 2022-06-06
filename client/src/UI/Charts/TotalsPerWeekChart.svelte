@@ -1,11 +1,9 @@
-<script lang="ts">
+<script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDuration } from '../../Helpers/formatting';
-  import { getTotalsPerWeekData } from '../../Helpers/chartLogic/totalsPerWeekChart';
+  import { formatDuration } from '../../helpers/formatting';
+  import { getTotalsPerWeekData } from '../../helpers/chartLogic/totalsPerWeekChart';
   import Chart from 'chart.js';
-  import type { LogDate } from '../../models/Logdata';
-  import type { Context } from 'chartjs-plugin-datalabels';
   import {
     colorGrid,
     colorTitle,
@@ -17,11 +15,11 @@
     colorTravelByPublicTransportThird,
   } from '../colors';
 
-  export let showGrid: boolean;
-  export let logData: LogDate[];
+  export let showGrid;
+  export let logData;
 
-  let totalsPerWeekChart: Chart;
-  let ctx: CanvasRenderingContext2D;
+  let totalsPerWeekChart;
+  let ctx;
 
   function createChart() {
     const {
@@ -32,10 +30,8 @@
       title,
     } = getTotalsPerWeekData(logData);
 
-    const canvas = <HTMLCanvasElement>(
-      document.getElementById('totalsPerWeekChart')
-    );
-    ctx = canvas.getContext('2d')!;
+    const canvas = document.getElementById('totalsPerWeekChart');
+    ctx = canvas.getContext('2d');
 
     const gradientFillCar = ctx.createLinearGradient(0, 0, 0, 250);
     gradientFillCar.addColorStop(0, colorTravelByCar);
@@ -52,19 +48,15 @@
     const totalizer = {
       id: 'totalizer',
 
-      beforeUpdate: (
-        chart: Chart & {
-          $totalizer: { totals: { [key: number]: number }; utmost: number };
-        }
-      ) => {
-        let totals: { [key: number]: number } = {};
+      beforeUpdate: (chart) => {
+        let totals = {};
         let utmost = 0;
 
         if (chart && chart.data && chart.data.datasets) {
-          chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
+          chart.data.datasets.forEach((dataset, datasetIndex) => {
             if (chart.isDatasetVisible(datasetIndex)) {
               utmost = datasetIndex;
-              dataset.data.forEach((value: number, index: number) => {
+              dataset.data.forEach((value, index) => {
                 totals[index] = (totals[index] || 0) + value;
               });
             }
@@ -156,13 +148,13 @@
             anchor: 'end',
             align: 'end',
             color: colorTitle,
-            formatter: (_value: string | number, ctx: Context) => {
+            formatter: (_value, ctx) => {
               // @ts-ignore
               const total = ctx.chart.$totalizer.totals[ctx.dataIndex];
               return formatDuration(total);
             },
             display: !showGrid
-              ? function (ctx: Context) {
+              ? function (ctx) {
                   // @ts-ignore
                   return ctx.datasetIndex === ctx.chart.$totalizer.utmost;
                 }

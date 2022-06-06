@@ -1,4 +1,3 @@
-import type { LogDate } from '../../models/Logdata';
 import { getMinutes } from './chartLogic';
 import { groupByWeekNumber, reduceDates } from '../utils';
 
@@ -12,14 +11,7 @@ export const timeMapsTravel = 5 * 2 * 90; // 900
 // Difference 1500 - 900 = 600
 // Total = 1500 + 20 = 1520
 
-export const actualTravelTime = (
-  logData: LogDate[],
-  weekNumber: number
-): {
-  backgroundColor: string[];
-  backGroundColorInner: string[];
-  data: number[];
-} => {
+export const actualTravelTime = (logData, weekNumber) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const weeks = groupByWeekNumber(reducedDates);
@@ -131,7 +123,7 @@ export const actualTravelTime = (
   }
 };
 
-export const getHigestTravelTime = (logData: LogDate[]): number => {
+export const getHigestTravelTime = (logData) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const weeks = groupByWeekNumber(reducedDates);
@@ -143,7 +135,7 @@ export const getHigestTravelTime = (logData: LogDate[]): number => {
   return maximum;
 };
 
-export const getTotalsPerWeek = (week: LogDate[]): number => {
+export const getTotalsPerWeek = (week) => {
   // Use .flatMap for type safe filtering
   const weekWithoutDayOff = week.flatMap((day) =>
     day.statusOfDay !== 'day off' ? [day] : []

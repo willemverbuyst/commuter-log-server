@@ -1,8 +1,8 @@
-<script lang="ts">
+<script>
   import { createEventDispatcher } from 'svelte';
   import FormButton from '../UI/Buttons/FormButton.svelte';
-  import Modal from '../UI/Modal/Modal.svelte';
   import LoginInput from '../UI/Inputs/LoginInput.svelte';
+  import Modal from '../UI/Modal/Modal.svelte';
 
   let email = '';
   let password = '';

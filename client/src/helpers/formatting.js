@@ -1,5 +1,5 @@
 // change the number in minutes to hh:mm
-export const formatDuration = (value: number): string => {
+export const formatDuration = (value) => {
   if (value === 0.00001) {
     return 'day off';
   } else if (value >= 600 && value % 60 === 0) {
@@ -17,7 +17,7 @@ export const formatDuration = (value: number): string => {
   }
 };
 
-export const formatTimeInput = (timeInput: string): number => {
+export const formatTimeInput = (timeInput) => {
   const [hours, minutes] = timeInput.split(':');
   const totalTimeInMinutes = Number(hours) * 60 + Number(minutes) * 1;
 

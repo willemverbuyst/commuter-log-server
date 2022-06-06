@@ -5,4 +5,4 @@
 //   'Vlissingen - Tilburg',
 // ];
 
-export const routes: string[] = ['Terneuzen', 'Tilburg', 'Vlissingen'];
+export const routes = ['Terneuzen', 'Tilburg', 'Vlissingen'];

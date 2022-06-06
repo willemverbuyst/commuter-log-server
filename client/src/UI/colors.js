@@ -63,53 +63,47 @@ document.documentElement.style.setProperty(
 
 document.documentElement.style.setProperty('--chart-datalabels', '#fff');
 
-export const colorTravelByCar = document.documentElement.style.getPropertyValue(
-  '--chart-travel-car'
-);
-export const colorTravelByCarSecond = document.documentElement.style.getPropertyValue(
-  '--chart-travel-car-second'
-);
-export const colorTravelByCarThird = document.documentElement.style.getPropertyValue(
-  '--chart-travel-car-third'
-);
-export const colorTravelByPublicTransport = document.documentElement.style.getPropertyValue(
-  '--chart-travel-publicTransport'
-);
-export const colorTravelByPublicTransportSecond = document.documentElement.style.getPropertyValue(
-  '--chart-travel-publicTransport-second'
-);
-export const colorTravelByPublicTransportThird = document.documentElement.style.getPropertyValue(
-  '--chart-travel-publicTransport-third'
-);
-export const colorWorkingFromHomeColor = document.documentElement.style.getPropertyValue(
-  '--chart-travel-workingFromHome'
-);
-export const colorTravelTimeNormal = document.documentElement.style.getPropertyValue(
-  '--chart-travel-normal'
-);
-export const colorTravelTimeMaps = document.documentElement.style.getPropertyValue(
-  '--chart-travel-maps'
-);
-export const colorTravelTimeExtra = document.documentElement.style.getPropertyValue(
-  '--chart-travel-extra'
-);
-export const colorTravelTimeAverage = document.documentElement.style.getPropertyValue(
-  '--chart-travel-average'
-);
-export const colorTitle = document.documentElement.style.getPropertyValue(
-  '--chart-title'
-);
-export const colorGrid = document.documentElement.style.getPropertyValue(
-  '--chart-grid'
-);
-export const colorDatalabels = document.documentElement.style.getPropertyValue(
-  '--chart-datalabels'
-);
+export const colorTravelByCar =
+  document.documentElement.style.getPropertyValue('--chart-travel-car');
+export const colorTravelByCarSecond =
+  document.documentElement.style.getPropertyValue('--chart-travel-car-second');
+export const colorTravelByCarThird =
+  document.documentElement.style.getPropertyValue('--chart-travel-car-third');
+export const colorTravelByPublicTransport =
+  document.documentElement.style.getPropertyValue(
+    '--chart-travel-publicTransport'
+  );
+export const colorTravelByPublicTransportSecond =
+  document.documentElement.style.getPropertyValue(
+    '--chart-travel-publicTransport-second'
+  );
+export const colorTravelByPublicTransportThird =
+  document.documentElement.style.getPropertyValue(
+    '--chart-travel-publicTransport-third'
+  );
+export const colorWorkingFromHomeColor =
+  document.documentElement.style.getPropertyValue(
+    '--chart-travel-workingFromHome'
+  );
+export const colorTravelTimeNormal =
+  document.documentElement.style.getPropertyValue('--chart-travel-normal');
+export const colorTravelTimeMaps =
+  document.documentElement.style.getPropertyValue('--chart-travel-maps');
+export const colorTravelTimeExtra =
+  document.documentElement.style.getPropertyValue('--chart-travel-extra');
+export const colorTravelTimeAverage =
+  document.documentElement.style.getPropertyValue('--chart-travel-average');
+export const colorTitle =
+  document.documentElement.style.getPropertyValue('--chart-title');
+export const colorGrid =
+  document.documentElement.style.getPropertyValue('--chart-grid');
+export const colorDatalabels =
+  document.documentElement.style.getPropertyValue('--chart-datalabels');
 
 // BUTTON COLORS
 document.documentElement.style.setProperty('--buttonMain', '#170a3a');
 
-export const setColors = (darkMode: boolean): void => {
+export const setColors = (darkMode) => {
   let root = document.documentElement;
 
   if (darkMode) {

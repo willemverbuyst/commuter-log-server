@@ -1,8 +1,8 @@
-<script lang="ts">
+<script>
   import { afterUpdate } from 'svelte';
   import 'chartjs-plugin-datalabels';
-  import { formatDuration } from '../../Helpers/formatting';
-  import { getAllWorkingDaysData } from '../../Helpers/chartLogic/allWorkingDaysChart';
+  import { formatDuration } from '../../helpers/formatting';
+  import { getAllWorkingDaysData } from '../../helpers/chartLogic/allWorkingDaysChart';
   import {
     colorGrid,
     colorTitle,
@@ -11,28 +11,20 @@
     colorTravelTimeMaps,
     colorTravelTimeNormal,
   } from '../colors';
-  import type { LogDate } from '../../models/Logdata';
   import Chart from 'chart.js';
 
-  export let showGrid: boolean;
-  export let logData: LogDate[];
+  export let showGrid;
+  export let logData;
 
-  let allWorkingDaysChart: Chart;
-  let ctx: CanvasRenderingContext2D;
+  let allWorkingDaysChart;
+  let ctx;
 
   function createChart() {
-    const {
-      travelTimes,
-      maxForDisplay,
-      labels,
-      title,
-      lineValue,
-    } = getAllWorkingDaysData(logData);
+    const { travelTimes, maxForDisplay, labels, title, lineValue } =
+      getAllWorkingDaysData(logData);
 
-    const canvas = <HTMLCanvasElement>(
-      document.getElementById('allWorkingDaysChart')
-    );
-    ctx = canvas.getContext('2d')!;
+    const canvas = document.getElementById('allWorkingDaysChart');
+    ctx = canvas.getContext('2d');
 
     const gradientFill = ctx.createLinearGradient(0, 100, 0, 250);
     gradientFill.addColorStop(0, colorTravelTimeExtra);

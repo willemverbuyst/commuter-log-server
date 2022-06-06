@@ -1,8 +1,8 @@
-<script lang="ts">
-  export let value: string;
-  export let group: string;
-  export let name: string;
-  export let onChange: any;
+<script>
+  export let value;
+  export let group;
+  export let name;
+  export let onChange;
 </script>
 
 <label>

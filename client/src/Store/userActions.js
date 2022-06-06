@@ -4,6 +4,6 @@ function updateIsSignedIn() {
   isSignedInStore.updateIsSignedIn();
 }
 
-function setUserEmail(email: string) {
+function setUserEmail(email) {
   userStore.setUser(email);
 }

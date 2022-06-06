@@ -1,12 +1,12 @@
-import { Writable, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-let user: Writable<string> = writable('');
-let isSignedIn: Writable<boolean> = writable(false);
+let user = writable('');
+let isSignedIn = writable(false);
 
 export const userStore = {
   subscribe: user.subscribe,
 
-  setUser: (email: string) => {
+  setUser: (email) => {
     user.set(email);
   },
 };
