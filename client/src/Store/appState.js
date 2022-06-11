@@ -21,5 +21,6 @@ export const showGridStore = {
 export const isLoadingStore = {
   subscribe: isLoading.subscribe,
 
-  updateIsLoading: () => isLoading.update((loading) => !loading),
+  // updateIsLoading: () => isLoading.update((loading) => !loading),
+  updateIsLoading: () => isLoading.update((loading) => false),
 };

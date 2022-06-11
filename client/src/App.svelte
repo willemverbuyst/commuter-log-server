@@ -18,18 +18,20 @@
   } from './Store/appState';
   import { isSignedInStore, userStore } from './Store/userState';
   import { setColors } from './UI/colors.js';
-  import logData from './Store/logState';
+
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import { fetchLogData } from './Store/logActions';
   // import { postLogData } from './Store/logActions';
-  import logStore from './Store/logState';
+  import { logStore } from './Store/logState';
 
   let showForm = false;
   let showLogIn = false;
   let weekIndexInLogData = 0;
   let edittedId;
 
+  console.log(isLoadingStore);
   fetchLogData();
+  console.log('ls', logStore);
   // setColors();
 
   // For dev only
@@ -101,10 +103,11 @@
       on:save={saveLogDate}
     />
   {/if}
-  <!-- {#if $isLoadingStore}
+  {#if $isLoadingStore}
     <LoadingSpinner />
   {:else if $logStore.length}
-    <div class="slider-container">
+    <p>test</p>
+    <!-- <div class="slider-container">
       <Slider
         {weekIndexInLogData}
         on:change={(event) => updateSelectedWeek(event)}
@@ -119,11 +122,11 @@
         {weekIndexInLogData}
       />
       <GaugeChart logData={$logData} {weekIndexInLogData} />
-    </div>
+    </div> -->
     <div class="dashboard__section">
       <AllWorkingDays logData={$logData} showGrid={$showGridStore} />
     </div>
-    <div class="dashboard__section">
+    <!-- <div class="dashboard__section">
       <TotalsPerWeekChart logData={$logData} showGrid={$showGridStore} />
     </div>
     <div class="dashboard__section">
@@ -135,8 +138,8 @@
     </div>
     <div class="dashboard__section">
       <Table logData={$logData} on:edit={startEdit} />
-    </div>
-  {/if} -->
+    </div> -->
+  {/if}
 </main>
 
 <style>

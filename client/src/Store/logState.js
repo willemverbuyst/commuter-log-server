@@ -3,11 +3,12 @@ import { sortByDateAscending } from '../helpers/dateLogic';
 
 let logData = writable([]);
 
-const logStore = {
+export const logStore = {
   subscribe: logData.subscribe,
 
   setLogData: (logs) => {
-    logData.set(sortByDateAscending([...logs]));
+    // logData.set(sortByDateAscending([...logs]));
+    logData.set(logs);
   },
 
   addLogDate: (date) => {
@@ -35,5 +36,3 @@ const logStore = {
     });
   },
 };
-
-export default logStore;
