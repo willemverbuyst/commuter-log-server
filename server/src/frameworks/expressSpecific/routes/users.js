@@ -8,11 +8,13 @@ module.exports = (dependencies) => {
     addUserController,
     deleteUserController,
     getUserByIdController,
+    getUsersController,
     updateUserController,
   } = userControllers(dependencies);
 
   router
     .route('/')
+    .get(getUsersController)
     .post(addUserController)
     .delete(deleteUserController)
     .put(updateUserController);

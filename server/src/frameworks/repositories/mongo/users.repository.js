@@ -63,6 +63,13 @@ const repository = () => {
         },
       ]);
     },
+    getAll: async () => {
+      return User.find({
+        deletedAt: {
+          $exists: false,
+        },
+      });
+    },
   };
 };
 
