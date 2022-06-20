@@ -38,9 +38,9 @@ do
     arr_csv+=("{
   userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
-  statusOfDay: 0,
+  statusOfDay: 'DAY_OFF',
   durationTrip: null,
-  meansOfTransport: 2,
+  meansOfTransport: 'NONE',
   startingPoint: null,
   destination: null,
   meta: {job: 'Job A'}
@@ -50,21 +50,21 @@ do
     arr_csv+=("{
   userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
-  statusOfDay: 2,
+  statusOfDay: 'WORKING_FROM_HOME',
   durationTrip: null,
-  meansOfTransport: 2,
+  meansOfTransport: 'NONE',
   startingPoint: null,
   destination: null,
   meta: {job: 'Job A'}
   }")
-  elif [[ $rec_column3 == "public" ]]
+  elif [[ $rec_column3 == "shuttle" ]]
   then
     arr_csv+=("{
   userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
-  statusOfDay: 1,
+  statusOfDay: 'WORKING_AT_THE_OFFICE',
   durationTrip: $(parseDuration $rec_column6), 
-  meansOfTransport: 1, 
+  meansOfTransport: 'PUBLIC_TRANSPORT', 
   startingPoint: '$(splitStringFrom $rec_column4)',
   Destination: '$(splitStringTo $rec_column4)',
   meta: {job: 'Job A'}
@@ -73,9 +73,9 @@ do
     arr_csv+=("{
   userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
-  statusOfDay: 0,
+   statusOfDay: 'WORKING_AT_THE_OFFICE',
   durationTrip: $(parseDuration $rec_column6), 
-  meansOfTransport: 0, 
+  meansOfTransport: 'CAR', 
   startingPoint: '$(splitStringFrom $rec_column4)',
   destination: '$(splitStringTo $rec_column4)',
   meta: {job: 'Job A'}

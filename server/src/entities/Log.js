@@ -22,12 +22,16 @@ module.exports.Log = class Log {
   }
 };
 
-const meansOfTransport = { CAR: 0, PUBLIC_TRANSPORT: 1, NONE: 2 };
+const meansOfTransport = {
+  CAR: 'CAR',
+  PUBLIC_TRANSPORT: 'PUBLIC_TRANSPORT',
+  NONE: 'NONE',
+};
 
 const statusOfDay = {
-  DAY_OFF: 0,
-  WORKING_AT_THE_OFFICE: 1,
-  WORKING_FROM_HOME: 2,
+  DAY_OFF: 'DAY_OFF',
+  WORKING_AT_THE_OFFICE: 'WORKING_AT_THE_OFFICE',
+  WORKING_FROM_HOME: 'WORKING_FROM_HOME',
 };
 
 module.exports.logConstants = { meansOfTransport, statusOfDay };
