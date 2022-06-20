@@ -24,7 +24,7 @@ export const reduceDates = (dates) => {
     let adjustedDate = String(date.date).slice(0, 15);
 
     if (
-      date.statusOfDay === 'working at the office' &&
+      date.statusOfDay === 'WORKING_AT_THE_OFFICE' &&
       container.hasOwnProperty(adjustedDate)
     ) {
       let temperoryCopyofObject = container[adjustedDate];

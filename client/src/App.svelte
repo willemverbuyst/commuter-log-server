@@ -29,9 +29,6 @@
   let weekIndexInLogData = 0;
   let edittedId;
 
-  console.log(isLoadingStore);
-  fetchLogData();
-  console.log('ls', logStore);
   // setColors();
 
   // For dev only
@@ -75,7 +72,7 @@
 </script>
 
 <main>
-  <div>{$userStore}</div>
+  <!-- <div>{$userStore}</div> -->
   <div class="nav-container">
     {#if $isSignedInStore}
       <Button on:click={() => (showForm = true)}>Add Day</Button>
@@ -92,54 +89,56 @@
       <Button on:click={signingOut}>Sign out</Button>
     {/if}
   </div>
-  {#if showLogIn}
+  <!-- {#if showLogIn}
     <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
-  {/if}
+  {/if} -->
 
-  {#if showForm}
+  <!-- {#if showForm}
     <FormComponent
       id={edittedId}
       on:cancel={cancelForm}
       on:save={saveLogDate}
     />
-  {/if}
-  {#if $isLoadingStore}
+  {/if}  -->
+  {#await fetchLogData()}
     <LoadingSpinner />
-  {:else if $logStore.length}
-    <p>test</p>
+  {:then}
     <!-- <div class="slider-container">
       <Slider
         {weekIndexInLogData}
         on:change={(event) => updateSelectedWeek(event)}
-        logData={$logData}
+        logData={$logStore}
       />
     </div>
-
     <div class="dashboard__section">
       <WeekChart
-        logData={$logData}
+        logData={$logStore}
         showGrid={$showGridStore}
         {weekIndexInLogData}
       />
-      <GaugeChart logData={$logData} {weekIndexInLogData} />
+    </div> -->
+    <!-- <div class="dashboard__section">
+      <GaugeChart logData={$logStore} {weekIndexInLogData} />
     </div> -->
     <div class="dashboard__section">
-      <AllWorkingDays logData={$logData} showGrid={$showGridStore} />
+      <AllWorkingDays logData={$logStore} showGrid={$showGridStore} />
     </div>
     <!-- <div class="dashboard__section">
-      <TotalsPerWeekChart logData={$logData} showGrid={$showGridStore} />
-    </div>
-    <div class="dashboard__section">
+      <TotalsPerWeekChart logData={$logStore} showGrid={$showGridStore} />
+    </div> -->
+    <!-- <div class="dashboard__section">
       <AveragesPerWeekChart logData={$logData} showGrid={$showGridStore} />
-    </div>
-    <div class="dashboard__section">
+    </div> -->
+    <!-- <div class="dashboard__section">
       <PartitionChart logData={$logData} />
       <CarVsPublicChart logData={$logData} />
-    </div>
-    <div class="dashboard__section">
+    </div> -->
+    <!-- <div class="dashboard__section">
       <Table logData={$logData} on:edit={startEdit} />
     </div> -->
-  {/if}
+  {:catch}
+    <p>something went wrong</p>
+  {/await}
 </main>
 
 <style>
@@ -147,18 +146,19 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     text-align: center;
     margin: 1rem auto;
+    color: black;
   }
 
-  /* .dashboard__section {
+  .dashboard__section {
     padding: 0;
     margin: 0 auto;
-    width: 1218px;
+    width: 80vw;
     display: flex;
     justify-content: space-between;
-  } */
+  }
 
   .nav-container {
     margin-bottom: 1rem;

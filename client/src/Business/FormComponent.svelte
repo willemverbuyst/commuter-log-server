@@ -12,7 +12,7 @@
   import { routes } from '../constants';
   import { addOneHour } from '../helpers/dateLogic';
   import { postNewLogData, updateLogData } from '../Store/logActions';
-  import logData from '../Store/logState';
+  import { logStore } from '../Store/logState';
 
   export let id;
 
@@ -28,7 +28,7 @@
 
   // Fill in the form on edit
   if (id) {
-    const unsubscribe = logData.subscribe((days) => {
+    const unsubscribe = logStore.subscribe((days) => {
       const selectedDay = days.find((d) => d.id === id);
       if (selectedDay) {
         selectedDate = new Date(selectedDay.date);

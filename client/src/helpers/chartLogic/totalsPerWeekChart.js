@@ -11,9 +11,9 @@ export const getTotalsPerWeekData = (logData) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
   const weeks = groupByWeekNumber(reducedDates);
-  const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'car'));
+  const totalsPerWeekCar = weeks.map((week) => getTotalsPerWeek(week, 'CAR'));
   const totalsPerWeekPublic = weeks.map((week) =>
-    getTotalsPerWeek(week, 'public transport')
+    getTotalsPerWeek(week, 'PUBLIC_TRANSPORT')
   );
   const backgroundColorCar = weeks.map(() => colorTravelByCar);
   const backgroundColorPublic = weeks.map(() => colorTravelByPublicTransport);
@@ -41,10 +41,8 @@ export const getTotalsPerWeekData = (logData) => {
 export const getTotalsPerWeek = (week, transport) => {
   // Use .flatMap for type safe filtering
   const weekTransport = week.flatMap((day) =>
-    day.statusOfDay === 'working at the office' &&
-    day.meansOfTransport === transport
-      ? [day]
-      : []
+    // day.statusOfDay === 'working at the office' &&
+    day.meansOfTransport === transport ? [day] : []
   );
 
   const totalPerTransport =
