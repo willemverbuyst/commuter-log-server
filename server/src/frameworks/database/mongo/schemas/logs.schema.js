@@ -5,6 +5,7 @@ const { ObjectId, Schema } = mongoose;
 module.exports = new Schema({
   date: Date,
   userId: ObjectId,
+  weekNumber: Number,
   statusOfDay: String,
   durationTrip: Number,
   meansOfTransport: String,

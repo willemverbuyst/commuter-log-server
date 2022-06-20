@@ -36,7 +36,8 @@ do
   if [[ $rec_column3 == "day off" ]]
   then
     arr_csv+=("{
-  userId: 1,
+  userId: '62b0064f1364576997beb852',
+  weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'DAY_OFF',
   durationTrip: null,
@@ -48,7 +49,8 @@ do
   elif [[ $rec_column3 == "home" ]]
   then
     arr_csv+=("{
-  userId: 1,
+  userId: '62b0064f1364576997beb852',
+  weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_FROM_HOME',
   durationTrip: null,
@@ -60,7 +62,8 @@ do
   elif [[ $rec_column3 == "shuttle" ]]
   then
     arr_csv+=("{
-  userId: 1,
+  userId: '62b0064f1364576997beb852',
+  weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_AT_THE_OFFICE',
   durationTrip: $(parseDuration $rec_column6), 
@@ -71,7 +74,8 @@ do
   }")
   else 
     arr_csv+=("{
-  userId: 1,
+  userId: '62b0064f1364576997beb852',
+  weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_AT_THE_OFFICE',
   durationTrip: $(parseDuration $rec_column6), 

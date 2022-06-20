@@ -123,9 +123,9 @@
     <div class="dashboard__section">
       <AllWorkingDays logData={$logStore} showGrid={$showGridStore} />
     </div>
-    <!-- <div class="dashboard__section">
+    <div class="dashboard__section">
       <TotalsPerWeekChart logData={$logStore} showGrid={$showGridStore} />
-    </div> -->
+    </div>
     <!-- <div class="dashboard__section">
       <AveragesPerWeekChart logData={$logData} showGrid={$showGridStore} />
     </div> -->

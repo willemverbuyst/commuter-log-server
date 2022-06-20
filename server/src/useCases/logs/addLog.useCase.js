@@ -14,6 +14,7 @@ module.exports = (dependencies) => {
 
   const execute = async ({
     userId,
+    weekNumber,
     date,
     statusOfDay,
     durationTrip,
@@ -24,6 +25,7 @@ module.exports = (dependencies) => {
   }) => {
     const log = new Log({
       userId,
+      weekNumber,
       date,
       statusOfDay,
       durationTrip,

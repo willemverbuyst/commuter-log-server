@@ -34,15 +34,7 @@ const repository = () => {
     delete: async (log) => {
       const { id } = log;
       delete log.id;
-      return Log.findByIdAndUpdate(
-        id,
-        {
-          deletedAt: new Date(),
-        },
-        {
-          new: true,
-        },
-      ).lean();
+      return Log.deleteOne({ id }).lean();
     },
     getById: async (id) => {
       return Log.findOne({
