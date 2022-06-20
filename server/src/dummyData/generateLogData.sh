@@ -73,7 +73,7 @@ do
     arr_csv+=("{
   userId: 1,
   date: String(new Date($(parseDate $rec_column2))), 
-   statusOfDay: 'WORKING_AT_THE_OFFICE',
+  statusOfDay: 'WORKING_AT_THE_OFFICE',
   durationTrip: $(parseDuration $rec_column6), 
   meansOfTransport: 'CAR', 
   startingPoint: '$(splitStringFrom $rec_column4)',
@@ -84,7 +84,7 @@ do
 done < dummy_logs.txt
 
 # Start writing js-file, open array
-echo "export const logDataSeed = [" >> dummyLogs.js
+echo "module.exports.logDataSeed = [" >> dummyLogs.js
 
 # Add all objects to the array in the js-file
 index=0
