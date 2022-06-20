@@ -7,8 +7,7 @@ export const logStore = {
   subscribe: logData.subscribe,
 
   setLogData: (logs) => {
-    // logData.set(sortByDateAscending([...logs]));
-    logData.set(logs);
+    logData.set(sortByDateAscending([...logs]));
   },
 
   addLogDate: (date) => {

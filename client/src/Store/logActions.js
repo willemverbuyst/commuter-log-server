@@ -8,11 +8,11 @@ function updateIsLoading() {
 
 export const fetchLogData = async () => {
   // try {
-  fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Bourbon')
+  fetch('http://localhost:4000/api/v1/logs')
     .then((response) => response.json())
     .then((data) => {
       console.log('fetch', data);
-      logStore.setLogData(data);
+      logStore.setLogData(data.content);
       updateIsLoading();
     })
     .catch((error) => {
@@ -20,10 +20,6 @@ export const fetchLogData = async () => {
       updateIsLoading();
       return [];
     });
-  // } catch (error) {
-  //   updateIsLoading();
-  //   console.log(error);
-  // }
 };
 
 export const postNewLogData = async (logDate) => {
