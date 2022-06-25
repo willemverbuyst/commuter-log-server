@@ -18,17 +18,17 @@ export const getPartition = (logData) => {
   const reducedDates = reduceDates(logData);
 
   const workingFromHome = reducedDates.filter(
-    (day) => day.statusOfDay === 'working from home'
+    (day) => day.statusOfDay === 'WORKING_FROM_HOME'
   ).length;
   const travelledByCar = reducedDates.filter(
     (day) =>
-      day.statusOfDay === 'working at the office' &&
-      day.meansOfTransport === 'car'
+      day.statusOfDay === 'WORKING_AT_THE_OFFICE' &&
+      day.meansOfTransport === 'CAR'
   ).length;
   const travelledByPublicTransport = reducedDates.filter(
     (day) =>
-      day.statusOfDay === 'working at the office' &&
-      day.meansOfTransport === 'public transport'
+      day.statusOfDay === 'WORKING_AT_THE_OFFICE' &&
+      day.meansOfTransport === 'PUBLIC_TRANSPORT'
   ).length;
 
   return [workingFromHome, travelledByCar, travelledByPublicTransport];

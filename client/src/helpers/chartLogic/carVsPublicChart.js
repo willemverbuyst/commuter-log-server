@@ -6,8 +6,8 @@ export const getCarVsPublicTotalsData = (logData) => {
   // Combine all the days with the same date
   const reducedDates = reduceDates(logData);
 
-  const totalsCar = getTotalsTransport(reducedDates, 'car');
-  const totalsPublic = getTotalsTransport(reducedDates, 'public transport');
+  const totalsCar = getTotalsTransport(reducedDates, 'CAR');
+  const totalsPublic = getTotalsTransport(reducedDates, 'PUBLIC_TRANSPORT');
   const labels = ['car', 'public transport'];
   const title = 'TOTAL TIMES CAR VS PUBLIC TRANSPORT';
 
@@ -23,7 +23,7 @@ export const getCarVsPublicTotalsData = (logData) => {
 export const getTotalsTransport = (workingDays, transport) => {
   // Use .flatMap for type safe filtering
   const daysTravelled = workingDays.flatMap((day) =>
-    day.statusOfDay === 'working at the office' &&
+    day.statusOfDay === 'WORKING_AT_THE_OFFICE' &&
     day.meansOfTransport === transport
       ? [day]
       : []

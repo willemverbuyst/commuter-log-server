@@ -126,13 +126,13 @@
     <div class="dashboard__section">
       <TotalsPerWeekChart logData={$logStore} showGrid={$showGridStore} />
     </div>
-    <!-- <div class="dashboard__section">
-      <AveragesPerWeekChart logData={$logData} showGrid={$showGridStore} />
-    </div> -->
-    <!-- <div class="dashboard__section">
-      <PartitionChart logData={$logData} />
-      <CarVsPublicChart logData={$logData} />
-    </div> -->
+    <div class="dashboard__section">
+      <AveragesPerWeekChart logData={$logStore} showGrid={$showGridStore} />
+    </div>
+    <div class="dashboard__section">
+      <PartitionChart logData={$logStore} />
+      <CarVsPublicChart logData={$logStore} />
+    </div>
     <!-- <div class="dashboard__section">
       <Table logData={$logData} on:edit={startEdit} />
     </div> -->
