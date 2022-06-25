@@ -36,7 +36,7 @@ do
   if [[ $rec_column3 == "day off" ]]
   then
     arr_csv+=("{
-  userId: '62b0064f1364576997beb852',
+  userId: '62b67a1aead864b7d2627662',
   weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'DAY_OFF',
@@ -49,7 +49,7 @@ do
   elif [[ $rec_column3 == "home" ]]
   then
     arr_csv+=("{
-  userId: '62b0064f1364576997beb852',
+  userId: '62b67a1aead864b7d2627662',
   weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_FROM_HOME',
@@ -59,10 +59,10 @@ do
   destination: null,
   meta: {job: 'Job A'}
   }")
-  elif [[ $rec_column3 == "shuttle" ]]
+  elif [[ $rec_column3 == "public" ]]
   then
     arr_csv+=("{
-  userId: '62b0064f1364576997beb852',
+  userId: '62b67a1aead864b7d2627662',
   weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_AT_THE_OFFICE',
@@ -74,7 +74,7 @@ do
   }")
   else 
     arr_csv+=("{
-  userId: '62b0064f1364576997beb852',
+  userId: '62b67a1aead864b7d2627662',
   weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_AT_THE_OFFICE',
@@ -88,7 +88,7 @@ do
 done < dummy_logs.txt
 
 # Start writing js-file, open array
-echo "module.exports.logDataSeed = [" >> dummyLogs.js
+echo "module.exports = [" >> dummyLogs.js
 
 # Add all objects to the array in the js-file
 index=0
