@@ -73,9 +73,9 @@
 <main>
   <!-- <div>{$userStore}</div> -->
   <div class="nav-container">
-    {#if $isSignedInStore}
-      <Button on:click={() => (showForm = true)}>Add Day</Button>
-    {/if}
+    <!-- {#if $isSignedInStore} -->
+    <Button on:click={() => (showForm = true)}>Add Day</Button>
+    <!-- {/if} -->
     <Button on:click={toggleGrid}
       >{$showGridStore ? 'Hide' : 'Show'} Grid</Button
     >
@@ -88,35 +88,37 @@
       <Button on:click={signingOut}>Sign out</Button>
     {/if}
   </div>
-  <!-- {#if showLogIn}
-    <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
-  {/if} -->
 
-  <!-- {#if showForm}
+  {#if showLogIn}
+    <LogInForm on:cancel={cancelForm} on:logIn={loggingIn} />
+  {/if}
+
+  {#if showForm}
     <FormComponent
       id={edittedId}
       on:cancel={cancelForm}
       on:save={saveLogDate}
     />
-  {/if}  -->
+  {/if}
+
   {#await fetchLogData()}
     <LoadingSpinner />
   {:then}
-    <div class="slider-container">
+    <!-- <div class="slider-container">
       <Slider
         {weekIndexInLogData}
         on:change={(event) => updateSelectedWeek(event)}
         logData={$logStore}
       />
-    </div>
-    <div class="dashboard__section">
+    </div> -->
+    <!-- <div class="dashboard__section">
       <WeekChart
         logData={$logStore}
         showGrid={$showGridStore}
         {weekIndexInLogData}
       />
       <GaugeChart logData={$logStore} {weekIndexInLogData} />
-    </div>
+    </div> -->
     <div class="dashboard__section">
       <AllWorkingDays logData={$logStore} showGrid={$showGridStore} />
     </div>
@@ -130,9 +132,9 @@
       <PartitionChart logData={$logStore} />
       <CarVsPublicChart logData={$logStore} />
     </div>
-    <!-- <div class="dashboard__section">
-      <Table logData={$logData} on:edit={startEdit} />
-    </div> -->
+    <div class="dashboard__section">
+      <Table logData={$logStore} on:edit={startEdit} />
+    </div>
   {:catch}
     <p>something went wrong</p>
   {/await}
