@@ -21,7 +21,6 @@
 
   import LoadingSpinner from './UI/LoadingSpinner/LoadingSpinner.svelte';
   import { fetchLogData } from './Store/logActions';
-  // import { postLogData } from './Store/logActions';
   import { logStore } from './Store/logState';
 
   let showForm = false;
@@ -103,7 +102,7 @@
   {#await fetchLogData()}
     <LoadingSpinner />
   {:then}
-    <!-- <div class="slider-container">
+    <div class="slider-container">
       <Slider
         {weekIndexInLogData}
         on:change={(event) => updateSelectedWeek(event)}
@@ -116,10 +115,8 @@
         showGrid={$showGridStore}
         {weekIndexInLogData}
       />
-    </div> -->
-    <!-- <div class="dashboard__section">
       <GaugeChart logData={$logStore} {weekIndexInLogData} />
-    </div> -->
+    </div>
     <div class="dashboard__section">
       <AllWorkingDays logData={$logStore} showGrid={$showGridStore} />
     </div>
@@ -164,8 +161,8 @@
     margin-bottom: 1rem;
   }
 
-  /* .slider-container {
+  .slider-container {
     width: 1150px;
     margin: auto;
-  } */
+  }
 </style>
