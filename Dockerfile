@@ -2,11 +2,11 @@ FROM node:16
 
 WORKDIR  /server
 
-COPY package*.json .
+COPY package*.json /server/
 
 RUN npm install
 
-COPY . .
+COPY . /server
 
 ENV PORT 4000
 
