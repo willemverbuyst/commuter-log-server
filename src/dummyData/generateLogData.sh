@@ -31,7 +31,7 @@ function parseDate () {
 
 # Loop through csv and build js-objects
 arr_csv=() 
-while IFS="|" read -r rec_column1 rec_column2 rec_column3 rec_column4 rec_column5 rec_column6
+while IFS="|" read -r rec_column1 rec_column2 rec_column3 rec_column4 rec_column5
 do
   if [[ $rec_column3 == "day off" ]]
   then
@@ -66,7 +66,7 @@ do
   weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_AT_THE_OFFICE',
-  durationTrip: $(parseDuration $rec_column6), 
+  durationTrip: $(parseDuration $rec_column5), 
   meansOfTransport: 'PUBLIC_TRANSPORT', 
   startingPoint: '$(splitStringFrom $rec_column4)',
   Destination: '$(splitStringTo $rec_column4)',
@@ -78,7 +78,7 @@ do
   weekNumber: $rec_column1,
   date: String(new Date($(parseDate $rec_column2))), 
   statusOfDay: 'WORKING_AT_THE_OFFICE',
-  durationTrip: $(parseDuration $rec_column6), 
+  durationTrip: $(parseDuration $rec_column5), 
   meansOfTransport: 'CAR', 
   startingPoint: '$(splitStringFrom $rec_column4)',
   destination: '$(splitStringTo $rec_column4)',
