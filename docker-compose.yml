@@ -5,17 +5,27 @@ services:
       context: .
       dockerfile: 'Dockerfile'
     env_file:
-      - ./.env
+      - .env
     depends_on:
       - mongo
     ports:
       - 4000:4000
+    networks:
+      - commuter-log-network
   mongo:
     image: mongo
     env_file:
-      - ./.env
+      - .env
+    ports:
+      - 27017:27017
     volumes:
       - mongo-db:/data/db
+    networks:
+      - commuter-log-network
 
 volumes:
   mongo-db:
+
+networks:
+  commuter-log-network:
+    driver: bridge
