@@ -26,7 +26,7 @@ function parseDuration () {
 
 function parseDate () {
   IFS="-" read day month year <<< "$1"
-  echo "'20$year/$month/$day'"
+  echo "'$year/$month/$day'"
 }
 
 # Loop through csv and build js-objects
@@ -69,7 +69,7 @@ do
   durationTrip: $(parseDuration $rec_column6), 
   meansOfTransport: 'PUBLIC_TRANSPORT', 
   startingPoint: '$rec_column4',
-  Destination: '$rec_column5',
+  destination: '$rec_column5',
   meta: {job: 'Job A'}
   }")
   else 
